@@ -18,6 +18,7 @@ import ONamaScreen from "./screens/ONamaScreen";
 import KontaktScreen from "./screens/KontakScreen";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
+
 function App() {
   return (
     <Router>

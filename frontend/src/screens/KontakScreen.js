@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
 function KontakScreen() {
   return (
-    <div>Kontakt podaci,mail, mobilni ,adresa i ostalo.</div>
-  )
+    <div>
+      <h3>Kontakt</h3>
+      <div>Kontakt podaci,mail, mobilni ,adresa i ostalo.</div>
+    </div>
+  );
 }
 
-export default KontakScreen
+export default KontakScreen;
