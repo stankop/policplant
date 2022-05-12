@@ -1,14 +1,15 @@
-import { userDetailsActions } from './userDetails-slice' 
-import { userActions } from './user_slice'
+import { userUpdateActions } from './userUpdate-slice' 
+import { userListActions } from './userList-slice'
+import { listUsers } from '../store/userList-actions'
 import axios from 'axios'
 
-export const getUserDetails = (id) => {
+export const updateUser = (user) => {
     return async (dispatch, getState) => {
 
         const {
             userLogin:{ userInfo }
         } = getState()
-        console.log('ovo je u fetc:',id)
+       
         const fetchData = async () => {
 
             const config = {
@@ -18,21 +19,22 @@ export const getUserDetails = (id) => {
                 },
                 
             }
-            const { data } = await axios.get(`/api/users/${id}/`, config)
+            const { data } = await axios.put(`/api/users/update/${user._id}/`,
+            user, config)
             return data;
         }
 
         try {
-            dispatch(userDetailsActions.userDetailsRequest())
+            dispatch(userUpdateActions.userUpdateRequest())
             const data = await fetchData()
             console.log('---------------------------------')
-            dispatch(userDetailsActions.userDetailsSuccess(data))
-
+            dispatch(userUpdateActions.userUpdateSuccess())
+            dispatch(listUsers())
 
         } catch (error) {
             
             dispatch(
-                userDetailsActions.userDetailsFail(
+                userUpdateActions.userUpdateFail(
                   error.response && error.response.data.detail
                   ? error.response.data.detail
                   : error.message
@@ -42,16 +44,19 @@ export const getUserDetails = (id) => {
     }
 }
 
-export const userDetailsReset = () => {
+
+export const updateUserReset = () => {
     return async (dispatch) => {
 
+       
+
         try {
-            dispatch(userDetailsActions.userDetailsReset())
+            dispatch(userUpdateActions.userUpdateReset())
 
         } catch (error) {
             
             dispatch(
-                userDetailsActions.userDetailsFail(
+                userUpdateActions.userUpdateFail(
                   error.response && error.response.data.detail
                   ? error.response.data.detail
                   : error.message

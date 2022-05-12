@@ -19,12 +19,16 @@ const userDeleteSlice = createSlice({
 
             userDeleteSuccess(state, action) {
                 state.loading = false;
-                state.success = action.payload;
+                state.success = true;
             },
 
             userDeleteFail(state, action) {
                 state.loading = false;
                 state.error = action.payload;
+            },
+            userDeleteReset(state, action) {
+                state.loading = false;
+                state.success = false;
             },
         },
 });

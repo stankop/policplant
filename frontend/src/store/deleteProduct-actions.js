@@ -1,9 +1,10 @@
-import { userDeleteActions } from './userDelete-slice'
+import { deleteProductActions} from './deleteProduct-slice'
 import axios from 'axios'
 
-export const deleteUser = (id) => {
+export const deleteProduct = (id) => {
     return async (dispatch, getState) => {
 
+        
         const {
             userLogin:{ userInfo }
         } = getState()
@@ -17,34 +18,38 @@ export const deleteUser = (id) => {
                 },
                 
             }
-            const { data } = await axios.delete(`/api/users/delete/${id}`, config)
+            const { data } = await axios.delete(`/api/products/delete/${id}`, config)
             return data;
         }
 
         try {
-            dispatch(userDeleteActions.userDeleteRequest())
-            const data = await fetchData()
-            
-            dispatch(userDeleteActions.userDeleteSuccess())
- 
+            dispatch(deleteProductActions.deleteProductRequest())
+            const cartData = await fetchData()
+            dispatch(deleteProductActions.deleteProductSuccess(cartData))
 
         } catch (error) {
-            
             dispatch(
-                userDeleteActions.userDeleteFail(
+                deleteProductActions.deleteProductFail(
                   error.response && error.response.data.detail
                   ? error.response.data.detail
                   : error.message
                 )
               );
         }
+
     }
 }
 
-export const deleteUserReset = () => {
+export const deleteProductReset = () => {
     return async (dispatch) => {
 
-        dispatch(userDeleteActions.deleteUserReset())
+        dispatch(deleteProductActions.deleteProductReset())
     }
 }
 
+
+
+
+       
+
+     

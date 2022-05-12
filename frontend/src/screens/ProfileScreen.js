@@ -45,7 +45,7 @@ function ProfileScreen() {
         if(!userInfo){
             navigate(`/login`)
         }else{
-            if(Object.keys(user).length === 0 || success){
+            if(Object.keys(user).length === 0 || success ){
                 dispatch(userUpdateProfileActions.userUpdateProfileReset())
                 dispatch(getUserDetails('profile'))
                 dispatch(listMyOrders())

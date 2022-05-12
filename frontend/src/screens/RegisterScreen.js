@@ -26,7 +26,6 @@ function RegisterScreen() {
    
     const [search, setSearch] = useSearchParams();
     const redirect = search.get("redirect");
-    
 
     const userRegister = useSelector(state => state.userRegister)
     const { userInfo, error, loading } = userRegister

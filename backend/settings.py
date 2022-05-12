@@ -130,38 +130,38 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-databases = {
-      'default': {
-         'engine': 'django.db.backends.sqlite3',
-         'name': BASE_DIR / 'db.sqlite3',
-     }
-} 
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'PolicPlant',
-#         'USER': 'postgres',
-#         'PASSWORD':'ok',
-#         'HOST':'localhost',
-#         'PORT':'5432'
+#       'default': {
+#          'engine': 'django.db.backends.sqlite3',
+#          'name': BASE_DIR / 'db.sqlite3',
+#      }
+# } 
 
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'PolicPlant',
+        'USER': 'postgres',
+        'PASSWORD':'ok',
+        'HOST':'localhost',
+        'PORT':'5432'
+
+    }
+}
 
 
 #ovo je DB na HEROKU
-DATABASES = {
-     'default': {
-         'ENGINE': 'django.db.backends.postgresql',
-         'NAME': 'policplant',
-         'USER': 'postgres',
-         'PASSWORD':'Prnjavorska114',
-         'HOST':'policplant.ciwljxueoqxr.eu-west-2.rds.amazonaws.com',
-         'PORT':'5432'
+# DATABASES = {
+#      'default': {
+#          'ENGINE': 'django.db.backends.postgresql',
+#          'NAME': 'policplant',
+#          'USER': 'postgres',
+#          'PASSWORD':'Prnjavorska114',
+#          'HOST':'policplant.ciwljxueoqxr.eu-west-2.rds.amazonaws.com',
+#          'PORT':'5432'
 
-     }
- }
+#      }
+#  }
 
 
 # Password validation

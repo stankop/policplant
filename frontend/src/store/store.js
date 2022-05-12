@@ -16,6 +16,10 @@ import { userListReducer} from './userList-slice'
 import { userDeleteReducer} from './userDelete-slice'
 import { reviewCreateReducer } from './review-slice'
 import { caruselReducer} from './carusel-slice'
+import { deleteProductReducer} from './deleteProduct-slice'
+import { createProductReducer} from './createProduct-slice'
+import { userUpdateReducer } from './userUpdate-slice'
+import { updateProductReducer } from './updateProduct-slice'
 
 const store = configureStore({
     reducer:{
@@ -35,7 +39,11 @@ const store = configureStore({
         userList: userListReducer,
         userDelete: userDeleteReducer,
         reviewCreate: reviewCreateReducer,
-        carusel: caruselReducer
+        carusel: caruselReducer,
+        deleteProduct: deleteProductReducer,
+        createProduct: createProductReducer,
+        userUpdate: userUpdateReducer,
+        updateProduct: updateProductReducer
     }
 })
 

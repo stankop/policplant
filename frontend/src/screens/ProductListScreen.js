@@ -11,6 +11,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import { listUsers } from '../store/userList-actions' 
 import { listProducts } from '../store/product-actions'
+import { deleteProduct, deleteProductReset } from '../store/deleteProduct-actions'
+import { createProduct, productReset } from '../store/createProduct-actions'
 
 function ProductListScreen() {
 
@@ -18,6 +20,12 @@ function ProductListScreen() {
 
     const productList = useSelector(state => state.productList)
     const { loading, error, products,page, pages} = productList
+
+    const deleteProd = useSelector(state => state.deleteProduct)
+    const { loading: loadingDelete, error: errorDelete, success: successDelete} = deleteProd
+
+    const crProd = useSelector(state => state.createProduct)
+    const { loading: loadingCreate, error: errorCreate, success: successCreate, product: createdProduct} = crProd
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo} = userLogin
@@ -28,45 +36,57 @@ function ProductListScreen() {
 
     useEffect(() => {
 
-        if(userInfo && userInfo.isAdmin){
+         if(!userInfo.isAdmin){
+             navigate('/login')
+            
+         }
+
+         if(successCreate){
+
+            dispatch(productReset())
+            navigate(`/admin/product/${createdProduct._id}/edit`)
+              
+          }else{
             dispatch(listProducts())
-        }else{
-            navigate('/login')
-        }
+          }
        
 
-    }, [dispatch, navigate, userInfo ])
+     }, [dispatch, navigate, userInfo, successDelete, successCreate , createdProduct])
 
     const deleteHandler = (id) => {
+        
+        if(window.confirm("Are you sure you want to delete this user?")){
 
-        // if(window.confirm("Are you sure you want to delete this user?")){
-
-        //     dispatch(deleteUser(id))
-
-        // } 
-    
+            dispatch(deleteProduct(id))
+            dispatch(deleteProductReset())
+            console.log('odstampaj ovo!!!')
+            dispatch(listProducts())
+        }
     }
 
-    const createProductHandler = (product) => {
+    const createProductHandler = () => {
 
-
+        dispatch(createProduct())
     }
   return (
     <div>
         <Row className='align-items-center'>
             <Col>
-                <h1>Proizvodi</h1>
+                <h1>Biljke</h1>
             </Col>
             <Col className='text-right'>
-                <Button className='my-3' onClick={createProductHandler}>
+                <Button className='my-3' onClick={(e) => createProductHandler()}>
                     <i className='fas fa-plus'></i> Kreiraj Proizvod
                 </Button>
             </Col>
 
         </Row>
 
-
+        { loadingDelete && <Loader></Loader>}
+        { errorDelete && <Message variant='danger'>{errorDelete}</Message>}
         
+        { loadingCreate && <Loader></Loader>}
+        { errorCreate && <Message variant='danger'>{errorCreate}</Message>}
         {loading 
                 ? (
                     <Loader>
@@ -84,8 +104,8 @@ function ProductListScreen() {
                                 <tr>
                                     <th>ID</th>
                                     <th>NAME</th>
-                                    <th>Price</th>
-                                    <th>Category</th>
+                                    <th>Cena</th>
+                                    <th>Kategorija</th>
                                     <th>Brand</th>
                                     <th></th>
                                 </tr>
@@ -105,10 +125,11 @@ function ProductListScreen() {
                                                      <i className='fas fa-edit'></i>
                                                 </Button>
                                             </LinkContainer></td>
-                                                <Button  className='btn-sm' onClick={deleteHandler(product._id)}>
+                                        <td>
+                                                <Button  className='btn-sm' onClick={(e) => deleteHandler(product._id)}>
                                                      <i className='fas fa-trash'></i>
-                                                </Button>
-                                    </tr>
+                                                </Button></td>
+                                        </tr>
 
                                 ))}
                             </tbody>

@@ -9,7 +9,8 @@ import { userActions } from "../store/user_slice";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import { listUsers } from '../store/userList-actions' 
-import { deleteUser } from '../store/userDelete-actions'
+import { deleteUser, deleteUserReset } from '../store/userDelete-actions'
+import {  userDetailsReset } from '../store/userDetails-actions'
 
 function UserListScreen() {
 
@@ -29,6 +30,7 @@ function UserListScreen() {
 
         if(userInfo && userInfo.isAdmin){
             dispatch(listUsers())
+            dispatch(userDetailsReset())
         }else{
             navigate('/login')
         }
@@ -38,13 +40,12 @@ function UserListScreen() {
 
     const deleteHandler = (id) => {
 
-        // if(window.confirm("Are you sure you want to delete this user?")){
+        if(window.confirm("Are you sure you want to delete this user?")){
 
-        //     dispatch(deleteUser(id))
-
-        // }
-        
-        
+            dispatch(deleteUser(id))
+            dispatch(deleteUserReset())
+            dispatch(listUsers())
+        }    
     }
 
   return (
@@ -73,7 +74,7 @@ function UserListScreen() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {users.map(user => (
+                                {users?.map(user => (
 
                                     <tr key={user._id}>
                                         <td>{user._id}</td>
@@ -82,15 +83,18 @@ function UserListScreen() {
                                         <td>{user.isAdmin ? (
                                             <i className='fas fa-check' style={{ color: 'green'}}></i>
                                         ) : <i className='fas fa-check' style={{ color: 'red'}}></i>}</td>
-                                        <td><LinkContainer to={`/admin/user/${user._id}`}>
+                                        <td><LinkContainer to={`/admin/user/${user._id}/edit`}>
 
                                                 <Button variant = 'light' className='btn'>
                                                      <i className='fas fa-edit'></i>
                                                 </Button>
-                                            </LinkContainer></td>
-                                                <Button  className='btn' onClick={deleteHandler(user._id)}>
-                                                     <i className='fas fa-trash'></i>
-                                                </Button>
+                                            </LinkContainer>
+                                        </td>
+                                        <td>
+                                            <Button  className='btn' onClick={(e) => deleteHandler(user._id)}>
+                                                <i className='fas fa-trash'></i>
+                                            </Button>
+                                        </td>
                                     </tr>
 
                                 ))}

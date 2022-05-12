@@ -16,6 +16,8 @@ import ProductListScreen from "./screens/ProductListScreen";
 import InfoScreen from "./screens/InfoScreen";
 import ONamaScreen from "./screens/ONamaScreen";
 import KontaktScreen from "./screens/KontakScreen";
+import UserEditScreen from "./screens/UserEditScreen";
+import ProductEditScreen from "./screens/ProductEditScreen"
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
 
@@ -45,6 +47,8 @@ function App() {
             <Route path="/info" element={<InfoScreen />}></Route>
             <Route path="/onama" element={<ONamaScreen />}></Route>
             <Route path="/kontakt" element={<KontaktScreen />}></Route>
+            <Route path="/admin/user/:id/edit" element={<UserEditScreen />}></Route>
+            <Route path="/admin/product/:id/edit" element={<ProductEditScreen />}></Route>
           </Routes>
         </Container>
       </main>
