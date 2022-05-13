@@ -115,12 +115,11 @@ def createProduct(request):
     user = request.user
     product = Product.objects.create(
         user=user,
-        name='Sample Name',
-        price = 0,
-        brand = "Sample Brand",
+        name='Unesite ime biljke...',
+        price = 0.00,
+        brand = "Odaberite boju biljke...",
         countInStock = 0,
-        category= 'Sample Category',
-        description = 'Sample Description...'
+        description = 'Prost opis...'
     )
     serilizer = ProductSerializer(product, many = False)
     return Response(serilizer.data)

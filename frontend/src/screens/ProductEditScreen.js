@@ -124,24 +124,24 @@ function ProductEditScreen( ) {
                         <Form onSubmit={submitHandler}>
 
                             <Form.Group controlId='name'>
-                                <Form.Label>Name</Form.Label>
+                                <Form.Label><strong>Name</strong></Form.Label>
                                 <Form.Control
 
                                     type='name'
                                     placeholder='Enter name'
-                                    value={name}
+                                    defaultValue={name}
                                     onChange={(e) => setName(e.target.value)}
                                 >
                                 </Form.Control>
                             </Form.Group>
 
                             <Form.Group controlId='price'>
-                                <Form.Label>Cena</Form.Label>
+                                <Form.Label><strong>Cena</strong></Form.Label>
                                 <Form.Control
 
                                     type='number'
                                     placeholder='Enter price'
-                                    value={price}
+                                    defaultValue={price}
                                     onChange={(e) => setPrice(e.target.value)}
                                 >
                                 </Form.Control>
@@ -149,12 +149,12 @@ function ProductEditScreen( ) {
 
 
                             <Form.Group controlId='image'>
-                                <Form.Label>Image</Form.Label>
+                                <Form.Label><strong>Image</strong></Form.Label>
                                 <Form.Control
 
                                     type='text'
                                     placeholder='Enter image'
-                                    value={image}
+                                    defaultValue={image}
                                    
                                 >
                                 </Form.Control>
@@ -174,48 +174,49 @@ function ProductEditScreen( ) {
 
 
                             <Form.Group controlId='brand'>
-                                <Form.Label>Boja</Form.Label>
+                                <Form.Label><strong>Boja</strong></Form.Label>
                                 <Form.Control
 
                                     type='text'
                                     placeholder='Enter brand'
-                                    value={brand}
+                                    defaultValue={brand}
                                     onChange={(e) => setBrand(e.target.value)}
                                 >
                                 </Form.Control>
                             </Form.Group>
 
                             <Form.Group controlId='countinstock'>
-                                <Form.Label>Stanje</Form.Label>
+                                <Form.Label><strong>Stanje</strong></Form.Label>
                                 <Form.Control
 
                                     type='number'
                                     placeholder='Enter stock'
-                                    value={countInStock}
+                                    defaultValue={countInStock}
                                     onChange={(e) => setCountInStock(e.target.value)}
                                 >
                                 </Form.Control>
                             </Form.Group>
 
                             <Form.Group controlId='category'>
-                                <Form.Label>Kategorija</Form.Label>
-                                <Form.Control
-
-                                    type='text'
-                                    placeholder='Enter category'
-                                    value={category}
-                                    onChange={(e) => setCategory(e.target.value)}
-                                >
-                                </Form.Control>
+                                <Form.Label><strong>Kategorija</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             onChange={(e) => setCategory(e.target.value)}>
+                                    <option>Odaberi kategoriju cveca...</option>
+                                    <option value="Lekovito Bilje">Lekovito Bilje</option>
+                                    <option value="Cvetnice">Cvetnice</option>
+                                    <option value="Bobicasto Voce">Bobicasto Voce</option>
+                                    <option value="Penjacice">Penjacice</option>
+                                    <option value="Zelena Biljka">Zelena Biljka</option>
+                                </Form.Select>
                             </Form.Group>
 
                             <Form.Group controlId='description'>
-                                <Form.Label>Description</Form.Label>
+                                <Form.Label><strong>Description</strong></Form.Label>
                                 <Form.Control
 
                                     type='text'
                                     placeholder='Enter description'
-                                    value={description}
+                                    defaultValue={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                 >
                                 </Form.Control>
