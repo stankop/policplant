@@ -149,3 +149,14 @@ def updateProduct(request,pk):
     serilizer = ProductSerializer(product, many = False)
     return Response(serilizer.data)
 
+@api_view(['POST'])
+def uploadImage(request):
+    data = request.data
+
+    product_id = data['product_id']
+    product = Product.objects.get(_id=product_id)
+
+    product.image = request.FILES.get('image')
+    product.save()
+    return Response('Image was uploaded')
+

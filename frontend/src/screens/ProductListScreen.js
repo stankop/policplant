@@ -106,7 +106,8 @@ function ProductListScreen() {
                                     <th>NAME</th>
                                     <th>Cena</th>
                                     <th>Kategorija</th>
-                                    <th>Brand</th>
+                                    <th>Boja</th>
+                                    <th>Stanje</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -119,6 +120,7 @@ function ProductListScreen() {
                                         <td>{product.price} din</td>
                                         <td>{product.category}</td>
                                         <td>{product.brand}</td>
+                                        <td>{product.countInStock}</td>
                                         <td><LinkContainer to={`/admin/product/${product._id}/edit`}>
 
                                                 <Button variant = 'light' className='btn-sm'>

@@ -4,8 +4,10 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+
 class Product(models.Model):
     user = models.ForeignKey(User, on_delete = models.SET_NULL, null= True)
+    #category = models.ForeignKey(Category, on_delete = models.SET_NULL, null= True)
     name = models.CharField(max_length=200, null=True, blank= True)
     image = models.ImageField( null=True, blank= True, default='/default.jpg')
     brand = models.CharField(max_length=200, null=True, blank= True)
@@ -16,7 +18,12 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=7, decimal_places= 2, null=True, blank= True)
     countInStock = models.IntegerField(null=True, blank= True, default=0)
     createdAt = models.DateTimeField(auto_now_add=True)
+    #color = models.CharField(max_length=200, null=True, blank= True)
+    #place_of_planting = models.CharField(max_length=200, null=True, blank= True)
+    #flowering_time = models.CharField(max_length=200, null=True, blank= True)
+    #position = models.CharField(max_length=200, null=True, blank= True)
     _id = models.AutoField(primary_key=True, editable= False)
+
 
     def __str__(self) -> str:
         return self.name
@@ -72,3 +79,4 @@ class ShippingAddress(models.Model):
 
     def __str__(self) -> str:
         return str(self.address)
+

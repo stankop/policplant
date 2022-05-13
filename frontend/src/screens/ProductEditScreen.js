@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { Form, Button } from 'react-bootstrap'
+import {  Button } from 'react-bootstrap'
+import Form from 'react-bootstrap/Form'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../compontents/Loader'
 import Message from '../compontents/Message'
@@ -79,32 +80,33 @@ function ProductEditScreen( ) {
 
     }
 
-    // const uploadFileHandler = async (e) => {
-    //     const file = e.target.files[0]
-    //     const formData = new FormData()
+    const uploadFileHandler = async (e) => {
+         const file = e.target.files[0]
+         console.log('sta je ovo:', file)
+         const formData = new FormData()
 
-    //     formData.append('image', file)
-    //     formData.append('product_id', productId)
+         formData.append('image', file)
+         formData.append('product_id', productId)
 
-    //     setUploading(true)
+         setUploading(true)
 
-    //     try {
-    //         const config = {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data'
-    //             }
-    //         }
+         try {
+             const config = {
+                 headers: {
+                     'Content-Type': 'multipart/form-data'
+                 }
+             }
 
-    //         const { data } = await axios.post('/api/products/upload/', formData, config)
+             const { data } = await axios.post('/api/products/upload/', formData, config)
 
 
-    //         setImage(data)
-    //         setUploading(false)
+             setImage(data)
+             setUploading(false)
 
-    //     } catch (error) {
-    //         setUploading(false)
-    //     }
-    // }
+         } catch (error) {
+            setUploading(false)
+         }
+     }
 
     return (
         <div>
@@ -134,7 +136,7 @@ function ProductEditScreen( ) {
                             </Form.Group>
 
                             <Form.Group controlId='price'>
-                                <Form.Label>Price</Form.Label>
+                                <Form.Label>Cena</Form.Label>
                                 <Form.Control
 
                                     type='number'
@@ -153,25 +155,26 @@ function ProductEditScreen( ) {
                                     type='text'
                                     placeholder='Enter image'
                                     value={image}
-                                    onChange={(e) => setImage(e.target.value)}
+                                   
                                 >
                                 </Form.Control>
 
-                                 {/* <Form.File
-                                    id='image-file'
-                                    label='Choose File'
-                                    custom
-                                    onChange={uploadFileHandler}
+                                <Form.Control
+                                    controlid="image-file"
+                                    type='file'
+                                    label="Izaberite sliku:"
+                                    
+                                    onChange={async (e) =>  uploadFileHandler(e)}
                                 > 
 
-                                </Form.Group></Form.File> */}
+                                </Form.Control>  
                                 {uploading && <Loader />}
 
                             </Form.Group>
 
 
                             <Form.Group controlId='brand'>
-                                <Form.Label>Brand</Form.Label>
+                                <Form.Label>Boja</Form.Label>
                                 <Form.Control
 
                                     type='text'
@@ -183,7 +186,7 @@ function ProductEditScreen( ) {
                             </Form.Group>
 
                             <Form.Group controlId='countinstock'>
-                                <Form.Label>Stock</Form.Label>
+                                <Form.Label>Stanje</Form.Label>
                                 <Form.Control
 
                                     type='number'
@@ -195,7 +198,7 @@ function ProductEditScreen( ) {
                             </Form.Group>
 
                             <Form.Group controlId='category'>
-                                <Form.Label>Category</Form.Label>
+                                <Form.Label>Kategorija</Form.Label>
                                 <Form.Control
 
                                     type='text'
