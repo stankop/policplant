@@ -22,7 +22,7 @@ class Product(models.Model):
         LJUBICASTA = 'Ljubicasta',_('LJUBICASTA')
         DEFAULT = 'Zelena',_('Zelena')
 
-    category = models.CharField(max_length=22, choices=Category.choices, default=Category.DEFAULT)
+    category = models.CharField(max_length=20, choices=Category.choices, default=Category.DEFAULT)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField( null=True, blank= True, default='/default.jpg')
