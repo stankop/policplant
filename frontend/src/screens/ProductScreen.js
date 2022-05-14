@@ -76,7 +76,7 @@ function ProductScreen({match}) {
 
   return (
     <div>
-        <Link to='/' className='btn btn-light my-3'> Nazad</Link>
+        <Link to='/' className='btn btn-primary my-3'> Nazad</Link>
 
         {loading ? 
                  <Loader></Loader>
@@ -93,22 +93,36 @@ function ProductScreen({match}) {
                                 <Col md={3}>
                                     <ListGroup variant='flush'>
                                         <ListGroup.Item>
-                                            <h3>{product.name}</h3>
+                                            <h2>{product.name}</h2>
                                         </ListGroup.Item>
-                                        <ListGroup.Item>
+                                        {/* <ListGroup.Item>
                                             <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'#f8e825'}>
                                             </Rating>
+                                        </ListGroup.Item> */}
+                                        <ListGroup.Item >
+                                            <strong style={{ color:'#228B22', fontSize:32 }}>{product.price} din</strong> 
                                         </ListGroup.Item>
+
                                         <ListGroup.Item>
-                                            <strong>Cena:</strong> {product.price} din
+                                            <strong>Kategorija:</strong> {product.category}
                                         </ListGroup.Item>
+
                                         <ListGroup.Item>
-                                            <strong>Opis:</strong> {product.description}
+                                            <strong>Boja:</strong> {product.color}
+                                        </ListGroup.Item>
+
+                                        <ListGroup.Item>
+                                            <strong>Polozaj:</strong> {product.flowering_time}
+                                        </ListGroup.Item>
+
+                                        <ListGroup.Item>
+                                            <strong>Mesto sadnje:</strong> {product.place_of_planting}
                                         </ListGroup.Item>
                                     </ListGroup>
                                 </Col>
                                 <Col md={3}>
                                     <Card>
+                                    <Card.Title style={{ textAlign:'center', color:'black'}}>Kupovina</Card.Title>
                                         <ListGroup variant='flush' >
                                             <ListGroup.Item>
                                                 <Row>
@@ -126,7 +140,12 @@ function ProductScreen({match}) {
                                                         Status:
                                                     </Col>
                                                     <Col>
-                                                        { product.countInStock > 0 ? 'Na stanju' : 'Nema na stanju'}
+                                                        <div style={{ 
+                                                                        color: `${ product.countInStock > 0 ? 'green' : 'red'}`,
+                                                                        fontSize: 20
+                                                                    }}>
+                                                            { product.countInStock > 0 ? 'Na stanju' : 'Nema na stanju'}
+                                                        </div>
                                                     </Col>
                                                 </Row>
                                             </ListGroup.Item>
@@ -170,8 +189,16 @@ function ProductScreen({match}) {
                         </Row>
 
                         <Row>
-                            <Col md={6}>
-                                <h4>Komentari</h4>
+                            <Col md={12} >
+                            <h2 style={{color:'black'}}>Detaljni opis:</h2>
+                                <ListGroup variant='flush'>
+                                        <ListGroup.Item>
+                                            {product.description}
+                                        </ListGroup.Item>
+                                </ListGroup>
+                            </Col>
+                            {/* <Col md={6}>
+                                <h4>Detaljni opis:</h4>
                                 {product.reviews?.length === 0 && <Message variant='info'>
                                     Nema Komentara
                                     </Message>}
@@ -237,12 +264,11 @@ function ProductScreen({match}) {
                                             )}
                                         </ListGroup.Item>
                                 </ListGroup>
-                            </Col>
+                            </Col> */}
                         </Row>
                     </div>
                     )}  
         
-        {product.name}
     </div>
   )
 }
