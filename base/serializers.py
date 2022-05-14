@@ -15,6 +15,8 @@ class ProductSerializer(serializers.ModelSerializer):
     reviews = serializers.SerializerMethodField(read_only= True)
     categoryChoises = serializers.SerializerMethodField(read_only= True)
     colorChoises = serializers.SerializerMethodField(read_only= True)
+    placeChoises = serializers.SerializerMethodField(read_only= True)
+    floweringChoises = serializers.SerializerMethodField(read_only= True)
     class Meta:
         model = Product
         fields =  '__all__'
@@ -31,6 +33,14 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_colorChoises(self, obj):
         color = [e.value for e in obj.Color]
         return color
+    
+    def get_placeChoises(self, obj):
+        place = [e.value for e in obj.Place]
+        return place
+    
+    def get_floweringChoises(self, obj):
+        flow = [e.value for e in obj.Flowering]
+        return flow
 
 
 class UserSerializer(serializers.ModelSerializer):

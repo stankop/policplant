@@ -23,6 +23,8 @@ function ProductEditScreen( ) {
     const [price, setPrice] = useState(0)
     const [image, setImage] = useState('')
     const [color, setColor] = useState('')
+    const [place, setPlace] = useState('')
+    const [flow, setFlow] = useState('')
     const [category, setCategory] = useState('')
     const [countInStock, setCountInStock] = useState(0)
     const [description, setDescription] = useState('')
@@ -54,6 +56,8 @@ function ProductEditScreen( ) {
                 setPrice(product.price)
                 setImage(product.image)
                 setColor(product.color)
+                setPlace(product.place)
+                setFlow(product.flow)
                 setCategory(product.category)
                 setCountInStock(product.countInStock)
                 setDescription(product.description)
@@ -72,6 +76,8 @@ function ProductEditScreen( ) {
             price,
             image,
             color,
+            place,
+            flow,
             category,
             countInStock,
             description
@@ -173,7 +179,7 @@ function ProductEditScreen( ) {
                             </Form.Group>
 
 
-                            <Form.Group controlId='brand'>
+                            <Form.Group controlId='color'>
                                 <Form.Label><strong>Boja</strong></Form.Label>
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setColor(e.target.value)}>
@@ -203,6 +209,30 @@ function ProductEditScreen( ) {
                                              onChange={(e) => setCategory(e.target.value)}>
                                     <option>Odaberi kategoriju cveca...</option>
                                     {product.categoryChoises?.map(cat => (
+                                        <option value={cat}>{cat}</option>
+                                    ))}
+ 
+                                </Form.Select>
+                            </Form.Group>
+
+                            <Form.Group controlId='flow'>
+                                <Form.Label><strong>Vreme cvetanja</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             onChange={(e) => setFlow(e.target.value)}>
+                                    <option>Odaberi vreme cvetanja...</option>
+                                    {product.floweringChoises?.map(cat => (
+                                        <option value={cat}>{cat}</option>
+                                    ))}
+ 
+                                </Form.Select>
+                            </Form.Group>
+
+                            <Form.Group controlId='place'>
+                                <Form.Label><strong>Mesto sadnje</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             onChange={(e) => setPlace(e.target.value)}>
+                                    <option>Odaberi mesto sadnje...</option>
+                                    {product.placeChoises?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
  

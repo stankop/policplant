@@ -22,6 +22,22 @@ class Product(models.Model):
         LJUBICASTA = 'Ljubicasta',_('LJUBICASTA')
         DEFAULT = 'Zelena',_('Zelena')
 
+    class Place(models.TextChoices):
+        SAKSIJA = 'SAKSIJA',_('SAKSIJA')
+        ZARDINJERA = 'ZARDINJERA',_('ZARDINJERA')
+        BASTA = 'BASTA', _('BASTA')
+        OGRADA = 'OGRADA', _('OGRADA')
+        VISECASAKSIJA = 'VISECA SAKSIJA',_ ('VISECA SAKSIJA')
+        POLUSENKA = 'POLUSENKA',_('POLUSENKA')
+        DEFAULT = 'VECA SAKSIJA',_('VECA SAKSIJA')
+
+    class Flowering(models.TextChoices):
+        JAKOSUNCE = 'JAKO SUNCE',_('JAKO SUNCE')
+        POLUSENKA = 'POLUSENKA', _('POLUSENKA')
+        SENKA = 'SENKA', _('SENKA')
+        DEFAULT = 'SUNCE',_('SUNCE')
+        
+
     category = models.CharField(max_length=20, choices=Category.choices, default=Category.DEFAULT)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200, null=True, blank=True)
@@ -35,8 +51,8 @@ class Product(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
 
     color = models.CharField(max_length=20, choices=Color.choices, default=Color.DEFAULT)
-    flowering_time = models.CharField(max_length=200, null=True, blank=True)
-    place_of_planting = models.CharField(max_length=200, null=True, blank=True)
+    flowering_time = models.CharField(max_length=20, choices=Flowering.choices, default=Flowering.DEFAULT)
+    place_of_planting = models.CharField(max_length=20, choices=Place.choices, default=Place.DEFAULT)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
