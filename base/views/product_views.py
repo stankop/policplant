@@ -139,7 +139,7 @@ def updateProduct(request,pk):
 
     product.name = data['name']
     product.price = data['price']
-    product.brand = data['brand']
+    product.color = data['color']
     product.countInStock = data['countInStock']
     product.category = data['category']
     product.description = data['description']

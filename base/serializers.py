@@ -1,4 +1,5 @@
 
+from django.http import JsonResponse
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import Product, Order, OrderItem, ShippingAddress, Review
@@ -12,6 +13,8 @@ class ReviewtSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     reviews = serializers.SerializerMethodField(read_only= True)
+    categoryChoises = serializers.SerializerMethodField(read_only= True)
+    colorChoises = serializers.SerializerMethodField(read_only= True)
     class Meta:
         model = Product
         fields =  '__all__'
@@ -20,6 +23,14 @@ class ProductSerializer(serializers.ModelSerializer):
         reviews = obj.review_set.all()
         serializer = ReviewtSerializer(reviews, many=True)
         return serializer.data
+    
+    def get_categoryChoises(self, obj):
+        category = [e.value for e in obj.Category]
+        return category
+    
+    def get_colorChoises(self, obj):
+        color = [e.value for e in obj.Color]
+        return color
 
 
 class UserSerializer(serializers.ModelSerializer):

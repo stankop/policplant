@@ -22,7 +22,7 @@ function ProductEditScreen( ) {
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
     const [image, setImage] = useState('')
-    const [brand, setBrand] = useState('')
+    const [color, setColor] = useState('')
     const [category, setCategory] = useState('')
     const [countInStock, setCountInStock] = useState(0)
     const [description, setDescription] = useState('')
@@ -53,7 +53,7 @@ function ProductEditScreen( ) {
                 setName(product.name)
                 setPrice(product.price)
                 setImage(product.image)
-                setBrand(product.brand)
+                setColor(product.color)
                 setCategory(product.category)
                 setCountInStock(product.countInStock)
                 setDescription(product.description)
@@ -71,7 +71,7 @@ function ProductEditScreen( ) {
             name,
             price,
             image,
-            brand,
+            color,
             category,
             countInStock,
             description
@@ -175,14 +175,14 @@ function ProductEditScreen( ) {
 
                             <Form.Group controlId='brand'>
                                 <Form.Label><strong>Boja</strong></Form.Label>
-                                <Form.Control
-
-                                    type='text'
-                                    placeholder='Enter brand'
-                                    defaultValue={brand}
-                                    onChange={(e) => setBrand(e.target.value)}
-                                >
-                                </Form.Control>
+                                <Form.Select aria-label="Default select example"
+                                             onChange={(e) => setColor(e.target.value)}>
+                                    <option>Odaberite boju cveca...</option>
+                                    {product.colorChoises?.map(col => (
+                                        <option value={col}>{col}</option>
+                                    ))}
+ 
+                                </Form.Select>
                             </Form.Group>
 
                             <Form.Group controlId='countinstock'>
@@ -202,11 +202,10 @@ function ProductEditScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setCategory(e.target.value)}>
                                     <option>Odaberi kategoriju cveca...</option>
-                                    <option value="Lekovito Bilje">Lekovito Bilje</option>
-                                    <option value="Cvetnice">Cvetnice</option>
-                                    <option value="Bobicasto Voce">Bobicasto Voce</option>
-                                    <option value="Penjacice">Penjacice</option>
-                                    <option value="Zelena Biljka">Zelena Biljka</option>
+                                    {product.categoryChoises?.map(cat => (
+                                        <option value={cat}>{cat}</option>
+                                    ))}
+ 
                                 </Form.Select>
                             </Form.Group>
 
