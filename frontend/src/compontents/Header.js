@@ -11,12 +11,15 @@ import {
   faPhone,
   faFlag,
 } from "@fortawesome/free-solid-svg-icons";
+import { Fragment } from 'react'
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
 import { logout } from "../store/user-actions";
-
-function Header() {
+import HeaderCardButton from './/UI/HeaderCardButton'
+import classes from './Header.module.css'
+import image from '../../src/assets/images/berberis-erecta-1-350x350.jpg'
+function Header(props) {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -25,12 +28,13 @@ function Header() {
     dispatch(logout());
   };
   return (
+    <Fragment>
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
               <LinkContainer to="/">
                 <Navbar.Brand>
-                  <h1>PolicPlant</h1>
+                  <h2>PolicPlant</h2>
                 </Navbar.Brand>
               </LinkContainer>
               
@@ -44,16 +48,26 @@ function Header() {
               </Navbar.Text>
               
               <Navbar.Text style={{ textAlign: 'center'}}>
+              <LinkContainer to="#" >
                     <Nav.Link >
-                      <div style={{fontSize: '20px'}}><FontAwesomeIcon icon={faFlag} />     Placeholder</div>
+                      <div style={{fontSize: '20px'}}><FontAwesomeIcon icon={faFlag} /> Placeholder</div>
                     </Nav.Link>
+                  </LinkContainer>
+              </Navbar.Text>
+
+              <Navbar.Text style={{ textAlign: 'center'}}>
+              <LinkContainer to="/cart" >
+                    <Nav.Link >
+                      <HeaderCardButton onClick={props.onShowCart}></HeaderCardButton>
+                    </Nav.Link>
+                  </LinkContainer>
               </Navbar.Text>
         </Container>
       </Navbar>
       <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>
         <Container>
           <Row>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" md={4} style={{ pading:5}}/>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" md={4} style={{ pading:2}}/>
             
             <Navbar.Collapse id="basic-navbar-nav">
               <Col md={4} style={{ pading:10, margin:10, size:20}} >
@@ -133,6 +147,10 @@ function Header() {
         </Container>
       </Navbar>
     </header>
+    { '' && <div className={classes["main-image"]}>
+        <img src={image} alt="Green color background" ></img>
+    </div>}
+    </Fragment>
   );
 }
 

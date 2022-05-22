@@ -9,6 +9,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import Paginate from '../compontents/Paginate'
 import ProductCarucel from '../compontents/ProductCarusel'
+import { CSSTransition } from 'react-transition-group'
 
 function HomeScreen() {
 

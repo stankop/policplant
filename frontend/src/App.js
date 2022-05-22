@@ -18,13 +18,27 @@ import ONamaScreen from "./screens/ONamaScreen";
 import KontaktScreen from "./screens/KontakScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import ProductEditScreen from "./screens/ProductEditScreen"
+import OrderListScreen from "./screens/OrderListScreen"
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
-
+import { useState } from "react";
+import Cart from './compontents/UI/Cart/Cart'
 
 function App() {
+
+  const [cartIsShown, setCartIsShown] = useState(false)
+
+  const showCartHalnder = () =>{
+    setCartIsShown(true)
+  }
+
+  const hideCartHanlder = () => {
+    setCartIsShown(false)
+  }
+
   return (
     <Router>
-      <Header />
+      { cartIsShown &&  <Cart onClose={hideCartHanlder}></Cart> }
+      <Header onShowCart={showCartHalnder}/>
       <main className="py-3">
         <Container>
           <Routes>
@@ -49,6 +63,7 @@ function App() {
             <Route path="/kontakt" element={<KontaktScreen />}></Route>
             <Route path="/admin/user/:id/edit" element={<UserEditScreen />}></Route>
             <Route path="/admin/product/:id/edit" element={<ProductEditScreen />}></Route>
+            <Route path="/admin/orderlist" element={<OrderListScreen />}></Route>
           </Routes>
         </Container>
       </main>

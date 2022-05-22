@@ -20,6 +20,7 @@ import { deleteProductReducer} from './deleteProduct-slice'
 import { createProductReducer} from './createProduct-slice'
 import { userUpdateReducer } from './userUpdate-slice'
 import { updateProductReducer } from './updateProduct-slice'
+import { orderListReducer } from './orderList-slice'
 
 const store = configureStore({
     reducer:{
@@ -43,7 +44,8 @@ const store = configureStore({
         deleteProduct: deleteProductReducer,
         createProduct: createProductReducer,
         userUpdate: userUpdateReducer,
-        updateProduct: updateProductReducer
+        updateProduct: updateProductReducer,
+        orderList: orderListReducer
     }
 })
 
