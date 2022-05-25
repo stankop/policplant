@@ -5,11 +5,11 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
-from base.models import Product, Order, OrderItem, ShippingAddress
+from base.models import Product, Order, OrderItem, UserAccount
 from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.contrib.auth.hashers  import make_password
 from rest_framework import status
 from datetime import datetime
@@ -31,18 +31,18 @@ def addOrderItems(request):
             user = user,
             paymentMethod = data['paymentMethod'],
             taxPrice = data['taxPrice'],
-            shippingPrice = data['shippingPrice'],
+            #shippingPrice = data['shippingPrice'],
             totalPrice = data['totalPrice']
             )
         # 2 create Shipping adddress
 
-        shipping = ShippingAddress.objects.create(
-            order = order,
-            address = data['shippingAddress']['address'],
-            city = data['shippingAddress']['city'],
-            postalCode = data['shippingAddress']['postalCode'],
-            country = data['shippingAddress']['country']
-        )
+        # shipping = ShippingAddress.objects.create(
+        #     order = order,
+        #     address = data['shippingAddress']['address'],
+        #     city = data['shippingAddress']['city'],
+        #     postalCode = data['shippingAddress']['postalCode'],
+        #     country = data['shippingAddress']['country']
+        #)
         # 4 create order items and set order to orderItem relationship
 
         for i in orderItems:

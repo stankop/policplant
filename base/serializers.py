@@ -1,14 +1,13 @@
-
 from django.http import JsonResponse
 from rest_framework import serializers
-from django.contrib.auth.models import User
-from .models import Product, Order, OrderItem, ShippingAddress, Review
+#from django.contrib.auth.models import User
+from .models import Product, Order, OrderItem, UserAccount
 from rest_framework_simplejwt.tokens import RefreshToken
 
-class ReviewtSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Review
-        fields =  '__all__'
+# class ReviewtSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Review
+#         fields =  '__all__'
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -21,10 +20,10 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields =  '__all__'
 
-    def get_reviews(self, obj):
-        reviews = obj.review_set.all()
-        serializer = ReviewtSerializer(reviews, many=True)
-        return serializer.data
+    # def get_reviews(self, obj):
+    #     reviews = obj.review_set.all()
+    #     serializer = ReviewtSerializer(reviews, many=True)
+    #     return serializer.data
     
     def get_categoryChoises(self, obj):
         category = [e.value for e in obj.Category]
@@ -49,7 +48,7 @@ class UserSerializer(serializers.ModelSerializer):
     isAdmin = serializers.SerializerMethodField(read_only= True)
 
     class Meta:
-        model = User
+        model = UserAccount
         fields =  [
             '_id','username','email', 'name', 'isAdmin'
         ]
@@ -65,14 +64,12 @@ class UserSerializer(serializers.ModelSerializer):
         return _id
     
     def get_isAdmin(self, obj):
-        
-        
         return obj.is_staff
 
 class UserSerializerWithToken(UserSerializer):
     token = serializers.SerializerMethodField(read_only= True)
     class Meta:
-        model = User
+        model = UserAccount
 
         fields =  [
             'id','username','email', 'name', 'isAdmin', 'token'
@@ -82,10 +79,10 @@ class UserSerializerWithToken(UserSerializer):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
 
-class ShippingAddressSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ShippingAddress
-        fields =  '__all__'
+# class ShippingAddressSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = ShippingAddress
+#         fields =  '__all__'
 
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:

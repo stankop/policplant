@@ -1,0 +1,12 @@
+Sifre za AWS:
+
+DB name: policplant
+username: postgres
+pass: Prnjavorska114
+
+
+endpoing za DB:
+Endpoint
+policplant.ciwljxueoqxr.eu-west-2.rds.amazonaws.com
+Port
+5432
