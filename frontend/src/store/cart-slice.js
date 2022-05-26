@@ -14,7 +14,7 @@ const cartSlice = createSlice({
             const newItem = action.payload
             const existItem = state.cartItems.find(x => x.id === newItem.id)
             if(existItem){
-                    state.cartItems.find(item => item.id === existItem.id).qty++
+                    state.cartItems.find(item => item.id === existItem.id).qty += newItem.qty
 
             }else{
                 
@@ -25,7 +25,7 @@ const cartSlice = createSlice({
         removeCartItem(state, action) {
                 const id = action.payload
                 const existItem = state.cartItems.find(x => x.id === id)
-                state.cartItems.pop(existItem)
+                state.cartItems.remove(existItem.id)
         },
 
        cleanCartItems(state, action) {

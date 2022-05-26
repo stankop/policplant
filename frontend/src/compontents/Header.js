@@ -105,7 +105,7 @@ function Header(props) {
                   </LinkContainer>
 
                   {userInfo ? (
-                    <NavDropdown title={userInfo.name} id="username" style={{fontSize: '20px'}}>
+                    <NavDropdown title={userInfo.user_name} id="username" style={{fontSize: '20px'}}>
                       <LinkContainer
                         to="/profile">
                         <NavDropdown.Item>Profile</NavDropdown.Item>

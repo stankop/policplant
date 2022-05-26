@@ -8,7 +8,8 @@ from rest_framework.response import Response
 from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from base.models import UserAccount
 from django.contrib.auth.hashers  import make_password
 from rest_framework import status
 
@@ -31,11 +32,16 @@ class MyTokenObtainPairView(TokenObtainPairView):
 def registerUser(request):
     data = request.data
     try:
-        user = User.objects.create(
-            first_name= data['name'],
-            username = data['email'],
+        user = UserAccount.objects.create(
+            first_name= data['username'],
+            user_name = data['name'],
             email = data['email'],
-            password = make_password(data['password'])
+            place = data['place'],
+            address = data['address'],
+            self_phone = data['self_phone'],
+            fix_phone = data['fix_phone'],
+            password = make_password(data['password']),
+            is_active = True
         )
         serializer = UserSerializerWithToken(user, many = False)
         return Response(serializer.data)
@@ -73,14 +79,14 @@ def getUserProfile(request):
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getUsers(request):
-    users = User.objects.all()
+    users = UserAccount.objects.all()
     serilizer = UserSerializer(users, many = True)
     return Response(serilizer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getUserById(request, pk):
-    users = User.objects.get(id = pk)
+    users = UserAccount.objects.get(id = pk)
     serilizer = UserSerializer(users, many = False)
     return Response(serilizer.data)
 
@@ -89,7 +95,7 @@ def getUserById(request, pk):
 @permission_classes([IsAuthenticated])
 def updateUser(request, pk):
     
-    user = User.objects.get(id = pk)
+    user = UserAccount.objects.get(id = pk)
     print(type(user))
     
 
@@ -107,7 +113,7 @@ def updateUser(request, pk):
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def deleteUser(requeste, pk):
-    userForDeltion = User.objects.get(id=pk)
+    userForDeltion = UserAccount.objects.get(id=pk)
     userForDeltion.delete()
     return Response('User was deleted')
 

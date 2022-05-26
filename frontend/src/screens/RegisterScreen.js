@@ -13,8 +13,13 @@ import { register } from '../store/userRegister-actions'
 
 function RegisterScreen() {
 
-    const [name , setName] = useState('')
+    const [username , setName] = useState('')
     const [email , setEmail] = useState('')
+    const [fullname , setUserName] = useState('')
+    const [place , setPlace] = useState('')
+    const [address , setAddress] = useState('')
+    const [self_phone , setSelfPhone] = useState('')
+    const [fix_phone , setFixPhone] = useState('')
     const [password , setPassword ] = useState('')
     const [confirmPassword , setConfirmPassword ] = useState('')
     const [message , setMessage ] = useState('')
@@ -44,7 +49,7 @@ function RegisterScreen() {
 
             setMessage('Password do not match.')
         }else{
-        dispatch(register(name, email, password))
+        dispatch(register(username, email, password, fullname, place, address, self_phone, fix_phone))
         }
 
     }
@@ -63,13 +68,13 @@ function RegisterScreen() {
         <Form onSubmit={submitHandler}>
                 <Form.Group controlId='name'>
                     <Form.Label>
-                        Ime
+                        User Name
                     </Form.Label>
                     <Form.Control 
                             required
                             type='name' 
-                            placeholder='Unesite Ime...'
-                            value={name}
+                            placeholder='Unesite User Name...'
+                            value={username}
                             onChange={(e) => setName(e.target.value)}>
 
                     </Form.Control>
@@ -90,6 +95,72 @@ function RegisterScreen() {
                     </Form.Control>
                 </Form.Group>
 
+                <Form.Group controlId='fullmame'>
+                    <Form.Label>
+                        Ime i Prezime
+                    </Form.Label>
+                    <Form.Control 
+                            type='fullname' 
+                            placeholder='Unesite Vase ime i prezime...'
+                            value={fullname}
+                            onChange={(e) => setUserName(e.target.value)}>
+
+                    </Form.Control>
+                </Form.Group>
+
+                <Form.Group controlId='place'>
+                    <Form.Label>
+                        Postanski broj
+                    </Form.Label>
+                    <Form.Control 
+                            type='place' 
+                            placeholder='Unesite Vas postanski broj...'
+                            value={place}
+                            onChange={(e) => setPlace(e.target.value)}>
+
+                    </Form.Control>
+                </Form.Group>
+
+                <Form.Group controlId='address'>
+                    <Form.Label>
+                        Adresa
+                    </Form.Label>
+                    <Form.Control 
+                            type='address' 
+                            placeholder='Unesite Vasu adresu...'
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}>
+
+                    </Form.Control>
+                </Form.Group>
+
+                <Form.Group controlId='self_phone'>
+                    <Form.Label>
+                        Broj Mobilnog
+                    </Form.Label>
+                    <Form.Control 
+                            type='self_phone' 
+                            placeholder='Unesite Vas mobilni telefon...'
+                            value={self_phone}
+                            onChange={(e) => setSelfPhone(e.target.value)}>
+
+                    </Form.Control>
+                </Form.Group>
+
+                <Form.Group controlId='fix_phone'>
+                    <Form.Label>
+                        Broj fixnog telefona
+                    </Form.Label>
+                    <Form.Control 
+                            type='fix_phone' 
+                            placeholder='Unesite Vas fixni telefon...'
+                            value={fix_phone}
+                            onChange={(e) => setFixPhone(e.target.value)}>
+
+                    </Form.Control>
+                </Form.Group>
+                <br/>
+                <br/>
                 <Form.Group controlId='password'>
                     <Form.Label>
                         Password

@@ -8,7 +8,6 @@ import { userListActions } from './userList-slice'
 export const login = (email, password) => {
     return async (dispatch) => {
 
-        
         const fetchData = async () => {
 
             const config = {
@@ -18,7 +17,7 @@ export const login = (email, password) => {
             }
             const { data } = await axios.post('/api/users/login/',
             {
-                'username': email,
+                'email': email,
                 'password': password
             }, config)
             return data;

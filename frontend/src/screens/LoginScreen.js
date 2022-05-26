@@ -14,6 +14,11 @@ import { login } from '../store/user-actions'
 function LoginScreen() {
 
     const [email , setEmail] = useState('')
+    const [userName , setUserName] = useState('')
+    const [place , setPlace] = useState('')
+    const [address , setAddress] = useState('')
+    const [self_phone , setSelfPhone] = useState('')
+    const [fix_phone , setFixPhone] = useState('')
     const [password , setPassword ] = useState('')
 
     const dispatch = useDispatch()
@@ -61,8 +66,6 @@ function LoginScreen() {
 
                     </Form.Control>
                 </Form.Group>
-
-
 
                 <Form.Group controlId='password'>
                     <Form.Label>

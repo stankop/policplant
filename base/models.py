@@ -71,36 +71,36 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 class Product(models.Model):
 
     class Category(models.TextChoices):
-        LEKOVITO = 'Lekovito Bilje',_('Lekovito Bilje')
-        CVETNICE = 'Cvetnice',_('Cvetnice')
+        LEKOVITO = 'Lekovito Bilje', _('Lekovito Bilje')
+        CVETNICE = 'Cvetnice', _('Cvetnice')
         BOBICASTO = 'Bobicasto Voce', _('Bobicasto Voce')
         SOBNO = 'Sobno Svece', _('Sobno Svece')
-        PENJACICE = 'Penjacice',_ ('Penjacice')
-        DEFAULT = 'Zelena Biljka',_('Zelena Biljka')
+        PENJACICE = 'Penjacice', _ ('Penjacice')
+        DEFAULT = 'Zelena Biljka', _('Zelena Biljka')
     
     class Color(models.TextChoices):
-        CRNA = 'Crna',_('CRNA')
-        PLAVA = 'Plava',_('PLAVA')
+        CRNA = 'Crna', _('CRNA')
+        PLAVA = 'Plava', _('PLAVA')
         ROZA = 'Roza', _('ROZA')
         CRVENA = 'Crvena', _('CRVENA')
-        SARENA = 'Sarena',_ ('SARENA')
-        LJUBICASTA = 'Ljubicasta',_('LJUBICASTA')
-        DEFAULT = 'Zelena',_('Zelena')
+        SARENA = 'Sarena',  _ ('SARENA')
+        LJUBICASTA = 'Ljubicasta', _('LJUBICASTA')
+        DEFAULT = 'Zelena', _('Zelena')
 
     class Place(models.TextChoices):
-        SAKSIJA = 'SAKSIJA',_('SAKSIJA')
-        ZARDINJERA = 'ZARDINJERA',_('ZARDINJERA')
+        SAKSIJA = 'SAKSIJA', _('SAKSIJA')
+        ZARDINJERA = 'ZARDINJERA', _('ZARDINJERA')
         BASTA = 'BASTA', _('BASTA')
         OGRADA = 'OGRADA', _('OGRADA')
-        VISECASAKSIJA = 'VISECA SAKSIJA',_ ('VISECA SAKSIJA')
-        POLUSENKA = 'POLUSENKA',_('POLUSENKA')
-        DEFAULT = 'VECA SAKSIJA',_('VECA SAKSIJA')
+        VISECASAKSIJA = 'VISECA SAKSIJA', _ ('VISECA SAKSIJA')
+        POLUSENKA = 'POLUSENKA', _('POLUSENKA')
+        DEFAULT = 'VECA SAKSIJA', _('VECA SAKSIJA')
 
     class Flowering(models.TextChoices):
-        JAKOSUNCE = 'JAKO SUNCE',_('JAKO SUNCE')
+        JAKOSUNCE = 'JAKO SUNCE', _('JAKO SUNCE')
         POLUSENKA = 'POLUSENKA', _('POLUSENKA')
         SENKA = 'SENKA', _('SENKA')
-        DEFAULT = 'SUNCE',_('SUNCE')
+        DEFAULT = 'SUNCE', _('SUNCE')
         
 
     category = models.CharField(max_length=20, choices=Category.choices, default=Category.DEFAULT)

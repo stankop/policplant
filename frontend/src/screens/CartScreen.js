@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,7 +9,14 @@ import {
   Form,
   Button,
   Card,
+  ToggleButtonGroup,
+  ToggleButton
 } from "react-bootstrap";
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import RadioGroup from '@mui/material/RadioGroup';
+import Radio from '@mui/material/Radio';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import Message from "../compontents/Message";
 import { addToCart, removeFromCart } from "../store/cart-actions";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -23,7 +30,15 @@ function CartScreen() {
   const [search, setSearch] = useSearchParams();
   const id = search.get("id");
   const qty = search.get("qty");
-  console.log("Ovo su podaci:", search.get("id"), search.get("qty"));
+
+
+  const [dostava, setDostava] = useState("licno");
+  console.log("Ovo su podaci:",dostava);
+  const handleDostavaChange = (val) => setDostava(val);
+
+  const [placanje, setPlacanje] = useState("uplata");
+  console.log("Ovo su podaci:",placanje);
+  const handleUplataChange = (val) => setPlacanje(val);
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -61,7 +76,7 @@ function CartScreen() {
           </Message>
         ) : (
           <ListGroup variant="flush">
-            {cartItems.map((item) => (
+            {cartItems?.map((item) => (
               <ListGroup.Item key={item.id}>
                 <Row>
                   <Col md={2}>
@@ -73,10 +88,10 @@ function CartScreen() {
                     ></Image>
                   </Col>
                   <Col md={3}>
-                    <Link to={`/products/${item.id}`}>{item.name}</Link>
+                    <Link to={`/products/${item.id}`}><strong><h4>{item.name}</h4></strong></Link>
                   </Col>
-                  <Col md={2}>{item.price} din</Col>
-                  <Col md={3}>
+                  <Col md={2}><strong>{item.price} din</strong></Col>
+                  <Col md={1}>
                     <Form.Control
                       as="select"
                       value={item.qty}
@@ -87,7 +102,7 @@ function CartScreen() {
                       { item.countInStock > 0 && (
 
                             [...Array(item?.countInStock)?.keys()]?.map((x) => (
-                              <option key={x + 1} value={x + 1}>
+                              <option key={x + 1} value={x + 1} style={{ width: 5}}>
                                 {x + 1}
                               </option>
                             ))
@@ -111,14 +126,72 @@ function CartScreen() {
         )}
       </Col>
       <Col md={4}>
-        <Card>
+        <Card border="info">
+           <Card.Header as="h4">Vasa Porudzbina</Card.Header>
           <ListGroup variant="flush">
-            <ListGroup.Item>
-              <h3>
-                Ukupan broj proizvoda ({cartItems.reduce((acc, item ) => acc + item.qty, 0)}) Ukupna Cena:
-                {cartItems.reduce((acc, item ) => acc + item.qty * item.price, 0).toFixed(2)} din
-              </h3>
+            <ListGroup.Item >
+              <Row>
+                <Col md={8}>Proizvodi</Col>
+                <Col md={4}> Ukupno</Col>
+              </Row>
+
             </ListGroup.Item>
+
+            {cartItems?.map((item) => (
+                <ListGroup.Item>
+                  <Row>
+                    <Col md={8}>{item.qty} X {item.name}</Col>
+                    <Col md={4}> {(item.qty * item.price).toFixed(2)}</Col>
+                  </Row>
+
+                 </ListGroup.Item>))}
+
+            <ListGroup.Item>
+                  <Row>
+                    <Col md={8}>Ukupan broj proizvoda:</Col>
+                    <Col md={4}> {cartItems.reduce((acc, item ) => acc + item.qty, 0)}</Col>
+                  </Row>
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+                  <Row>
+                    <Col md={8}> Ukupna Cena:</Col>
+                    <Col md={4}> {cartItems.reduce((acc, item ) => acc + item.qty * item.price, 0).toFixed(2)} din</Col>
+                  </Row>
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+
+                <FormControl>
+                  <FormLabel id="demo-controlled-radio-buttons-group"><h4>Dostava</h4></FormLabel>
+                  <RadioGroup
+                    aria-labelledby="demo-controlled-radio-buttons-group"
+                    name="controlled-radio-buttons-group"
+                    value={dostava}
+                    onChange={(e) => handleDostavaChange(e.target.value)}
+                  >
+                    <FormControlLabel value="licno" control={<Radio />} label="Licno preuzimanje" />
+                    <FormControlLabel value="posta" control={<Radio />} label="Slanje brzom postom" />
+                  </RadioGroup>
+                </FormControl>
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+
+                <FormControl>
+                  <FormLabel id="demo-controlled-radio-buttons-group"><h4>Placanje</h4></FormLabel>
+                  <RadioGroup
+                    aria-labelledby="demo-controlled-radio-buttons-group"
+                    name="controlled-radio-buttons-group"
+                    value={placanje}
+                    onChange={(e) => handleUplataChange(e.target.value)}
+                  >
+                    <FormControlLabel value="uplata" control={<Radio />} label="Uplata na racun" />
+                    <FormControlLabel value="pouzece" control={<Radio />} label="Prilikom preuzimanja" />
+                  </RadioGroup>
+                </FormControl>
+            </ListGroup.Item>
+
             <ListGroup.Item>
               <Button
                 type='button'

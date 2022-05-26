@@ -2,7 +2,7 @@ import { userRegisterActions } from './userRegister-slice'
 import { userActions } from './user_slice'
 import axios from 'axios'
 
-export const register = (name, email, password) => {
+export const register = (username, email, password, fullname, place, address, self_phone, fix_phone) => {
     return async (dispatch) => {
 
 
@@ -15,8 +15,13 @@ export const register = (name, email, password) => {
             }
             const { data } = await axios.post('/api/users/register/',
             {
-                'name':name,
+                'name':username,
                 'email': email,
+                'username': fullname,
+                'place': place,
+                'address': address,
+                'self_phone': self_phone,
+                'fix_phone': fix_phone,
                 'password': password
             }, config)
             return data;

@@ -59,10 +59,10 @@ def getTopProducts(request):
 
 
 @api_view(['GET'])
-def getProduct(request,pk):
-    product = Product.objects.get(_id = pk)
-    serilizer = ProductSerializer(product, many = False)
-    return Response(serilizer.data)
+def getProduct(request, pk):
+    product = Product.objects.get(_id=pk)
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

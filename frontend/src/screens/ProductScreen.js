@@ -8,6 +8,7 @@ import Message from '../compontents/Message'
 import { useParams } from 'react-router';
 import {useDispatch, useSelector } from 'react-redux'
 import {  productDetails } from '../store/product-actions'
+import {  addToCart,removeFromCart } from '../store/cart-actions'
 import {  createReview } from '../store/review-actions'
 import { reviewCreateActions } from '../store/review-slice'
 
@@ -18,34 +19,18 @@ function ProductScreen({match}) {
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
 
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
-
-
   const dispatch = useDispatch()
-
-  
 
   const userLogin = useSelector(state => state.userLogin)
   const {userInfo} = userLogin
 
-
-  const productReview = useSelector(state => state.reviewCreate)
-  const {loading: loadingReview, error: errorReview, success: successReview} = productReview
-
-
   useEffect(()=>{
 
-       if(successReview){
-            setRating(0)
-            setComment('')
-            dispatch(reviewCreateActions.reviewCreateReset())
-       }
        dispatch(productDetails(id))
 
        return () => {}
         
-  }, [dispatch, id, successReview]);
+  }, [dispatch, id]);
 
   const productDet = useSelector(state => state.product)
   const {loading, error, product} = productDet
@@ -55,15 +40,6 @@ function ProductScreen({match}) {
       navigate(`/cart/?id=${id}&qty=${qty}`)
   }
 
-  const submitHandler= (event) => {
-
-    event.preventDefault()
-    dispatch(createReview(id, {
-
-        rating,
-        comment
-    }))
-  }
 
   useEffect(() => {
     window.scrollTo({
@@ -95,10 +71,6 @@ function ProductScreen({match}) {
                                         <ListGroup.Item>
                                             <h2>{product.name}</h2>
                                         </ListGroup.Item>
-                                        {/* <ListGroup.Item>
-                                            <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'#f8e825'}>
-                                            </Rating>
-                                        </ListGroup.Item> */}
                                         <ListGroup.Item >
                                             <strong style={{ color:'#228B22', fontSize:32 }}>{product.price} din</strong> 
                                         </ListGroup.Item>
@@ -158,7 +130,7 @@ function ProductScreen({match}) {
                                                             <Form.Control 
                                                                  as='select'
                                                                  value={qty} 
-                                                                 onChange={(e) => setQty(e.target.value) }>
+                                                                 onChange={(e) => setQty(Number(e.target.value)) }>
                                                                      {
                                                                          [...Array(product.countInStock).keys()].map((x) => (
                                                                              <option key={x +1} value={x +1}>

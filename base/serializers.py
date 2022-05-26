@@ -1,30 +1,18 @@
-from django.http import JsonResponse
 from rest_framework import serializers
 #from django.contrib.auth.models import User
 from .models import Product, Order, OrderItem, UserAccount
 from rest_framework_simplejwt.tokens import RefreshToken
 
-# class ReviewtSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Review
-#         fields =  '__all__'
-
 
 class ProductSerializer(serializers.ModelSerializer):
-    reviews = serializers.SerializerMethodField(read_only= True)
-    categoryChoises = serializers.SerializerMethodField(read_only= True)
-    colorChoises = serializers.SerializerMethodField(read_only= True)
-    placeChoises = serializers.SerializerMethodField(read_only= True)
-    floweringChoises = serializers.SerializerMethodField(read_only= True)
+    categoryChoises = serializers.SerializerMethodField(read_only=True)
+    colorChoises = serializers.SerializerMethodField(read_only=True)
+    placeChoises = serializers.SerializerMethodField(read_only=True)
+    floweringChoises = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Product
-        fields =  '__all__'
+        fields = '__all__'
 
-    # def get_reviews(self, obj):
-    #     reviews = obj.review_set.all()
-    #     serializer = ReviewtSerializer(reviews, many=True)
-    #     return serializer.data
-    
     def get_categoryChoises(self, obj):
         category = [e.value for e in obj.Category]
         return category
@@ -49,8 +37,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserAccount
-        fields =  [
-            '_id','username','email', 'name', 'isAdmin'
+        fields = [
+            '_id', 'user_name', 'email', 'name', 'isAdmin'
         ]
     
     def get_name(self, obj):
@@ -72,17 +60,13 @@ class UserSerializerWithToken(UserSerializer):
         model = UserAccount
 
         fields =  [
-            'id','username','email', 'name', 'isAdmin', 'token'
+            'id','user_name','email', 'isAdmin', 'token'
         ]
 
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
 
-# class ShippingAddressSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = ShippingAddress
-#         fields =  '__all__'
 
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
@@ -92,7 +76,6 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     orderItems = serializers.SerializerMethodField(read_only= True)
-    shippingAddress = serializers.SerializerMethodField(read_only= True)
     user = serializers.SerializerMethodField(read_only= True)
     class Meta:
         model =  Order
@@ -103,16 +86,7 @@ class OrderSerializer(serializers.ModelSerializer):
         serializer = OrderItemSerializer(items, many=True)
         return serializer.data
     
-    def get_shippingAddress(self, obj):
-         
-        try:
-            address = ShippingAddressSerializer(obj.shippingaddress, many= False).data
-        except:
-            address = False
-        return address
-    
     def get_user(self, obj):
         user = obj.user
         serializer = UserSerializer(user, many=False)
         return serializer.data
-
