@@ -1,4 +1,6 @@
-import email
+
+
+
 from django.shortcuts import render
 
 #from .products import products
@@ -16,23 +18,31 @@ from datetime import datetime
 
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
 def addOrderItems(request):
-    user = request.user
     data = request.data
+    user = UserAccount.objects.create(
+        email=data['email'],
+        user_name=data['name'],
+        password=make_password(data['password']),
+        place=data['place'],
+        address=data['address'],
+        self_phone=data['self_phone'],
+        fix_phone=data['fix_phone']
+    )
+    user.save()
     orderItems = data['orderItems']
 
     if orderItems and len(orderItems) == 0:
-        return Response({'detail':'No Order Items'}, status= status.HTTP_400_BAD_REQUEST)
+        return Response({'detail': 'No Order Items'}, status=status.HTTP_400_BAD_REQUEST)
     else:
         # 1 create Order
 
         order = Order.objects.create(
-            user = user,
-            paymentMethod = data['paymentMethod'],
-            taxPrice = data['taxPrice'],
+            user=user,
+            paymentMethod='paypal',
+            taxPrice=2100,
             #shippingPrice = data['shippingPrice'],
-            totalPrice = data['totalPrice']
+            totalPrice=452
             )
         # 2 create Shipping adddress
 
@@ -46,20 +56,20 @@ def addOrderItems(request):
         # 4 create order items and set order to orderItem relationship
 
         for i in orderItems:
-            product = Product.objects.get(_id = i['id'])
+            product = Product.objects.get(_id=i['id'])
             item = OrderItem.objects.create(
-                product = product,
-                order = order,
-                name = product.name,
-                qty = i['qty'],
-                price = i['price'],
-                image = product.image.url
+                product=product,
+                order=order,
+                name=product.name,
+                qty=i['qty'],
+                price=i['price'],
+                image=product.image.url
             )
             # 5 update Stock
             product.countInStock -= item.qty
             product.save()
         
-    serializer = OrderSerializer(order, many= False)
+    serializer = OrderSerializer(order, many=False)
         
     return Response(serializer.data)
 
@@ -73,12 +83,12 @@ def getOrderById(requeste, pk):
         order = Order.objects.get(_id=pk)
 
         if user.is_staff or order.user == user:
-            serializer  = OrderSerializer(order, many= False)
+            serializer  = OrderSerializer(order, many=False)
             return Response(serializer.data)
         else:
-            return Response({'detail':'Not Authorized to view this order'}, status= status.HTTP_400_BAD_REQUEST)
+            return Response({'detail': 'Not Authorized to view this order'}, status=status.HTTP_403_FORBIDDEN)
     except:
-        return Response({'detail':'Order doesnt exist'}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({'detail': 'Order doesnt exist'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

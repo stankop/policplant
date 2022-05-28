@@ -30,7 +30,7 @@ function HomeScreen() {
  
   return (
     <div>
-        { !keyword && <ProductCarucel></ProductCarucel>}
+        { keyword && <ProductCarucel></ProductCarucel>}
         
         <h1>Proizvodi:</h1>
         { loading ? <Loader></Loader>

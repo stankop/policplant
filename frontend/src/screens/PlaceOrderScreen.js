@@ -19,7 +19,8 @@ function PlaceOrderScreen() {
     const orderCreate = useSelector(state => state.order)
     const { order, error, success} = orderCreate
 
-    const shipping = useSelector(state => state.shipping)
+    const  shipping  = useSelector(state => state.shipping)
+    const { shippingAddress } = shipping
     const payment = useSelector(state => state.payment)
     const cart = useSelector(state => state.cart)
 
@@ -28,9 +29,6 @@ function PlaceOrderScreen() {
     const taxPrice = Number((0.0082) * itemsPrice).toFixed(2)
     const totalPrice = (Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice)).toFixed(2)
 
-    if(!payment.paymentMethod){
-        navigate('/payment')
-    }
    
     useEffect(() =>{
 
@@ -49,19 +47,22 @@ function PlaceOrderScreen() {
         event.preventDefault()
         dispatch(createOrder({
             orderItems:cart.cartItems,
-            shippingAddress: shipping.shippingAddress,
-            paymentMethod:payment.paymentMethod,
+            name: shippingAddress.name,
+            email:shippingAddress.email,
+            password: shippingAddress.password,
+            address: shippingAddress.address,
             itemsPrice: itemsPrice,
-            shippingPrice: shippingPrice,
-            taxPrice: taxPrice,
-            totalPrice: totalPrice,
+            place: shippingAddress.post,
+            fix_phone: shippingAddress.fix_phone,
+            self_phone: shippingAddress.self_phone,
+            demands: shippingAddress.demands,
 
         }))
 
     }
   return (
     <div>
-        <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
+        <CheckoutSteps step1 step2 step3 ></CheckoutSteps>
         <Row>
             <Col md={8}>
 
@@ -70,12 +71,29 @@ function PlaceOrderScreen() {
 
                         <h2>Adresa</h2>
                         <p>
-                            <strong>Adresa:</strong>
-                            { shipping.shippingAddress.address}, { shipping.shippingAddress.city}
-                            { '     '}
-                            { shipping.shippingAddress.postalCode},
-                            { '     '}
-                            { shipping.shippingAddress.country}
+
+                            <div>
+                                <strong>Name:</strong> { shippingAddress.name}
+                            </div>
+                            <div>
+                                <strong>Adresa:</strong> { shippingAddress.address}
+                            </div>
+                            <div>
+                                <strong>Email:</strong> { shippingAddress.email}
+                                <p>Bice poslat mail na ovu adresu sa sadrzajem Vase porudzbine.</p>
+                            </div>
+                            <div>
+                                <strong>Post:</strong> { shippingAddress.post}
+                            </div>
+                            <div>
+                                <strong>Fixni telefon:</strong> { shippingAddress.fix_phone}
+                            </div>
+                            <div>
+                                <strong>Mobilni telefon:</strong> { shippingAddress.self_phone}
+                            </div>
+                            <div>
+                                <strong>Posebni zahtevi:</strong> { shippingAddress.demands}
+                            </div>
                         </p>
                     </ListGroup.Item>
 
@@ -133,25 +151,25 @@ function PlaceOrderScreen() {
                             </ListGroup.Item>
                             <ListGroup.Item>
                                <Row>
-                                   <Col>Stavke:</Col>
+                                   <Col><strong>Stavke:</strong></Col>
                                    <Col>{itemsPrice} din</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                <Row>
-                                   <Col>Shiping:</Col>
+                                   <Col><strong>Shiping:</strong></Col>
                                    <Col>{shippingPrice} din</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                <Row>
-                                   <Col>Pdv:</Col>
+                                   <Col><strong>Pdv:</strong></Col>
                                    <Col>{taxPrice} din</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                <Row>
-                                   <Col>Ukupno:</Col>
+                                   <Col><strong>Ukupno:</strong></Col>
                                    <Col>{totalPrice} din</Col>
                                 </Row>
                             </ListGroup.Item>
@@ -165,8 +183,8 @@ function PlaceOrderScreen() {
                                          disabled='true'
                                          type='button'
                                          className='btn-block'
-                                         //disabled={cart.cartItems.lenght === 0 }
-                                         onClick={placeOrder}>Plati</Button>
+                                         disabled={cart.cartItems.length === 0 }
+                                         onClick={placeOrder}>Posalji porudzbu</Button>
                             </ListGroup.Item>
                         </ListGroup>
                     </Card>

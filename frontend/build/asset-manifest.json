@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.a8d594a7.css",
-    "main.js": "/static/js/main.23a3f31a.js",
+    "main.css": "/static/css/main.e35691cd.css",
+    "main.js": "/static/js/main.f7a06264.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
     "static/media/berberis-erecta-1-350x350.jpg": "/static/media/berberis-erecta-1-350x350.355e0771b3d79d1474f0.jpg",
     "index.html": "/index.html",
-    "main.a8d594a7.css.map": "/static/css/main.a8d594a7.css.map",
-    "main.23a3f31a.js.map": "/static/js/main.23a3f31a.js.map",
+    "main.e35691cd.css.map": "/static/css/main.e35691cd.css.map",
+    "main.f7a06264.js.map": "/static/js/main.f7a06264.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a8d594a7.css",
-    "static/js/main.23a3f31a.js"
+    "static/css/main.e35691cd.css",
+    "static/js/main.f7a06264.js"
   ]
 }

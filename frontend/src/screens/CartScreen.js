@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -25,30 +25,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function CartScreen() {
+
   const navigate = useNavigate();
   const location = useLocation();
   const [search, setSearch] = useSearchParams();
   const id = search.get("id");
   const qty = search.get("qty");
 
-
   const [dostava, setDostava] = useState("licno");
-  console.log("Ovo su podaci:",dostava);
+  //console.log("Ovo su podaci:",dostava);
   const handleDostavaChange = (val) => setDostava(val);
 
   const [placanje, setPlacanje] = useState("uplata");
-  console.log("Ovo su podaci:",placanje);
+  //console.log("Ovo su podaci:",placanje);
   const handleUplataChange = (val) => setPlacanje(val);
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  //console.log("Ovo je cart:",cartItems);
 
   useEffect(() => {
-    if (id) {
-      dispatch(addToCart(Number(id), Number(qty)));
+    if (id  ) {
+
+
     }
-  }, [dispatch, id, qty]);
+
+  }, []);
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
@@ -131,8 +134,8 @@ function CartScreen() {
           <ListGroup variant="flush">
             <ListGroup.Item >
               <Row>
-                <Col md={8}>Proizvodi</Col>
-                <Col md={4}> Ukupno</Col>
+                <Col md={8}><strong>Proizvodi</strong></Col>
+                <Col md={4}> <strong>Ukupno</strong></Col>
               </Row>
 
             </ListGroup.Item>
@@ -140,7 +143,7 @@ function CartScreen() {
             {cartItems?.map((item) => (
                 <ListGroup.Item>
                   <Row>
-                    <Col md={8}>{item.qty} X {item.name}</Col>
+                    <Col md={8}>{item.qty}      X      {item.name}</Col>
                     <Col md={4}> {(item.qty * item.price).toFixed(2)}</Col>
                   </Row>
 
@@ -148,14 +151,14 @@ function CartScreen() {
 
             <ListGroup.Item>
                   <Row>
-                    <Col md={8}>Ukupan broj proizvoda:</Col>
+                    <Col md={8}><strong>Ukupan broj proizvoda:</strong></Col>
                     <Col md={4}> {cartItems.reduce((acc, item ) => acc + item.qty, 0)}</Col>
                   </Row>
             </ListGroup.Item>
 
             <ListGroup.Item>
                   <Row>
-                    <Col md={8}> Ukupna Cena:</Col>
+                    <Col md={8}> <strong>Ukupna Cena:</strong></Col>
                     <Col md={4}> {cartItems.reduce((acc, item ) => acc + item.qty * item.price, 0).toFixed(2)} din</Col>
                   </Row>
             </ListGroup.Item>

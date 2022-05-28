@@ -9,6 +9,7 @@ import { useParams } from 'react-router';
 import {useDispatch, useSelector } from 'react-redux'
 import {  productDetails } from '../store/product-actions'
 import {  addToCart,removeFromCart } from '../store/cart-actions'
+
 import {  createReview } from '../store/review-actions'
 import { reviewCreateActions } from '../store/review-slice'
 
@@ -36,6 +37,7 @@ function ProductScreen({match}) {
   const {loading, error, product} = productDet
 
   const addToCartHandler = () => {
+      dispatch(addToCart(Number(id), Number(qty)));
       console.log(`Add to cart where id: ${ id } and ${ qty }`)
       navigate(`/cart/?id=${id}&qty=${qty}`)
   }

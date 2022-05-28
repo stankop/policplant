@@ -2,7 +2,7 @@ import React from 'react'
 import { Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-function CheckoutSteps({step1, step2, step3, step4}) {
+function CheckoutSteps({step1, step2, step3}) {
   return (
     <Nav className='justify-content-center mb-4'>
         <Nav.Item>
@@ -37,21 +37,6 @@ function CheckoutSteps({step1, step2, step3, step4}) {
 
         <Nav.Item>
             {step3 ? (
-                    <LinkContainer to='/payment'>
-                        <Nav.Link>
-                        Placanje
-                        </Nav.Link>
-                    </LinkContainer>
-            ) : (
-                <Nav.Link disabled>
-                        Placanje
-                </Nav.Link>
-            )}
-            
-        </Nav.Item>
-
-        <Nav.Item>
-            {step4 ? (
                     <LinkContainer to='/placeorder'>
                         <Nav.Link>
                         Narudzba
@@ -64,6 +49,8 @@ function CheckoutSteps({step1, step2, step3, step4}) {
             )}
             
         </Nav.Item>
+
+
     </Nav>
   )
 }

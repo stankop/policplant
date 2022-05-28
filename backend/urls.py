@@ -18,6 +18,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
+from rest_framework_swagger.views import get_swagger_view
+
+
+schema_view = get_swagger_view(title='PolicPlant API')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,7 +29,7 @@ urlpatterns = [
     path('api/products/', include('base.urls.product_urls')),
     path('api/users/', include('base.urls.user_urls')),
     path('api/orders/', include('base.urls.order_urls')),
-
+    path('swagger/', schema_view)
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
