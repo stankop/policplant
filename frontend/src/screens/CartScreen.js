@@ -18,7 +18,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Message from "../compontents/Message";
-import { addToCart, removeFromCart } from "../store/cart-actions";
+import { addToCart, removeFromCart, addDostavaAndPlacanjeCart } from "../store/cart-actions";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -33,12 +33,7 @@ function CartScreen() {
   const qty = search.get("qty");
 
   const [dostava, setDostava] = useState("licno");
-  //console.log("Ovo su podaci:",dostava);
-  const handleDostavaChange = (val) => setDostava(val);
-
   const [placanje, setPlacanje] = useState("uplata");
-  //console.log("Ovo su podaci:",placanje);
-  const handleUplataChange = (val) => setPlacanje(val);
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -51,15 +46,16 @@ function CartScreen() {
 
     }
 
-  }, []);
+  }, [id]);
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
   };
 
-  const chechoutHandler =( ) => {
+  const chechoutHandler =(e) => {
 
     //navigate('/login?redirect=shipping')
+    dispatch(addDostavaAndPlacanjeCart(dostava, placanje))
     navigate('/shipping')
   }
 
@@ -171,7 +167,7 @@ function CartScreen() {
                     aria-labelledby="demo-controlled-radio-buttons-group"
                     name="controlled-radio-buttons-group"
                     value={dostava}
-                    onChange={(e) => handleDostavaChange(e.target.value)}
+                    onChange={(e) => setDostava(e.target.value)}
                   >
                     <FormControlLabel value="licno" control={<Radio />} label="Licno preuzimanje" />
                     <FormControlLabel value="posta" control={<Radio />} label="Slanje brzom postom" />
@@ -187,7 +183,7 @@ function CartScreen() {
                     aria-labelledby="demo-controlled-radio-buttons-group"
                     name="controlled-radio-buttons-group"
                     value={placanje}
-                    onChange={(e) => handleUplataChange(e.target.value)}
+                    onChange={(e) => setPlacanje(e.target.value)}
                   >
                     <FormControlLabel value="uplata" control={<Radio />} label="Uplata na racun" />
                     <FormControlLabel value="pouzece" control={<Radio />} label="Prilikom preuzimanja" />
@@ -200,7 +196,7 @@ function CartScreen() {
                 type='button'
                 className='btn-block'
                 disabled={ cartItems.length === 0 }
-                onClick={chechoutHandler}>
+                onClick={() => chechoutHandler()}>
                     Nastavite sa kupovinom
               </Button>
             </ListGroup.Item>

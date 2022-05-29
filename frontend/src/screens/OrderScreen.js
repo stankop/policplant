@@ -22,7 +22,7 @@ function OrderScreen() {
     const [itemsPrice, setItemPrice] = useState(0) 
 
     if(!loading && error){
-        itemsPrice = order.orderItems.reduce((acc,item) => acc + item.price * item.qty, 0).toFixed(2)
+        setItemPrice(order.orderItems.reduce((acc,item) => acc + item.price * item.qty, 0).toFixed(2))
     }
     
     useEffect(() => {
@@ -31,7 +31,7 @@ function OrderScreen() {
             dispatch(getOrderDetails(Number(orderId.id)))
         }  
 
-    }, [ orderId._id, dispatch, successPay]);
+    }, [ orderId._id, dispatch]);
 
 
     const successPaymentHandler = (paymentResult) => {
@@ -64,21 +64,15 @@ function OrderScreen() {
                 <ListGroup variant='flush'>
                     <ListGroup.Item >
 
-                        <h2>Adresa</h2>
+                        <h2>Poruzbina je poslata na Vas email.</h2>
                         <p>
-                            <strong>Name: </strong> { order.user?.name}
+                            <strong>Name: </strong> { order.user?.user_name}
                         </p>
                         <p>
                             <strong>Email: </strong> <a href={`mailto:${order.user?.email}`}>{order.user?.email}</a>
                         </p>
-                        <p>
-                            <strong>Shipping:</strong>
-                            { order.shippingAddress?.address}, { order.shippingAddress?.city}
-                            { '     '}
-                            { order.shippingAddress?.postalCode },
-                            { '     '}
-                            { order.shippingAddress?.country }
-                        </p>
+                        <br/>
+
                         { order.isDelivered ? (
                             <Message variant="success"  >
                                    Isporuceno dana: {order.deliveredAt}
@@ -94,13 +88,12 @@ function OrderScreen() {
 
                         <h2>Nacin placanja</h2>
                         <p>
-                            <strong>Method:</strong>
-                            { order.paymentMethod}
+                            <strong>Method:</strong> { order.paymentMethod === 'uplata' ? 'Placanje pouzecem' : 'Placanje karticom'}
                             
                         </p>
                         { order.isPaid ? (
                             <Message variant='success' >
-                                    Placeno dana: {order.paidAt}
+                                    <div>Placeno dana:</div>   {order.paidAt}
                             </Message>
                         ): (
                             <Message variant='warning' >
@@ -154,24 +147,10 @@ function OrderScreen() {
                             <ListGroup.Item>
                                <Row>
                                    <Col>Ukupna cena:</Col>
-                                   <Col>${itemsPrice}</Col>
+                                   <Col>RSD {order.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
-                            <ListGroup.Item>
-                               <Row>
-                                   <Col>Shiping:</Col>
-                                   <Col>${order.shippingPrice}</Col>
-                                </Row>
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                               <Row>
-                                   <Col>PayPal:</Col>
-                                   
-                                </Row>
-                                
-                                
-                            </ListGroup.Item>
-                           
+
                             <ListGroup.Item>
                                 {!order.isPaid && loadingPay ? (
                                         <Loader>

@@ -107,6 +107,7 @@ MIDDLEWARE = [
 ]
 
 
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -138,31 +139,32 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #      }
 # } 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'PolicPlant',
-        'USER': 'postgres',
-        'PASSWORD':'ok',
-        'HOST':'localhost',
-        'PORT':'5432'
+#ovo je baza u localu
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'PolicPlant',
+#         'USER': 'postgres',
+#         'PASSWORD':'ok',
+#         'HOST':'localhost',
+#         'PORT':'5432'
 
-    }
-}
+#     }
+# }
 
 
 #ovo je DB na HEROKU
-# DATABASES = {
-#      'default': {
-#          'ENGINE': 'django.db.backends.postgresql',
-#          'NAME': 'policplant',
-#          'USER': 'postgres',
-#          'PASSWORD':'Prnjavorska114',
-#          'HOST':'policplant.ciwljxueoqxr.eu-west-2.rds.amazonaws.com',
-#          'PORT':'5432'
+DATABASES = {
+      'default': {
+          'ENGINE': 'django.db.backends.postgresql',
+          'NAME': 'policplant',
+          'USER': 'postgres',
+          'PASSWORD':'Prnjavorska114',
+          'HOST':'policplant.ciwljxueoqxr.eu-west-2.rds.amazonaws.com',
+          'PORT':'5432'
 
-#      }
-#  }
+      }
+}
 
 
 # Password validation

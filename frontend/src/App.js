@@ -22,10 +22,12 @@ import OrderListScreen from "./screens/OrderListScreen"
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import Cart from './compontents/UI/Cart/Cart'
+import Order from './compontents/UI/Order/Order'
 
 function App() {
 
   const [cartIsShown, setCartIsShown] = useState(false)
+  const [orderIsShown, setOrderIsShown] = useState(false)
 
   const showCartHalnder = () =>{
     setCartIsShown(true)
@@ -35,9 +37,18 @@ function App() {
     setCartIsShown(false)
   }
 
+   const showOrderHalnder = () =>{
+    setOrderIsShown(true)
+  }
+
+  const hideOrderHanlder = () => {
+    setOrderIsShown(false)
+  }
+
   return (
     <Router>
       { cartIsShown &&  <Cart onClose={hideCartHanlder}></Cart> }
+      { orderIsShown &&  <Order onClose={hideOrderHanlder}></Order> }
       <Header onShowCart={showCartHalnder}/>
       <main className="py-3">
         <Container>
@@ -54,7 +65,7 @@ function App() {
             <Route path="/profile" element={<ProfileScreen />}></Route>
             <Route path="/shipping" element={<ShippingScreen />}></Route>
             <Route path="/payment" element={<PaymentScreen />}></Route>
-            <Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
+            <Route path="/placeorder" element={<PlaceOrderScreen onShowOrder={showOrderHalnder} />}></Route>
             <Route path="/order/:id" element={<OrderScreen />}></Route>
             <Route path="/admin/userlist" element={<UserListScreen />}></Route>
             <Route path="/admin/productlist" element={<ProductListScreen />}></Route>

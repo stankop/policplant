@@ -34,14 +34,19 @@ function ShippingScreen() {
    
     const [search, setSearch] = useSearchParams();
     const redirect = search.get("redirect");
-    
-    const handleChange = (event) => {
+
+    const handleTab = (e, value) => setValue(value);
+    const submitHandler1 = (event) => {
 
         event.preventDefault()
-
+        dispatch(saveShippingAddress({
+            name, email, password, post,
+            address, fix_phone, self_phone, demands
+        }))
+        navigate('/placeorder')
     }
 
-    const submitHandler = (event) => {
+    const submitHandler2 = (event) => {
 
         event.preventDefault()
         dispatch(saveShippingAddress({
@@ -52,10 +57,11 @@ function ShippingScreen() {
     }
 
   return (
-
+    <div>
+      <CheckoutSteps step1 step2></CheckoutSteps>
       <TabContext value={value}>
-      <Box sx={{ border: 1, borderColor: 'divider' }}>
-        <TabList onChange={handleChange} aria-label="lab API tabs example">
+      <Box sx={{ borderBottom:1, borderColor: 'divider' }}>
+        <TabList onChange={handleTab} aria-label="lab API tabs example">
           <Tab label="Novi Kupac" value="1" />
           <Tab label="Postojeci Kupac" value="2" />
 
@@ -63,9 +69,9 @@ function ShippingScreen() {
       </Box>
       <TabPanel value="1">
           <FormContainer>
-        <CheckoutSteps step1 step2></CheckoutSteps>
+
         <h1>Podaci Kupca</h1>
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler1}>
 
                 <Form.Group controlId='name'>
                     <Form.Label>
@@ -101,7 +107,7 @@ function ShippingScreen() {
                     </Form.Label>
                     <Form.Control
                             required
-                            type='text'
+                            type='password'
                             placeholder='Unesite lozinku...'
                             value={password ? password : ''}
                             onChange={(e) => setPassword(e.target.value)}>
@@ -187,13 +193,54 @@ function ShippingScreen() {
         </Form>
     </FormContainer>
       </TabPanel>
-      <TabPanel value="2">Item Two</TabPanel>
+      <TabPanel value="2">
+          <FormContainer>
 
-</TabContext>
+        <h1>Podaci Kupca</h1>
+        <Form onSubmit={submitHandler2}>
 
+                <Form.Group controlId='name'>
+                    <Form.Label>
+                        Vase Ime i Prezime
+                    </Form.Label>
+                    <Form.Control
+                            required
+                            type='text'
+                            placeholder='Unesite Vase ime i prezime...'
+                            value={name ? name : ''}
+                            onChange={(e) => setName(e.target.value)}>
 
+                    </Form.Control>
+                </Form.Group>
 
-  )
-}
+                <Form.Group controlId='email'>
+                    <Form.Label>
+                        Email
+                    </Form.Label>
+                    <Form.Control
+                            required
+                            type='text'
+                            placeholder='Unesite Email...'
+                            value={email ? email : ''}
+                            onChange={(e) => setEmail(e.target.value)}>
+
+                    </Form.Control>
+                    </Form.Group>
+                    <Form.Group>
+                    <Button type='submit' variant='primary'>
+                        Nastavite
+                    </Button>
+                    </Form.Group>
+
+                    </Form>
+                </FormContainer>
+
+            </TabPanel>
+
+        </TabContext>
+
+        </div>
+
+  )}
 
 export default ShippingScreen

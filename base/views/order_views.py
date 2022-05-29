@@ -39,8 +39,8 @@ def addOrderItems(request):
 
         order = Order.objects.create(
             user=user,
-            paymentMethod='paypal',
-            taxPrice=2100,
+            paymentMethod=data['placanje'],
+            taxPrice=0,
             #shippingPrice = data['shippingPrice'],
             totalPrice=452
             )

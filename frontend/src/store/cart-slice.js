@@ -6,7 +6,9 @@ const cartItemsFromStorage = localStorage.getItem('cartItems')
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
-        cartItems:cartItemsFromStorage
+        cartItems:cartItemsFromStorage,
+        dostava:'',
+        placanje:''
     },
     reducers:{
         addCartItem(state, action){
@@ -24,14 +26,20 @@ const cartSlice = createSlice({
 
         removeCartItem(state, action) {
                 const id = action.payload
-                const excludeCartItem = state.cartItems.filter(x => x.id != id)
+                const excludeCartItem = state.cartItems.filter(x => x.id !== id)
                 state.cartItems = excludeCartItem
         },
 
        cleanCartItems(state, action) {
             
             state.cartItems=[]
-    },
+       },
+
+       addDostavaAndPlacanje(state, action) {
+            const obj = action.payload
+            state.dostava = obj.dostava
+            state.placanje = obj.placanje
+       },
 
     }
 })
