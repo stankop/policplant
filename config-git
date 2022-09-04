@@ -7,11 +7,14 @@
 	symlinks = false
 	ignorecase = true
 [remote "heroku"]
-	url = https://git.heroku.com/policplant-demo.git
+	url = https://git.heroku.com/policplant.git
 	fetch = +refs/heads/*:refs/remotes/heroku/*
 [branch "master"]
 	remote = heroku
 	merge = refs/heads/master
+[user]
+	name = stankop
+	email = s_polic@yahoo.com
 	
 
 
@@ -29,6 +32,8 @@
 [branch "master"]
 	remote = policplant
 	merge = refs/heads/master
+
+
 
 
 #real GIT

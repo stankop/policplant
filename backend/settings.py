@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
-from unittest.case import _AssertWarnsContext
 import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -140,31 +139,31 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # } 
 
 #ovo je baza u localu
-#DATABASES = {
-#     'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'PolicPlant',
-#         'USER': 'postgres',
-#         'PASSWORD':'ok',
-#         'HOST':'localhost',
-#         'PORT':'5432'
-#
-#     }
-#}
+DATABASES = {
+     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+         'NAME': 'PolicPlant',
+         'USER': 'postgres',
+         'PASSWORD':'ok',
+         'HOST':'localhost',
+         'PORT':'5432'
+
+     }
+}
 
 
 #ovo je DB na HEROKU
-DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql',
-           'NAME': 'policplant',
-           'USER': 'postgres',
-           'PASSWORD':'Prnjavorska114',
-           'HOST':'policplant.ciwljxueoqxr.eu-west-2.rds.amazonaws.com',
-           'PORT':'5432'
-
-       }
-}
+#DATABASES = {
+#       'default': {
+#           'ENGINE': 'django.db.backends.postgresql',
+#           'NAME': 'policplant',
+#           'USER': 'postgres',
+#           'PASSWORD':'Prnjavorska114',
+#           'HOST':'policplant.ciwljxueoqxr.eu-west-2.rds.amazonaws.com',
+#           'PORT':'5432'
+#
+#       }
+#}
 
 
 # Password validation
