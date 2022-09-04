@@ -140,30 +140,30 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # } 
 
 #ovo je baza u localu
-# DATABASES = {
+#DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
+#        'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'PolicPlant',
 #         'USER': 'postgres',
 #         'PASSWORD':'ok',
 #         'HOST':'localhost',
 #         'PORT':'5432'
-
+#
 #     }
-# }
+#}
 
 
 #ovo je DB na HEROKU
 DATABASES = {
-      'default': {
-          'ENGINE': 'django.db.backends.postgresql',
-          'NAME': 'policplant',
-          'USER': 'postgres',
-          'PASSWORD':'Prnjavorska114',
-          'HOST':'policplant.ciwljxueoqxr.eu-west-2.rds.amazonaws.com',
-          'PORT':'5432'
+       'default': {
+           'ENGINE': 'django.db.backends.postgresql',
+           'NAME': 'policplant',
+           'USER': 'postgres',
+           'PASSWORD':'Prnjavorska114',
+           'HOST':'policplant.ciwljxueoqxr.eu-west-2.rds.amazonaws.com',
+           'PORT':'5432'
 
-      }
+       }
 }
 
 
