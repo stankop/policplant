@@ -11,3 +11,20 @@
 [branch "master"]
 	remote = heroku
 	merge = refs/heads/master
+	
+
+
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+
+[remote "policplant"]
+	url = https://github.com/stankop/policplant.git
+	fetch = +refs/heads/*:refs/remotes/policplant/*
+[branch "master"]
+	remote = policplant
+	merge = refs/heads/master
