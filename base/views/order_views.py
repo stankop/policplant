@@ -26,14 +26,17 @@ def addOrderItems(request):
     data = request.data
     data_email = data['email']
     try:
-        user = UserAccount.objects.create(
+        user,a = UserAccount.objects.get_or_create(
             email=data['email'],
-            user_name=data['name'],
-            password=make_password(data['password'] if data['password'] else 'ok'),
-            place=data['place'],
-            address=data['address'],
-            self_phone=data['self_phone'],
-            fix_phone=data['fix_phone']
+            defaults={
+                'user_name':data['name'],
+                'password':make_password(data['password'] if data['password'] else 'ok'),
+            'place':data['place'],
+            'address':data['address'],
+            'self_phone':data['self_phone'],
+            'fix_phone':data['fix_phone']
+            }
+            
         )
         user.save()
     except:
@@ -80,7 +83,7 @@ def addOrderItems(request):
     serializer = OrderSerializer(order, many=False)
 
     #sending message
-    send_email(order.totalPrice, order._id, orderItems)
+    send_email(order.totalPrice, order._id, orderItems, data_email)
 
     return Response(serializer.data)
 
@@ -131,8 +134,8 @@ def updateOrderToPaid(requeste, pk):
 
 
 
-def send_email(total, orderNum, orderi, mail_to=None, admin_mail=None):
-    subject, from_email, to = 'PolicPlant', 'PolicPlant Company', 's_polic@yahoo.com'
+def send_email(total, orderNum, orderi,data_email, mail_to=None, admin_mail=None):
+    subject, from_email, to = 'PolicPlant', 'PolicPlant Company', data_email
     text_content = 'Hvala vam sto kupujete kod nas.'
     html_content = rf'''<!DOCTYPE html>
 <html>

@@ -5,16 +5,16 @@ import { cartActions } from './cart-slice'
 export const createOrder = (order) => {
     return async (dispatch, getState) => {
 
-        const {
-            userLogin:{ userInfo }
-        } = getState()
+        // const {
+        //     userLogin:{ userInfo }
+        // } = getState()
 
         const fetchData = async () => {
 
             const config = {
                 headers:{
-                    'Content-type':'application/json',
-                    Authorization: `Bearer ${userInfo.token}`
+                    'Content-type':'application/json'
+                    //Authorization: `Bearer ${userInfo.token}`
                 },
                 
             }
