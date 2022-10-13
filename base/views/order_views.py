@@ -86,7 +86,7 @@ def addOrderItems(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def getOrderById(requeste, pk):
     user = requeste.user
 
@@ -102,7 +102,7 @@ def getOrderById(requeste, pk):
         return Response({'detail': 'Order doesnt exist'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def getMyOrders(request):
     user = request.user
     orders = user.order_set.all()
@@ -111,7 +111,7 @@ def getMyOrders(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAdminUser])
+#@permission_classes([IsAdminUser])
 def getOrders(request):
     
     orders = Order.objects.all()
@@ -120,7 +120,7 @@ def getOrders(request):
 
 
 @api_view(['PUT'])
-@permission_classes([IsAuthenticated])
+#@permission_classes([IsAuthenticated])
 def updateOrderToPaid(requeste, pk):
     order = Order.objects.get(_id=pk)
 
