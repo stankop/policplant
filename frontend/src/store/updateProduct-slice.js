@@ -5,7 +5,7 @@ const updateProductSlice = createSlice({
     initialState: {
         loading:false,
         success: false,
-        error: null,
+        error: '',
         product: {}
     },
     reducers:{

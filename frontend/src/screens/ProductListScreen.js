@@ -19,21 +19,20 @@ function ProductListScreen() {
     const dispatch = useDispatch()
 
     const productList = useSelector(state => state.productList)
-    const { loading, error, products,page, pages} = productList
+    const { loading, error, products } = productList
 
     const deleteProd = useSelector(state => state.deleteProduct)
     const { loading: loadingDelete, error: errorDelete, success: successDelete} = deleteProd
 
-    const crProd = useSelector(state => state.createProduct)
-    const { loading: loadingCreate, error: errorCreate, success: successCreate, product: createdProduct} = crProd
+    const createProd = useSelector(state => state.createProduct)
+    const { loading: loadingCreate, error: errorCreate, success: successCreate, product: createdProduct} = createProd
 
     const userLogin = useSelector(state => state.userLogin)
-    const { userInfo} = userLogin
-
- 
+    const { userInfo } = userLogin
 
     const navigate = useNavigate()
 
+    
     useEffect(() => {
 
          if(!userInfo.isAdmin){
@@ -43,8 +42,9 @@ function ProductListScreen() {
 
          if(successCreate){
 
+            const productId = createdProduct._id
             dispatch(productReset())
-            navigate(`/admin/product/${createdProduct._id}/edit`)
+            navigate(`/admin/product/${productId}/edit`)
               
           }else{
             dispatch(listProducts())
@@ -52,6 +52,7 @@ function ProductListScreen() {
        
 
      }, [dispatch, navigate, userInfo, successDelete, successCreate , createdProduct])
+     
 
     const deleteHandler = (id) => {
         
@@ -59,7 +60,6 @@ function ProductListScreen() {
 
             dispatch(deleteProduct(id))
             dispatch(deleteProductReset())
-            console.log('odstampaj ovo!!!')
             dispatch(listProducts())
         }
     }
@@ -68,6 +68,7 @@ function ProductListScreen() {
 
         dispatch(createProduct())
     }
+    
   return (
     <div>
         <Row className='align-items-center'>
@@ -75,9 +76,11 @@ function ProductListScreen() {
                 <h1>Biljke</h1>
             </Col>
             <Col className='text-right'>
-                <Button className='my-3' onClick={(e) => createProductHandler()}>
-                    <i className='fas fa-plus'></i> Kreiraj Proizvod
-                </Button>
+                <LinkContainer to={`/admin/createproduct`}>
+                    <Button className='my-3'>
+                        <i className='fas fa-plus'></i> Kreiraj Proizvod
+                    </Button>
+                </LinkContainer>     
             </Col>
 
         </Row>
@@ -103,12 +106,13 @@ function ProductListScreen() {
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>NAME</th>
+                                    <th>Name</th>
                                     <th>Cena</th>
                                     <th>Kategorija</th>
                                     <th>Boja</th>
                                     <th>Stanje</th>
-                                    <th></th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>

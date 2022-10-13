@@ -36,6 +36,7 @@ function ShippingScreen() {
     const redirect = search.get("redirect");
 
     const handleTab = (e, value) => setValue(value);
+    
     const submitHandler1 = (event) => {
 
         event.preventDefault()
@@ -179,19 +180,19 @@ function ShippingScreen() {
                     <Form.Control
                             required
                             type='text'
-                            placeholder='Enter Country..'
+                            placeholder='Unesite zahteve oko isporuke...'
                             value={demands ? demands : ''}
                             onChange={(e) => setDemands(e.target.value)}>
 
                     </Form.Control>
 
                     <Button type='submit' variant='primary'>
-                        Nastavite
+                        Nastavite sa Narudzbom
                     </Button>
                 </Form.Group>
 
         </Form>
-    </FormContainer>
+          </FormContainer>
       </TabPanel>
       <TabPanel value="2">
           <FormContainer>

@@ -9,7 +9,7 @@ function CheckoutSteps({step1, step2, step3}) {
             {step1 ? (
                     <LinkContainer to='/login'>
                         <Nav.Link>
-                            Login
+                            Login  
                         </Nav.Link>
                     </LinkContainer>
             ) : (

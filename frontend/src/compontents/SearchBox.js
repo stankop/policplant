@@ -3,6 +3,8 @@ import { Button, Container, Form, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 
 function SearchBox() {
@@ -10,6 +12,12 @@ function SearchBox() {
     const [keyword, setKeyword] = useState('')
     const navigate = useNavigate()
     const location = useLocation();
+
+    const renderTooltip = (props) => (
+        <Tooltip id="button-tooltip" {...props}>
+          Pretraga
+        </Tooltip>
+      );
     
     const submitHandler = (e) => {
         e.preventDefault()
@@ -38,12 +46,18 @@ function SearchBox() {
                     </Form.Control>
                 </Col>
                 <Col md={2}>
-                <Button 
-                    type='submit'
-                    variant='outline-success'
-                    className='p-2'>
-                    Pretraga
-                </Button>
+                <OverlayTrigger
+                    placement="right"
+                    delay={{ show: 250, hide: 400 }}
+                    overlay={renderTooltip}
+                    >
+                        <Button 
+                            type='submit'
+                            variant='outline-success'
+                            className='p-2'>
+                            Pretraga
+                        </Button>
+                </OverlayTrigger>
                 </Col>
             </Row>
         </Container>

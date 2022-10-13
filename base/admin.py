@@ -26,6 +26,7 @@ class UserAdminConfig(UserAdmin):
 admin.site.register(UserAccount, UserAdminConfig)
 admin.site.register(Product)
 #admin.site.register(Review)
+admin.site.register(PlantCategory)
 admin.site.register(Order)
 admin.site.register(OrderItem)
 #admin.site.register(ShippingAddress)

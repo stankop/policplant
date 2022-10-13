@@ -7,7 +7,6 @@ function Paginate({pages, page, keyword='', isAdmin = false}) {
     if(keyword === null){
         keyword = ''
     }
-    console.log('Pravi rezultati:', pages, page, keyword)
   return (
     
     pages > 1 && (

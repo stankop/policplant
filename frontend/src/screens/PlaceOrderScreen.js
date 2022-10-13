@@ -10,20 +10,26 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import CheckoutSteps from "../compontents/CheckoutSteps";
 import { createOrder, resetOrder } from '../store/order-actions'
+import TitleCase from 'react-title-case';
 
 
 function PlaceOrderScreen(props) {
 
     const dispatch  = useDispatch()
     const navigate = useNavigate()
+
+    const [iznos, setIznos] = useState(0)
+    const [ orderId, setOrderId] = useState(0)
+    const [ orderi, setOrderi] = useState({})
+
     const orderCreate = useSelector(state => state.order)
-    const { order, error, success} = orderCreate
+    const { order , error, success, loading} = orderCreate
 
     const  shipping  = useSelector(state => state.shipping)
     const { shippingAddress } = shipping
 
-    const  orderDetail  = useSelector(state => state.orderDetail)
-    const { order: { _id }   } = orderDetail
+    //const  orderDetail  = useSelector(state => state.orderDetail)
+    //const { order: { _id }   } = orderDetail
 
     const cart = useSelector(state => state.cart)
     const {placanje, dostava } = cart
@@ -32,20 +38,26 @@ function PlaceOrderScreen(props) {
     const shippingPrice =  (itemsPrice > 100 ? 0 : 10).toFixed(2)
     const taxPrice = Number((0.0082) * itemsPrice).toFixed(2)
     const totalPrice = (Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice)).toFixed(2)
-
+ 
    
     useEffect(() =>{
-
-       
+        console.log('ovo je pre succesa',success)
+        //dispatch(resetOrder())
         if (success){
-
+            setIznos(order.totalPrice)
+            setOrderId(order._id)
+            setOrderi(order.orderItems)
+            console.log('ovo je order:',order)
             //navigate(`/order/${order._id}`)
-            props.onShowOrder()
+            props.onShowOrder({iznos: order.totalPrice,
+                               orderId: order._id,
+                               orderi: order.orderItems})
             dispatch(resetOrder())
+            console.log('ovo je order posle reseta:',order)
         }
 
 
-    }, [success, navigate])
+    }, [success])
 
 
     const placeOrder = (event) => {
@@ -70,6 +82,7 @@ function PlaceOrderScreen(props) {
         console.log('jel doslo dovde?')
 
     }
+
   return (
     <div>
         <CheckoutSteps step1 step2 step3 ></CheckoutSteps>
@@ -111,7 +124,7 @@ function PlaceOrderScreen(props) {
 
                         <h2>Nacin Placanja</h2>
                         <p>
-                            <strong>Method:</strong> { placanje}
+                            <strong>Method:</strong> <TitleCase string={placanje} />
                             
                         </p>
                     </ListGroup.Item>
@@ -120,7 +133,16 @@ function PlaceOrderScreen(props) {
 
                         <h2>Narucene biljke</h2>
                         { cart.cartItems.length === 0 
-                            ? <Message variant= 'info'> Vasa Korpa je prazna</Message> 
+                            ? <div>
+                                <Message variant= 'info'> Vasa Korpa je prazna</Message> 
+                                <Button to="/"
+
+                                         type='button'
+                                         className='btn-block'
+                                         href="/"
+                                         >Povratak na pocetak
+                                </Button>
+                              </div>
                             : (
                                 <ListGroup variant='flush'>
                                     {
@@ -136,7 +158,7 @@ function PlaceOrderScreen(props) {
                                                             <Link to={`/products/${item.id}`}>{item.name}</Link>
                                                         </Col>
                                                         <Col md={4}>
-                                                            {item.qty} X {item.price} din = {(item.qty *item.price).toFixed(2)} din
+                                                            {item.qty} x {item.price} din = {(item.qty *item.price).toFixed(2)} din
                                                         </Col>
                                                     </Row>
                                                 </ListGroup.Item>
@@ -186,7 +208,7 @@ function PlaceOrderScreen(props) {
                                 <ListGroup.Item>
                                     <Message variant='danger'>
                                         {error}
-                                    </Message>}
+                                    </Message>
                             </ListGroup.Item>
                             }
                             <ListGroup.Item>

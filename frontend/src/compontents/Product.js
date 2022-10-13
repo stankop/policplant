@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom'
 
 function Product({product}) {
   return (
-    <Card className="my-3 p-3 rounded">
+    <Card className="my-3 p-3 rounded" border="primary" style={{ width: '18rem', height: '30rem' }}>
         <Link to={`/products/${product._id}`}>
             <Card.Img src={product.image}></Card.Img>
         </Link>
-        <Card.Body>
+        <Card.Body style={{ textAlign: "center"}}>
             <Link to={`/products/${product._id}`}>
              <Card.Title as="div" >
                  <strong style={{ fontSize: 28}}>{product.name}</strong>
@@ -24,7 +24,7 @@ function Product({product}) {
                     {product.price} din
             </Card.Text>
             <Card.Text as="h7">
-                    {product.countInStock > 0 ? <strong style={{ color:'green'}}>Na stanju</strong> : <strong style={{ color:'red'}}>Nema na stanju</strong>} 
+                    {product.countInStock > 0 ? <strong style={{ color:'green'}}>{product.countInStock} proizvoda</strong> : <strong style={{ color:'red'}}>Nema na stanju</strong>} 
             </Card.Text>
         </Card.Body>
     </Card>

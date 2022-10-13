@@ -21,6 +21,7 @@ import { createProductReducer} from './createProduct-slice'
 import { userUpdateReducer } from './userUpdate-slice'
 import { updateProductReducer } from './updateProduct-slice'
 import { orderListReducer } from './orderList-slice'
+import { plantCategoryReducer } from './plantCategory-slice'
 
 const store = configureStore({
     reducer:{
@@ -45,7 +46,8 @@ const store = configureStore({
         createProduct: createProductReducer,
         userUpdate: userUpdateReducer,
         updateProduct: updateProductReducer,
-        orderList: orderListReducer
+        orderList: orderListReducer,
+        categoryList: plantCategoryReducer
     }
 })
 

@@ -52,7 +52,7 @@ function CartScreen() {
     dispatch(removeFromCart(id))
   };
 
-  const chechoutHandler =(e) => {
+  const chechoutHandler = (e) => {
 
     //navigate('/login?redirect=shipping')
     dispatch(addDostavaAndPlacanjeCart(dostava, placanje))
@@ -137,9 +137,9 @@ function CartScreen() {
             </ListGroup.Item>
 
             {cartItems?.map((item) => (
-                <ListGroup.Item>
+                <ListGroup.Item key={item.id}>
                   <Row>
-                    <Col md={8}>{item.qty}      X      {item.name}</Col>
+                    <Col md={8}>{item.qty}      x      {item.name}</Col>
                     <Col md={4}> {(item.qty * item.price).toFixed(2)}</Col>
                   </Row>
 
@@ -196,7 +196,7 @@ function CartScreen() {
                 type='button'
                 className='btn-block'
                 disabled={ cartItems.length === 0 }
-                onClick={() => chechoutHandler()}>
+                onClick={chechoutHandler}>
                     Nastavite sa kupovinom
               </Button>
             </ListGroup.Item>

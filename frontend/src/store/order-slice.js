@@ -7,7 +7,7 @@ const orderSlice = createSlice({
        loading: false,
        success: false,
        order:{},
-       error: null
+       error: ''
     },
     reducers:{
         orderCreateRequest(state, action){

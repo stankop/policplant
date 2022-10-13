@@ -49,7 +49,7 @@ class UserAccountManager(BaseUserManager):
 class UserAccount(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(_('email address'), unique=True)
-    user_name = models.CharField(max_length=150, unique=True)
+    user_name = models.CharField(max_length=150, unique=False)
     place = models.CharField(max_length=150,null= True, blank=True)
     address = models.CharField(max_length=150,null= True, blank=True)
     self_phone = models.CharField(max_length=150,null= True, blank=True)
@@ -67,8 +67,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return str(self.user_name)
 
-
-class Product(models.Model):
+class PlantCategory(models.Model):
 
     class Category(models.TextChoices):
         LEKOVITO = 'Lekovito Bilje', _('Lekovito Bilje')
@@ -77,6 +76,14 @@ class Product(models.Model):
         SOBNO = 'Sobno Svece', _('Sobno Svece')
         PENJACICE = 'Penjacice', _ ('Penjacice')
         DEFAULT = 'Zelena Biljka', _('Zelena Biljka')
+
+    name = models.CharField(max_length=20, choices=Category.choices, default=Category.DEFAULT)
+    _id = models.AutoField(primary_key=True, editable=False)
+
+    def __str__(self):
+        return str(self.name)
+
+class Product(models.Model):
     
     class Color(models.TextChoices):
         CRNA = 'Crna', _('CRNA')
@@ -101,12 +108,22 @@ class Product(models.Model):
         POLUSENKA = 'POLUSENKA', _('POLUSENKA')
         SENKA = 'SENKA', _('SENKA')
         DEFAULT = 'SUNCE', _('SUNCE')
+
+    class High(models.TextChoices):
+        SREDNJA = '50-100cm', _('50-100cm')
+        VISOKA = '100cm +', _('100cm +')
+        DEFAULT = '0-50cm',_('0-50cm')
+    
+    class Type(models.TextChoices):
+        ZIMZELANA = 'ZIMZELANA', _('ZIMZELANA')
+        DEFAULT = 'LISTOPADNA',_('LISTOPADNA')
         
 
-    category = models.CharField(max_length=20, choices=Category.choices, default=Category.DEFAULT)
+    # category = models.ForeignKey(max_length=20, choices=Category.choices, default=Category.DEFAULT)
+    category = models.ForeignKey(PlantCategory, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200, null=True, blank=True)
-    image = models.ImageField( null=True, blank= True, default='/default.jpg')
+    image = models.ImageField(null=True, blank= True, default='/default.jpg')
     brand = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     rating = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
@@ -118,11 +135,12 @@ class Product(models.Model):
     color = models.CharField(max_length=20, choices=Color.choices, default=Color.DEFAULT)
     flowering_time = models.CharField(max_length=20, choices=Flowering.choices, default=Flowering.DEFAULT)
     place_of_planting = models.CharField(max_length=20, choices=Place.choices, default=Place.DEFAULT)
+    high = models.CharField(max_length=20, choices=High.choices, default=High.DEFAULT)
+    type_of_plant = models.CharField(max_length=20, choices=Type.choices, default=Type.DEFAULT)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
         return str(self.name)
-
 
 class Order(models.Model):
     user = models.ForeignKey(UserAccount, on_delete = models.SET_NULL, null= True)

@@ -18,19 +18,17 @@ function HomeScreen() {
   const { error, loading, products, page, pages } = product
   const [search, setSearch] = useSearchParams();
   const keyword = search.get("keyword");
-  
-  console.log('uspehhhhhh:',page,keyword,page,pages)
 
   useEffect(()=>{
 
-    dispatch(listProducts(keyword,page))
+    dispatch(listProducts(keyword, page))
         
  }, [dispatch, keyword]);
 
  
   return (
     <div>
-        { keyword && <ProductCarucel></ProductCarucel>}
+        { true && <ProductCarucel></ProductCarucel>}
         
         <h1>Proizvodi:</h1>
         { loading ? <Loader></Loader>

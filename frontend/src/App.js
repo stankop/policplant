@@ -18,6 +18,7 @@ import ONamaScreen from "./screens/ONamaScreen";
 import KontaktScreen from "./screens/KontakScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import ProductEditScreen from "./screens/ProductEditScreen"
+import ProductCreateScreen from "./screens/ProductCreateScreen"
 import OrderListScreen from "./screens/OrderListScreen"
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import { useState } from "react";
@@ -29,6 +30,8 @@ function App() {
   const [cartIsShown, setCartIsShown] = useState(false)
   const [orderIsShown, setOrderIsShown] = useState(false)
 
+  const [value, setValue] = useState({})
+
   const showCartHalnder = () =>{
     setCartIsShown(true)
   }
@@ -37,19 +40,20 @@ function App() {
     setCartIsShown(false)
   }
 
-   const showOrderHalnder = () =>{
+   const showOrderHalnder = (event) =>{
+    setValue(event)
     setOrderIsShown(true)
   }
 
-  const hideOrderHanlder = () => {
+  const hideOrderHanlder = (event) => {
     setOrderIsShown(false)
   }
 
   return (
     <Router>
       { cartIsShown &&  <Cart onClose={hideCartHanlder}></Cart> }
-      { orderIsShown &&  <Order onClose={hideOrderHanlder}></Order> }
-      <Header onShowCart={showCartHalnder}/>
+      { orderIsShown &&  <Order onClose={hideOrderHanlder} value={value}></Order> }
+      {<Header onShowCart={showCartHalnder}/> }
       <main className="py-3">
         <Container>
           <Routes>
@@ -69,6 +73,7 @@ function App() {
             <Route path="/order/:id" element={<OrderScreen />}></Route>
             <Route path="/admin/userlist" element={<UserListScreen />}></Route>
             <Route path="/admin/productlist" element={<ProductListScreen />}></Route>
+            <Route path="/admin/createproduct" element={<ProductCreateScreen />}></Route>
             <Route path="/info" element={<InfoScreen />}></Route>
             <Route path="/onama" element={<ONamaScreen />}></Route>
             <Route path="/kontakt" element={<KontaktScreen />}></Route>

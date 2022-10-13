@@ -5,7 +5,6 @@ import axios from 'axios'
 export const listProducts = (keyword = '', page) => {
     return async (dispatch) => {
 
-        console.log('ProductListttt:',keyword)
         const fetchData = async () => {
 
             if(keyword === null){
@@ -13,7 +12,6 @@ export const listProducts = (keyword = '', page) => {
             }
            
             const { data } = await axios.get(`/api/products/?keyword=${keyword}&page=${page}`)
-            console.log(data)
             return data;
         }
 

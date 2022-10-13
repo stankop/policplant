@@ -5,18 +5,18 @@ import CartItem from '../Cart/CartItem'
 
 const Order = (props) => {
 
-    const orderDetail = useSelector((state) => state.orderDetail);
-    const { cartItems } = orderDetail;
+    const orderDetail = useSelector((state) => state.order);
+    const { order: { orderItems } } = orderDetail;
 
     const ord = useSelector((state) => state.order);
     const { order } = ord;
 
-    const totalAmount = cartItems?.reduce((total, item) =>
+    const totalAmount = props.value.orderi?.reduce((total, item) =>
         {
             return total + item.qty * item.price
         }, 0)
 
-    const hasItems = cartItems?.length >0
+    //const hasItems = cartItems?.length >0
 
     const cartItemRemoveHanlder= id => {
 
@@ -27,11 +27,12 @@ const Order = (props) => {
 
         //cartCtx.addItem({...item, amount:1})
     }
+    console.log('ovo je value:', props.value)
     const cartitems =
     <ul className={classes['cart-items']}>
         {
-        cartItems?.map(order =>
-            (<CartItem key={order.id}
+        props.value.orderi?.map(order =>
+            (<CartItem key={order._id}
                        name={order.name}
                        qty={order.qty}
                        price={order.price}
@@ -48,12 +49,12 @@ const Order = (props) => {
     return <OrderModal onClose={props.onClose} >
         {cartitems}
         <div className={classes.total}>
-            <span>Ukupan iznos</span>
-            <span>RSD {totalAmount?.toFixed(2)}</span>
+            <span>Ukupan iznos: </span>
+            <span><strong>RSD {totalAmount?.toFixed(2)}</strong></span>
         </div>
         <div className={classes.total}>
-            <span>Order number:</span>
-            <span>{order.id}</span>
+            <span>Order number: </span>
+            <span>{props.value.orderId}</span>
         </div>
         <div>
             <p>Vase poruzdzbina je poslata na obradu. Mozete se vratiti na pocetnu stranu i  kreirati novu porudzbinu ukoliko zelite.</p>

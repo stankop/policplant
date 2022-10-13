@@ -24,8 +24,8 @@ export const createProduct = () => {
 
         try {
             dispatch(createProductActions.createProductRequest())
-            const cartData = await fetchData()
-            dispatch(createProductActions.createProductSuccess(cartData))
+            const productData = await fetchData()
+            dispatch(createProductActions.createProductSuccess(productData))
 
         } catch (error) {
             dispatch(

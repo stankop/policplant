@@ -1,22 +1,21 @@
 from rest_framework import serializers
 #from django.contrib.auth.models import User
-from .models import Product, Order, OrderItem, UserAccount
+from .models import PlantCategory, Product, Order, OrderItem, UserAccount
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    categoryChoises = serializers.SerializerMethodField(read_only=True)
     colorChoises = serializers.SerializerMethodField(read_only=True)
     placeChoises = serializers.SerializerMethodField(read_only=True)
     floweringChoises = serializers.SerializerMethodField(read_only=True)
+    highChoises = serializers.SerializerMethodField(read_only=True)
+    type_of_plantChoises = serializers.SerializerMethodField(read_only=True)
+    category = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Product
         fields = '__all__'
 
-    def get_categoryChoises(self, obj):
-        category = [e.value for e in obj.Category]
-        return category
-    
+   
     def get_colorChoises(self, obj):
         color = [e.value for e in obj.Color]
         return color
@@ -28,6 +27,18 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_floweringChoises(self, obj):
         flow = [e.value for e in obj.Flowering]
         return flow
+    
+    def get_highChoises(self, obj):
+        high = [e.value for e in obj.High]
+        return high
+    
+    def get_type_of_plantChoises(self, obj):
+        type_of_plant = [e.value for e in obj.Type]
+        return type_of_plant
+    
+    def get_category(self, obj):
+        category_name = '' if obj.category == None else obj.category.name
+        return category_name
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -90,3 +101,9 @@ class OrderSerializer(serializers.ModelSerializer):
         user = obj.user
         serializer = UserSerializer(user, many=False)
         return serializer.data
+    
+class PlantCategorySerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = PlantCategory
+        fields = '__all__'

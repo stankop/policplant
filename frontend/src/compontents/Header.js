@@ -19,6 +19,8 @@ import { logout } from "../store/user-actions";
 import HeaderCardButton from './/UI/HeaderCardButton'
 import classes from './Header.module.css'
 import image from '../../src/assets/images/berberis-erecta-1-350x350.jpg'
+
+
 function Header(props) {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -28,22 +30,22 @@ function Header(props) {
     dispatch(logout());
   };
   return (
-    <Fragment>
-    <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-        <Container>
+    <Fragment >
+    <header >
+      <Navbar  variant="dark" expand="lg" collapseOnSelect className={classes["color-navbar"]}>
+        <Container  >
               <LinkContainer to="/">
                 <Navbar.Brand>
-                  <h2>PolicPlant</h2>
+                  <h1 className={classes["h1"]}>PolicPlant</h1>
                 </Navbar.Brand>
               </LinkContainer>
               
               <Navbar.Text style={{ textAlign: 'center'}}>
-                  <div>                     
+                  {<div>                     
                     <div style={{fontSize: '20px'}}><FontAwesomeIcon icon={faPhone} />     Pozovite nas</div>
                       
                     <div >065356458</div>
-                  </div>
+                  </div>}
 
               </Navbar.Text>
               
@@ -65,7 +67,7 @@ function Header(props) {
         </Container>
       </Navbar>
       <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>
-        <Container>
+        <Container >
           <Row>
           <Navbar.Toggle aria-controls="basic-navbar-nav" md={4} style={{ pading:2}}/>
             
@@ -147,7 +149,7 @@ function Header(props) {
         </Container>
       </Navbar>
     </header>
-    { '' && <div className={classes["main-image"]}>
+    { false && <div className={classes["main-image"]}>
         <img src={image} alt="Green color background" ></img>
     </div>}
     </Fragment>

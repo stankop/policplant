@@ -5,6 +5,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
+from base.serializers import PlantCategorySerializer
+from base.models import PlantCategory
 from base.models import Product
 from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -13,11 +15,33 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers  import make_password
 from rest_framework import status
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.exceptions import ObjectDoesNotExist
 
 
 @api_view(['GET'])
 def getRoutes(request):
     return Response("Hello")
+
+@api_view(['GET'])
+def getCategories(request):
+    
+    categories = PlantCategory.objects.all()
+    product = Product._meta.get_fields()
+    my_model_fields = [field for field in Product._meta.get_fields()]
+    for f in my_model_fields:
+        if f.name == 'flowering_time':
+            flowering_time= [x for (x, y) in f.choices]
+        elif f.name == 'place_of_planting':
+            place_of_planting = [x for (x,y) in f.choices]
+        elif f.name == 'type_of_plant':
+            type_of_plant = [x for (x,y) in f.choices]
+        elif f.name == 'high':
+            high = [x for (x,y) in f.choices]
+        elif f.name == 'color':
+            color = [x for (x,y) in f.choices]
+    serializerCategory = PlantCategorySerializer(categories, many= True)
+
+    return Response({'categories': serializerCategory.data, 'flowering_time': flowering_time, 'place_of_planting': place_of_planting, 'type_of_plant': type_of_plant, 'high': high, 'color':color})
 
 @api_view(['GET'])
 def getProducts(request):
@@ -60,9 +84,14 @@ def getTopProducts(request):
 
 @api_view(['GET'])
 def getProduct(request, pk):
-    product = Product.objects.get(_id=pk)
-    serializer = ProductSerializer(product, many=False)
-    return Response(serializer.data)
+    try:
+        product = Product.objects.get(_id=pk)
+        serializer = ProductSerializer(product, many=False)
+        return Response(serializer.data)
+    except ObjectDoesNotExist as e:
+        return Response(data={"error":f"Ne postoji product sa ID: {pk}"}, status=status.HTTP_404_NOT_FOUND)
+   
+    
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -91,34 +120,42 @@ def createProductReview(request, pk):
 
     # 3 Create Reveiw 
     else:
-        review = Review.objects.create(
-            user=user,
-            product= product,
-            name=user.first_name,
-            rating= data['rating'],
-            comment= data['comment']
-        )
-        reviews = product.review_set.all()
-        product.numReviews = len(reviews)
+        # review = Review.objects.create(
+        #     user=user,
+        #     product= product,
+        #     name=user.first_name,
+        #     rating= data['rating'],
+        #     comment= data['comment']
+        # )
+        # reviews = product.review_set.all()
+        product.numReviews = len(10)
 
         total = 0
-        for i in reviews:
+        for i in 10:
             total += i.rating
-        product.rating = total / len(reviews)
+        product.rating = total / len(10)
         product.save()
         return Response({'detail':'Review Added'})
         
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
 def createProduct(request):
+    data= request.data
     user = request.user
+    category= PlantCategory.objects.get(pk=data['category'])
     product = Product.objects.create(
         user=user,
-        name='Unesite ime biljke...',
-        price = 0.00,
-        brand = "Odaberite boju biljke...",
-        countInStock = 0,
-        description = 'Prost opis...'
+        name=data['name'],
+        price = data['price'],
+        brand = data['brand'],
+        countInStock =data['countInStock'],
+        description = data['description'],
+        color=data['color'],
+        flowering_time=data['flowering_time'],
+        place_of_planting= data['place_of_planting'],
+        type_of_plant=data['type_of_plant'],
+        high=data['high'],
+        category=category
     )
     serilizer = ProductSerializer(product, many = False)
     return Response(serilizer.data)

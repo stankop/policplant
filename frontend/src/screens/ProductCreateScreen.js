@@ -11,14 +11,11 @@ import { listProducts, productDetails } from '../store/product-actions'
 import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import { updateProduct, updateProductReset } from '../store/updateProduct-actions'
+import { plantCategories } from '../store/plantCategory-actions'
+import { createProduct, productReset } from '../store/createProduct-actions'
 
+function ProductCreateScreen( ) {
 
-function ProductEditScreen( ) {
-
-    const { id } = useParams();
-    const productId = id;
-
-        console.log('ovo je product id:', productId)
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0.00)
     const [image, setImage] = useState('')
@@ -28,50 +25,25 @@ function ProductEditScreen( ) {
     const [category, setCategory] = useState('')
     const [countInStock, setCountInStock] = useState(0)
     const [description, setDescription] = useState('')
+    const [high, setHigh] = useState('')
+    const [type_of_plant, setType] = useState('')
     const [uploading, setUploading] = useState(false)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const productDetail = useSelector(state => state.product)
-    const { loading, product, error } = productDetail
+    const categoryList = useSelector(state => state.categoryList)
+    const { loading: categoryLoading, categories , error: categoryError } = categoryList
 
-    const productUpd = useSelector(state => state.updateProduct)
-    const { error: errorUpdate, loading: loadingUpdate, success: successUpdate } = productUpd
-
-    console.log('prvo')
     useEffect(() => {
-        console.log('pocetak')
-        if(successUpdate){
-            dispatch(updateProductReset())
-            navigate(`/admin/productlist`)
-        }else{
+        
+        dispatch(plantCategories())  
 
-            if(!product.name || product._id !== Number(productId)){
-                console.log('********************')
-                dispatch(productDetails(productId))
-            }else{
-                console.log('++++++++++++++++++++++')
-                setName(product.name)
-                setPrice(product.price)
-                setImage(product.image)
-                setColor(product.color)
-                setPlace(product.place)
-                setFlow(product.flow)
-                setCategory(product.category)
-                setCountInStock(product.countInStock)
-                setDescription(product.description)
-            }
-        }
-
-           
-
-    }, [dispatch, product , productId,navigate,successUpdate])
+    }, [dispatch, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault()
-        dispatch(updateProduct({
-            _id:productId,
+        dispatch(createProduct({
             name,
             price,
             image,
@@ -81,37 +53,41 @@ function ProductEditScreen( ) {
             category,
             countInStock,
             description
-
         }))
 
     }
 
+    const createProductHandler = () => {
+
+        dispatch(createProduct())
+    }
+
     const uploadFileHandler = async (e) => {
+
          const file = e.target.files[0]
-         console.log('sta je ovo:', file)
+        
          const formData = new FormData()
 
          formData.append('image', file)
-         formData.append('product_id', productId)
 
          setUploading(true)
 
          try {
-             const config = {
-                 headers: {
-                     'Content-Type': 'multipart/form-data'
-                 }
-             }
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
 
-             const { data } = await axios.post('/api/products/upload/', formData, config)
+            const { data } = await axios.post('/api/products/upload/', formData, config)
 
 
-             setImage(data)
-             setUploading(false)
+            setImage(data)
+            setUploading(false)
 
          } catch (error) {
             setUploading(false)
-         }
+        }
      }
 
     return (
@@ -121,11 +97,11 @@ function ProductEditScreen( ) {
             </Link>
 
             <FormContainer>
-                <h1>Edit Product</h1>
-                {loadingUpdate && <Loader />}
-                {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>} 
+                <h1>Create Product</h1>
+                {categoryLoading && <Loader />}
+                {categoryError && <Message variant='danger'>{categoryError}</Message>} 
 
-                {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
+                {categoryLoading ? <Loader /> : categoryError ? <Message variant='danger'>{categoryError}</Message>
                     : (
                         <Form onSubmit={submitHandler}>
 
@@ -184,7 +160,7 @@ function ProductEditScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setColor(e.target.value)}>
                                     <option>Odaberite boju cveca...</option>
-                                    {product.colorChoises?.map(col => (
+                                    {categories?.color?.map(col => (
                                         <option value={col}>{col}</option>
                                     ))}
  
@@ -208,8 +184,8 @@ function ProductEditScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setCategory(e.target.value)}>
                                     <option>Odaberi kategoriju cveca...</option>
-                                    {product.categoryChoises?.map(cat => (
-                                        <option value={cat}>{cat}</option>
+                                    {categories?.categories?.map(cat => (
+                                        <option value={cat.name}>{cat.name}</option>
                                     ))}
  
                                 </Form.Select>
@@ -220,7 +196,7 @@ function ProductEditScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setFlow(e.target.value)}>
                                     <option>Odaberi vreme cvetanja...</option>
-                                    {product.floweringChoises?.map(cat => (
+                                    {categories?.flowering_time?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
  
@@ -232,7 +208,7 @@ function ProductEditScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setPlace(e.target.value)}>
                                     <option>Odaberi mesto sadnje...</option>
-                                    {product.placeChoises?.map(cat => (
+                                    {categories?.place_of_planting?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
  
@@ -265,4 +241,4 @@ function ProductEditScreen( ) {
     )
 }
 
-export default ProductEditScreen
+export default ProductCreateScreen
