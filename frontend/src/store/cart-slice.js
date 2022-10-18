@@ -16,7 +16,7 @@ const cartSlice = createSlice({
             const newItem = action.payload
             const existItem = state.cartItems.find(x => x.id === newItem.id)
             if(existItem){
-                    state.cartItems.find(item => item.id === existItem.id).qty += newItem.qty
+                    state.cartItems.find(item => item.id === existItem.id).qty = newItem.qty
 
             }else{
                 
@@ -40,6 +40,15 @@ const cartSlice = createSlice({
             state.dostava = obj.dostava
             state.placanje = obj.placanje
        },
+
+       removeCartItemByOne(state, action){
+            const id = action.payload
+            state.cartItems.find(x => x.id === id).qty -= 1
+       },
+       addCartItemByOne(state, action){
+        const id = action.payload
+        state.cartItems.find(x => x.id === id).qty += 1
+   }
 
     }
 })

@@ -31,6 +31,12 @@ function SearchBox() {
         }
 
     }
+
+    const btnStyle = {
+        background: 'greenyellow',
+        // backgroundImage: 'url(' + imgUrl + ')',
+    };
+
   return (
     
     <Form onSubmit={submitHandler} >
@@ -38,7 +44,7 @@ function SearchBox() {
             <Row>
                 <Col md={10}>
                     <Form.Control 
-                        type='text'
+                        type='search'
                         name='keyword'
                         inline ='true'
                         className='mr-sm-2 ml-sm-5'
@@ -54,7 +60,8 @@ function SearchBox() {
                         <Button 
                             type='submit'
                             variant='outline-success'
-                            className='p-2'>
+                            className='p-2'
+                            style={btnStyle}>
                             Pretraga
                         </Button>
                 </OverlayTrigger>

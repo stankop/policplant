@@ -22,15 +22,16 @@ function ProductCreateScreen( ) {
     const [color, setColor] = useState('')
     const [place, setPlace] = useState('')
     const [flow, setFlow] = useState('')
+    const [brand, setBrand] = useState('')
     const [category, setCategory] = useState('')
     const [countInStock, setCountInStock] = useState(0)
     const [description, setDescription] = useState('')
     const [high, setHigh] = useState('')
-    const [type_of_plant, setType] = useState('')
+    const [type, setType] = useState('')
     const [uploading, setUploading] = useState(false)
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const categoryList = useSelector(state => state.categoryList)
     const { loading: categoryLoading, categories , error: categoryError } = categoryList
@@ -52,9 +53,13 @@ function ProductCreateScreen( ) {
             flow,
             category,
             countInStock,
-            description
-        }))
-
+            description,
+            brand,
+            high,
+            type
+        }, image))
+        navigate('/admin/productlist')
+        console.log('Ovde treba da ide na product list')
     }
 
     const createProductHandler = () => {
@@ -135,7 +140,7 @@ function ProductCreateScreen( ) {
                                 <Form.Control
 
                                     type='text'
-                                    placeholder='Enter image'
+                                    placeholder='Enter image...'
                                     defaultValue={image}
                                    
                                 >
@@ -146,7 +151,7 @@ function ProductCreateScreen( ) {
                                     type='file'
                                     label="Izaberite sliku:"
                                     
-                                    onChange={async (e) =>  uploadFileHandler(e)}
+                                    onChange={(e) =>  setImage(e.target.files[0])}
                                 > 
 
                                 </Form.Control>  
@@ -215,6 +220,42 @@ function ProductCreateScreen( ) {
                                 </Form.Select>
                             </Form.Group>
 
+                            <Form.Group controlId='brand'>
+                                <Form.Label><strong>Brand</strong></Form.Label>
+                                <Form.Control
+
+                                    type='text'
+                                    placeholder='Enter brand...'
+                                    defaultValue={brand}
+                                    onChange={(e) => setBrand(e.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group controlId='high'>
+                                <Form.Label><strong>Visina biljke</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             onChange={(e) => setHigh(e.target.value)}>
+                                    <option>Visina biljke...</option>
+                                    {categories?.high?.map(cat => (
+                                        <option value={cat}>{cat}</option>
+                                    ))}
+ 
+                                </Form.Select>
+                            </Form.Group>
+
+                            <Form.Group controlId='type_plant'>
+                                <Form.Label><strong>Tip biljke</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             onChange={(e) => setType(e.target.value)}>
+                                    <option>Tip biljke...</option>
+                                    {categories?.type_of_plant?.map(cat => (
+                                        <option value={cat}>{cat}</option>
+                                    ))}
+ 
+                                </Form.Select>
+                            </Form.Group>
+
                             <Form.Group controlId='description'>
                                 <Form.Label><strong>Description</strong></Form.Label>
                                 <Form.Control
@@ -229,7 +270,7 @@ function ProductCreateScreen( ) {
 
 
                             <Button type='submit' variant='primary'>
-                                Update
+                                Create Product
                         </Button>
 
                         </Form>

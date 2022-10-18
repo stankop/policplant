@@ -53,7 +53,6 @@ function PlaceOrderScreen(props) {
                                orderId: order._id,
                                orderi: order.orderItems})
             dispatch(resetOrder())
-            console.log('ovo je order posle reseta:',order)
         }
 
 

@@ -25,7 +25,7 @@ def getRoutes(request):
 @api_view(['GET'])
 def getCategories(request):
     
-    categories = PlantCategory.objects.all()
+    categoriess = PlantCategory.objects.all()
     product = Product._meta.get_fields()
     my_model_fields = [field for field in Product._meta.get_fields()]
     for f in my_model_fields:
@@ -39,7 +39,7 @@ def getCategories(request):
             high = [x for (x,y) in f.choices]
         elif f.name == 'color':
             color = [x for (x,y) in f.choices]
-    serializerCategory = PlantCategorySerializer(categories, many= True)
+    serializerCategory = PlantCategorySerializer(categoriess, many= True)
 
     return Response({'categories': serializerCategory.data, 'flowering_time': flowering_time, 'place_of_planting': place_of_planting, 'type_of_plant': type_of_plant, 'high': high, 'color':color})
 
@@ -89,7 +89,7 @@ def getProduct(request, pk):
         serializer = ProductSerializer(product, many=False)
         return Response(serializer.data)
     except ObjectDoesNotExist as e:
-        return Response(data={"error":f"Ne postoji product sa ID: {pk}"}, status=status.HTTP_404_NOT_FOUND)
+        return Response(data={"detail":f"Ne postoji product sa ID: {pk}"}, status=status.HTTP_404_NOT_FOUND)
    
     
 
@@ -142,18 +142,19 @@ def createProductReview(request, pk):
 def createProduct(request):
     data= request.data
     user = request.user
-    category= PlantCategory.objects.get(pk=data['category'])
+    category= PlantCategory.objects.get(name=data['category'])
     product = Product.objects.create(
         user=user,
         name=data['name'],
+        image=data['image'],
         price = data['price'],
         brand = data['brand'],
         countInStock =data['countInStock'],
         description = data['description'],
         color=data['color'],
-        flowering_time=data['flowering_time'],
-        place_of_planting= data['place_of_planting'],
-        type_of_plant=data['type_of_plant'],
+        flowering_time=data['flow'],
+        place_of_planting= data['place'],
+        type_of_plant=data['type'],
         high=data['high'],
         category=category
     )

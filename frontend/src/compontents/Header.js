@@ -11,7 +11,7 @@ import {
   faPhone,
   faFlag,
 } from "@fortawesome/free-solid-svg-icons";
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
@@ -19,13 +19,24 @@ import { logout } from "../store/user-actions";
 import HeaderCardButton from './/UI/HeaderCardButton'
 import classes from './Header.module.css'
 import image from '../../src/assets/images/berberis-erecta-1-350x350.jpg'
+import { plantCategories } from '../store/plantCategory-actions'
 
 
 function Header(props) {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const category = useSelector((state) => state.categoryList);
+  const { categories: { categories} } = category;
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    
+    dispatch(plantCategories())
+
+  }, []);
+  
   const logoutHandler = (event) => {
     dispatch(logout());
   };
@@ -42,20 +53,14 @@ function Header(props) {
               
               <Navbar.Text style={{ textAlign: 'center'}}>
                   {<div>                     
-                    <div style={{fontSize: '20px'}}><FontAwesomeIcon icon={faPhone} />     Pozovite nas</div>
+                    <div style={{fontSize: '1.6rem'}}><FontAwesomeIcon icon={faPhone} />     Pozovite nas</div>
                       
                     <div >065356458</div>
                   </div>}
 
               </Navbar.Text>
               
-              <Navbar.Text style={{ textAlign: 'center'}}>
-              <LinkContainer to="#" >
-                    <Nav.Link >
-                      <div style={{fontSize: '20px'}}><FontAwesomeIcon icon={faFlag} /> Placeholder</div>
-                    </Nav.Link>
-                  </LinkContainer>
-              </Navbar.Text>
+                <SearchBox ></SearchBox>
 
               <Navbar.Text style={{ textAlign: 'center'}}>
               <LinkContainer to="/cart" >
@@ -72,8 +77,28 @@ function Header(props) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" md={4} style={{ pading:2}}/>
             
             <Navbar.Collapse id="basic-navbar-nav">
-              <Col md={4} style={{ pading:10, margin:10, size:20}} >
-                <SearchBox ></SearchBox>
+              <Col md={6} style={{ pading:10, margin:10, size:20}} >
+                
+                <NavDropdown title="Kategorije proizvoda" id="basic-nav-dropdown" style={{fontSize: '1.4rem', color: 'red'}}>
+                  {categories?.map( (category) => (
+                    <NavDropdown.Item href="#" key={category._id}>
+                        { category.name }
+                    </NavDropdown.Item>
+                  ))}
+                  {/* <NavDropdown.Item href="#action/3.1">
+                    Action
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.2">
+                    Another action
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3">
+                    Something
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action/3.4">
+                    Separated link
+                  </NavDropdown.Item> */}
+                </NavDropdown>
               </Col>
               <Col md={{ span: 10, offset: 2 }}>
                 <Nav>

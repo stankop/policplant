@@ -54,3 +54,24 @@ export const addDostavaAndPlacanjeCart = (dostava, placanje) => {
 
     }
 }
+
+
+export const removeItem = (id) => {
+    return  (dispatch, getState) => {
+
+            dispatch(cartActions.removeCartItemByOne(id))
+           
+            localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+
+    }
+}
+
+export const addItem = (id) => {
+    return  (dispatch, getState) => {
+
+            dispatch(cartActions.addCartItemByOne(id))
+           
+            localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+
+    }
+}

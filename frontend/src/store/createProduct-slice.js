@@ -29,6 +29,7 @@ const createProductSlice = createSlice({
             
             state.product = {}
             state.success = false
+            state.error = ''
         }
 
     }

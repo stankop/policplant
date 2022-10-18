@@ -1,12 +1,15 @@
 import classes from './Cart.module.css'
 import CartModal from '../CartModal'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import CartItem from './CartItem'
+import { removeItem , addItem} from '../../../store/cart-actions'
 
 const Cart = (props) => {
 
     const cart = useSelector((state) => state.cart);
     const { cartItems } = cart;
+
+    const dispatch = useDispatch()
 
     const totalAmount = cartItems?.reduce((total, item) => 
         {
@@ -17,12 +20,12 @@ const Cart = (props) => {
 
     const cartItemRemoveHanlder= id => {
 
-        //cartCtx.removeItem(id)
+        dispatch(removeItem(id))
     }
 
-    const cartItemAddHanlder = item => {
+    const cartItemAddHanlder = id => {
 
-        //cartCtx.addItem({...item, amount:1})
+        dispatch(addItem(id))
     }
     const cartitems = 
     <ul className={classes['cart-items']}>
@@ -32,8 +35,8 @@ const Cart = (props) => {
                        name={order.name}
                        qty={order.qty} 
                        price={order.price}
-                       onRemove={cartItemRemoveHanlder.bind(null, order._id)} 
-                       onAdd={cartItemAddHanlder.bind(null, order)}>
+                       onRemove={() => cartItemRemoveHanlder(order.id)} 
+                       onAdd={() => cartItemAddHanlder(order.id)}>
 
             </CartItem>
  

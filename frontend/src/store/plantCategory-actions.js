@@ -6,7 +6,7 @@ export const plantCategories = () => {
 
         const fetchData = async () => {
            
-            const { data } = await axios.get(`/api/products/categories`)
+            const { data } = await axios.get(`/api/products/categories/`)
             return data;
         }
 

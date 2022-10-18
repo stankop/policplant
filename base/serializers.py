@@ -10,7 +10,7 @@ class ProductSerializer(serializers.ModelSerializer):
     floweringChoises = serializers.SerializerMethodField(read_only=True)
     highChoises = serializers.SerializerMethodField(read_only=True)
     type_of_plantChoises = serializers.SerializerMethodField(read_only=True)
-    category = serializers.SerializerMethodField(read_only=True)
+    #category = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Product
         fields = '__all__'
@@ -35,10 +35,12 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_type_of_plantChoises(self, obj):
         type_of_plant = [e.value for e in obj.Type]
         return type_of_plant
+
+    # def get_type_of_plantChoises(self, obj):
+    #     type_of_plant = [e.value for e in obj.Type]
+    #     return type_of_plant
     
-    def get_category(self, obj):
-        category_name = '' if obj.category == None else obj.category.name
-        return category_name
+    
 
 
 class UserSerializer(serializers.ModelSerializer):

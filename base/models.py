@@ -119,8 +119,8 @@ class Product(models.Model):
         DEFAULT = 'LISTOPADNA',_('LISTOPADNA')
         
 
-    # category = models.ForeignKey(max_length=20, choices=Category.choices, default=Category.DEFAULT)
-    category = models.ForeignKey(PlantCategory, on_delete=models.SET_NULL, null=True)
+    category = models.CharField(max_length=20, choices=PlantCategory.Category.choices, default=PlantCategory.Category.DEFAULT)
+    #category = models.ForeignKey(PlantCategory, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(null=True, blank= True, default='/default.jpg')

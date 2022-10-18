@@ -23,6 +23,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { orderActions } from "../store/order-slice";
 
 function CartScreen() {
 
@@ -74,9 +75,10 @@ function CartScreen() {
             Vasa korpa je prazna <Link to="/">Vratite se Nazad</Link>
           </Message>
         ) : (
-          <ListGroup variant="flush">
-            {cartItems?.map((item) => (
-              <ListGroup.Item key={item.id}>
+          <ListGroup variant="flush" >
+            {cartItems?.map((item) => {
+              return (
+              <ListGroup.Item key={item.id} hidden={item.qty < 1}>
                 <Row>
                   <Col md={2}>
                     <Image
@@ -119,8 +121,8 @@ function CartScreen() {
                     </Button>
                   </Col>
                 </Row>
-              </ListGroup.Item>
-            ))}
+              </ListGroup.Item>);
+            })}
           </ListGroup>
         )}
       </Col>

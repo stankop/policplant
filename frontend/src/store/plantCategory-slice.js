@@ -14,6 +14,7 @@ const plantCategorySlice = createSlice({
 
         plantCategorySuccess(state, action) {
             state.loading = false
+            state.error = false
             state.categories = action.payload     
         },
 

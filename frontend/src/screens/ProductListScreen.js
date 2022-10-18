@@ -42,16 +42,16 @@ function ProductListScreen() {
 
          if(successCreate){
 
-            const productId = createdProduct._id
-            dispatch(productReset())
-            navigate(`/admin/product/${productId}/edit`)
+            // const productId = createdProduct._id
+            // dispatch(productReset())
+            // navigate(`/admin/product/${productId}/edit`)
               
           }else{
             dispatch(listProducts())
           }
        
 
-     }, [dispatch, navigate, userInfo, successDelete, successCreate , createdProduct])
+     }, [dispatch, navigate, userInfo, successDelete, successCreate])
      
 
     const deleteHandler = (id) => {

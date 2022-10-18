@@ -1,7 +1,7 @@
 import { createProductActions} from './createProduct-slice'
 import axios from 'axios'
 
-export const createProduct = () => {
+export const createProduct = (prod, image) => {
     return async (dispatch, getState) => {
 
 
@@ -18,14 +18,45 @@ export const createProduct = () => {
                 },
                 
             }
-            const { data } = await axios.post(`/api/products/create/`,{}, config)
+            const { data } = await axios.post(`/api/products/create/`,prod, config)
             return data;
+        }
+
+
+        const uploadData = async (product_id, img) => {
+
+            const file = img //e.target.files[0]
+         
+            const formData = new FormData()
+
+            formData.append('image', file)
+            formData.append('product_id', product_id)
+
+            try {
+                const config = {
+                 headers: {
+                     'Content-Type': 'multipart/form-data'
+                    }
+                }
+
+                const { data } = await axios.post('/api/products/upload/', formData, config)
+
+            } catch (error) {
+           
+            }
         }
 
         try {
             dispatch(createProductActions.createProductRequest())
             const productData = await fetchData()
             dispatch(createProductActions.createProductSuccess(productData))
+            const {
+                createProduct:{ product, success }
+            } = getState()
+            if(success){
+                const imageData = await uploadData(product._id, image)
+            }
+            dispatch(createProductActions.createProductReset())
 
         } catch (error) {
             dispatch(

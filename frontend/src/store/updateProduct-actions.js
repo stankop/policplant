@@ -50,6 +50,34 @@ export const updateProductReset = () => {
     }
 }
 
+export const updateProductDetails = (id) => {
+    return async (dispatch) => {
+
+
+        const fetchData = async () => {
+           
+            const { data } = await axios.get(`/api/products/${id}`)
+            return data;
+        }
+
+        try {
+            dispatch(updateProductActions.updateProductRequest())
+            const cartData = await fetchData()
+            dispatch(updateProductActions.updateProductSuccess(cartData))
+
+        } catch (error) {
+            dispatch(
+                updateProductActions.updateProductFail(
+                  error.response && error.response.data.detail
+                  ? error.response.data.detail
+                  : error.message
+                )
+              );
+        }
+
+    }
+}
+
 
 
        
