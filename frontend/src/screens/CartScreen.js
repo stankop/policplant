@@ -88,10 +88,10 @@ function CartScreen() {
                       rounded
                     ></Image>
                   </Col>
-                  <Col sm={12} md={3} lg={4} xl={3} xs={4}>
+                  <Col sm={12} md={3} lg={4} xl={3} xs={3}>
                     <Link to={`/products/${item.id}`}><strong><h4>{item.name}</h4></strong></Link>
                   </Col>
-                  <Col sm={12} md={6} lg={4} xl={3} xs={2}><strong>{item.price} din</strong></Col>
+                  <Col sm={12} md={6} lg={4} xl={3} xs={3}><strong>{item.price} din</strong></Col>
                   <Col sm={12} md={6} lg={4} xl={2} xs={2}>
                     <Form.Control
                       as="select"
@@ -111,7 +111,7 @@ function CartScreen() {
                       
                     </Form.Control>
                   </Col>
-                  <Col md={1} xl={2} xs={2}>
+                  <Col md={1} xl={2} xs={1}>
                     <Button
                       type="button"
                       variant="light"

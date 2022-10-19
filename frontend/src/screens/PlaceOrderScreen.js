@@ -173,8 +173,8 @@ function PlaceOrderScreen(props) {
 
             </Col>
 
-            <Col sm={12} md={6} lg={4} xl={4} xs={6}>
-                    <Card>
+            <Col sm={12} md={6} lg={4} xl={4} xs={12}>
+                    <Card border="info">
                         <ListGroup variant='flush'>
                             <ListGroup.Item>
                                 <h2>Narudzba</h2>

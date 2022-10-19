@@ -37,7 +37,7 @@ function HomeScreen() {
                  <div >  
                     <Row >
                      {products?.map(product => (
-                     <Col key={product._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex  p-2 ">
+                     <Col key={product._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex">
                          <Product product={product} />
                      </Col>
                       ))}
