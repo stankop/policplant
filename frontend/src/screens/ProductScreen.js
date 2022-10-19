@@ -62,19 +62,19 @@ function ProductScreen({match}) {
                 ? <Message variant='danger'>{error}</Message>
                 :(  
                     <div>
-                        <Row>
-                                <Col md={6}>
+                        <Row >
+                                <Col  sm={12} md={6} lg={4} xl={3} xs={6} >
                                     <Image src={product.image} alt={product.name} fluid>
 
                                     </Image>
                                 </Col>
-                                <Col md={3}>
+                                <Col sm={12} md={6} lg={6} xl={6} xs={6}>
                                     <ListGroup variant='flush'>
                                         <ListGroup.Item>
                                             <h2>{product.name}</h2>
                                         </ListGroup.Item>
                                         <ListGroup.Item >
-                                            <strong style={{ color:'#228B22', fontSize:32 }}>{product.price} din</strong> 
+                                            <strong style={{ color:'#228B22', fontSize:30 }}>{product.price} din</strong> 
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
@@ -94,7 +94,7 @@ function ProductScreen({match}) {
                                         </ListGroup.Item>
                                     </ListGroup>
                                 </Col>
-                                <Col md={3}>
+                                <Col sm={12} md={6} lg={4} xl={3} xs={12}>
                                     <Card>
                                     <Card.Title style={{ textAlign:'center', color:'black'}}>Kupovina</Card.Title>
                                         <ListGroup variant='flush' >
@@ -163,7 +163,7 @@ function ProductScreen({match}) {
                         </Row>
 
                         <Row>
-                            <Col md={12} >
+                            <Col sm={12} md={6} lg={4} xl={3} xs={12} >
                             <h2 style={{color:'black'}}>Detaljni opis:</h2>
                                 <ListGroup variant='flush'>
                                         <ListGroup.Item>

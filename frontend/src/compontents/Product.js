@@ -6,7 +6,7 @@ import classes from './Product.module.css'
 
 function Product({product}) {
   return (
-    <Card className={`my-3 p-3 rounded ${classes["img-hover-zoom"]}`} border="primary" style={{ width: '18rem', height: '30rem' }}>
+    <Card className={`my-2 p-2 rounded ${classes["img-hover-zoom"]} `} border="primary"  style={{ width: '18rem', height: '30rem' }}>
         <Link to={`/products/${product._id}`}>
             <Card.Img src={product.image}></Card.Img>
         </Link>

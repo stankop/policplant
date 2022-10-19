@@ -34,11 +34,11 @@ function HomeScreen() {
         { loading ? <Loader></Loader>
                  : error ? <Message variant='danger'>{error}</Message> 
                  :
-                 <div>  
-                    <Row>
+                 <div >  
+                    <Row >
                      {products?.map(product => (
-                     <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                         <Product product={product}/>
+                     <Col key={product._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex  p-2 ">
+                         <Product product={product} />
                      </Col>
                       ))}
                       <Paginate page={page} pages={pages} keyword={keyword}></Paginate>

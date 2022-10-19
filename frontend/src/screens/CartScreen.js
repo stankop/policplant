@@ -68,7 +68,7 @@ function CartScreen() {
   return (
     <div>
     <Row>
-      <Col md={8}>
+      <Col sm={12} md={6} lg={4} xl={6} xs={12}>
         <h1>Korpa</h1>
         {cartItems.length === 0 ? (
           <Message variant="info">
@@ -80,7 +80,7 @@ function CartScreen() {
               return (
               <ListGroup.Item key={item.id} hidden={item.qty < 1}>
                 <Row>
-                  <Col md={2}>
+                  <Col sm={12} md={6} lg={3} xl={2} xs={2}>
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -88,11 +88,11 @@ function CartScreen() {
                       rounded
                     ></Image>
                   </Col>
-                  <Col md={3}>
+                  <Col sm={12} md={3} lg={4} xl={3} xs={4}>
                     <Link to={`/products/${item.id}`}><strong><h4>{item.name}</h4></strong></Link>
                   </Col>
-                  <Col md={2}><strong>{item.price} din</strong></Col>
-                  <Col md={1}>
+                  <Col sm={12} md={6} lg={4} xl={3} xs={2}><strong>{item.price} din</strong></Col>
+                  <Col sm={12} md={6} lg={4} xl={2} xs={2}>
                     <Form.Control
                       as="select"
                       value={item.qty}
@@ -111,7 +111,7 @@ function CartScreen() {
                       
                     </Form.Control>
                   </Col>
-                  <Col md={1}>
+                  <Col md={1} xl={2} xs={2}>
                     <Button
                       type="button"
                       variant="light"
@@ -126,14 +126,14 @@ function CartScreen() {
           </ListGroup>
         )}
       </Col>
-      <Col md={4}>
+      <Col sm={12} md={6} lg={4} xl={6} xs={12}>
         <Card border="info">
            <Card.Header as="h4">Vasa Porudzbina</Card.Header>
           <ListGroup variant="flush">
             <ListGroup.Item >
               <Row>
-                <Col md={8}><strong>Proizvodi</strong></Col>
-                <Col md={4}> <strong>Ukupno</strong></Col>
+                <Col sm={12} md={6} lg={4} xl={8} xs={8}><strong>Proizvodi</strong></Col>
+                <Col sm={12} md={6} lg={4} xl={4} xs={4}> <strong>Ukupno</strong></Col>
               </Row>
 
             </ListGroup.Item>
@@ -141,23 +141,23 @@ function CartScreen() {
             {cartItems?.map((item) => (
                 <ListGroup.Item key={item.id}>
                   <Row>
-                    <Col md={8}>{item.qty}      x      {item.name}</Col>
-                    <Col md={4}> {(item.qty * item.price).toFixed(2)}</Col>
+                    <Col m={12} md={6} lg={4} xl={8} xs={8}>{item.qty}      x      {item.name}</Col>
+                    <Col m={12} md={6} lg={4} xl={4} xs={4}> {(item.qty * item.price).toFixed(2)}</Col>
                   </Row>
 
                  </ListGroup.Item>))}
 
             <ListGroup.Item>
                   <Row>
-                    <Col md={8}><strong>Ukupan broj proizvoda:</strong></Col>
-                    <Col md={4}> {cartItems.reduce((acc, item ) => acc + item.qty, 0)}</Col>
+                    <Col m={12} md={6} lg={4} xl={8} xs={8}><strong>Ukupan broj proizvoda:</strong></Col>
+                    <Col m={12} md={6} lg={4} xl={4} xs={4}> {cartItems.reduce((acc, item ) => acc + item.qty, 0)}</Col>
                   </Row>
             </ListGroup.Item>
 
             <ListGroup.Item>
                   <Row>
-                    <Col md={8}> <strong>Ukupna Cena:</strong></Col>
-                    <Col md={4}> {cartItems.reduce((acc, item ) => acc + item.qty * item.price, 0).toFixed(2)} din</Col>
+                    <Col m={12} md={6} lg={4} xl={8} xs={8}> <strong>Ukupna Cena:</strong></Col>
+                    <Col m={12} md={6} lg={4} xl={4} xs={4}> {cartItems.reduce((acc, item ) => acc + item.qty * item.price, 0).toFixed(2)} din</Col>
                   </Row>
             </ListGroup.Item>
 

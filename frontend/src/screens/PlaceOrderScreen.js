@@ -86,7 +86,7 @@ function PlaceOrderScreen(props) {
     <div>
         <CheckoutSteps step1 step2 step3 ></CheckoutSteps>
         <Row>
-            <Col md={8}>
+            <Col sm={12} md={6} lg={4} xl={7} xs={12}>
 
                 <ListGroup variant='flush'>
                     <ListGroup.Item>
@@ -149,14 +149,14 @@ function PlaceOrderScreen(props) {
                                                 <ListGroup.Item key={index}>
 
                                                     <Row>
-                                                        <Col md={1}>
+                                                        <Col sm={12} md={6} lg={4} xl={2} xs={3}>
                                                             <Image src={item.image} alt={item.name} fluid rounded></Image>
                                                         </Col>
-                                                        <Col>
+                                                        <Col sm={12} md={6} lg={4} xl={3} xs={3}>
 
                                                             <Link to={`/products/${item.id}`}>{item.name}</Link>
                                                         </Col>
-                                                        <Col md={4}>
+                                                        <Col sm={12} md={6} lg={4} xl={6} xs={6}>
                                                             {item.qty} x {item.price} din = {(item.qty *item.price).toFixed(2)} din
                                                         </Col>
                                                     </Row>
@@ -173,7 +173,7 @@ function PlaceOrderScreen(props) {
 
             </Col>
 
-            <Col md={4}>
+            <Col sm={12} md={6} lg={4} xl={4} xs={6}>
                     <Card>
                         <ListGroup variant='flush'>
                             <ListGroup.Item>
