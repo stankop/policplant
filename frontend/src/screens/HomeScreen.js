@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Container } from 'react-bootstrap'
 import Product from '../compontents/Product'
 import Kategorija from '../compontents/Kategorija'
+import Search from '../compontents/Search'
 import { useDispatch , useSelector } from 'react-redux'
 import { listProducts } from '../store/product-actions'
 import { listCategories } from '../store/category-actions'
@@ -36,15 +37,24 @@ function HomeScreen() {
         { loading ? <Loader></Loader>
                  : error ? <Message variant='danger'>{error}</Message> 
                  :
-                 <div >  
-                    <Row >
-                     {categories?.map(category => (
-                     <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex">
-                         <Kategorija category={category} />
-                     </Col>
-                      ))}
-                      {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                 <div > 
+                  <Container fluid> 
+                    <Row>
+                      <Col sm={8} md={8} lg={8} xl={10} xs={8}>
+                        <Row >
+                          {categories?.map(category => (
+                          <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={12} className="d-flex">
+                              <Kategorija category={category} />
+                          </Col>
+                            ))}
+                            {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                        </Row>
+                      </Col>
+                      <Col>
+                          <Search></Search>
+                      </Col>
                     </Row>
+                  </Container>
                 </div>}
                 
         

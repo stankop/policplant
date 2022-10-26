@@ -80,7 +80,14 @@ function Header(props) {
             <Navbar.Collapse id="basic-navbar-nav">
               <Col md={6} style={{ pading:10, margin:10, size:20}} >
                 
-                <NavDropdown title="Kategorije proizvoda" id="basic-nav-dropdown" style={{fontSize: '1.4rem', color: 'red'}}>
+                <NavDropdown title="Kategorije proizvoda" 
+                             id="basic-nav-dropdown"  
+                             style={{
+                                    fontSize: '1.4rem',
+                                    color: 'red', 
+                                    border:'1px solid black',
+                                     display: 'inline-block',
+                                     background: 'rgb(97, 240, 7)'}}>
                   {categories?.map( (category) => (
                     <NavDropdown.Item  key={category._id}>
                       <LinkContainer to={`/categories/${category._id}`} >
