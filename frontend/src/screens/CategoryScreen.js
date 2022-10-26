@@ -41,11 +41,12 @@ function CategoryScreen() {
                  :
                  <div >  
                     <Row >
-                     {products?.filter(product => product.category.toString() === id).map(product => (
+                     {products?.filter(product => product.category.toString() === id).length == 0 ? <div>Trenutno nema proizvoda iz ove kategorije na stanju.</div> : products?.filter(product => product.category.toString() === id).map(product => (
                      <Col key={product._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex">
                          <Product product={product} />
                      </Col>
                       ))}
+
                       {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
                     </Row>
                 </div>}
