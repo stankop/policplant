@@ -11,7 +11,7 @@ import { listProducts, productDetails } from '../store/product-actions'
 import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import { updateProduct, updateProductReset } from '../store/updateProduct-actions'
-import { plantCategories } from '../store/plantCategory-actions'
+import { listCategories } from '../store/category-actions'
 import { createProduct, productReset } from '../store/createProduct-actions'
 
 function ProductCreateScreen( ) {
@@ -34,11 +34,11 @@ function ProductCreateScreen( ) {
     const navigate = useNavigate();
 
     const categoryList = useSelector(state => state.categoryList)
-    const { loading: categoryLoading, categories , error: categoryError } = categoryList
+    const { loading: categoryLoading, categories , allcategories, error: categoryError } = categoryList
 
     useEffect(() => {
         
-        dispatch(plantCategories())  
+        dispatch(listCategories())  
 
     }, [dispatch, navigate])
 
@@ -165,7 +165,7 @@ function ProductCreateScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setColor(e.target.value)}>
                                     <option>Odaberite boju cveca...</option>
-                                    {categories?.color?.map(col => (
+                                    {allcategories?.color?.map(col => (
                                         <option value={col}>{col}</option>
                                     ))}
  
@@ -189,7 +189,7 @@ function ProductCreateScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setCategory(e.target.value)}>
                                     <option>Odaberi kategoriju cveca...</option>
-                                    {categories?.categories?.map(cat => (
+                                    {categories?.map(cat => (
                                         <option value={cat.name}>{cat.name}</option>
                                     ))}
  
@@ -201,7 +201,7 @@ function ProductCreateScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setFlow(e.target.value)}>
                                     <option>Odaberi vreme cvetanja...</option>
-                                    {categories?.flowering_time?.map(cat => (
+                                    {allcategories?.flowering_time?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
  
@@ -213,7 +213,7 @@ function ProductCreateScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setPlace(e.target.value)}>
                                     <option>Odaberi mesto sadnje...</option>
-                                    {categories?.place_of_planting?.map(cat => (
+                                    {allcategories?.place_of_planting?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
  
@@ -237,7 +237,7 @@ function ProductCreateScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setHigh(e.target.value)}>
                                     <option>Visina biljke...</option>
-                                    {categories?.high?.map(cat => (
+                                    {allcategories?.high?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
  
@@ -249,7 +249,7 @@ function ProductCreateScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setType(e.target.value)}>
                                     <option>Tip biljke...</option>
-                                    {categories?.type_of_plant?.map(cat => (
+                                    {allcategories?.type_of_plant?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
  

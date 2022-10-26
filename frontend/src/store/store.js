@@ -1,5 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit'
 import { productListReducer } from './product-slice'
+import { categoryListReducer } from './category-slice'
 import { productDetailsReducer } from './productDetails-slice'
 import { cartReducer } from './cart-slice'
 import { userReducer } from './user_slice'
@@ -21,7 +22,7 @@ import { createProductReducer} from './createProduct-slice'
 import { userUpdateReducer } from './userUpdate-slice'
 import { updateProductReducer } from './updateProduct-slice'
 import { orderListReducer } from './orderList-slice'
-import { plantCategoryReducer } from './plantCategory-slice'
+
 
 const store = configureStore({
     reducer:{
@@ -47,7 +48,8 @@ const store = configureStore({
         userUpdate: userUpdateReducer,
         updateProduct: updateProductReducer,
         orderList: orderListReducer,
-        categoryList: plantCategoryReducer
+        categoryList: categoryListReducer,
+        
     }
 })
 

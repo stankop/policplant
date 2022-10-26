@@ -13,34 +13,37 @@ import Paginate from '../compontents/Paginate'
 import ProductCarucel from '../compontents/ProductCarusel'
 import { CSSTransition } from 'react-transition-group'
 
-function HomeScreen() {
+function CategoryScreen() {
 
   const dispatch = useDispatch()
+  const prod = useSelector(state => state.productList)
+  const { error, loading, products } = prod
   const cat = useSelector(state => state.categoryList)
-  const { error, loading, categories } = cat
+  const { error: catError, loading: carLoading, categories: catProducts } = cat
   const [search, setSearch] = useSearchParams();
-  const keyword = search.get("keyword");
+  const { id } = useParams();
+  //const id = search.get("id");
 
   useEffect(()=>{
 
-    dispatch(listCategories())
+    dispatch(listProducts())
         
- }, [dispatch, keyword]);
+ }, [dispatch, id]);
 
  
   return (
     <div>
-        { true && <ProductCarucel></ProductCarucel>}
+        { false && <ProductCarucel></ProductCarucel>}
         
-        <h1>Kategorije:</h1>
+        <h1>{ catProducts?.find( cat => cat._id.toString() === id)?.name}</h1>
         { loading ? <Loader></Loader>
                  : error ? <Message variant='danger'>{error}</Message> 
                  :
                  <div >  
                     <Row >
-                     {categories?.map(category => (
-                     <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex">
-                         <Kategorija category={category} />
+                     {products?.filter(product => product.category.toString() === id).map(product => (
+                     <Col key={product._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex">
+                         <Product product={product} />
                      </Col>
                       ))}
                       {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
@@ -52,4 +55,4 @@ function HomeScreen() {
   )
 }
 
-export default HomeScreen
+export default CategoryScreen

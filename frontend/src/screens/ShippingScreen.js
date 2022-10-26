@@ -71,8 +71,8 @@ function ShippingScreen() {
       <TabPanel value="1">
           <FormContainer>
 
-        <h1>Podaci Kupca</h1>
-        <Form onSubmit={submitHandler1}>
+            <h1>Podaci Kupca</h1>
+            <Form onSubmit={submitHandler1}>
 
                 <Form.Group controlId='name'>
                     <Form.Label>
@@ -191,14 +191,15 @@ function ShippingScreen() {
                     </Button>
                 </Form.Group>
 
-        </Form>
-          </FormContainer>
+            </Form>
+        </FormContainer>
       </TabPanel>
-      <TabPanel value="2">
-          <FormContainer>
+      
+      <TabPanel value="2" disabled={true}>
+        <FormContainer>
 
-        <h1>Podaci Kupca</h1>
-        <Form onSubmit={submitHandler2}>
+            <h1>Podaci Kupca</h1>
+            <Form onSubmit={submitHandler2}>
 
                 <Form.Group controlId='name'>
                     <Form.Label>
@@ -226,21 +227,20 @@ function ShippingScreen() {
                             onChange={(e) => setEmail(e.target.value)}>
 
                     </Form.Control>
-                    </Form.Group>
-                    <Form.Group>
+                    
                     <Button type='submit' variant='primary'>
                         Nastavite
                     </Button>
                     </Form.Group>
 
-                    </Form>
-                </FormContainer>
+            </Form>
+        </FormContainer>
 
-            </TabPanel>
+      </TabPanel>
 
         </TabContext>
 
-        </div>
+    </div>
 
   )}
 

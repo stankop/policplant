@@ -23,7 +23,7 @@ def getRoutes(request):
     return Response("Hello")
 
 @api_view(['GET'])
-def getCategories(request):
+def getAllCategories(request):
     
     categoriess = PlantCategory.objects.all()
     product = Product._meta.get_fields()
@@ -74,6 +74,13 @@ def getProducts(request):
 
     serializer = ProductSerializer(products, many= True)
     return Response({'products': serializer.data, 'page':page, 'pages': paginator.num_pages})
+
+@api_view(['GET'])
+def getCategories(request):
+    
+    categories = PlantCategory.objects.all()
+    serializer = PlantCategorySerializer(categories, many= True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def getTopProducts(request):

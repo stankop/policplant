@@ -14,5 +14,6 @@ urlpatterns = [
     path('update/<str:pk>/', views.updateProduct, name = 'update_product'),
     path('delete/<str:pk>', views.deleteProduct, name = 'delete_product'),
     path('carusel/top/', views.getTopProducts, name='top-products'),
+    path('allcategories/', views.getAllCategories, name='get_categories'),
     path('categories/', views.getCategories, name='get_categories'),
 ]

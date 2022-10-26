@@ -2,6 +2,7 @@ import { Container } from "react-bootstrap";
 import Header from "./compontents/Header";
 import Footer from "./compontents/Footer";
 import HomeScreen from "./screens/HomeScreen";
+import CategoryScreen from "./screens/CategoryScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
@@ -59,6 +60,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomeScreen />} exact></Route>
             <Route path="/products/:id" element={<ProductScreen />}></Route>
+            <Route path="/categories/:id" element={<CategoryScreen />}></Route>
             <Route path="/cart" >
               <Route path=":qty" element={<CartScreen />} />
               <Route path=":id" element={<CartScreen />} />

@@ -19,7 +19,8 @@ import { logout } from "../store/user-actions";
 import HeaderCardButton from './/UI/HeaderCardButton'
 import classes from './Header.module.css'
 import image from '../../src/assets/images/berberis-erecta-1-350x350.jpg'
-import { plantCategories } from '../store/plantCategory-actions'
+import { listCategories } from "../store/category-actions";
+//import { plantCategories } from '../store/plantCategory-actions'
 
 
 function Header(props) {
@@ -27,13 +28,13 @@ function Header(props) {
   const { userInfo } = userLogin;
 
   const category = useSelector((state) => state.categoryList);
-  const { categories: { categories} } = category;
+  const { categories } = category;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     
-    dispatch(plantCategories())
+    dispatch(listCategories())
 
   }, []);
   
@@ -81,8 +82,13 @@ function Header(props) {
                 
                 <NavDropdown title="Kategorije proizvoda" id="basic-nav-dropdown" style={{fontSize: '1.4rem', color: 'red'}}>
                   {categories?.map( (category) => (
-                    <NavDropdown.Item href="#" key={category._id}>
-                        { category.name }
+                    <NavDropdown.Item  key={category._id}>
+                      <LinkContainer to={`/categories/${category._id}`} >
+                          <Nav.Link >
+                          { category.name }
+                          </Nav.Link>
+                      </LinkContainer>
+                        
                     </NavDropdown.Item>
                   ))}
                   {/* <NavDropdown.Item href="#action/3.1">

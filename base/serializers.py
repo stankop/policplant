@@ -105,7 +105,13 @@ class OrderSerializer(serializers.ModelSerializer):
         return serializer.data
     
 class PlantCategorySerializer(serializers.ModelSerializer):
-    
+    productNumber = serializers.SerializerMethodField(read_only= True)
     class Meta:
         model = PlantCategory
-        fields = '__all__'
+        fields =  [
+            '_id','name','description', 'image', 'productNumber'
+        ]
+    def get_productNumber(self, obj):
+        productNumber = len(obj.product_set.all())
+        return str(productNumber)
+       
