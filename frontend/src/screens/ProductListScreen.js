@@ -122,7 +122,7 @@ function ProductListScreen() {
                                         <td>{product._id}</td>
                                         <td>{product.name}</td>
                                         <td>{product.price} din</td>
-                                        <td>{product.category}</td>
+                                        <td>{product.category.name}</td>
                                         <td>{product.color}</td>
                                         <td>{product.countInStock}</td>
                                         <td><LinkContainer to={`/admin/product/${product._id}/edit`}>

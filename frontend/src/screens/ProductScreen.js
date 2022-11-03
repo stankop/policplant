@@ -78,7 +78,7 @@ function ProductScreen({match}) {
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
-                                            <strong>Kategorija:</strong> {product.category}
+                                            <strong>Kategorija:</strong> {product.category.name}
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
