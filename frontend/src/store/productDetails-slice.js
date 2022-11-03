@@ -5,7 +5,7 @@ const productDetailsSlice = createSlice({
     initialState: {
             product: {},
             loading: false,
-            error:null
+            error:''
 
     },
     reducers:{
@@ -17,6 +17,7 @@ const productDetailsSlice = createSlice({
         productDetailsSuccess(state, action) {
                     state.loading = false
                     state.product = action.payload
+                    state.error = ''
         },
 
         productDetailsFail(state, action) {

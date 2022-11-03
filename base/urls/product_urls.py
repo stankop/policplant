@@ -16,4 +16,5 @@ urlpatterns = [
     path('carusel/top/', views.getTopProducts, name='top-products'),
     path('allcategories/', views.getAllCategories, name='get_categories'),
     path('categories/', views.getCategories, name='get_categories'),
+    path('filter/', views.getFilterProducts, name='get_filter_products'),
 ]

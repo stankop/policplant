@@ -21,6 +21,7 @@ import UserEditScreen from "./screens/UserEditScreen";
 import ProductEditScreen from "./screens/ProductEditScreen"
 import ProductCreateScreen from "./screens/ProductCreateScreen"
 import OrderListScreen from "./screens/OrderListScreen"
+import FilterScreen from "./screens/FilterScreen"
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import Cart from './compontents/UI/Cart/Cart'
@@ -61,6 +62,7 @@ function App() {
             <Route path="/" element={<HomeScreen />} exact></Route>
             <Route path="/products/:id" element={<ProductScreen />}></Route>
             <Route path="/categories/:id" element={<CategoryScreen />}></Route>
+            <Route path="/filter" element={<FilterScreen />}></Route>
             <Route path="/cart" >
               <Route path=":qty" element={<CartScreen />} />
               <Route path=":id" element={<CartScreen />} />

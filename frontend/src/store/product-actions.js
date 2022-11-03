@@ -61,6 +61,42 @@ export const productDetails = (id) => {
     }
 }
 
+export const listFilterProducts = (value) => {
+    return async (dispatch) => {
+
+        const val = {
+            color: value.color,
+            high: value.high,
+            type: value.type,
+            category: value.category,
+            flow: value.flow,
+            place: value.place,
+            search: value.search
+        }
+        const fetchData = async () => {
+            
+            const { data } = await axios.post(`/api/products/filter/`,val)
+            return data;
+        }
+
+        try {
+            dispatch(productListActions.productListRequest())
+            const prodData = await fetchData()
+            dispatch(productListActions.productListSuccess(prodData))
+
+        } catch (error) {
+            dispatch(
+                productListActions.productListFail(
+                  error.response && error.response.data.detail
+                  ? error.response.data.detail
+                  : error.message
+                )
+              );
+        }
+
+    }
+}
+
 
 
 

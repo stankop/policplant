@@ -16,6 +16,7 @@ from django.contrib.auth.hashers  import make_password
 from rest_framework import status
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 
 
 @api_view(['GET'])
@@ -191,6 +192,24 @@ def updateProduct(request,pk):
     
     serilizer = ProductSerializer(product, many = False)
     return Response(serilizer.data)
+
+@api_view(['POST'])
+def getFilterProducts(request):
+    data = request.data
+    print('data:',data)
+
+    products = Product.objects.filter((Q(pk__gte=0) if data['search'] == '' else Q(name__icontains=data['search']))
+            & (Q(pk__gte=0) if data['color'] == '' else Q(color__icontains=data['color']))
+            & (Q(pk__gte=0) if data['flow'] == '' else Q(flowering_time__icontains=data['flow']))
+            & (Q(pk__gte=0) if data['high'] == '' else Q(high__icontains=data['high']))
+            & (Q(pk__gte=0) if data['type'] == '' else Q(type_of_plant__icontains=data['type']))
+            & (Q(pk__gte=0) if data['category'] == '' else Q(category__name__icontains=data['category']))).order_by('name')
+    print(products)
+
+   
+    serializer = ProductSerializer(products, many= True)
+    return Response({'products': serializer.data} )
+
 
 @api_view(['POST'])
 def uploadImage(request):
