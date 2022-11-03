@@ -149,7 +149,8 @@ function Search( { onSearch}) {
                             type='submit'
                             variant='outline-success'
                             className='p-2'
-                            style={btnStyle}>
+                            style={btnStyle}
+                            disabled={true}>
                             Filter
                         </Button>
                 
