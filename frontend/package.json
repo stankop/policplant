@@ -6,6 +6,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@fortawesome/fontawesome-free": "^6.2.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
@@ -19,7 +20,11 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
     "babel-plugin-macros": "^3.1.0",
+    "cdbreact": "^1.5.3",
     "formik": "^2.2.9",
+    "mdb-react-ui-kit": "^5.0.0",
+    "postcss-custom-properties": "^12.1.10",
+    "postcss-safe-parser": "^6.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.3.0",
     "react-dom": "^18.2.0",
@@ -66,6 +71,8 @@
   },
   "resolutions": {
     "**/react": "18.2.0",
-    "**/react-select": "18.2.0"
+    "**/react-select": "18.2.0",
+    "postcss-custom-properties": "12.1.10",
+    "postcss-safe-parser": "^6.0.0"
   }
 }

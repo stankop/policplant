@@ -13,6 +13,8 @@ import { useParams, useSearchParams } from "react-router-dom";
 import Paginate from '../compontents/Paginate'
 import ProductCarucel from '../compontents/ProductCarusel'
 import { CSSTransition } from 'react-transition-group'
+import Sidebar from "../compontents/UI/SideBar"
+import SearchModal from '../compontents/UI/SearchModal'
 
 function HomeScreen() {
 
@@ -59,16 +61,18 @@ function HomeScreen() {
         { carucel && <ProductCarucel></ProductCarucel>}
         
         <h1> {carucel ? 'Kategorije:' : 'Filtrirani Proizvodi:'}</h1>
+        {/* <Sidebar></Sidebar> */}
+        <SearchModal></SearchModal>
         { categoryLoading ? <Loader></Loader>
                  : categoryError ? <Message variant='danger'>{categoryError}</Message> 
                  :
                  <div > 
                   <Container fluid> 
                     <Row>
-                      <Col sm={8} md={8} lg={8} xl={9} xs={8}>
+                      <Col sm={6} md={6} lg={8} xl={9} xs={4}>
                         { toggle ? (<Row >
                           {categories?.map(category => (
-                          <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={12} className="d-flex">
+                          <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex">
                               <Kategorija category={category} />
                           </Col>
                             ))}
@@ -84,10 +88,11 @@ function HomeScreen() {
                         </Row>)}
                       </Col>
                       <Col>
-                          <Search onSearch={ setSearchValue}></Search>
-                      </Col>
+                          <Search onSearch={ setSearchValue}></Search> 
+                      </Col> 
                     </Row>
                   </Container>
+                  
                 </div>}
                 
         
