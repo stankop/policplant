@@ -25,6 +25,9 @@ function ProductScreen({match}) {
   const userLogin = useSelector(state => state.userLogin)
   const {userInfo} = userLogin
 
+  const productDet = useSelector(state => state.product)
+  const {loading, error, product} = productDet
+
   useEffect(()=>{
 
        dispatch(productDetails(id))
@@ -33,8 +36,6 @@ function ProductScreen({match}) {
         
   }, [dispatch, id]);
 
-  const productDet = useSelector(state => state.product)
-  const {loading, error, product} = productDet
 
   const addToCartHandler = () => {
       dispatch(addToCart(Number(id), Number(qty)));
@@ -78,7 +79,7 @@ function ProductScreen({match}) {
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
-                                            <strong>Kategorija:</strong> {product.category.name}
+                                            <strong>Kategorija:</strong> {product.category?.name}
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>

@@ -10,6 +10,7 @@ import {
   MDBModalFooter,
 } from 'mdb-react-ui-kit';
 import Search from '../Search'
+import classes from './SearchModal.module.css'
 
 const setSearchValue = () => {
 
@@ -23,7 +24,7 @@ export default function SearchModal( {onSearch}) {
     <>
       <MDBBtn onClick={toggleShow}>Pretraga   <i className="fa fa-bars fa-large"></i></MDBBtn>
       <MDBModal show={basicModal} setShow={setBasicModal} tabIndex='-1' animationDirection="left">
-        <MDBModalDialog position="top-right" size="sm" scrollable dialogClassName={{ width: '75%' }} >
+        <MDBModalDialog position="top-right"  dialogClassName="modal-dialog modal-sm" scrollable  >
           <MDBModalContent>
             <MDBModalHeader >
               <MDBModalTitle>Pretraga Biljaka</MDBModalTitle>
