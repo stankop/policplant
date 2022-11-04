@@ -32,6 +32,7 @@
     "react-redux": "^8.0.1",
     "react-router-bootstrap": "^0.26.1",
     "react-router-dom": "^6.3.0",
+    "react-screentype-hook": "^1.0.18",
     "react-scripts": "4.0.0-next.98",
     "react-select": "^5.5.9",
     "react-singleton-hook": "^4.0.0",
