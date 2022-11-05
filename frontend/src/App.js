@@ -57,7 +57,7 @@ function App() {
       { orderIsShown &&  <Order onClose={hideOrderHanlder} value={value}></Order> }
       {<Header onShowCart={showCartHalnder}/> }
       <main className="py-3">
-        <Container>
+        <Container className="container-fluid">
           <Routes>
             <Route path="/" element={<HomeScreen />} exact></Route>
             <Route path="/products/:id" element={<ProductScreen />}></Route>

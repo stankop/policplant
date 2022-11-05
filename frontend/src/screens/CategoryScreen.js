@@ -12,6 +12,9 @@ import { useParams, useSearchParams } from "react-router-dom";
 import Paginate from '../compontents/Paginate'
 import ProductCarucel from '../compontents/ProductCarusel'
 import { CSSTransition } from 'react-transition-group'
+import Breadcrumb from 'react-bootstrap/Breadcrumb'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from "react-router-dom";
 
 function CategoryScreen() {
 
@@ -34,7 +37,15 @@ function CategoryScreen() {
   return (
     <div>
         { false && <ProductCarucel></ProductCarucel>}
-        
+        <Breadcrumb>
+          <Breadcrumb.Item href="/"><i class="fa fa-home"></i></Breadcrumb.Item>
+          <Breadcrumb.Item  active>
+            { catProducts?.find( cat => cat._id.toString() === id)?.name}
+          
+          </Breadcrumb.Item>
+          
+        </Breadcrumb>
+        <Link to={-1} className='btn btn-primary my-3'> Nazad</Link>
         <h1>{ catProducts?.find( cat => cat._id.toString() === id)?.name}</h1>
         { loading ? <Loader></Loader>
                  : error ? <Message variant='danger'>{error}</Message> 

@@ -9,9 +9,13 @@ import { useParams } from 'react-router';
 import {useDispatch, useSelector } from 'react-redux'
 import {  productDetails } from '../store/product-actions'
 import {  addToCart,removeFromCart } from '../store/cart-actions'
+import { LinkContainer } from 'react-router-bootstrap'
+
 
 import {  createReview } from '../store/review-actions'
 import { reviewCreateActions } from '../store/review-slice'
+import Breadcrumb from 'react-bootstrap/Breadcrumb'
+import HomeIcon from '@mui/icons-material/Home';
 
 function ProductScreen({match}) {
     
@@ -55,7 +59,18 @@ function ProductScreen({match}) {
 
   return (
     <div>
-        <Link to='/' className='btn btn-primary my-3'> Nazad</Link>
+        <Breadcrumb>
+          <Breadcrumb.Item href="/#/"><i class="fa fa-home"></i></Breadcrumb.Item>
+          <Breadcrumb.Item href={`#/categories/${product?.category?._id}`}>
+                
+          { product?.category?.name}
+          </Breadcrumb.Item>
+          <Breadcrumb.Item active>
+            { product?.name}
+          </Breadcrumb.Item>
+        </Breadcrumb>
+        <Link to={-1} className='btn btn-primary my-3'> Nazad</Link>
+        
 
         {loading ? 
                  <Loader></Loader>

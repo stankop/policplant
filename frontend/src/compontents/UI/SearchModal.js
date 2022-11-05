@@ -24,7 +24,7 @@ export default function SearchModal( {onSearch}) {
     <>
       <MDBBtn onClick={toggleShow}>Pretraga   <i className="fa fa-bars fa-large"></i></MDBBtn>
       <MDBModal show={basicModal} setShow={setBasicModal} tabIndex='-1' animationDirection="left">
-        <MDBModalDialog position="top-right"  dialogClassName="modal-dialog modal-sm" scrollable  >
+        <MDBModalDialog position="top-right"  dialogClassName={classes['modal']} scrollable  >
           <MDBModalContent>
             <MDBModalHeader >
               <MDBModalTitle>Pretraga Biljaka</MDBModalTitle>

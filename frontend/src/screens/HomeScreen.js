@@ -16,6 +16,7 @@ import { CSSTransition } from 'react-transition-group'
 import Sidebar from "../compontents/UI/SideBar"
 import SearchModal from '../compontents/UI/SearchModal'
 import useScreenType from "react-screentype-hook";
+import MUISearchModal from '../compontents/UI/MUISearchModal'
 
 function HomeScreen() {
 
@@ -63,7 +64,8 @@ function HomeScreen() {
         
         <h1> {carucel ? 'Kategorije:' : 'Filtrirani Proizvodi:'}</h1>
         {/* <Sidebar></Sidebar> */}
-        {screenType.isMobile && <SearchModal onSearch={ setSearchValue}></SearchModal>}
+        {screenType.isMobile && <SearchModal onSearch={ setSearchValue}></SearchModal>} 
+        {/* {screenType.isMobile && <MUISearchModal onSearch={ setSearchValue}></MUISearchModal>} */}
         { categoryLoading ? <Loader></Loader>
                  : categoryError ? <Message variant='danger'>{categoryError}</Message> 
                  :

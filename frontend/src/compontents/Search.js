@@ -90,20 +90,20 @@ function Search( { onSearch}) {
     <Form onSubmit={submitHandler} >
         <Container style={{ padding: '0.2rem'}}>
            
-            <h7>Pretraga Proizvoda:</h7>
+            <h7><strong>Pretraga Proizvoda:</strong></h7>
             <Row md={12} xl={12} style={{margin: 'auto', display: 'flex',  justifyContent:'center', alignItems:'center', }}>
                 <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                     <Form.Control 
                         type='search'
                         name='pretraga'
                         inline ='true'
-                        placeholder='Trazeni proizvod'
+                        placeholder='Trazeni proizvod...'
                         onChange={(e) => setPretraga(e.target.value) }>
                     </Form.Control>
                 </Row>
                 <hr/>
                 
-                <h7>Pozicija za sadnju</h7>
+                <h7><strong>Pozicija za sadnju</strong></h7>
                     <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                         <CustomSelect values={ allcategories?.flowering_time?.map(col => (
                             { value: col, label: col}
@@ -111,7 +111,7 @@ function Search( { onSearch}) {
                         
                     </Row>
                 <hr/>
-                <h7>Boja cveta</h7>
+                <h7><strong>Boja cveta</strong></h7>
                     <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                         <CustomSelect values={ allcategories?.color?.map(col => (
                             { value: col, label: col}
@@ -120,7 +120,7 @@ function Search( { onSearch}) {
                     </Row>
                 <hr/>
                 
-                <h7>Tip biljke</h7>
+                <h7><strong>Tip biljke</strong></h7>
                     <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                         <CustomSelect values={ allcategories?.type_of_plant?.map(col => (
                             { value: col, label: col}
@@ -128,7 +128,7 @@ function Search( { onSearch}) {
                     </Row>
                 <hr/>
                 
-                <h7>Visina biljke</h7>
+                <h7><strong>Visina biljke</strong></h7>
                     <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                         <CustomSelect values={ allcategories?.high?.map(col => (
                             { value: col, label: col}
@@ -136,7 +136,7 @@ function Search( { onSearch}) {
                     </Row>
                 <hr/>
                 
-                <h7>Kategorija biljke</h7>
+                <h7><strong>Kategorija biljke</strong></h7>
                     <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                         <CustomSelect  values={ allcategories?.categories?.map(col => (
                             { value: col.name, label: col.name}
