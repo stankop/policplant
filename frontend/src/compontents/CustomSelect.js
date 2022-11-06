@@ -21,9 +21,11 @@ export default function CustomSelect({values, onAction}) {
 
   const onChange = (inputValue,{ action, prevInputValue }) => {
     if (action === 'select-option') 
-        onAction(inputValue.value)
+        onAction(inputValue)
     if (action === 'clear') 
         onAction('')
+    if (action === 'remove-value') 
+        onAction(inputValue)
      
   };
 
@@ -38,9 +40,12 @@ export default function CustomSelect({values, onAction}) {
         name="aria-live-color"
         isClearable
         isSearchable
+        isMulti
+        className="basic-multi-select"
         onMenuOpen={onMenuOpen}
         onMenuClose={onMenuClose}
         options={values}
+        classNamePrefix="select"
         onChange={onChange}
       />
  

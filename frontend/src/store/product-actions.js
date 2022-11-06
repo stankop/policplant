@@ -64,15 +64,18 @@ export const productDetails = (id) => {
 export const listFilterProducts = (value) => {
     return async (dispatch) => {
 
+        
         const val = {
-            color: value.color,
-            high: value.high,
-            type: value.type,
-            category: value.category,
-            flow: value.flow,
-            place: value.place,
-            search: value.search
-        }
+                color: value.color,
+                high: value.high,
+                type: value.type,
+                category: value.category,
+                flow: value.flow,
+                place: value.place,
+                search: value.search
+            }
+            
+        
         const fetchData = async () => {
             
             const { data } = await axios.post(`/api/products/filter/`,val)

@@ -1,4 +1,5 @@
 import email
+from functools import reduce
 from django.shortcuts import render
 
 #from .products import products
@@ -16,6 +17,7 @@ from django.contrib.auth.hashers  import make_password
 from rest_framework import status
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
+import operator
 from django.db.models import Q
 
 
@@ -199,12 +201,12 @@ def getFilterProducts(request):
     print('data:',data)
 
     products = Product.objects.filter((Q(pk__gte=0) if data['search'] == '' else Q(name__icontains=data['search']))
-            & (Q(pk__gte=0) if data['color'] == '' else Q(color__icontains=data['color']))
-            & (Q(pk__gte=0) if data['flow'] == '' else Q(flowering_time__icontains=data['flow']))
-            & (Q(pk__gte=0) if data['high'] == '' else Q(high__icontains=data['high']))
-            & (Q(pk__gte=0) if data['type'] == '' else Q(type_of_plant__icontains=data['type']))
-            & (Q(pk__gte=0) if data['category'] == '' else Q(category__name__icontains=data['category']))).order_by('name')
-    print(products)
+            & (Q(pk__gte=0) if (data['color'] == [] or data['color'] == '')  else (reduce(operator.or_,(Q(color__icontains=x) for x in ( y['value'] for y in data['color'])))))
+            & (Q(pk__gte=0) if (data['flow'] == [] or data['flow'] =='') else (reduce(operator.or_,(Q(flowering_time__icontains=x) for x in ( y['value'] for y in data['flow'])))))
+            & (Q(pk__gte=0) if (data['high'] == [] or data['high'] =='') else (reduce(operator.or_,(Q(high__icontains=x) for x in ( y['value'] for y in data['high'])))))
+            & (Q(pk__gte=0) if (data['type'] == [] or data['type'] == '') else (reduce(operator.or_,(Q(type_of_plant__icontains=x) for x in ( y['value'] for y in data['type'])))))
+            & (Q(pk__gte=0) if (data['category'] == [] or data['category'] == '') else (reduce(operator.or_,(Q(category__name__icontains=x) for x in ( y['value'] for y in data['category']))))) ).order_by('name')
+    print("Final:",products)
 
    
     serializer = ProductSerializer(products, many= True)

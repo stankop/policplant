@@ -9,11 +9,14 @@ function Product({product}) {
     <Card className={`my-2 p-2 rounded ${classes["img-hover-zoom"]} `} border="primary"  style={{ width: '18rem', height: '30rem' }}>
         <Link to={`/products/${product._id}`}>
             <Card.Img src={product.image}></Card.Img>
+            <Card.ImgOverlay>
+                {product?.countInStock < 1 && <Card.Title><div style={{ backgroundColor:"red", color:"white", display: 'inline-flex', padding: '5px', marginBottom: '1em'}}>Nema na stanju</div></Card.Title>}
+            </Card.ImgOverlay>
         </Link>
         <Card.Body style={{ textAlign: "center"}}>
             <Link to={`/products/${product._id}`}>
              <Card.Title as="div" >
-                 <strong style={{ fontSize: 28}}>{product.name}</strong>
+                 <strong style={{ fontSize: 24}}>{product.name}</strong>
              </Card.Title>
             </Link>
             {/* <Card.Text as="div">
@@ -25,7 +28,7 @@ function Product({product}) {
                     {product.price} din
             </Card.Text>
             <Card.Text as="h7">
-                    {product.countInStock > 0 ? <strong style={{ color:'green'}}>{product.countInStock} proizvoda</strong> : <strong style={{ color:'red'}}>Nema na stanju</strong>} 
+                    {product.countInStock > 0 ? <strong style={{ color:'green'}}>Na stanju</strong> : ''} 
             </Card.Text>
         </Card.Body>
     </Card>

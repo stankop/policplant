@@ -39,11 +39,11 @@ function Search( { onSearch}) {
     const [keyword, setKeyword] = useState('')
 
     const [pretraga, setPretraga] = useState('')
-    const [pozicija, setPozicija] = useState('')
-    const [boja, setBoja] = useState('')
-    const [high, setHigh] = useState('')
-    const [tip, setTip] = useState('')
-    const [kategorija, setKategorija] = useState('')
+    const [pozicija, setPozicija] = useState([])
+    const [boja, setBoja] = useState([])
+    const [high, setHigh] = useState([])
+    const [tip, setTip] = useState([])
+    const [kategorija, setKategorija] = useState([])
 
     const navigate = useNavigate()
     const location = useLocation();
