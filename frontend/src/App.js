@@ -57,8 +57,8 @@ function App() {
       { orderIsShown &&  <Order onClose={hideOrderHanlder} value={value}></Order> }
       {<Header onShowCart={showCartHalnder}/> }
       <main >
-        <Container className="extended-container" style={{ position:"relative", zIndex:'10',height:'100%' }}>
-        <Container className="container-fluid" style={{   backgroundColor: '#FFF', height:'100%'}}>
+        <Container className="extended-container" style={{ position:"relative"}}>
+        <Container className="container-fluid" style={{   backgroundColor: '#FFF'}}>
           <Routes>
             <Route path="/" element={<HomeScreen />} exact></Route>
             <Route path="/products/:id" element={<ProductScreen />}></Route>
