@@ -20,6 +20,7 @@ export default function CustomSelect({values, onAction}) {
   };
 
   const onChange = (inputValue,{ action, prevInputValue }) => {
+    console.log('Input e:',inputValue)
     if (action === 'select-option') 
         onAction(inputValue)
     if (action === 'clear') 
@@ -47,6 +48,7 @@ export default function CustomSelect({values, onAction}) {
         options={values}
         classNamePrefix="select"
         onChange={onChange}
+        closeMenuOnSelect={false}
       />
  
   );

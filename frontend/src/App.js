@@ -56,8 +56,9 @@ function App() {
       { cartIsShown &&  <Cart onClose={hideCartHanlder}></Cart> }
       { orderIsShown &&  <Order onClose={hideOrderHanlder} value={value}></Order> }
       {<Header onShowCart={showCartHalnder}/> }
-      <main className="py-3">
-        <Container className="container-fluid">
+      <main >
+        <Container className="extended-container" style={{ position:"relative", zIndex:'10',height:'100%' }}>
+        <Container className="container-fluid" style={{   backgroundColor: '#FFF', height:'100%'}}>
           <Routes>
             <Route path="/" element={<HomeScreen />} exact></Route>
             <Route path="/products/:id" element={<ProductScreen />}></Route>
@@ -85,6 +86,7 @@ function App() {
             <Route path="/admin/product/:id/edit" element={<ProductEditScreen />}></Route>
             <Route path="/admin/orderlist" element={<OrderListScreen />}></Route>
           </Routes>
+        </Container>
         </Container>
       </main>
       <Footer />
