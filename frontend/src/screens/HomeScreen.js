@@ -1,4 +1,4 @@
-import React, { useEffect , useState} from 'react'
+import React, { useEffect , useState, useRef} from 'react'
 import { Row, Col, Container } from 'react-bootstrap'
 import Product from '../compontents/Product'
 import Kategorija from '../compontents/Kategorija'
@@ -17,6 +17,8 @@ import Sidebar from "../compontents/UI/SideBar"
 import SearchModal from '../compontents/UI/SearchModal'
 import useScreenType from "react-screentype-hook";
 import MUISearchModal from '../compontents/UI/MUISearchModal'
+import MDBCarusel from '../compontents/MDBCarusel'
+import ProductCarusel from '../compontents/ProductCarusel'
 
 function HomeScreen() {
 
@@ -38,6 +40,7 @@ function HomeScreen() {
   const { error: { productError }, loading:{ productLoading }, products } = prod
   const [search, setSearch] = useSearchParams();
   const keyword = search.get("keyword");
+  const customerLogo = useRef(null);
 
   useEffect(()=>{
 
@@ -60,7 +63,7 @@ function HomeScreen() {
  
   return (
     <div>
-        { carucel && <ProductCarucel></ProductCarucel>}
+        { carucel && <MDBCarusel itemRef={customerLogo}></MDBCarusel>}
         
         <h1> {carucel ? 'Kategorije:' : 'Filtrirani Proizvodi:'}</h1>
         {/* <Sidebar></Sidebar> */}

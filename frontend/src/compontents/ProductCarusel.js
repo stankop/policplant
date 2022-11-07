@@ -6,14 +6,26 @@ import Loader from './Loader'
 import Message from './Message'
 import { caruselTop } from '../store/carusel-actions'
 
+
 function ProductCarusel() {
 
     const dispatch = useDispatch()
     const productTop = useSelector(state => state.carusel)
     const { loading, error, products} = productTop
 
+    const slike = [
+        { 
+            id: 1,
+            src: 'https://policplantpublic.s3.eu-west-2.amazonaws.com/ogrod-angielski-sciezka.png',
+            name: 'amazonska suma'
+        },
+        {
+            id:2,
+            src: 'https://policplantpublic.s3.eu-west-2.amazonaws.com/jesenji+izgled.jpg',
+            name: 'borova suma'
+        }]
     useEffect(() => {
-        dispatch(caruselTop())
+        //dispatch(caruselTop())
     }, [dispatch])
   return (
     
@@ -22,18 +34,13 @@ function ProductCarusel() {
 
             </Message>
             : (
-                <Carousel pause='hover' className='bg-dark'>
-                    {products.map(product => (
-                        <Carousel.Item key={product._id}>
-                            <Link to={`/products/${product._id}`}>
-                                <Image src={product.image} alt={product.name} fluid>
-
-                                </Image>
-                                <Carousel.Caption className='carusel.caption'>
-                                    <h4>{product.name} ({product.price} din)</h4>
-                                </Carousel.Caption>
-
-                            </Link>
+                <Carousel pause='hover'  wrap >
+                    {slike.map(product => (
+                        <Carousel.Item key={product.id} style={{objectFit: 'cover'}}>
+                            <div>
+                                <Image src={product.src} className="d-block w-100" roundedCircle={false} ></Image>
+                            </div>
+                             
 
                         </Carousel.Item>
                     ))}
