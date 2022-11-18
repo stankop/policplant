@@ -12,6 +12,7 @@ import CheckoutSteps from "../compontents/CheckoutSteps";
 import { TabContext, TabList, TabPanel  } from '@mui/lab';
 import { Tab , Box } from '@mui/material';
 //import { register } from '../store/userRegister-actions'
+import { useForm } from "react-hook-form";
 
 function ShippingScreen() {
 
@@ -31,14 +32,16 @@ function ShippingScreen() {
     const dispatch = useDispatch()
 
     const navigate = useNavigate();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm({ mode:"onChange"});
+    
    
     const [search, setSearch] = useSearchParams();
     const redirect = search.get("redirect");
 
     const handleTab = (e, value) => setValue(value);
     
-    const submitHandler1 = (event) => {
-
+    const submitHandler1 = (data, event) => {
+        console.log(event)
         event.preventDefault()
         dispatch(saveShippingAddress({
             name, email, password, post,
@@ -47,9 +50,9 @@ function ShippingScreen() {
         navigate('/placeorder')
     }
 
-    const submitHandler2 = (event) => {
+    const submitHandler2 = (e) => {
 
-        event.preventDefault()
+        e.preventDefault()
         dispatch(saveShippingAddress({
             name, email, password, post,
             address, fix_phone, self_phone, demands
@@ -72,90 +75,109 @@ function ShippingScreen() {
           <FormContainer>
 
             <h1>Podaci Kupca</h1>
-            <Form onSubmit={submitHandler1}>
+            <Form onSubmit={handleSubmit(submitHandler1)}>
 
                 <Form.Group controlId='name'>
                     <Form.Label>
                         Vase Ime i Prezime
                     </Form.Label>
-                    <Form.Control
-                            required
+                    <Form.Control 
+                            {...register("fullName", { 
+                                required: "Potebno je uneti Ime i Prezime" ,
+                                minLength: {
+                                    value: 3,
+                                    message: "Minimalan broj karaktera je 3"
+                                },
+                                pattern: {
+                                    value: /^[A-Za-z]+$/i,
+                                    message:"Morate uneti samo slova za Ime i prezime"
+                                }
+                                
+                            })} 
+                            aria-invalid={errors.fullName ? "true" : "false"}
                             type='text'
                             placeholder='Unesite Vase ime i prezime...'
                             value={name ? name : ''}
                             onChange={(e) => setName(e.target.value)}>
 
                     </Form.Control>
+                    {errors.fullName && <span style={{ color: 'red'}} role="alert">{errors.fullName?.message}</span>}
                 </Form.Group>
 
                 <Form.Group controlId='email'>
                     <Form.Label>
                         Email
                     </Form.Label>
-                    <Form.Control
-                            required
-                            type='text'
+                    <Form.Control {...register("email",{ 
+                            required: true,  
+                            pattern: {
+                                value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                message: "Nije validan Email" 
+                            },
+                            message:"That is a invalid email."
+                        })}
+                            aria-invalid={errors.email ? "true" : "false"}
+                            type='email'
                             placeholder='Unesite Email...'
                             value={email ? email : ''}
                             onChange={(e) => setEmail(e.target.value)}>
 
                     </Form.Control>
-                </Form.Group>
-
-                 <Form.Group controlId='password'>
-                    <Form.Label>
-                        Password
-                    </Form.Label>
-                    <Form.Control
-                            required
-                            type='password'
-                            placeholder='Unesite lozinku...'
-                            value={password ? password : ''}
-                            onChange={(e) => setPassword(e.target.value)}>
-
-                    </Form.Control>
+                    {errors.email && <span style={{ color: 'red'}} role="alert">{errors.email?.message}</span>}
                 </Form.Group>
 
                 <Form.Group controlId='postanski broj'>
                     <Form.Label>
                         Postanski broj i mesto
                     </Form.Label>
-                    <Form.Control
-                            required
+                    <Form.Control {...register("post",{
+                            required:"Unesite postanski broj i mesto boravka"
+                            })}
+                            
                             type='text'
                             placeholder='Unesite postanski broj i mesto...'
                             value={post ? post : ''}
                             onChange={(e) => setPost(e.target.value)}>
 
                     </Form.Control>
+                    {errors.post && <span style={{ color: 'red'}} role="alert">{errors.post?.message}</span>}
                 </Form.Group>
 
                  <Form.Group controlId='address'>
                     <Form.Label>
                         Adresa
                     </Form.Label>
-                    <Form.Control
-                            required
+                    <Form.Control {...register("adress",{
+                            required:"Unesite adresu stanovanja i broj"
+                            })}
+                            
                             type='text'
                             placeholder='Unesite Adresu..'
                             value={address ? address : ''}
                             onChange={(e) => setAddress(e.target.value)}>
 
                     </Form.Control>
+                    {errors.adress && <span style={{ color: 'red'}} role="alert">{errors.adress?.message}</span>}
                 </Form.Group>
 
                 <Form.Group controlId='fix_phone'>
                     <Form.Label>
                         Fixni telefon
                     </Form.Label>
-                    <Form.Control
-                            required
-                            type='text'
+                    <Form.Control {...register("fix_phone",{
+                                    
+                                    valueAsNumber: {
+                                        value: true,
+                                        message: "Unesite ispravan fixni telefon"},
+                                })}
+                            
+                            type="number"
                             placeholder='Unesite fixni broj telefona..'
                             value={fix_phone ? fix_phone : ''}
                             onChange={(e) => setFixPhone(e.target.value)}>
 
                     </Form.Control>
+                    {errors.fix_phone && <span style={{ color: 'red'}} role="alert">{errors.fix_phone?.message}</span>}
                 </Form.Group>
 
 
@@ -163,9 +185,9 @@ function ShippingScreen() {
                     <Form.Label>
                         Mobilni telefon
                     </Form.Label>
-                    <Form.Control
+                    <Form.Control {...register("self_phone")}
                             required
-                            type='text'
+                            type='number'
                             placeholder='Unesite mobilni telefon..'
                             value={self_phone ? self_phone : ''}
                             onChange={(e) => setSelfPhone(e.target.value)}>
@@ -177,7 +199,7 @@ function ShippingScreen() {
                     <Form.Label>
                         Zahtevi oko isporuke
                     </Form.Label>
-                    <Form.Control
+                    <Form.Control {...register("demands")}
                             required
                             type='text'
                             placeholder='Unesite zahteve oko isporuke...'

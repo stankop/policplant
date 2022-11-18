@@ -34,17 +34,25 @@ def getAllCategories(request):
     for f in my_model_fields:
         if f.name == 'flowering_time':
             flowering_time= [x for (x, y) in f.choices]
+        elif f.name == 'vreme_cvetanja':
+            vreme_cvetanja= [x for (x, y) in f.choices]
+        elif f.name == 'orezivanje':
+            orezivanje= [x for (x, y) in f.choices]
         elif f.name == 'place_of_planting':
-            place_of_planting = [x for (x,y) in f.choices]
+            place_of_planting= [x for (x, y) in f.choices]
+        elif f.name == 'prezimljava':
+            prezimljava= [x for (x, y) in f.choices]
+        elif f.name == 'privlaci_insekte':
+            privlaci_insekte= [x for (x, y) in f.choices]
+        elif f.name == 'brzina_rasta':
+            brzina_rasta = [x for (x,y) in f.choices]
         elif f.name == 'type_of_plant':
             type_of_plant = [x for (x,y) in f.choices]
-        elif f.name == 'high':
-            high = [x for (x,y) in f.choices]
         elif f.name == 'color':
             color = [x for (x,y) in f.choices]
     serializerCategory = PlantCategorySerializer(categoriess, many= True)
 
-    return Response({'categories': serializerCategory.data, 'flowering_time': flowering_time, 'place_of_planting': place_of_planting, 'type_of_plant': type_of_plant, 'high': high, 'color':color})
+    return Response({'categories': serializerCategory.data,'place_of_planting': place_of_planting,'prezimljava': prezimljava,'brzina_rasta': brzina_rasta,'privlaci_insekte': privlaci_insekte,'orezivanje': orezivanje,'vreme_cvetanja': vreme_cvetanja, 'flowering_time': flowering_time, 'place_of_planting': place_of_planting, 'type_of_plant': type_of_plant, 'color':color})
 
 @api_view(['GET'])
 def getProducts(request):
@@ -200,7 +208,7 @@ def getFilterProducts(request):
     data = request.data
     print('data:',data)
 
-    products = Product.objects.filter((Q(pk__gte=0) if data['search'] == '' else Q(name__icontains=data['search']))
+    products = Product.objects.filter((Q(pk__gte=0) if data['search'] == '' else (Q(name__icontains=data['search']) or Q(hesteg__icontains=data['search'])))
             & (Q(pk__gte=0) if (data['color'] == [] or data['color'] == '')  else (reduce(operator.or_,(Q(color__icontains=x) for x in ( y['value'] for y in data['color'])))))
             & (Q(pk__gte=0) if (data['flow'] == [] or data['flow'] =='') else (reduce(operator.or_,(Q(flowering_time__icontains=x) for x in ( y['value'] for y in data['flow'])))))
             & (Q(pk__gte=0) if (data['high'] == [] or data['high'] =='') else (reduce(operator.or_,(Q(high__icontains=x) for x in ( y['value'] for y in data['high'])))))

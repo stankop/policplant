@@ -8,9 +8,15 @@ class ProductSerializer(serializers.ModelSerializer):
     colorChoises = serializers.SerializerMethodField(read_only=True)
     placeChoises = serializers.SerializerMethodField(read_only=True)
     floweringChoises = serializers.SerializerMethodField(read_only=True)
-    highChoises = serializers.SerializerMethodField(read_only=True)
     type_of_plantChoises = serializers.SerializerMethodField(read_only=True)
     category = serializers.SerializerMethodField(read_only=True)
+    prezimljava = serializers.SerializerMethodField(read_only=True)
+    vreme_cvetanja = serializers.SerializerMethodField(read_only=True)
+    orezivanje = serializers.SerializerMethodField(read_only=True)
+    privlaci_insekte = serializers.SerializerMethodField(read_only=True)
+    brzina_rasta = serializers.SerializerMethodField(read_only=True)
+    prezimljava = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Product
         fields = '__all__'
@@ -28,10 +34,26 @@ class ProductSerializer(serializers.ModelSerializer):
         flow = [e.value for e in obj.Flowering]
         return flow
     
-    def get_highChoises(self, obj):
-        high = [e.value for e in obj.High]
+    def get_vreme_cvetanja(self, obj):
+        high = [e.value for e in obj.Vreme_Cvetanja]
+        return high
+
+    def get_orezivanje(self, obj):
+        high = [e.value for e in obj.Orezivanje]
         return high
     
+    def get_privlaci_insekte(self, obj):
+        high = [e.value for e in obj.Privlaci_Insekte]
+        return high
+
+    def get_brzina_rasta(self, obj):
+        high = [e.value for e in obj.Brzina_Rasta]
+        return high
+    
+    def get_prezimljava(self, obj):
+        high = [e.value for e in obj.Prezimljava]
+        return high
+
     def get_type_of_plantChoises(self, obj):
         type_of_plant = [e.value for e in obj.Type]
         return type_of_plant
