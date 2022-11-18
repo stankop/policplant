@@ -89,7 +89,7 @@ function ShippingScreen() {
                                     message: "Minimalan broj karaktera je 3"
                                 },
                                 pattern: {
-                                    value: /^[A-Za-z]+$/i,
+                                    value: /^[A-Za-z ]+$/i,
                                     message:"Morate uneti samo slova za Ime i prezime"
                                 }
                                 
