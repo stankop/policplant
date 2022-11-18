@@ -29,10 +29,7 @@ export const createOrder = (order) => {
             dispatch(orderActions.orderCreateSuccess(data))
             dispatch(cartActions.cleanCartItems())
 
-            console.log('Pre localstorage remove')
             localStorage.removeItem('cartItems')
-            console.log('Posle localstorage remove')
-
 
         } catch (error) {
             

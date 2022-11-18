@@ -78,8 +78,6 @@ function PlaceOrderScreen(props) {
             ukupno: totalPrice
 
         }))
-        console.log('jel doslo dovde?')
-
     }
 
   return (

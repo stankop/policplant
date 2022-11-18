@@ -27,7 +27,7 @@ const Order = (props) => {
 
         //cartCtx.addItem({...item, amount:1})
     }
-    console.log('ovo je value:', props.value)
+    
     const cartitems =
     <ul className={classes['cart-items']}>
         {
@@ -47,14 +47,14 @@ const Order = (props) => {
 
 
     return <OrderModal onClose={props.onClose} >
-        {cartitems}
+        
         <div className={classes.total}>
-            <span>Ukupan iznos: </span>
+            <span>Ukupan iznos vase porudzbine: </span>
             <span><strong>RSD {totalAmount?.toFixed(2)}</strong></span>
         </div>
         <div className={classes.total}>
-            <span>Order number: </span>
-            <span>{props.value.orderId}</span>
+            <span>Broj porudzbine: </span>
+            <span><strong>{props.value.orderId}</strong></span>
         </div>
         <div>
             <p>Vase poruzdzbina je poslata na obradu. Mozete se vratiti na pocetnu stranu i  kreirati novu porudzbinu ukoliko zelite.</p>
