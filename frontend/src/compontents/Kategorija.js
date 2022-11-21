@@ -6,7 +6,7 @@ import classes from './Product.module.css'
 
 function Kategorija({category}) {
   return (
-    <Card className={`my-2 p-2  ${classes["img/-hover-zoom"]} `} border="dark"  style={{ width: '18rem', height: '25rem' }}>
+    <Card className={`my-1 p-1  ${classes["img/-hover-zoom"]} h-100 `} border="dark"  style={{ width: '18rem', height: '25rem' }}>
         <Card.Header as="h7">Kategorija</Card.Header>
         <Link to={`/categories/${category._id}`}>
             <Card.Img src={category.image}></Card.Img>

@@ -19,6 +19,7 @@ import useScreenType from "react-screentype-hook";
 import MUISearchModal from '../compontents/UI/MUISearchModal'
 import MDBCarusel from '../compontents/MDBCarusel'
 import ProductCarusel from '../compontents/ProductCarusel'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function HomeScreen() {
 
@@ -76,15 +77,16 @@ function HomeScreen() {
                   <Container fluid> 
                     <Row>
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
-                        { toggle ? (<Row >
+                        { toggle ? (
+                        <Row  className={'gy-2'}>
                           {categories?.map(category => (
-                          <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex">
+                          <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={4} className="d-flex">
                               <Kategorija category={category} />
                           </Col>
                             ))}
                             {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
                         </Row>) :
-                        (<Row >
+                        (<Row className={'gy-2'}>
                           {products?.map(product => (
                           <Col key={product._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex">
                               <Product product={product} />

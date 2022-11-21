@@ -21,6 +21,7 @@ import classes from './Header.module.css'
 import image from '../../src/assets/images/berberis-erecta-1-350x350.jpg'
 import { listCategories } from "../store/category-actions";
 //import { plantCategories } from '../store/plantCategory-actions'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function Header(props) {
@@ -74,7 +75,7 @@ function Header(props) {
       </Navbar>
       <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>
         <Container >
-          <Row>
+          <Row >
           <Navbar.Toggle aria-controls="basic-navbar-nav" md={4} style={{ pading:2}}/>
             
             <Navbar.Collapse id="basic-navbar-nav">
@@ -82,9 +83,10 @@ function Header(props) {
                 
                 <NavDropdown title="Kategorije proizvoda" 
                              id="basic-nav-dropdown"  
+                             border='primary'
                              style={{
                                     fontSize: '1.4rem',
-                                    color: 'red', 
+                                     
                                     border:'1px solid black',
                                      display: 'inline-block',
                                      background: 'rgb(97, 240, 7)'}}>
