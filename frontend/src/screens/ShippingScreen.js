@@ -41,7 +41,6 @@ function ShippingScreen() {
     const handleTab = (e, value) => setValue(value);
     
     const submitHandler1 = (data, event) => {
-        console.log(event)
         event.preventDefault()
         dispatch(saveShippingAddress({
             name, email, password, post,
@@ -66,8 +65,8 @@ function ShippingScreen() {
       <TabContext value={value}>
       <Box sx={{ borderBottom:1, borderColor: 'divider' }}>
         <TabList onChange={handleTab} aria-label="lab API tabs example">
-          <Tab label="Novi Kupac" value="1" />
-          <Tab label="Postojeci Kupac" value="2" />
+          <Tab label="Podaci Kupca" value="1" />
+          <Tab label="Postojeci Kupac" value="2" disabled/>
 
         </TabList>
       </Box>

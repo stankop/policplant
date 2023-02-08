@@ -3,6 +3,7 @@ from django.utils import timezone
 #from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from multiselectfield import MultiSelectField
 
 # Create your models here
 
@@ -84,24 +85,20 @@ class Akcija(models.Model):
 class PlantCategory(models.Model):
 
     class Category(models.TextChoices):
-        CETINAR = 'Cetinar', _('Cetinar')
-        LISCAR = 'Liscar', _('Liscar')
-        ZBUN = 'Zbun', _('Zbun')
-        UKRASNO_BILJE = 'Ukrasno zbunje', _('Ukrasno zbunje')
-        PUZAVICA = 'Puzavica', _ ('Puzavica')
-        PENJACICE = 'Penjacica', _ ('Penjacica')
-        ZACINSKO = 'Zacinsko i lekovito bilje', _ ('Zacinsko i lekovito bilje')
-        BOBICASTO = 'Bobicasto voce i povrce', _ ('Bobicasto voce i povrce')
-        DRVECE = 'Drvece', _ ('Drvece')
-        REZNICE = 'Oziljenje reznice', _ ('Oziljenje reznice')
-        SOBNO = 'Sobno cvece', _ ('Sobno cvece')
-        UKRASNE = 'Ukrasne trave', _ ('Ukrasne trave')
-        KAMENJARE = 'Biljke za kamenjare', _ ('Biljke za kamenjare')
-        TOPIJARI = 'Topijari', _ ('Topijari')
+        TRAJNICE = 'Trajnice-perene', _('Trajnice-perene')
+        PENJACICE = 'Penjačice', _ ('Penjačice')
+        PUZAVICA = 'Puzavice', _ ('Puzavice')
+        UKRASNO_ZBUNJE = 'Ukrasno žbunje', _('Ukrasno žbunje')
+        ZACINSKO_I_LEKOVITO_BILJE = 'Začinsko i lekovito bilje',_('Začinsko i lekovito bilje')
+        UKRASNE_TRAVE = 'Ukrasne trave', _ ('Ukrasne trave')
+        SEDUMI_I_CUVARKUCE = 'Sedumi i čuvarkuće', _ ('Sedumi i čuvarkuće')
+        LISCARI = 'Lišćari', _ ('Lišćari')
+        CETINARI = 'Četinari', _ ('Četinari')
+        RUZE = 'Ruže', _ ('Ruže')
+        SADNICE_VOCA = 'Sadnice voca', _ ('Sadnice voca')
+        DEFAULT = 'Ostalo', _('Ostalo')
 
-        DEFAULT = 'Trajnica', _('Trajnica')
-
-    name = models.CharField(max_length=50, choices=Category.choices, default=Category.DEFAULT)
+    name = models.CharField(max_length=50, choices=Category.choices, default=Category.DEFAULT, unique=True)
     _id = models.AutoField(primary_key=True, editable=False)
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(null=True, blank=True, default='/default.jpg')
@@ -113,14 +110,24 @@ class PlantCategory(models.Model):
 class Product(models.Model):
     
 
-    class Color(models.TextChoices):
-        CRNA = 'Crna', _('CRNA')
-        PLAVA = 'Plava', _('PLAVA')
-        ROZA = 'Roza', _('ROZA')
-        CRVENA = 'Crvena', _('CRVENA')
-        SARENA = 'Sarena',  _ ('SARENA')
-        LJUBICASTA = 'Ljubicasta', _('LJUBICASTA')
-        DEFAULT = 'Zelena', _('Zelena')
+    # class Color(models.TextChoices):
+    #     CRNA = 'Crna', _('CRNA')
+    #     BELA = 'BELA', _('BELA')
+    #     BEZ = 'BEZ', _('BEZ')
+    #     ZUTA = 'ZUTA', _('ZUTA')
+    #     ZLATNA = 'ZLATNA', _('ZLATNA')
+    #     LILA = 'LILA', _('LILA')
+    #     NARANDZASTA = 'NARANDZASTA', _('NARANDZASTA')
+    #     PURPURNA = 'PURPURNA', _('PURPURNA')
+    #     RUZICASTA = 'RUZICASTA', _('RUZICASTA')
+    #     SIVA = 'SIVA', _('SIVA')
+    #     BRAON = 'BRAON', _('BRAON')
+    #     SARENA = 'SARENA', _('SARENA')
+    #     PLAVA = 'PLAVA', _('PLAVA')
+    #     ROZA = 'ROZA', _('ROZA')
+    #     CRVENA = 'CRVENA', _('CRVENA')
+    #     LJUBICASTA = 'LJUBICASTA', _('LJUBICASTA')
+    #     DEFAULT = 'ZELENA', _('ZELENA')
 
     class Place(models.TextChoices):
         SAKSIJA = 'SAKSIJA', _('SAKSIJA')
@@ -131,73 +138,95 @@ class Product(models.Model):
         POLUSENKA = 'POLUSENKA', _('POLUSENKA')
         DEFAULT = 'VECA SAKSIJA', _('VECA SAKSIJA')
 
-    class Flowering(models.TextChoices):
-        SUNCE = 'SUNCE', _('SUNCE')
-        POLUSENKA = 'POLUSENKA', _('POLUSENKA')
-        DEFAULT = 'HLAD', _('HLAD')
+    class Mesto_Sadnje(models.TextChoices):
+        SUNCE = 'sunce', _('sunce')
+        POLUSENKA = 'polusenka', _('polusenka')
+        DEFAULT = 'hlad', _('hlad')
 
-    class Vreme_Cvetanja(models.TextChoices):
-        JANUAR = 'Januar', _('Januar')
-        FEBRUAR = 'FEBRUAR', _('FEBRUAR')
-        MART = 'MART', _('MART')
-        DEFAULT = 'DECEMBAR', _('DECEMBAR')
+    # class Vreme_Cvetanja(models.TextChoices):
+    #     JANUAR = 'JANUAR', _('JANUAR')
+    #     FEBRUAR = 'FEBRUAR', _('FEBRUAR')
+    #     MART = 'MART', _('MART')
+    #     APRIL = 'APRIL', _('APRIL')
+    #     MAJ = 'MAJ', _('MAJ')
+    #     JUN = 'JUN', _('JUN')
+    #     JUL = 'JUL', _('JUL')
+    #     AVGUST = 'AVGUST', _('AVGUST')
+    #     SEPTEMBAR = 'SEPTEMBAR', _('SEPTEMBAR')
+    #     OKTOBAR = 'OKTOBAR', _('OKTOBAR')
+    #     NOVEMBAR = 'NOVEMBAR', _('NOVEMBAR')
+    #     DEFAULT = 'DECEMBAR', _('DECEMBAR')
 
+    VREME_CVETANJA = (('januar', 'januar'),
+              ('februar', 'februar'),
+              ('mart', 'mart'),
+              ('april', 'april'),
+              ('maj', 'maj'),
+              ('jun', 'jun'),
+              ('jul', 'jul'),
+              ('avgust', 'avgust'),
+              ('septembar', 'septembar'),
+              ('oktobar', 'oktobar'),
+              ('novembar', 'novembar'),
+              ('decembar', 'decembar'))
     class Orezivanje(models.TextChoices):
-        DA = 'DA', _('DA')
-        DEFAULT = 'NE', _('NE')
+        DA = 'da', _('da')
+        DEFAULT = 'ne', _('ne')
 
     class Privlaci_Insekte(models.TextChoices):
-        DA = 'DA', _('DA')
-        DEFAULT = 'NE', _('NE')
+        DA = 'da', _('da')
+        DEFAULT = 'ne', _('ne')
         
 
     class Brzina_Rasta(models.TextChoices):
-        SREDNJA = '50-100cm', _('50-100cm')
-        VISOKA = '100cm +', _('100cm +')
-        DEFAULT = '0-50cm',_('0-50cm')
-
-    class Prezimljava(models.TextChoices):
-        DA = 'DA', _('DA')
-        DEFAULT = 'NE', _('NE')
+        BRZORASTUCE = 'brzorastuće', _('brzorastuće')
+        SREDNJERASTUCE = 'srednje brzine', _('srednje brzine')
+        DEFAULT = 'spororastuće',_('spororastuće')
     
     class Type(models.TextChoices):
-        ZIMZELANA = 'ZIMZELANA', _('ZIMZELANA')
-        DEFAULT = 'LISTOPADNA',_('LISTOPADNA')
+        ZIMZELANA = 'zimzelena', _('zimzelena')
+        LISTOPADNA = 'listopadna', _('listopadna')
+        VISEGODISNJA = 'višegodišnja', _('višegodišnja')
+        DEFAULT = 'delimično zimzelena',_('delimično zimzelena')
         
 
     #category = models.CharField(max_length=20, choices=PlantCategory.Category.choices, default=PlantCategory.Category.DEFAULT)
     
     _id = models.AutoField(primary_key=True, editable=False)
-    category = models.ForeignKey(PlantCategory, on_delete=models.CASCADE)
     user = models.ForeignKey(UserAccount, on_delete=models.SET_NULL, null=True)
-    name = models.CharField(max_length=200, null=True, blank=True)
-    botanicki_naziv = models.CharField(max_length=200, null=True, blank=True)
-    hesteg = models.CharField(max_length=200, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True, default='/default.jpg')
+    
+    name = models.CharField(max_length=100, null=True, blank=True, unique=True)
+    hesteg = models.CharField(max_length=400, null=True, blank=True)
+    #image = models.ImageField(null=True, blank=True, default='/default.jpg')
     description = models.TextField(null=True, blank=True)
+    price = models.PositiveIntegerField( null=True, blank=True, default=0)
+    countInStock = models.PositiveIntegerField(null=True, blank=True, default=0)
     
-   
-    price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
-    countInStock = models.IntegerField(null=True, blank=True, default=0)
-    createdAt = models.DateTimeField(auto_now_add=True)
-
     #karakteristike
-    color = models.CharField(max_length=50, choices=Color.choices, default=Color.DEFAULT)
-    flowering_time = models.CharField(max_length=50, choices=Flowering.choices, default=Flowering.DEFAULT)
-    place_of_planting = models.CharField(max_length=50, choices=Place.choices, default=Place.DEFAULT)
-    vreme_cvetanja = models.CharField(max_length=50, choices=Vreme_Cvetanja.choices, default=Vreme_Cvetanja.DEFAULT)
-    orezivanje = models.CharField(max_length=50,choices=Orezivanje.choices, default=Orezivanje.DEFAULT)
-    privlaci_insekte = models.CharField(max_length=50,choices=Privlaci_Insekte.choices, default=Privlaci_Insekte.DEFAULT)
-    brzina_rasta = models.CharField(max_length=50,choices=Brzina_Rasta.choices, default=Brzina_Rasta.DEFAULT)
-    prezimljava = models.CharField(max_length=50,choices=Prezimljava.choices, default=Prezimljava.DEFAULT)
+    color = models.CharField(max_length=250, null=True, blank=True)
+    mesto_sadnje = models.CharField(max_length=250, choices=Mesto_Sadnje.choices, default=Mesto_Sadnje.DEFAULT)
+    place_of_planting = models.CharField(max_length=250, choices=Place.choices, default=Place.DEFAULT)
+    #vreme_cvetanja = models.CharField(max_length=50, choices=Vreme_Cvetanja.choices, default=Vreme_Cvetanja.DEFAULT)
+    vre_cve = MultiSelectField(choices=VREME_CVETANJA,max_choices=3)
+    orezivanje = models.CharField(max_length=250,choices=Orezivanje.choices, default=Orezivanje.DEFAULT)
+    privlaci_insekte = models.CharField(max_length=250,choices=Privlaci_Insekte.choices, default=Privlaci_Insekte.DEFAULT)
+    brzina_rasta = models.CharField(max_length=250,choices=Brzina_Rasta.choices, default=Brzina_Rasta.DEFAULT)
+    prezimljava = models.CharField(max_length=250, null=True, blank=True)
+    high = models.CharField(max_length=250,  null=True, blank=True )
+    botanicki_naziv = models.CharField(max_length=300, null=True, blank=True)
+    velicina_slanja = models.CharField(max_length=250,  null=True, blank=True )
+    type_of_plant = models.CharField(max_length=250, choices=Type.choices, default=Type.DEFAULT)
+    sirina_biljke = models.CharField(max_length=250,  null=True, blank=True )
+    category = models.ManyToManyField(PlantCategory, related_name='products')
 
-    high = models.CharField(max_length=50,  null=True, blank=True )
-    velicina_slanja = models.CharField(max_length=50,  null=True, blank=True )
-    type_of_plant = models.CharField(max_length=50, choices=Type.choices, default=Type.DEFAULT)
-    
+    createdAt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return str(self.name)
+
+class PlantImage(models.Model):
+    product = models.ForeignKey(Product,related_name="images", on_delete=models.CASCADE)
+    image = models.ImageField(null=True, blank=True, default='/default.jpg')
 
 class Order(models.Model):
     user = models.ForeignKey(UserAccount, on_delete = models.SET_NULL, null= True)

@@ -13,6 +13,7 @@ import { listUsers } from '../store/userList-actions'
 import { listProducts } from '../store/product-actions'
 import { deleteProduct, deleteProductReset } from '../store/deleteProduct-actions'
 import { createProduct, productReset } from '../store/createProduct-actions'
+import { Link } from 'react-router-dom';
 
 function ProductListScreen() {
 
@@ -39,7 +40,11 @@ function ProductListScreen() {
              navigate('/login')
             
          }
-
+         window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+          })
          if(successCreate){
 
             // const productId = createdProduct._id
@@ -122,20 +127,21 @@ function ProductListScreen() {
                                         <td>{product._id}</td>
                                         <td>{product.name}</td>
                                         <td>{product.price} din</td>
-                                        <td>{product.category.name}</td>
+                                        <td>{product.category.map(x => x.name).join(', ')}</td>
                                         <td>{product.color}</td>
-                                        <td>{product.countInStock}</td>
-                                        <td><LinkContainer to={`/admin/product/${product._id}/edit`}>
+                                        <td style={{whiteSpace: "nowrap"}}>{product.countInStock}</td>
+                                        <td><Link to={`/admin/product/${product._id}/edit`}>
 
                                                 <Button variant = 'light' className='btn-sm'>
                                                      <i className='fas fa-edit'></i>
                                                 </Button>
-                                            </LinkContainer></td>
+                                            </Link></td>
                                         <td>
                                                 <Button  className='btn-sm' onClick={(e) => deleteHandler(product._id)}>
                                                      <i className='fas fa-trash'></i>
-                                                </Button></td>
-                                        </tr>
+                                                </Button>
+                                        </td>
+                                    </tr>
 
                                 ))}
                             </tbody>

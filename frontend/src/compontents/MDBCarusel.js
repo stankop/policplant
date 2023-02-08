@@ -41,10 +41,10 @@ function MDBCarusel( {itemRef}) {
 
             </Message>
             : (
-                <Rerousel itemRef={itemRef} interval={10000}>
+                <Rerousel itemRef={itemRef} interval={5000}>
                 {slike.map((c) => {
-                    return <Image key={c.id} src={c.src} ref={itemRef} fluid  rounded   style={{ position: 'relative' , right:'20px',  width:'110%',
-                        height: '30rem', objectFit:'fill', margin:'5px', padding:'12px'}}/>
+                    return <Image key={c.id} src={c.src} ref={itemRef} fluid  rounded   style={{ offsetPosition: 'auto', position: 'relative' , right:'1.4rem',  width:'100%',
+                        height: '28rem', objectFit:'fill', margin:'auto', padding:'0.2rem 0.8rem'}}/>
                 })}
                 </Rerousel>
             )

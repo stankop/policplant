@@ -24,17 +24,19 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { orderActions } from "../store/order-slice";
+import { color } from "@mui/system";
 
 function CartScreen() {
 
   const navigate = useNavigate();
   const location = useLocation();
   const [search, setSearch] = useSearchParams();
+  const [color, setColor] = useState(true)
   const id = search.get("id");
   const qty = search.get("qty");
 
   const [dostava, setDostava] = useState("licno");
-  const [placanje, setPlacanje] = useState("uplata");
+  const [placanje, setPlacanje] = useState("pouzece");
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -54,10 +56,13 @@ function CartScreen() {
   };
 
   const chechoutHandler = (e) => {
-
+    if(cartItems.reduce((acc, item ) => acc + item.qty * item.price, 0) < 1000){
+      setColor(false)
+    }else{
     //navigate('/login?redirect=shipping')
     dispatch(addDostavaAndPlacanjeCart(dostava, placanje))
     navigate('/shipping')
+    }
   }
 
   const backHandler = () => {
@@ -70,7 +75,7 @@ function CartScreen() {
     <Row>
       <Col sm={12} md={6} lg={4} xl={6} xs={12}>
         <h1>Korpa</h1>
-        {cartItems.length === 0 ? (
+        {cartItems?.length === 0 ? (
           <Message variant="info">
             Vasa korpa je prazna <Link to="/">Vratite se Nazad</Link>
           </Message>
@@ -91,7 +96,7 @@ function CartScreen() {
                   <Col sm={12} md={3} lg={4} xl={3} xs={3}>
                     <Link to={`/products/${item.id}`}><strong><h4>{item.name}</h4></strong></Link>
                   </Col>
-                  <Col sm={12} md={6} lg={4} xl={3} xs={3}><strong>{item.price} din</strong></Col>
+                  <Col sm={12} md={6} lg={4} xl={3} xs={3}><strong>{item.price.toFixed(2)} rsd</strong></Col>
                   <Col sm={12} md={6} lg={4} xl={2} xs={2}>
                     <Form.Control
                       as="select"
@@ -138,7 +143,7 @@ function CartScreen() {
 
             </ListGroup.Item>
 
-            {cartItems?.map((item) => (
+            {cartItems?.filter(x => x.qty > 0).map((item) => (
                 <ListGroup.Item key={item.id}>
                   <Row>
                     <Col m={12} md={6} lg={4} xl={8} xs={8}>{item.qty}      x      {item.name}</Col>
@@ -157,7 +162,7 @@ function CartScreen() {
             <ListGroup.Item>
                   <Row>
                     <Col m={12} md={6} lg={4} xl={8} xs={8}> <strong>Ukupna Cena:</strong></Col>
-                    <Col m={12} md={6} lg={4} xl={4} xs={4}> {cartItems.reduce((acc, item ) => acc + item.qty * item.price, 0).toFixed(2)} din</Col>
+                    <Col m={12} md={6} lg={4} xl={4} xs={4}> {cartItems.reduce((acc, item ) => acc + item.qty * item.price, 0).toFixed(2)} rsd</Col>
                   </Row>
             </ListGroup.Item>
 
@@ -207,7 +212,7 @@ function CartScreen() {
       </Col>
     </Row>
     <Row>
-      <Col md={4}>
+      <Col style={{ padding:'1.2rem'}} md={4}>
           <Button type='button'
                 className='btn-block'
                 
@@ -215,6 +220,10 @@ function CartScreen() {
                 Nazad na listu proizvoda          
           </Button>
       </Col>
+    </Row>
+    <Row>
+      <span style={{ border: color ? 'solid 3px green' : 'solid 3px red' , width:'80%', position:'center', padding: '10px', textAlign:'center', margin: 'auto', fontSize:'1.1rem'}}>
+        Minimalna vrednost porudžbine ne može biti manja od 1.000rsd. Vaš trenutni ukupni iznos porudžbine je {cartItems.reduce((acc, item ) => acc + item.qty * item.price, 0).toFixed(2)} rsd</span>
     </Row>
     </div>
   );

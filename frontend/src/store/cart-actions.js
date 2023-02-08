@@ -16,7 +16,7 @@ export const addToCart = (id, qty) => {
             const product = {
                 id: data._id,
                 name: data.name,
-                image: data.image,
+                image: data.images[0]?.image,
                 price: data.price,
                 countInStock: data.countInStock,
                 qty: qty

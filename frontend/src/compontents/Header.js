@@ -49,7 +49,7 @@ function Header(props) {
         <Container  >
               <LinkContainer to="/">
                 <Navbar.Brand>
-                  <h1 className={classes["h1"]}>PolicPlant</h1>
+                  <h1 className={classes["h1"]}>Rasadnik Ema</h1>
                 </Navbar.Brand>
               </LinkContainer>
               
@@ -57,7 +57,7 @@ function Header(props) {
                   {<div>                     
                     <div style={{fontSize: '1.6rem'}}><FontAwesomeIcon icon={faPhone} />     Pozovite nas</div>
                       
-                    <div >065356458</div>
+                    <div >0652077257</div>
                   </div>}
 
               </Navbar.Text>
@@ -81,7 +81,7 @@ function Header(props) {
             <Navbar.Collapse id="basic-navbar-nav">
               <Col md={6} style={{ pading:10, margin:10, size:20}} >
                 
-                <NavDropdown title="Kategorije proizvoda" 
+                <NavDropdown title="Prodavnica" 
                              id="basic-nav-dropdown"  
                              border='primary'
                              style={{
@@ -115,20 +115,20 @@ function Header(props) {
                   </NavDropdown.Item> */}
                 </NavDropdown>
               </Col>
-              <Col md={{ span: 10, offset: 2 }}>
+              <Col md={{ span: 10, offset: 10 }}>
                 <Nav>
-                  <LinkContainer to="/cart" >
+                  {/* <LinkContainer to="/cart" >
                     <Nav.Link >
                       <div style={{fontSize: '20px'}}><FontAwesomeIcon icon={faCartFlatbed} />     Korpa</div>
                     </Nav.Link>
-                  </LinkContainer>
+                  </LinkContainer> */}
 
-                  <LinkContainer
+                  {/* <LinkContainer
                     to="/info">
                     <Nav.Link>
                     <div style={{fontSize: '20px'}}><FontAwesomeIcon icon={faInfo} />  Info</div>
                     </Nav.Link>
-                  </LinkContainer>
+                  </LinkContainer> */}
 
                   <LinkContainer to="/onama" >
                   

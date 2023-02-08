@@ -28,7 +28,7 @@ function CategoryScreen() {
   //const id = search.get("id");
 
   useEffect(()=>{
-
+    window.scrollTo(0, 0)
     dispatch(listProducts())
         
  }, [dispatch, id]);
@@ -38,21 +38,21 @@ function CategoryScreen() {
     <div>
         { false && <ProductCarucel></ProductCarucel>}
         <Breadcrumb>
-          <Breadcrumb.Item href="/"><i class="fa fa-home"></i></Breadcrumb.Item>
+          <Breadcrumb.Item href="/"><i className="fa fa-home"></i></Breadcrumb.Item>
           <Breadcrumb.Item  active>
-            { catProducts?.find( cat => cat._id.toString() === id)?.name}
+            { catProducts?.find( cat => cat._id?.toString() === id)?.name}
           
           </Breadcrumb.Item>
           
         </Breadcrumb>
         <Link to={-1} className='btn btn-primary my-3'> Nazad</Link>
-        <h1>{ catProducts?.find( cat => cat._id.toString() === id)?.name}</h1>
+        <h1>{ catProducts?.find( cat => cat._id?.toString() === id)?.name}</h1>
         { loading ? <Loader></Loader>
                  : error ? <Message variant='danger'>{error}</Message> 
                  :
                  <div >  
                     <Row >
-                     {products?.filter(product => product.category._id.toString() === id).length == 0 ? <div>Trenutno nema proizvoda iz ove kategorije na stanju.</div> : products?.filter(product => product.category._id.toString() === id).map(product => (
+                     {products?.filter(product => product?.category?.map(x => x._id.toString())?.includes(id))?.length === 0 ? <div>Trenutno nema proizvoda iz ove kategorije na stanju.</div> : products?.filter(product => product?.category?.map(x => x._id.toString())?.includes(id))?.map(product => (
                      <Col key={product._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex">
                          <Product product={product} />
                      </Col>

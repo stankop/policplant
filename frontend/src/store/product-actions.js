@@ -72,7 +72,8 @@ export const listFilterProducts = (value) => {
                 category: value.category,
                 flow: value.flow,
                 place: value.place,
-                search: value.search
+                search: value.search,
+                keyword: value.keyword
             }
             
         

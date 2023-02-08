@@ -29,6 +29,6 @@ admin.site.register(Product)
 admin.site.register(PlantCategory)
 admin.site.register(Order)
 admin.site.register(OrderItem)
-#admin.site.register(ShippingAddress)
+admin.site.register(PlantImage)
 
 

@@ -6,6 +6,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
+from base.models import PlantImage
 from base.serializers import PlantCategorySerializer
 from base.models import PlantCategory
 from base.models import Product
@@ -32,42 +33,41 @@ def getAllCategories(request):
     product = Product._meta.get_fields()
     my_model_fields = [field for field in Product._meta.get_fields()]
     for f in my_model_fields:
-        if f.name == 'flowering_time':
-            flowering_time= [x for (x, y) in f.choices]
+        if f.name == 'mesto_sadnje':
+            mesto_sadnje= [x for (x, y) in f.choices]
         elif f.name == 'vreme_cvetanja':
             vreme_cvetanja= [x for (x, y) in f.choices]
         elif f.name == 'orezivanje':
             orezivanje= [x for (x, y) in f.choices]
         elif f.name == 'place_of_planting':
             place_of_planting= [x for (x, y) in f.choices]
-        elif f.name == 'prezimljava':
-            prezimljava= [x for (x, y) in f.choices]
         elif f.name == 'privlaci_insekte':
             privlaci_insekte= [x for (x, y) in f.choices]
         elif f.name == 'brzina_rasta':
             brzina_rasta = [x for (x,y) in f.choices]
         elif f.name == 'type_of_plant':
             type_of_plant = [x for (x,y) in f.choices]
-        elif f.name == 'color':
-            color = [x for (x,y) in f.choices]
+        # elif f.name == 'color':
+        #     color = [x for (x,y) in f.choices]
+        elif f.name == 'vre_cve':
+            vre_cve = [x for (x,y) in f.choices]
     serializerCategory = PlantCategorySerializer(categoriess, many= True)
 
-    return Response({'categories': serializerCategory.data,'place_of_planting': place_of_planting,'prezimljava': prezimljava,'brzina_rasta': brzina_rasta,'privlaci_insekte': privlaci_insekte,'orezivanje': orezivanje,'vreme_cvetanja': vreme_cvetanja, 'flowering_time': flowering_time, 'place_of_planting': place_of_planting, 'type_of_plant': type_of_plant, 'color':color})
+    return Response({'categories': serializerCategory.data,'place_of_planting': place_of_planting,'brzina_rasta': brzina_rasta,'privlaci_insekte': privlaci_insekte,'orezivanje': orezivanje, 'vre_cve': vre_cve,'mesto_sadnje': mesto_sadnje, 'place_of_planting': place_of_planting, 'type_of_plant': type_of_plant})
 
 @api_view(['GET'])
 def getProducts(request):
-    print(f'Multi query:{request.GET}')
     query = request.GET.get('keyword')
-    print('keyword:',query)
+    
     if query == 'null' or query == None:
         query = ''
-    print('keyword:',query)
+    
 
     products = Product.objects.filter(name__icontains=query).order_by('name')
     print(products)
     page = request.GET.get('page')
     paginator = Paginator(products, 10)
-    print('page:',page)
+    
     try:
         products = paginator.page(page)
     except PageNotAnInteger:
@@ -159,61 +159,105 @@ def createProductReview(request, pk):
 @permission_classes([IsAdminUser])
 def createProduct(request):
     data= request.data
+    data2 = request.FILES
     user = request.user
-    category= PlantCategory.objects.get(name=data['category'])
+    
     product = Product.objects.create(
         user=user,
         name=data['name'],
-        image=data['image'],
+        botanicki_naziv=data['botanicki_naziv'],
+        hesteg=data['hesteg'],
+        vre_cve=data['vre_cve'],
+        orezivanje=data['orezivanje'],
+        privlaci_insekte=data['privlaci_insekte'],
+        brzina_rasta=data['brzina_rasta'],
+        prezimljava=data['prezimljava'],
+        sirina_biljke=data['sirina_biljke'],
+        velicina_slanja=data['velicina_slanja'],
+        #image='stanko.jpg',
         price = data['price'],
-        brand = data['brand'],
         countInStock =data['countInStock'],
         description = data['description'],
         color=data['color'],
-        flowering_time=data['flow'],
+        mesto_sadnje=data['mesto_sadnje'],
         place_of_planting= data['place'],
         type_of_plant=data['type'],
-        high=data['high'],
-        category=category
+        high=data['high']
     )
+
+    if type(data['category']) == str:
+        category = PlantCategory.objects.get(name=data['category'])
+        product.category.add(category)
+        product.save()
+    else:
+        for x in data['category']:
+            category = PlantCategory.objects.get(name=x)
+            product.category.add(category)
+            product.save()
+    
     serilizer = ProductSerializer(product, many = False)
     return Response(serilizer.data)
 
 @api_view(['DELETE'])
-@permission_classes([IsAdminUser])
+#@permission_classes([IsAdminUser])
 def deleteProduct(request, pk):
     product = Product.objects.get(_id = pk)
     product.delete()
     return Response("Product deleted.")
 
 @api_view(['PUT'])
-@permission_classes([IsAdminUser])
+#@permission_classes([IsAdminUser])
 def updateProduct(request,pk):
     data = request.data
+    print('Data', type(data['price']))
     product = Product.objects.get(_id = pk)
-
-    product.name = data['name']
-    product.price = data['price']
-    product.color = data['color']
-    product.countInStock = data['countInStock']
-    product.category = data['category']
-    product.description = data['description']
+    product.category.clear()
     product.save()
-    
+    if not isinstance(data['category'], list):
+        category  = PlantCategory.objects.get(name__icontains=data['category'])
+        product.category.add(category)
+        product.save()
+    else:
+        for x in data['category']:
+            category = PlantCategory.objects.get(name=x)
+            product.category.add(category)
+            product.save()
+    product.name = data['name']
+    product.botanicki_naziv=data['botanicki_naziv']
+    product.hesteg=data['hesteg']
+    product.vre_cve=data['vre_cve']
+    product.orezivanje=data['orezivanje']
+    product.privlaci_insekte=data['privlaci_insekte']
+    product.brzina_rasta=data['brzina_rasta']
+    product.prezimljava=data['prezimljava']
+    product.sirina_biljke=data['sirina_biljke']
+    product.velicina_slanja=data['velicina_slanja']
+    #product.image=data['image']
+    product.price = data['price']
+    product.countInStock =data['countInStock']
+    product.description = data['description']
+    product.color=data['color']
+    product.mesto_sadnje=data['mesto_sadnje']
+    product.place_of_planting= data['place']
+    product.type_of_plant=data['type']
+    product.high=data['high']
+    product.save()
+
+
     serilizer = ProductSerializer(product, many = False)
     return Response(serilizer.data)
 
 @api_view(['POST'])
 def getFilterProducts(request):
     data = request.data
-    print('data:',data)
+    print('data request:',data)
 
-    products = Product.objects.filter((Q(pk__gte=0) if data['search'] == '' else (Q(name__icontains=data['search']) or Q(hesteg__icontains=data['search'])))
-            & (Q(pk__gte=0) if (data['color'] == [] or data['color'] == '')  else (reduce(operator.or_,(Q(color__icontains=x) for x in ( y['value'] for y in data['color'])))))
-            & (Q(pk__gte=0) if (data['flow'] == [] or data['flow'] =='') else (reduce(operator.or_,(Q(flowering_time__icontains=x) for x in ( y['value'] for y in data['flow'])))))
-            & (Q(pk__gte=0) if (data['high'] == [] or data['high'] =='') else (reduce(operator.or_,(Q(high__icontains=x) for x in ( y['value'] for y in data['high'])))))
-            & (Q(pk__gte=0) if (data['type'] == [] or data['type'] == '') else (reduce(operator.or_,(Q(type_of_plant__icontains=x) for x in ( y['value'] for y in data['type'])))))
-            & (Q(pk__gte=0) if (data['category'] == [] or data['category'] == '') else (reduce(operator.or_,(Q(category__name__icontains=x) for x in ( y['value'] for y in data['category']))))) ).order_by('name')
+    products = Product.objects.filter((Q(pk__gte=0) if (data['search'] == '' or data['search'] == [] or data['search'] == None) else Q(name__icontains=data['search']) | Q(hesteg__icontains=data['search']))
+            & (Q(pk__gte=0) if data['keyword'] == '' else Q(name__icontains=data['keyword']))
+            & (Q(pk__gte=0) if (data['color'] == [] or data['color'] == '' or data['color'] == None)  else (reduce(operator.or_,(Q(color__icontains=x) for x in ( y['value'] for y in data['color'])))))
+            & (Q(pk__gte=0) if (data['flow'] == [] or data['flow'] =='' or data['flow'] ==None) else (reduce(operator.or_,(Q(mesto_sadnje__icontains=x) for x in ( y['value'] for y in data['flow'])))))
+            & (Q(pk__gte=0) if (data['type'] == [] or data['type'] == '' or data['type'] == None) else (reduce(operator.or_,(Q(type_of_plant__icontains=x) for x in ( y['value'] for y in data['type'])))))
+            & (Q(pk__gte=0) if (data['category'] == [] or data['category'] == '' or data['category'] == None) else (reduce(operator.or_,(Q(category__name__icontains=x) for x in ( y['value'] for y in data['category']))))) ).order_by('name')
     print("Final:",products)
 
    
@@ -226,9 +270,15 @@ def uploadImage(request):
     data = request.data
 
     product_id = data['product_id']
+    
     product = Product.objects.get(_id=product_id)
-
-    product.image = request.FILES.get('image')
+    if not request.FILES.getlist('images'):
+        pass
+    else:
+        PlantImage.objects.filter(product_id = product_id).delete()
+        images = request.FILES.getlist('images')
+        for image in images:
+            PlantImage.objects.create(product=product , image=image)
     product.save()
-    return Response('Image was uploaded')
+    return Response(data={'message':'Image was uploaded'})
 

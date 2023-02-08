@@ -35,13 +35,12 @@ function PlaceOrderScreen(props) {
     const {placanje, dostava } = cart
 
     const itemsPrice = cart.cartItems.reduce((acc,item) => acc + item.price * item.qty, 0).toFixed(2)
-    const shippingPrice =  (itemsPrice > 100 ? 0 : 10).toFixed(2)
-    const taxPrice = Number((0.0082) * itemsPrice).toFixed(2)
+    const shippingPrice =  0.00 //(itemsPrice > 100 ? 0 : 10).toFixed(2)
+    const taxPrice = 0.00 //Number((0.0082) * itemsPrice).toFixed(2)
     const totalPrice = (Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice)).toFixed(2)
  
    
     useEffect(() =>{
-        console.log('ovo je pre succesa',success)
         //dispatch(resetOrder())
         if (success){
             setIznos(order.totalPrice)
@@ -129,7 +128,7 @@ function PlaceOrderScreen(props) {
                      <ListGroup.Item>
 
                         <h2>Narucene biljke</h2>
-                        { cart.cartItems.length === 0 
+                        { cart?.cartItems?.length === 0 
                             ? <div>
                                 <Message variant= 'info'> Vasa Korpa je prazna</Message> 
                                 <Button to="/"
@@ -143,7 +142,7 @@ function PlaceOrderScreen(props) {
                             : (
                                 <ListGroup variant='flush'>
                                     {
-                                        cart.cartItems.map( (item,index) => (
+                                        cart.cartItems?.filter(x => x.qty > 0)?.map( (item,index) => (
                                                 <ListGroup.Item key={index}>
 
                                                     <Row>
@@ -155,7 +154,7 @@ function PlaceOrderScreen(props) {
                                                             <Link to={`/products/${item.id}`}>{item.name}</Link>
                                                         </Col>
                                                         <Col sm={12} md={6} lg={4} xl={6} xs={6}>
-                                                            {item.qty} x {item.price} din = {(item.qty *item.price).toFixed(2)} din
+                                                            {item.qty} x {item.price.toFixed(2)} rsd = {(item.qty *item.price).toFixed(2)} rsd
                                                         </Col>
                                                     </Row>
                                                 </ListGroup.Item>
@@ -180,25 +179,20 @@ function PlaceOrderScreen(props) {
                             <ListGroup.Item>
                                <Row>
                                    <Col><strong>Stavke(zbirno):</strong></Col>
-                                   <Col>{itemsPrice} din</Col>
+                                   <Col>{itemsPrice} rsd</Col>
                                 </Row>
                             </ListGroup.Item>
-                            <ListGroup.Item>
-                               <Row>
-                                   <Col><strong>Shiping:</strong></Col>
-                                   <Col>{shippingPrice} din</Col>
-                                </Row>
-                            </ListGroup.Item>
+                            
                             <ListGroup.Item>
                                <Row>
                                    <Col><strong>Pdv:</strong></Col>
-                                   <Col>{taxPrice} din</Col>
+                                   <Col>0 din</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                <Row>
                                    <Col><strong>Ukupno:</strong></Col>
-                                   <Col>{totalPrice} din</Col>
+                                   <Col>{itemsPrice} rsd</Col>
                                 </Row>
                             </ListGroup.Item>
                             {error &&
@@ -213,7 +207,7 @@ function PlaceOrderScreen(props) {
 
                                          type='button'
                                          className='btn-block'
-                                         disabled={cart.cartItems.length === 0 }
+                                         disabled={cart?.cartItems?.length === 0 }
                                          onClick={placeOrder}>Posalji porudzbu</Button>
                             </ListGroup.Item>
                         </ListGroup>

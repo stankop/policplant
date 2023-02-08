@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState,useMemo, useRef } from 'react'
 import { Button, Container, Form, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useLocation } from "react-router-dom";
@@ -7,10 +7,12 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
 
+
 function SearchBox() {
 
     const [keyword, setKeyword] = useState('')
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const location = useLocation();
 
     const renderTooltip = (props) => (
@@ -22,15 +24,12 @@ function SearchBox() {
     const submitHandler = (e) => {
         e.preventDefault()
         console.log('Vrednost KEYWORDA: ', keyword)
-        if(keyword){
-            
-            navigate(`/?keyword=${keyword}`)
-        }else{
-
-            navigate(location.pathname)
-        }
-
+        
     }
+
+    useEffect(() => {
+        localStorage.setItem('keyword', keyword)
+    },[keyword])
 
     const btnStyle = {
         background: 'greenyellow',

@@ -18,6 +18,7 @@ import SearchModal from '../compontents/UI/SearchModal'
 import useScreenType from "react-screentype-hook";
 import MUISearchModal from '../compontents/UI/MUISearchModal'
 import MDBCarusel from '../compontents/MDBCarusel'
+import ReactCarusel from '../compontents/ReactCarusel'
 import ProductCarusel from '../compontents/ProductCarusel'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -64,8 +65,8 @@ function HomeScreen() {
  
   return (
     <div>
-        { carucel && <MDBCarusel itemRef={customerLogo}></MDBCarusel>}
-        
+        { carucel && <MDBCarusel itemRef={customerLogo}></MDBCarusel>} 
+        {/* { carucel && <ReactCarusel ></ReactCarusel>} */}
         <h1> {carucel ? 'Kategorije:' : 'Filtrirani Proizvodi:'}</h1>
         {/* <Sidebar></Sidebar> */}
         {screenType.isMobile && <SearchModal onSearch={ setSearchValue}></SearchModal>} 
@@ -76,6 +77,9 @@ function HomeScreen() {
                  <div > 
                   <Container fluid> 
                     <Row>
+                    { (screenType.isDesktop || screenType.isLargeDesktop) && <Col>
+                          <Search onSearch={ setSearchValue}></Search> 
+                      </Col> }
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
                         { toggle ? (
                         <Row  className={'gy-2'}>
@@ -95,9 +99,9 @@ function HomeScreen() {
                             {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
                         </Row>)}
                       </Col>
-                      { (screenType.isDesktop || screenType.isLargeDesktop) && <Col>
+                      {/* { (screenType.isDesktop || screenType.isLargeDesktop) && <Col>
                           <Search onSearch={ setSearchValue}></Search> 
-                      </Col> }
+                      </Col> } */}
                     </Row>
                   </Container>
                   

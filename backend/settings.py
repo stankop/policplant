@@ -31,7 +31,9 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '*',
     'policplant.herokuapp.com',
-    'localhost'
+    'localhost',
+    '127.0.0.1',
+    '.ngrok.io'
     ]
 
 

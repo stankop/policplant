@@ -11,12 +11,13 @@ const updateProductSlice = createSlice({
     reducers:{
         updateProductRequest(state){
             state.loading = true
-            
+            //state.success = false
         },
 
         updateProductSuccess(state, action) {
             state.loading = false
             state.success = true
+            state.error = ''
             state.product = action.payload        
         },
 

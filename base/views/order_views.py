@@ -7,6 +7,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
+from base.models import PlantImage
 from email_sending import send_template_email
 from base.models import Product, Order, OrderItem, UserAccount
 from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer
@@ -31,7 +32,7 @@ def addOrderItems(request):
             email=data['email'],
             defaults={
                 'user_name':data['name'],
-                'password':make_password(data['password'] if data['password'] else 'ok'),
+                'password':make_password('ok'),
                 'place':data['place'],
                 'address':data['address'],
                 'self_phone':data['self_phone'],
@@ -41,7 +42,7 @@ def addOrderItems(request):
         )
         user.save()
     except Exception as e:
-        return Response({'detail': f'Duplicate User - email {data_email} alredy in use.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'detail': f'Duplicate User - email {data_email} alredy in use.Or problem with: {e}'}, status=status.HTTP_400_BAD_REQUEST)
     orderItems = data['orderItems']
 
     if orderItems and len(orderItems) == 0:
@@ -69,13 +70,14 @@ def addOrderItems(request):
         itemi = []
         for i in orderItems:
             product = Product.objects.get(_id=i['id'])
+            #images = PlantImage.objects.all().values()
             item = OrderItem.objects.create(
                 product=product,
                 order=order,
                 name=product.name,
                 qty=i['qty'],
                 price=i['price'],
-                image=product.image.url
+                image="stanko.jpg"
             )
             itemi.append(item)
             # 5 update Stock

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {  Button } from 'react-bootstrap'
@@ -11,78 +11,115 @@ import { listProducts, productDetails } from '../store/product-actions'
 import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import { updateProduct, updateProductReset, updateProductDetails } from '../store/updateProduct-actions'
-
+import Select from 'react-select';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 function ProductEditScreen( ) {
 
     const { id } = useParams();
     const productId = id;
 
-    console.log('ovo je product id:', productId)
-
     const [name, setName] = useState('')
-    const [price, setPrice] = useState(0.00)
-    const [image, setImage] = useState('')
-    const [color, setColor] = useState('')
-    const [place, setPlace] = useState('')
-    const [flow, setFlow] = useState('')
-    const [brand, setBrand] = useState('')
-    const [category, setCategory] = useState('')
-    const [countInStock, setCountInStock] = useState(0)
+    const [hesteg, setHesteg] = useState('')
+    const [images, setImage] = useState('')
     const [description, setDescription] = useState('')
+    const [price, setPrice] = useState(0)
+    const [countInStock, setCountInStock] = useState(0)
+    const [color, setColor] = useState('')
+    const [mesto_sadnje, setMestoSadnje] = useState('')
+    const [place, setPlace] = useState('')
+    const [vre_cve, setVremeCvetanja] = useState([])
+    const [orezivanje, setOrezivanje] = useState('')
+    const [privlaci_insekte, setPrivlaciInsekte] = useState('')
+    const [brzina_rasta, setBrzinaRasta] = useState('')
+    const [prezimljava, setPrezimljava] = useState('')
+    const [botanicki_naziv, setBotanickiNaziv] = useState('')
     const [high, setHigh] = useState('')
+    const [velicina_slanja, setVelicinaSlanja] = useState('')
     const [type, setType] = useState('')
+    const [sirina_biljke, setSirinaBiljke] = useState('')
+    const [category, setCategory] = useState([])
+
     const [uploading, setUploading] = useState(false)
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    const categoryList = useSelector(state => state.categoryList)
+    const { loading: categoryLoading, categories , allcategories, error: categoryError } = categoryList
 
     const productUpd = useSelector(state => state.updateProduct)
     const { error, loading, success, product } = productUpd
 
-    
+
     useEffect(() => {
-        console.log('pocetka useEffecta')
-
+        
         dispatch(updateProductDetails(id))
-
+        
         if(success){
             //dispatch(updateProductReset())
             //navigate(`/admin/productlist`)
             setName(product.name)
+            setHesteg(product.hesteg)
             setPrice(product.price)
-            setImage(product.image)
+            setImage(product.images)
             setColor(product.color)
             setPlace(product.place_of_planting)
-            setFlow(product.flowering_time)
-            setCategory(product.category)
+            setMestoSadnje(product.mesto_sadnje)
+            setCategory(product.category?.map(x => x.name))
             setCountInStock(product.countInStock)
             setDescription(product.description)
             setHigh(product.high)
             setType(product.type_of_plant)
+            setVremeCvetanja(product.vre_cve)
+            setOrezivanje(product.orezivanje)
+            setPrivlaciInsekte(product.privlaci_insekte)
+            setBrzinaRasta(product.brzina_rasta)
+            setPrezimljava(product.prezimljava)
+            setBotanickiNaziv(product.botanicki_naziv)
+            setVelicinaSlanja(product.velicina_slanja)
+            setSirinaBiljke(product.sirina_biljke)
         }  
-
+        
     }, [dispatch, navigate, success])
 
-    console.log('drugo')
+    const notify = ()=>{
+ 
+        toast.success('Uspesno editovanje Biljke',
+           {position: toast.POSITION.TOP_RIGHT, autoClose:3000})
+    }
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(updateProduct({
             _id:id,
             name,
+            botanicki_naziv,
+            hesteg,
+            vre_cve,
+            orezivanje,
+            privlaci_insekte,
+            brzina_rasta,
+            prezimljava,
+            sirina_biljke,
+            velicina_slanja,
             price,
-            image,
-            color,
-            place,
-            flow,
-            category,
             countInStock,
             description,
-            brand,
+            color,
+            mesto_sadnje,
+            place,
+            type,
             high,
-            type
-        }))
-
+            category
+        },images))
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+          })
+          notify()
     }
 
 
@@ -112,8 +149,31 @@ function ProductEditScreen( ) {
          } catch (error) {
             setUploading(false)
          }
-     }
+    }
+    
+    const handleChange = (e) => {
+        
+        setVremeCvetanja(Array.isArray(e) ? e.map(x => x.value) : []);
+    }
 
+    const handleChange2 = (e) => {
+        
+        setCategory(Array.isArray(e) ? e.map(x => x.value) : []);
+    }
+    
+    const data = allcategories?.vre_cve?.map(x => {
+        return {
+            value:x,
+            label:x
+        }
+    })
+
+    const data2 = categories?.map(x => {
+        return {
+            value:x.name,
+            label:x.name
+        }
+    })
 
     return (
         <div>
@@ -122,7 +182,7 @@ function ProductEditScreen( ) {
         </Link>
 
         <FormContainer>
-            <h1>Create Product</h1>
+            <h1>Edituj Biljku</h1>
             {loading && <Loader />}
             {error && <Message variant='danger'>{error}</Message>} 
 
@@ -130,170 +190,282 @@ function ProductEditScreen( ) {
                 : (
                     <Form onSubmit={submitHandler}>
 
-                        <Form.Group controlId='name'>
-                            <Form.Label><strong>Name</strong></Form.Label>
-                            <Form.Control
+                            <Form.Group controlId='name'>
+                                <Form.Label><strong>NAME</strong></Form.Label>
+                                <Form.Control
+                                    required
+                                    type='text'
+                                    placeholder=''
+                                    defaultValue={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
 
-                                type='name'
-                                placeholder='Enter name'
-                                defaultValue={name}
-                                onChange={(e) => setName(e.target.value)}
-                            >
-                            </Form.Control>
-                        </Form.Group>
+                            <Form.Group controlId='hesteg'>
+                                <Form.Label><strong>HESTEG</strong></Form.Label>
+                                <Form.Control
 
-                        <Form.Group controlId='price'>
-                            <Form.Label><strong>Cena</strong></Form.Label>
-                            <Form.Control
+                                    type='text'
+                                    placeholder=''
+                                    defaultValue={hesteg}
+                                    onChange={(e) => setHesteg(e.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
 
-                                type='number'
-                                placeholder='Enter price'
-                                defaultValue={price}
-                                onChange={(e) => setPrice(e.target.value)}
-                            >
-                            </Form.Control>
-                        </Form.Group>
+                            <Form.Group controlId='image'>
+                                <Form.Label><strong>IMAGES</strong></Form.Label>
+                                {/* <Form.Control
 
+                                    type='text'
+                                    placeholder='Enter image...'
+                                    defaultValue={image}
+                                   
+                                >
+                                </Form.Control> */}
 
-                        <Form.Group controlId='image'>
-                            <Form.Label><strong>Image</strong></Form.Label>
-                            <Form.Control
+                                <Form.Control
+                                    controlid="image-file"
+                                    type='file'
+                                    multiple="multiple"
+                                    onChange={(e) =>  setImage(e.target.files)}
+                                > 
 
-                                type='text'
-                                placeholder='Enter image...'
-                                defaultValue={image}
-                               
-                            >
-                            </Form.Control>
+                                </Form.Control>
+                                {uploading && <Loader />}
 
-                            <Form.Control
-                                controlid="image-file"
-                                type='file'
-                                label="Izaberite sliku:"
-                                
-                                onChange={(e) => uploadFileHandler(e)}
-                            > 
+                            </Form.Group>
 
-                            </Form.Control>  
-                            {uploading && <Loader />}
+                            <Form.Group controlId='description'>
+                                <Form.Label><strong>DESCRIPTION</strong></Form.Label>
+                                <Form.Control
 
-                        </Form.Group>
+                                    type='text'
+                                    placeholder=''
+                                    defaultValue={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
 
+                            <Form.Group controlId='price'>
+                                <Form.Label><strong>CENA</strong></Form.Label>
+                                <Form.Control
+                                    required
+                                    type='number'
+                                    placeholder=''
+                                    defaultValue={price}
+                                    onChange={(e) => setPrice(e.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
 
-                        <Form.Group controlId='color'>
-                            <Form.Label><strong>Boja</strong></Form.Label>
-                            <Form.Select aria-label="Default select example"
-                                         onChange={(e) => setColor(e.target.value)}>
-                                <option>{color}</option>
-                                {product?.colorChoises?.map(col => (
-                                    <option value={col}>{col}</option>
-                                ))}
+                            <Form.Group controlId='countinstock'>
+                                <Form.Label><strong>STANJE</strong></Form.Label>
+                                <Form.Control
+                                    required
+                                    type='number'
+                                    placeholder=''
+                                    defaultValue={countInStock}
+                                    onChange={(e) => setCountInStock(e.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
 
-                            </Form.Select>
-                        </Form.Group>
+                            <Form.Group controlId='color'>
+                                <Form.Label><strong>BOJA</strong></Form.Label>
+                                <Form.Control
+                                             
+                                             type='text'
+                                             placeholder=''
+                                             defaultValue={color}
+                                             onChange={(e) => setColor(e.target.value)}>
+                                    
+ 
+                                </Form.Control>
+                            </Form.Group>
 
-                        <Form.Group controlId='countinstock'>
-                            <Form.Label><strong>Stanje</strong></Form.Label>
-                            <Form.Control
+                            <Form.Group controlId='mesto_sadnje'>
+                                <Form.Label><strong>MESTO SADNJE</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             defaultValue={mesto_sadnje}
+                                             onChange={(e) => setMestoSadnje(e.target.value)}>
+                                    {/* <option>Odaberi mesto sadnje...</option> */}
+                                    {allcategories?.mesto_sadnje?.map(cat => (
+                                        <option value={cat}>{cat}</option>
+                                    ))}
+ 
+                                </Form.Select>
+                            </Form.Group>
 
-                                type='number'
-                                placeholder='Enter stock'
-                                defaultValue={countInStock}
-                                onChange={(e) => setCountInStock(e.target.value)}
-                            >
-                            </Form.Control>
-                        </Form.Group>
+                            <Form.Group controlId='type_plant'>
+                                <Form.Label><strong>TIP BILJKE</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             defaultValue={type}
+                                             onChange={(e) => setType(e.target.value)}>
+                                    {/* <option>Tip biljke...</option> */}
+                                    {allcategories?.type_of_plant?.map(cat => (
+                                        <option value={cat}>{cat}</option>
+                                    ))}
+ 
+                                </Form.Select>
+                            </Form.Group>
 
-                        {/* <Form.Group controlId='category'>
-                            <Form.Label><strong>Kategorija</strong></Form.Label>
-                            <Form.Select aria-label="Default select example"
-                                         onChange={(e) => setCategory(e.target.value)}>
-                                <option>Odaberi kategoriju cveca...</option>
-                                {product.category?.map(cat => (
-                                    <option value={cat.name}>{cat.name}</option>
-                                ))}
-
-                            </Form.Select>
-                        </Form.Group> */}
-
-                        <Form.Group controlId='flow'>
-                            <Form.Label><strong>Vreme cvetanja</strong></Form.Label>
-                            <Form.Select aria-label="Default select example"
-                                         onChange={(e) => setFlow(e.target.value)}>
-                                <option>{flow}</option>
-                                {product.floweringChoises?.map(cat => (
-                                    <option value={cat}>{cat}</option>
-                                ))}
-
-                            </Form.Select>
-                        </Form.Group>
-
-                        <Form.Group controlId='place'>
-                            <Form.Label><strong>Mesto sadnje</strong></Form.Label>
-                            <Form.Select aria-label="Default select example"
-                                         onChange={(e) => setPlace(e.target.value)}>
-                                <option>{place}</option>
-                                {product.placeChoises?.map(cat => (
-                                    <option value={cat}>{cat}</option>
-                                ))}
-
-                            </Form.Select>
-                        </Form.Group>
-
-                        <Form.Group controlId='brand'>
-                            <Form.Label><strong>Brand</strong></Form.Label>
-                            <Form.Control
-
-                                type='text'
-                                placeholder='Enter brand...'
-                                defaultValue={brand}
-                                onChange={(e) => setBrand(e.target.value)}
-                            >
-                            </Form.Control>
-                        </Form.Group>
-
-                        <Form.Group controlId='high'>
-                            <Form.Label><strong>Visina biljke</strong></Form.Label>
-                            <Form.Select aria-label="Default select example"
-                                         onChange={(e) => setHigh(e.target.value)}>
-                                <option>{high}</option>
-                                {product.highChoises?.map(cat => (
-                                    <option value={cat}>{cat}</option>
-                                ))}
-
-                            </Form.Select>
-                        </Form.Group>
-
-                        <Form.Group controlId='type_plant'>
-                            <Form.Label><strong>Tip biljke</strong></Form.Label>
-                            <Form.Select aria-label="Default select example"
-                                         onChange={(e) => setType(e.target.value)}>
-                                <option>{type}</option>
-                                {product.type_of_plantChoises?.map(cat => (
-                                    <option value={cat}>{cat}</option>
-                                ))}
-
-                            </Form.Select>
-                        </Form.Group>
-
-                        <Form.Group controlId='description'>
-                            <Form.Label><strong>Description</strong></Form.Label>
-                            <Form.Control
-
-                                type='text'
-                                placeholder='Enter description'
-                                defaultValue={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                            >
-                            </Form.Control>
-                        </Form.Group>
+                            <Form.Group controlId='vreme_cvetanja'>
+                                <Form.Label><strong>VREME CVETANJA</strong></Form.Label>
+                                <Select aria-label="Default select example"
+                                             isMulti
+                                             
+                                             isClearable
+                                             className="dropdown"
+                                             placeholder="Select Option"
+                                             closeMenuOnSelect={false}
+                                             minMenuHeight={5}
+                                             openMenuOnFocus={true}
+                                             value={data?.filter(obj => vre_cve?.includes(obj.value))}
+                                             options={data}
+                                             onChange={handleChange}>
+                                             {/* onChange={(e) => setVremeCvetanja(e.target.value)}> */}
+                                    {/* <option>Tip biljke...</option> */}
+                                    {/* {allcategories?.vre_cve?.map((cat, i) => (
+                                        <option value={cat}>{cat}</option>
+                                    ))} */}
+ 
+                                </Select>
+                            </Form.Group>
 
 
-                        <Button type='submit' variant='primary'>
-                            Update Product
-                    </Button>
+                            <Form.Group controlId='orezivanje'>
+                                <Form.Label><strong>OREZIVANJE:</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             defaultValue={orezivanje}
+                                             onChange={(e) => setOrezivanje(e.target.value)}>
+                                    <option>Orezivanje...</option> 
+                                    {allcategories?.orezivanje?.map(cat => (
+                                        <option value={cat}>{cat}</option>
+                                    ))}
+ 
+                                </Form.Select>
+                            </Form.Group>
 
-                    </Form>
+                            <Form.Group controlId='privlaci_insekte'>
+                                <Form.Label><strong>MEDONOSNA:</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             defaultValue={privlaci_insekte}
+                                             onChange={(e) => setPrivlaciInsekte(e.target.value)}>
+                                    <option>Privlaci instekte...</option> 
+                                    {allcategories?.privlaci_insekte?.map(cat => (
+                                        <option value={cat}>{cat}</option>
+                                    ))}
+ 
+                                </Form.Select>
+                            </Form.Group>
+
+                            <Form.Group controlId='brzina_rasta'>
+                                <Form.Label><strong>BRZINA RASTA</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             defaultValue={brzina_rasta}
+                                             onChange={(e) => setBrzinaRasta(e.target.value)}>
+                                    <option>Brzina rasta...</option>
+                                    {allcategories?.brzina_rasta?.map(cat => (
+                                        <option value={cat}>{cat}</option>
+                                    ))}
+ 
+                                </Form.Select>
+                            </Form.Group>
+
+                            <Form.Group controlId='prezimljava'>
+                                <Form.Label><strong>PREZIMLJAVA</strong></Form.Label>
+                                <Form.Control
+
+                                    type='text'
+                                    placeholder=''
+                                    defaultValue={prezimljava}
+                                    onChange={(e) => setPrezimljava(e.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group controlId='botanicki_naziv'>
+                                <Form.Label><strong>BOTANICKI NAZIV</strong></Form.Label>
+                                <Form.Control
+
+                                    type='text'
+                                    placeholder=''
+                                    defaultValue={botanicki_naziv}
+                                    onChange={(e) => setBotanickiNaziv(e.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group controlId='high'>
+                                <Form.Label><strong>VISINA:</strong></Form.Label>
+                                <Form.Control
+
+                                    type='text'
+                                    placeholder=''
+                                    defaultValue={high}
+                                    onChange={(e) => setHigh(e.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group controlId='sirina_biljke'>
+                                <Form.Label><strong>SIRINA:</strong></Form.Label>
+                                <Form.Control
+
+                                    type='text'
+                                    placeholder=''
+                                    defaultValue={sirina_biljke}
+                                    onChange={(e) => setSirinaBiljke(e.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group controlId='velicina_slanja'>
+                                <Form.Label><strong>ISPORUKA:</strong></Form.Label>
+                                <Form.Control
+
+                                    type='text'
+                                    placeholder=''
+                                    defaultValue={velicina_slanja}
+                                    onChange={(e) => setVelicinaSlanja(e.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
+
+
+                            
+
+                            <Form.Group controlId='category2'>
+                                <Form.Label><strong>KATEGORIJA</strong></Form.Label>
+                                <Select aria-label="Default select example"
+                                             isMulti
+                                             required
+                                             isClearable
+                                             className="dropdown"
+                                             placeholder="Select Option"
+                                             value={data2?.filter(obj => category?.includes(obj.value))}
+                                             closeMenuOnSelect={false}
+                                             minMenuHeight={5}
+                                             openMenuOnFocus={true}
+                                             options={data2}
+                                             onChange={handleChange2}>
+                                             {/* onChange={(e) => setVremeCvetanja(e.target.value)}> */}
+                                    {/* <option>Tip biljke...</option> */}
+                                    {/* {allcategories?.vre_cve?.map((cat, i) => (
+                                        <option value={cat}>{cat}</option>
+                                    ))} */}
+ 
+                                </Select>
+                            </Form.Group>
+
+                            <Button type='submit' variant='primary'>
+                                Edituj Biljku
+                        </Button>
+
+                        </Form>
                 )}
 
         </FormContainer >

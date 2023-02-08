@@ -36,7 +36,8 @@ function Search( { onSearch}) {
     const dispatch = useDispatch()
     const cat = useSelector(state => state.categoryList)
     const { allcategories } = cat
-    const [keyword, setKeyword] = useState('')
+    const prod = useSelector(state => state.productList)
+    const { products } = prod
 
     const [pretraga, setPretraga] = useState('')
     const [pozicija, setPozicija] = useState([])
@@ -47,6 +48,7 @@ function Search( { onSearch}) {
 
     const navigate = useNavigate()
     const location = useLocation();
+    const keyword = localStorage.getItem('keyword')
 
     const memoizedValue = useMemo(() => {
         const value = {
@@ -55,13 +57,14 @@ function Search( { onSearch}) {
             type: tip,
             category: kategorija,
             flow: pozicija,
-            search: pretraga
+            search: pretraga,
+            keyword: keyword
         }
         onSearch(value)
         return value;
-        }, [boja, high, tip, kategorija, pozicija, pretraga]);
+        }, [boja, high, tip, kategorija, pozicija, pretraga, keyword]);
     
-    const debouncedSearchTerm = useDebounce(memoizedValue, 1000);
+    const debouncedSearchTerm = useDebounce(memoizedValue, 100);
     const initialRender = useRef(true);
     
     useEffect(()=>{
@@ -73,7 +76,7 @@ function Search( { onSearch}) {
         dispatch(listFilterProducts(debouncedSearchTerm))
         //navigate(`filter`, {state: debouncedSearchTerm, replace:true})
        }    
-    }, [debouncedSearchTerm]);
+    }, [dispatch, debouncedSearchTerm, keyword]);
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -105,7 +108,7 @@ function Search( { onSearch}) {
                 
                 <h7><strong>Pozicija za sadnju</strong></h7>
                     <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
-                        <CustomSelect values={ allcategories?.flowering_time?.map(col => (
+                        <CustomSelect values={ allcategories?.mesto_sadnje?.map(col => (
                             { value: col, label: col}
                         ))} onAction={setPozicija}></CustomSelect>
                         
@@ -128,13 +131,13 @@ function Search( { onSearch}) {
                     </Row>
                 <hr/>
                 
-                <h7><strong>Visina biljke</strong></h7>
+                {/* <h7><strong>Visina biljke</strong></h7>
                     <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                         <CustomSelect values={ allcategories?.high?.map(col => (
                             { value: col, label: col}
                         ))} onAction={setHigh}></CustomSelect>
                     </Row>
-                <hr/>
+                <hr/> */}
                 
                 <h7><strong>Kategorija biljke</strong></h7>
                     <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>

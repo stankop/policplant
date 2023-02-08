@@ -2,11 +2,14 @@ import classes from './Cart.module.css'
 import CartModal from '../CartModal'
 import { useDispatch, useSelector } from 'react-redux'
 import CartItem from './CartItem'
-import { removeItem , addItem} from '../../../store/cart-actions'
+import { removeItem , addItem, removeFromCart} from '../../../store/cart-actions'
+import { useNavigate} from "react-router-dom";
 
 const Cart = (props) => {
 
     const cart = useSelector((state) => state.cart);
+    const navigate = useNavigate();
+
     const { cartItems } = cart;
 
     const dispatch = useDispatch()
@@ -27,19 +30,27 @@ const Cart = (props) => {
 
         dispatch(addItem(id))
     }
+
+    const removeItemFromCart = id => {
+        dispatch(removeFromCart(id))
+    }
+
+    const toPorudzba = () => {
+        navigate(`/cart`)
+        props.onClose();
+    }
     const cartitems = 
     <ul className={classes['cart-items']}>
-        {
-        cartItems?.map(order => 
+        {cartItems?.filter(x => x.qty > 0).map(order => 
             (<CartItem key={order.id} 
                        name={order.name}
                        qty={order.qty} 
-                       price={order.price}
+                       price={order.price.toFixed(2)}
                        onRemove={() => cartItemRemoveHanlder(order.id)} 
-                       onAdd={() => cartItemAddHanlder(order.id)}>
-
+                       onAdd={() => cartItemAddHanlder(order.id)}
+                       removeItem={() => removeItemFromCart(order.id)}>
+                       
             </CartItem>
- 
         ))}
     
     </ul>
@@ -52,8 +63,9 @@ const Cart = (props) => {
             <span>RSD {totalAmount.toFixed(2)}</span>
         </div>
         <div className={classes.actions}>
+            <button className={classes['button--alt']} onClick={() => { navigate(-1); props.onClose(); }}>Nastavite kupovinu</button>
             <button className={classes['button--alt']} onClick={props.onClose}>Close</button>
-            {hasItems && <button className={classes.button}> Narudzba</button>}
+            {hasItems && <button className={classes.button} onClick={toPorudzba}> Nastavite sa placanjem</button>}
         </div>
     </CartModal>
 }

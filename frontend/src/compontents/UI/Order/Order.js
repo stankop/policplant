@@ -32,7 +32,7 @@ const Order = (props) => {
     <ul className={classes['cart-items']}>
         {
         props.value.orderi?.map(order =>
-            (<CartItem key={order._id}
+            (<CartItem key={order?._id}
                        name={order.name}
                        qty={order.qty}
                        price={order.price}

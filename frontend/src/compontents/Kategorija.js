@@ -7,18 +7,18 @@ import classes from './Product.module.css'
 function Kategorija({category}) {
   return (
     <Card className={`my-1 p-1  ${classes["img/-hover-zoom"]} h-100 `} border="dark"  style={{ width: '18rem', height: '25rem' }}>
-        <Card.Header as="h7">Kategorija</Card.Header>
+        <Card.Header as="h7"></Card.Header>
         <Link to={`/categories/${category._id}`}>
             <Card.Img src={category.image}></Card.Img>
         </Link>
         <Card.Body style={{ textAlign: "center"}}>
             <Link to={`/categories/${category._id}`}>
              <Card.Title as="div" >
-                 <strong style={{ fontSize: 26}}>{category.name}</strong>
+                 <strong style={{ fontSize: '1.6rem'}}>{category.name}</strong>
              </Card.Title>
             </Link>
             
-            <Card.Text as="h7" style={{ color:'black'}}>
+            <Card.Text as="h7" style={{ color:'black', fontSize: '1.1rem'}}>
                     {category.productNumber} proizvoda
             </Card.Text>
             {/* <Card.Text as="h7">

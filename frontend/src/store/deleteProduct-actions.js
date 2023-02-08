@@ -18,7 +18,7 @@ export const deleteProduct = (id) => {
                 },
                 
             }
-            const { data } = await axios.delete(`/api/products/delete/${id}`, config)
+            const { data } = await axios.delete(`/api/products/delete/${id}`)
             return data;
         }
 

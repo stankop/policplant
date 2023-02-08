@@ -1,7 +1,7 @@
 import { createProductActions} from './createProduct-slice'
 import axios from 'axios'
 
-export const createProduct = (prod, image) => {
+export const createProduct = (prod, images) => {
     return async (dispatch, getState) => {
 
 
@@ -18,20 +18,22 @@ export const createProduct = (prod, image) => {
                 },
                 
             }
-            const { data } = await axios.post(`/api/products/create/`,prod, config)
+            const { data } = await axios.post(`/api/products/create/`,prod,config)
             return data;
         }
 
 
         const uploadData = async (product_id, img) => {
 
-            const file = img //e.target.files[0]
-         
+            const files = img //e.target.filesconsole.log('form fils:', files)
             const formData = new FormData()
-
-            formData.append('image', file)
+            const arr = Array.from(files)
+            arr?.forEach(x => 
+                formData.append('images', x)
+            )
+            //formData.append('image', files)
             formData.append('product_id', product_id)
-
+            
             try {
                 const config = {
                  headers: {
@@ -47,6 +49,9 @@ export const createProduct = (prod, image) => {
         }
 
         try {
+            //const imageData = await uploadData(100, images) // ovo obrisati
+
+
             dispatch(createProductActions.createProductRequest())
             const productData = await fetchData()
             dispatch(createProductActions.createProductSuccess(productData))
@@ -54,7 +59,7 @@ export const createProduct = (prod, image) => {
                 createProduct:{ product, success }
             } = getState()
             if(success){
-                const imageData = await uploadData(product._id, image)
+                const imageData = await uploadData(product._id, images)
             }
             dispatch(createProductActions.createProductReset())
 

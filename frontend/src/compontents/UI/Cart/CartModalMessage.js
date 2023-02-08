@@ -27,10 +27,12 @@ const CartModalMessage = (props) => {
 
         dispatch(addItem(id))
     }
+    const filter = cartItems?.filter(x => x.qty > 0);
+    console.log('Ovde filter:', filter)
     const cartitems = 
     <ul className={classes['cart-items']}>
         {
-        cartItems?.map(order => 
+        filter.map(order => 
             (<CartItem key={order.id} 
                        name={order.name}
                        qty={order.qty} 
@@ -48,7 +50,7 @@ const CartModalMessage = (props) => {
     return <CartModal onClose={props.onClose} >
         {cartitems}
         <div className={classes.total}>
-            <span>Ukupan iznos</span>
+            <span>Ukupan iznosss</span>
             <span>RSD {totalAmount.toFixed(2)}</span>
         </div>
         <div className={classes.actions}>

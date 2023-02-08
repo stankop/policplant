@@ -10,6 +10,7 @@ import {useDispatch, useSelector } from 'react-redux'
 import {  productDetails } from '../store/product-actions'
 import {  addToCart,removeFromCart } from '../store/cart-actions'
 import { LinkContainer } from 'react-router-bootstrap'
+import WebFont from 'webfontloader';
 
 
 import {  createReview } from '../store/review-actions'
@@ -33,9 +34,12 @@ function ProductScreen({match}) {
   const {loading, error, product} = productDet
 
   useEffect(()=>{
-
+        WebFont.load({
+        google: {
+          families: ['Droid Sans', 'Chilanka']
+            }
+        });
        dispatch(productDetails(id))
-
        return () => {}
         
   }, [dispatch, id]);
@@ -61,9 +65,9 @@ function ProductScreen({match}) {
     <div style={{height:'100%'}}>
         <Breadcrumb>
           <Breadcrumb.Item href="/#/"><i class="fa fa-home"></i></Breadcrumb.Item>
-          <Breadcrumb.Item href={`#/categories/${product?.category?._id}`}>
+          <Breadcrumb.Item href={`#/categories/${product?.category?.map(x => x._id)[0]}`}>
                 
-          { product?.category?.name}
+          { product?.category?.map(x => x.name)[0]}
           </Breadcrumb.Item>
           <Breadcrumb.Item active>
             { product?.name}
@@ -80,21 +84,32 @@ function ProductScreen({match}) {
                     <div>
                         <Row >
                                 <Col  sm={12} md={6} lg={4} xl={3} xs={6} >
-                                    <Image src={product.image} alt={product.name} fluid>
+                                    <Row>
+                                    <Image src={product?.images?.find(x => true)?.image} alt={product.name} fluid>
 
                                     </Image>
+                                    </Row>
+                                    <Row className="justify-content-md-left">
+                                    {product?.images?.map(img => (
+                                        <Col key={img.id} sm={4} md={4} lg={4} xl={3} xs={6} className="d-flex">
+                                            <Image src={img.image} alt={img.id} fluid className="square border border-3">
+
+                                            </Image>
+                                        </Col>
+                                    ))}
+                                    </Row>
                                 </Col>
                                 <Col sm={12} md={6} lg={6} xl={6} xs={6}>
                                     <ListGroup variant='flush'>
                                         <ListGroup.Item>
-                                            <h2>{product.name}</h2>
+                                            <h2><strong style={{ fontSize:'2.8rem', fontFamily: 'Oswald, sans-serif;'}}>{product.name}</strong> <i style={{fontSize:'1.4rem'}}>{product.botanicki_naziv}</i></h2> 
                                         </ListGroup.Item>
                                         <ListGroup.Item >
-                                            <strong style={{ color:'#228B22', fontSize:30 }}>{product.price} din</strong> 
+                                            <strong style={{ color:'#228B22', fontSize:30 }}>{product.price} rsd</strong> 
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
-                                            <strong>Kategorija:</strong> {product.category?.name}
+                                            <strong>Kategorija:</strong> {product.category?.map(x => x.name).join(', ')}
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
@@ -102,11 +117,27 @@ function ProductScreen({match}) {
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
-                                            <strong>Polozaj:</strong> {product.flowering_time}
+                                            <strong>Lokacija sadnje:</strong> {product.mesto_sadnje}
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
                                             <strong>Mesto sadnje:</strong> {product.place_of_planting}
+                                        </ListGroup.Item>
+
+                                        <ListGroup.Item>
+                                            <strong>Vreme cvetanja:</strong> {Array.isArray(product.vre_cve) ? product.vre_cve?.join(', ') : ""}
+                                        </ListGroup.Item>
+
+                                        <ListGroup.Item>
+                                            <strong>Orezivanje:</strong> {product.orezivanje}
+                                        </ListGroup.Item>
+
+                                        <ListGroup.Item>
+                                            <strong>Botanicki naziv:</strong> {product.botanicki_naziv}
+                                        </ListGroup.Item>
+
+                                        <ListGroup.Item>
+                                            <strong>Visina biljke:</strong> {product.high}
                                         </ListGroup.Item>
                                     </ListGroup>
                                 </Col>
@@ -120,7 +151,7 @@ function ProductScreen({match}) {
                                                         Cena:
                                                     </Col>
                                                     <Col>
-                                                        <strong>{product.price} din</strong>
+                                                        <strong>{product.price} rsd</strong>
                                                     </Col>
                                                 </Row>
                                             </ListGroup.Item>

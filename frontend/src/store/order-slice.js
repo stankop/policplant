@@ -20,6 +20,7 @@ const orderSlice = createSlice({
                 state.loading = false;
                 state.success = true;
                 state.order = action.payload;
+                state.error = ''
         },
 
         orderCreateFail(state, action) {

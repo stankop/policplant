@@ -2,7 +2,7 @@ import { updateProductActions} from './updateProduct-slice'
 import { productDetails } from './product-actions'
 import axios from 'axios'
 
-export const updateProduct = (product) => {
+export const updateProduct = (product, images) => {
     return async (dispatch, getState) => {
 
 
@@ -20,14 +20,40 @@ export const updateProduct = (product) => {
                 
             }
             const { data } = await axios.put(`/api/products/update/${product._id}/`,
-            product, config)
+            product)
             return data;
+        }
+
+        const uploadData = async (product_id, images) => {
+
+            const files = images //e.target.filesconsole.log('form fils:', files)
+            const formData = new FormData()
+            const arr = Array.from(files)
+            arr?.forEach(x => 
+                formData.append('images', x)
+            )
+            //formData.append('image', files)
+            formData.append('product_id', product_id)
+            
+            try {
+                const config = {
+                 headers: {
+                     'Content-Type': 'multipart/form-data'
+                    }
+                }
+
+                const { data } = await axios.post('/api/products/upload/', formData, config)
+
+            } catch (error) {
+           
+            }
         }
 
         try {
             dispatch(updateProductActions.updateProductRequest())
             const cartData = await fetchData()
             dispatch(updateProductActions.updateProductSuccess(cartData))
+            const imageData = await uploadData(product._id, images)
             dispatch(productDetails(product._id))
 
         } catch (error) {
