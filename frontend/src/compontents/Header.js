@@ -10,6 +10,7 @@ import {
   faContactBook,
   faPhone,
   faFlag,
+  faStore
 } from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useEffect } from 'react'
 import { LinkContainer } from "react-router-bootstrap";
@@ -24,13 +25,14 @@ import { listCategories } from "../store/category-actions";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
+
 function Header(props) {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const category = useSelector((state) => state.categoryList);
   const { categories } = category;
-
+  const image = 'https://policplantpublic.s3.eu-west-2.amazonaws.com/veliki+logo+verzija+1.0.png'
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,19 +47,22 @@ function Header(props) {
   return (
     <Fragment >
     <header >
-      <Navbar  variant="dark" expand="lg" collapseOnSelect className={classes["color-navbar"]}>
+      <Row>
+      <Navbar  variant="dark" expand="lg" collapseOnSelect style={{ height:'12rem'}} className={classes["color-navbar"]}>
         <Container  >
+        
               <LinkContainer to="/">
                 <Navbar.Brand>
-                  <h1 className={classes["h1"]}>Rasadnik Ema</h1>
+                  {/* <h1 className={classes["h1"]}>Rasadnik Ema</h1> */}
+                  <img src={image} style={{ width:'22rem', height:'22rem',marginTop: '+2rem'}} alt="Facebook"/>
                 </Navbar.Brand>
               </LinkContainer>
               
               <Navbar.Text style={{ textAlign: 'center'}}>
                   {<div>                     
-                    <div style={{fontSize: '1.6rem'}}><FontAwesomeIcon icon={faPhone} />     Pozovite nas</div>
+                    <div style={{fontSize: '1.6rem', color:'black'}}><FontAwesomeIcon icon={faPhone} />     Pozovite nas</div>
                       
-                    <div >0652077257</div>
+                    <div style={{color:'black',fontSize: '1.4rem'}}>0652077257</div>
                   </div>}
 
               </Navbar.Text>
@@ -66,74 +71,52 @@ function Header(props) {
 
               <Navbar.Text style={{ textAlign: 'center'}}>
               <LinkContainer to="/cart" >
-                    <Nav.Link >
+                    <Nav.Link style={{ margin:'1rem'}}>
                       <HeaderCardButton onClick={props.onShowCart}></HeaderCardButton>
                     </Nav.Link>
                   </LinkContainer>
               </Navbar.Text>
         </Container>
       </Navbar>
+      </Row>
+      
       <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>
         <Container >
+          
           <Row >
+          
           <Navbar.Toggle aria-controls="basic-navbar-nav" md={4} style={{ pading:2}}/>
-            
+          
             <Navbar.Collapse id="basic-navbar-nav">
-              <Col md={6} style={{ pading:10, margin:10, size:20}} >
-                
-                <NavDropdown title="Prodavnica" 
-                             id="basic-nav-dropdown"  
-                             border='primary'
-                             style={{
-                                    fontSize: '1.4rem',
-                                     
-                                    border:'1px solid black',
-                                     display: 'inline-block',
-                                     background: 'rgb(97, 240, 7)'}}>
-                  {categories?.map( (category) => (
-                    <NavDropdown.Item  key={category._id}>
-                      <LinkContainer to={`/categories/${category._id}`} >
-                          <Nav.Link >
-                          { category.name }
-                          </Nav.Link>
-                      </LinkContainer>
-                        
-                    </NavDropdown.Item>
-                  ))}
-                  {/* <NavDropdown.Item href="#action/3.1">
-                    Action
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">
-                    Another action
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">
-                    Something
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">
-                    Separated link
-                  </NavDropdown.Item> */}
-                </NavDropdown>
-              </Col>
-              <Col md={{ span: 10, offset: 10 }}>
+              
+              <Col md={{ span: 12, offset: 10 }}>
                 <Nav>
-                  {/* <LinkContainer to="/cart" >
-                    <Nav.Link >
-                      <div style={{fontSize: '20px'}}><FontAwesomeIcon icon={faCartFlatbed} />     Korpa</div>
-                    </Nav.Link>
-                  </LinkContainer> */}
-
-                  {/* <LinkContainer
-                    to="/info">
-                    <Nav.Link>
-                    <div style={{fontSize: '20px'}}><FontAwesomeIcon icon={faInfo} />  Info</div>
-                    </Nav.Link>
-                  </LinkContainer> */}
-
+                    
+                    <div style={{fontSize: '1.4rem'}}><FontAwesomeIcon icon={faStore}></FontAwesomeIcon>   
+                          <NavDropdown title="Prodavnica" 
+                                  id="basic-nav-dropdown" 
+                                  style={{
+                                          fontSize: '1.4rem', 
+                                          display: 'inline-block'}}>
+                        {categories?.map( (category) => (
+                            <NavDropdown.Item  key={category._id}>
+                                <LinkContainer to={`/categories/${category._id}`} >
+                                    <Nav.Link >
+                                    { category.name }
+                                    </Nav.Link>
+                                </LinkContainer>
+                                
+                            </NavDropdown.Item>
+                            ))}
+                        
+                          </NavDropdown>  
+                    </div>
+                  
+                   
                   <LinkContainer to="/onama" >
                   
                     <Nav.Link>
-                    <div style={{fontSize: '20px'}}><FontAwesomeIcon icon={faAnchor}></FontAwesomeIcon>     O nama</div>
+                    <div style={{fontSize: '1.4rem',display: 'inline-block'}}><FontAwesomeIcon icon={faAnchor}></FontAwesomeIcon>     O nama</div>
                    
                     </Nav.Link>
                   </LinkContainer>
@@ -141,13 +124,13 @@ function Header(props) {
                   <LinkContainer
                     to="/kontakt">
                     <Nav.Link>
-                    <div style={{fontSize: '20px'}}><FontAwesomeIcon icon={faContactBook} />   Kontakt</div>
+                    <div style={{fontSize: '1.4rem'}}><FontAwesomeIcon icon={faContactBook} />   Kontakt</div>
                       
                     </Nav.Link>
                   </LinkContainer>
 
                   {userInfo ? (
-                    <NavDropdown title={userInfo.user_name} id="username" style={{fontSize: '20px'}}>
+                    <NavDropdown title={userInfo.user_name} id="username" style={{fontSize: '1.4rem'}}>
                       <LinkContainer
                         to="/profile">
                         <NavDropdown.Item>Profile</NavDropdown.Item>
@@ -168,7 +151,7 @@ function Header(props) {
                     </LinkContainer>
                   )}
                   {userInfo && userInfo.isAdmin && (
-                    <NavDropdown title="Admin" id="adminmenu" style={{fontSize: '20px'}}>
+                    <NavDropdown title="Admin" id="adminmenu" style={{fontSize: '1.4rem'}}>
                       <LinkContainer to="/admin/userlist">
                         <NavDropdown.Item>Users</NavDropdown.Item>
                       </LinkContainer>
@@ -185,6 +168,7 @@ function Header(props) {
                 </Nav>
               </Col>
             </Navbar.Collapse>
+            
           </Row>
         </Container>
       </Navbar>

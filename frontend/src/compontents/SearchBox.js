@@ -39,10 +39,11 @@ function SearchBox() {
   return (
     
     <Form onSubmit={submitHandler} >
-        <Container>
+        <Container style={{padding:'4rem'}}>
             <Row>
                 <Col md={10}>
                     <Form.Control 
+                        
                         type='search'
                         name='keyword'
                         inline ='true'

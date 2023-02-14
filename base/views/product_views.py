@@ -275,7 +275,7 @@ def uploadImage(request):
     if not request.FILES.getlist('images'):
         pass
     else:
-        PlantImage.objects.filter(product_id = product_id).delete()
+        #PlantImage.objects.filter(product_id = product_id).delete()
         images = request.FILES.getlist('images')
         for image in images:
             PlantImage.objects.create(product=product , image=image)

@@ -23,7 +23,7 @@ function MDBCarusel( {itemRef}) {
     const slike = [
         { 
             id: 1,
-            src: 'https://policplantpublic.s3.eu-west-2.amazonaws.com/ogrod-angielski-sciezka.png',
+            src: 'https://policplantpublic.s3.eu-west-2.amazonaws.com/slika1.jpg',
             name: 'amazonska suma'
         },
         {

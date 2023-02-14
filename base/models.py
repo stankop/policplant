@@ -95,7 +95,7 @@ class PlantCategory(models.Model):
         LISCARI = 'Lišćari', _ ('Lišćari')
         CETINARI = 'Četinari', _ ('Četinari')
         RUZE = 'Ruže', _ ('Ruže')
-        SADNICE_VOCA = 'Sadnice voca', _ ('Sadnice voca')
+        SADNICE_VOCA = 'Sadnice voća', _ ('Sadnice voća')
         DEFAULT = 'Ostalo', _('Ostalo')
 
     name = models.CharField(max_length=50, choices=Category.choices, default=Category.DEFAULT, unique=True)

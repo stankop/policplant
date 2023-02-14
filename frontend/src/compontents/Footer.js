@@ -14,7 +14,18 @@ function Footer() {
         <Container>
             <Row>
                 <Col className="text-center py-3">Copyright &copy; Rasadnik Ema</Col>
-                <GoogleMap location={location} zoomLevel={17} /> 
+                {/* <GoogleMap location={location} zoomLevel={17} />  */}
+
+            </Row>
+            <Row>
+              <Col>
+                <h6>Korisni linkovi</h6>
+                <h5>Kako poručiti putem sajta</h5>
+                <h5>Izrada plana sadnje</h5>
+                <h5>Najčešća pitanja</h5>
+                <h5>Način plaćanja</h5>
+                <h5>Isporuka</h5>
+              </Col>
             </Row>
         </Container>
     </footer>

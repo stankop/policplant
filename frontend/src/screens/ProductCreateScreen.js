@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import {  Button } from 'react-bootstrap'
+import {  Button, Row } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../compontents/Loader'
@@ -17,6 +17,10 @@ import Select from 'react-select';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ImagesGallery from '../compontents/UI/Image/ImageGallery'
+import Gallery from "react-photo-gallery";
+import { arrayMove } from 'react-sortable-hoc';
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import Photo from "../compontents/Photo";
 toast.configure()
 
 
@@ -43,6 +47,7 @@ function ProductCreateScreen( ) {
     const [type, setType] = useState('')
     const [sirina_biljke, setSirinaBiljke] = useState('')
     const [category, setCategory] = useState('Četinari')
+    const [ukupneSlike, setUkupneSlike] = useState([])
 
     const [uploading, setUploading] = useState(false)
 
@@ -57,7 +62,7 @@ function ProductCreateScreen( ) {
     const inputHesh = useRef();
 
     const handleMultipleImages =(evnt)=>{
-        console.log('original:', evnt)
+        
         const selectedFIles =[];
         const targetFiles =evnt.target.files;
         const targetFilesObject= [...targetFiles]
@@ -172,6 +177,25 @@ function ProductCreateScreen( ) {
         }
     })
 
+    const SortablePhoto = SortableElement(item => <Photo {...item} />);
+    const SortableGallery = SortableContainer(({ items }) => (
+        <Gallery photos={items} renderImage={props => <SortablePhoto {...props} />} />
+    
+    ));
+
+    const photos = prevImages?.map(image => {
+        return {
+            src:image.image,
+            width:4,
+            height:3
+        }
+    })
+    const [items, setItems] = useState(photos);
+
+    const onSortEnd = ({ oldIndex, newIndex }) => {
+    setItems(arrayMove(items, oldIndex, newIndex));
+  };
+
     return (
         <div>
             <Link to='/admin/productlist'>
@@ -236,8 +260,10 @@ function ProductCreateScreen( ) {
 
                                 </Form.Control>
                                 
-                                <ImagesGallery  images={prevImages} />
-   
+                                {/* <ImagesGallery  images={prevImages} /> */}
+                                <Row>
+                                    <SortableGallery items={items} onSortEnd={onSortEnd} axis={"xy"} />
+                                </Row>
                                 {uploading && <Loader />}
 
                             </Form.Group>

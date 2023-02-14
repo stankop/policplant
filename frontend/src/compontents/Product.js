@@ -6,7 +6,7 @@ import classes from './Product.module.css'
 
 function Product({product}) {
   return (
-    <Card className={`my-2 p-2 rounded ${classes["img-hover-zoom"]}`} border="primary"  style={{ width: '18rem', height: '26rem' }}>
+    <Card className={`my-2 p-2 rounded ${classes["img-hover-zoomA"]}`} border="primary"  style={{ width: '18rem', height: '26rem' }}>
         <Link to={`/products/${product._id}`}>
             <Card.Img src={product.images[0]?.image} style={{width: '16.4rem', height: '18rem' }}></Card.Img>
             <Card.ImgOverlay>
@@ -27,7 +27,7 @@ function Product({product}) {
             <Card.Text as="h3" style={{ color:'black', fontSize: '1.8rem'}}>
                     {product.price} rsd
             </Card.Text>
-            <Card.Text as="h7">
+            <Card.Text as="h6">
                     {/* {product.countInStock > 0 ? <strong style={{ color:'green'}}>Na stanju</strong> : ''}  */}
                     {/* {product.countInStock > 0 ? '' : <strong style={{ color:'red'}}>Nema na stanju</strong>}  */}
             </Card.Text>

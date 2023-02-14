@@ -48,19 +48,19 @@ function HomeScreen() {
 
     dispatch(listCategories())
     //dispatch(listFilterProducts(val))
-        
- }, [dispatch, keyword]);
+         
+  }, [dispatch, keyword]);
 
 
  const setSearchValue = (value) => {
-  setVal(value)
-  if(value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== ''){
-    setToggle(false)
-    setCarucel(false)
-  } else{
-    setToggle(true)
-    setCarucel(true)
-  }
+    setVal(value)
+    if(value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== ''){
+     setToggle(false)
+     setCarucel(false)
+   } else{
+     setToggle(true)
+     setCarucel(true)
+   }
  }
  
   return (

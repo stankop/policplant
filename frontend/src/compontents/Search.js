@@ -72,7 +72,7 @@ function Search( { onSearch}) {
         initialRender.current = false;
        }
        else{
-        console.count(debouncedSearchTerm)
+        
         dispatch(listFilterProducts(debouncedSearchTerm))
         //navigate(`filter`, {state: debouncedSearchTerm, replace:true})
        }    
@@ -93,7 +93,7 @@ function Search( { onSearch}) {
     <Form onSubmit={submitHandler} >
         <Container style={{ padding: '0.2rem'}}>
            
-            <h7><strong>Pretraga Proizvoda:</strong></h7>
+            <h6><strong>Pretraga Proizvoda:</strong></h6>
             <Row md={12} xl={12} style={{margin: 'auto', display: 'flex',  justifyContent:'center', alignItems:'center', }}>
                 <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                     <Form.Control 
@@ -106,7 +106,7 @@ function Search( { onSearch}) {
                 </Row>
                 <hr/>
                 
-                <h7><strong>Pozicija za sadnju</strong></h7>
+                <h6><strong>Pozicija za sadnju</strong></h6>
                     <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                         <CustomSelect values={ allcategories?.mesto_sadnje?.map(col => (
                             { value: col, label: col}
@@ -114,16 +114,20 @@ function Search( { onSearch}) {
                         
                     </Row>
                 <hr/>
-                <h7><strong>Boja cveta</strong></h7>
+                <h6><strong>Boja cveta</strong></h6>
                     <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
-                        <CustomSelect values={ allcategories?.color?.map(col => (
-                            { value: col, label: col}
-                        ))} onAction={setBoja}></CustomSelect>
+                    <Form.Control 
+                        type='search'
+                        name='pretraga'
+                        inline ='true'
+                        placeholder='Boja...NE radi jos ovo za boje'
+                        onChange={(e) => setBoja(e.target.value) }>
+                    </Form.Control>
                         
                     </Row>
                 <hr/>
                 
-                <h7><strong>Tip biljke</strong></h7>
+                <h6><strong>Tip biljke</strong></h6>
                     <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                         <CustomSelect values={ allcategories?.type_of_plant?.map(col => (
                             { value: col, label: col}
@@ -131,7 +135,7 @@ function Search( { onSearch}) {
                     </Row>
                 <hr/>
                 
-                {/* <h7><strong>Visina biljke</strong></h7>
+                {/* <h6><strong>Visina biljke</strong></h6>
                     <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                         <CustomSelect values={ allcategories?.high?.map(col => (
                             { value: col, label: col}
@@ -139,7 +143,7 @@ function Search( { onSearch}) {
                     </Row>
                 <hr/> */}
                 
-                <h7><strong>Kategorija biljke</strong></h7>
+                <h6><strong>Kategorija biljke</strong></h6>
                     <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                         <CustomSelect  values={ allcategories?.categories?.map(col => (
                             { value: col.name, label: col.name}

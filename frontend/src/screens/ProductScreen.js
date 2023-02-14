@@ -17,6 +17,9 @@ import {  createReview } from '../store/review-actions'
 import { reviewCreateActions } from '../store/review-slice'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import HomeIcon from '@mui/icons-material/Home';
+import ImageZoom from "react-image-zooom";
+import '../../node_modules/react-image-gallery/styles/css/image-gallery.css';
+import ImageGallery from 'react-image-gallery';
 
 function ProductScreen({match}) {
     
@@ -60,7 +63,12 @@ function ProductScreen({match}) {
       })
     }, [])
   
-
+ const images = product?.images?.map(image => {
+    return {
+        original: image.image,
+        thumbnail: image.image
+    }
+ })
   return (
     <div style={{height:'100%'}}>
         <Breadcrumb>
@@ -83,13 +91,19 @@ function ProductScreen({match}) {
                 :(  
                     <div>
                         <Row >
-                                <Col  sm={12} md={6} lg={4} xl={3} xs={6} >
+                                <Col  sm={12} md={6} lg={4} xl={5} xs={6} >
                                     <Row>
-                                    <Image src={product?.images?.find(x => true)?.image} alt={product.name} fluid>
+                                    
+                                    {/* {image && <ImageZoom src={image} alt={product.name} zoom="150" fluid>
 
-                                    </Image>
+                                    </ImageZoom>} */}
+                                     {images && <ImageGallery items={images}
+                                     
+                                     lazyLoad={true}
+                                      />}
+                                    
                                     </Row>
-                                    <Row className="justify-content-md-left">
+                                    {/* <Row className="justify-content-md-left">
                                     {product?.images?.map(img => (
                                         <Col key={img.id} sm={4} md={4} lg={4} xl={3} xs={6} className="d-flex">
                                             <Image src={img.image} alt={img.id} fluid className="square border border-3">
@@ -97,9 +111,9 @@ function ProductScreen({match}) {
                                             </Image>
                                         </Col>
                                     ))}
-                                    </Row>
+                                    </Row> */}
                                 </Col>
-                                <Col sm={12} md={6} lg={6} xl={6} xs={6}>
+                                <Col sm={12} md={6} lg={8} xl={7} xs={6}>
                                     <ListGroup variant='flush'>
                                         <ListGroup.Item>
                                             <h2><strong style={{ fontSize:'2.8rem', fontFamily: 'Oswald, sans-serif;'}}>{product.name}</strong> <i style={{fontSize:'1.4rem'}}>{product.botanicki_naziv}</i></h2> 
@@ -112,36 +126,121 @@ function ProductScreen({match}) {
                                             <strong>Kategorija:</strong> {product.category?.map(x => x.name).join(', ')}
                                         </ListGroup.Item>
 
-                                        <ListGroup.Item>
+                                        {product.color && <ListGroup.Item>
                                             <strong>Boja:</strong> {product.color}
-                                        </ListGroup.Item>
+                                        </ListGroup.Item>}
 
-                                        <ListGroup.Item>
-                                            <strong>Lokacija sadnje:</strong> {product.mesto_sadnje}
-                                        </ListGroup.Item>
+                                        {product.mesto_sadnje && <ListGroup.Item>
+                                            <strong>Položaj:</strong> {product.mesto_sadnje}
+                                        </ListGroup.Item>}
 
-                                        <ListGroup.Item>
+                                        {product.place_of_planting && <ListGroup.Item>
                                             <strong>Mesto sadnje:</strong> {product.place_of_planting}
-                                        </ListGroup.Item>
+                                        </ListGroup.Item>}
 
-                                        <ListGroup.Item>
-                                            <strong>Vreme cvetanja:</strong> {Array.isArray(product.vre_cve) ? product.vre_cve?.join(', ') : ""}
-                                        </ListGroup.Item>
+                                        {product.vre_cve?.length > 0 && <ListGroup.Item>
+                                            <strong>Vreme cvetanja:</strong> {Array.isArray(product.vre_cve) ? product.vre_cve?.join(', ') : product.vre_cve}
+                                        </ListGroup.Item>}
 
-                                        <ListGroup.Item>
+                                        {product.orezivanje && <ListGroup.Item>
                                             <strong>Orezivanje:</strong> {product.orezivanje}
-                                        </ListGroup.Item>
+                                        </ListGroup.Item>}
 
-                                        <ListGroup.Item>
-                                            <strong>Botanicki naziv:</strong> {product.botanicki_naziv}
-                                        </ListGroup.Item>
-
-                                        <ListGroup.Item>
+                                        {product.high && <ListGroup.Item>
                                             <strong>Visina biljke:</strong> {product.high}
+                                        </ListGroup.Item>}
+                                        {product.high && <ListGroup.Item>
+                                            <strong>Tip biljke:</strong> {product.type_of_plant}
+                                        </ListGroup.Item>}
+                                        {product.high && <ListGroup.Item>
+                                            <strong> Medonosna:</strong> {product.privlaci_insekte}
+                                        </ListGroup.Item>}
+                                        {product.high && <ListGroup.Item>
+                                            <strong> Brzina rasta:</strong> {product.brzina_rasta}
+                                        </ListGroup.Item>}
+                                        {product.high && <ListGroup.Item>
+                                            <strong> Prezimljava:</strong> {product.prezimljava}
+                                        </ListGroup.Item>}
+                                        {product.high && <ListGroup.Item>
+                                            <strong> Sirina:</strong> {product.sirina_biljke}
+                                        </ListGroup.Item>}
+                                        {product.high && <ListGroup.Item>
+                                            <strong> Isporuka:</strong> {product.velicina_slanja}
+                                        </ListGroup.Item>}
+                                        <ListGroup.Item>
+                                            
+                                                
+                                                 <Col sm={12} md={6} lg={4} xl={6} xs={12}>
+                                                    <Card>
+                                                    <Card.Title style={{ textAlign:'center', color:'black'}}>Kupovina</Card.Title>
+                                                        <ListGroup variant='flush' >
+                                                            {/* <ListGroup.Item>
+                                                                <Row>
+                                                                    <Col>
+                                                                        Cena:
+                                                                    </Col>
+                                                                    <Col>
+                                                                        <strong>{product.price} rsd</strong>
+                                                                    </Col>
+                                                                </Row>
+                                                            </ListGroup.Item> */}
+                                                            {/* <ListGroup.Item>
+                                                                <Row>
+                                                                    <Col>
+                                                                        Status:
+                                                                    </Col>
+                                                                    <Col>
+                                                                        <div style={{ 
+                                                                                        color: `${ product.countInStock > 0 ? 'green' : 'red'}`,
+                                                                                        fontSize: 20
+                                                                                    }}>
+                                                                            { product.countInStock > 0 ? 'Na stanju' : 'Nema na stanju'}
+                                                                        </div>
+                                                                    </Col>
+                                                                </Row>
+                                                            </ListGroup.Item> */}
+
+                                                            {product.countInStock > 0 && (
+                                                                <ListGroup.Item>
+                                                                    <Row>
+                                                                        <Col>Kolicina:</Col>
+                                                                        <Col xs='auto' className='my-1'>
+                                                                            <Form.Control 
+                                                                                as='select'
+                                                                                value={qty} 
+                                                                                onChange={(e) => setQty(Number(e.target.value)) }>
+                                                                                    {
+                                                                                        [...Array(product.countInStock).keys()].map((x) => (
+                                                                                            <option key={x +1} value={x +1}>
+                                                                                                {x+1}
+                                                                                            </option>
+                                                                                        ))
+                                                                                    }
+
+                                                                            </Form.Control>
+                                                                        </Col>
+                                                                    </Row>
+                                                                </ListGroup.Item>
+                                                            )}
+
+                                                            <ListGroup.Item>
+                                                                <Button 
+                                                                    className='btn btn-block' 
+                                                                    disabled={product.countInStock == 0} 
+                                                                    type='button'
+                                                                    onClick= {addToCartHandler}>
+                                                                        Dodaj u Korpu
+                                                                </Button>
+                                                            </ListGroup.Item>
+                                                        </ListGroup>
+                                                    </Card>
+
+                                                </Col>
+                                               
                                         </ListGroup.Item>
                                     </ListGroup>
                                 </Col>
-                                <Col sm={12} md={6} lg={4} xl={3} xs={12}>
+                                {/* <Col sm={12} md={6} lg={4} xl={3} xs={12}>
                                     <Card>
                                     <Card.Title style={{ textAlign:'center', color:'black'}}>Kupovina</Card.Title>
                                         <ListGroup variant='flush' >
@@ -206,11 +305,11 @@ function ProductScreen({match}) {
                                         </ListGroup>
                                     </Card>
 
-                                </Col>
+                                </Col> */}
                         </Row>
 
                         <Row>
-                            <Col sm={12} md={6} lg={4} xl={3} xs={12} >
+                            <Col sm={12} md={12} lg={12} xl={12} xs={12} >
                             <h2 style={{color:'black'}}>Detaljni opis:</h2>
                                 <ListGroup variant='flush'>
                                         <ListGroup.Item>

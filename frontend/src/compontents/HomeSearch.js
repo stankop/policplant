@@ -28,9 +28,10 @@ function HomeSearch() {
   const location = useLocation();
   
   return (
-    <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={12} className="d-flex">
-                              <Kategorija category={category} />
-    </Col>
+    // <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={12} className="d-flex">
+    //                           <Kategorija category={category} />
+    // </Col>
+    true
   )
 }
 
