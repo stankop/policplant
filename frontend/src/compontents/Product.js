@@ -8,7 +8,7 @@ function Product({product}) {
   return (
     <Card className={`my-2 p-2 rounded ${classes["img-hover-zoomA"]}`} border="primary"  style={{ width: '18rem', height: '26rem' }}>
         <Link to={`/products/${product._id}`}>
-            <Card.Img src={product.images[0]?.image} style={{width: '16.4rem', height: '18rem' }}></Card.Img>
+            <Card.Img src={product.images?.findLast( image => image.order === 0)?.image} style={{width: '16.4rem', height: '18rem' }}></Card.Img>
             <Card.ImgOverlay>
                 {product?.countInStock < 1 && <Card.Title><div style={{ backgroundColor:"red", color:"white", display: 'inline-flex', padding: '5px', marginBottom: '1em'}}>Nema na stanju</div></Card.Title>}
             </Card.ImgOverlay>

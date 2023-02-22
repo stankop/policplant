@@ -227,6 +227,7 @@ class Product(models.Model):
 class PlantImage(models.Model):
     product = models.ForeignKey(Product,related_name="images", on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True, default='/default.jpg')
+    order = models.IntegerField(null=True, blank=True, default=0)
 
 class Order(models.Model):
     user = models.ForeignKey(UserAccount, on_delete = models.SET_NULL, null= True)

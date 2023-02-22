@@ -277,8 +277,9 @@ def uploadImage(request):
     else:
         #PlantImage.objects.filter(product_id = product_id).delete()
         images = request.FILES.getlist('images')
-        for image in images:
-            PlantImage.objects.create(product=product , image=image)
+        print('Ovo su slike:',images)
+        for index, image in enumerate(images):
+            PlantImage.objects.create(product=product , image=image, order=index)
     product.save()
     return Response(data={'message':'Image was uploaded'})
 

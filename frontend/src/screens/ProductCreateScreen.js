@@ -21,15 +21,21 @@ import Gallery from "react-photo-gallery";
 import { arrayMove } from 'react-sortable-hoc';
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import Photo from "../compontents/Photo";
+import {arrayMoveImmutable} from 'array-move';
+
 toast.configure()
 
+const SortablePhoto = SortableElement(item => <Photo {...item} />);
+const SortableGallery = SortableContainer(({ items }) => (
+        <Gallery photos={items} renderImage={props => <SortablePhoto {...props} />} />
+    
+    ));
 
 function ProductCreateScreen( ) {
 
     const [name, setName] = useState('')
     const [hesteg, setHesteg] = useState('')
     const [images, setImage] = useState([])
-    const [prevImages, setPrevImages] = useState([])
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
     const [countInStock, setCountInStock] = useState(0)
@@ -47,7 +53,7 @@ function ProductCreateScreen( ) {
     const [type, setType] = useState('')
     const [sirina_biljke, setSirinaBiljke] = useState('')
     const [category, setCategory] = useState('Četinari')
-    const [ukupneSlike, setUkupneSlike] = useState([])
+    const [items, setItems] = useState([]);
 
     const [uploading, setUploading] = useState(false)
 
@@ -62,16 +68,24 @@ function ProductCreateScreen( ) {
     const inputHesh = useRef();
 
     const handleMultipleImages =(evnt)=>{
-        
         const selectedFIles =[];
-        const targetFiles =evnt.target.files;
+        const targetFiles = evnt.target.files;
         const targetFilesObject= [...targetFiles]
         targetFilesObject.map((file)=>{
            return selectedFIles.push(URL.createObjectURL(file))
         })
-        setPrevImages(selectedFIles);
+        
         setImage(evnt.target.files)
-      }
+        const photos = selectedFIles?.map(image => {
+              return {
+                  src:image,
+                  width:1,
+                  height:1
+              }
+        })
+        
+        setItems(photos)
+    }
 
     function checkPress(e){
         
@@ -83,9 +97,17 @@ function ProductCreateScreen( ) {
 
     useEffect(() => {
         
-        dispatch(listCategories())  
+        dispatch(listCategories()) 
+        console.log('First useEffect') 
         
-    }, [dispatch, navigate])
+    }, [dispatch])
+
+    useEffect(() => {
+        
+        console.log('images', images)
+        console.log('items', items)
+        
+    }, [images, items])
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -177,23 +199,21 @@ function ProductCreateScreen( ) {
         }
     })
 
-    const SortablePhoto = SortableElement(item => <Photo {...item} />);
-    const SortableGallery = SortableContainer(({ items }) => (
-        <Gallery photos={items} renderImage={props => <SortablePhoto {...props} />} />
-    
-    ));
+    // {prevImages && console.log('prevImages:', prevImages)}
 
-    const photos = prevImages?.map(image => {
-        return {
-            src:image.image,
-            width:4,
-            height:3
-        }
-    })
-    const [items, setItems] = useState(photos);
+    // const photos = prevImages?.map(image => {
+    //      return {
+    //         src:image,
+    //          width:4,
+    //         height:3
+    //      }
+    // })
+    // {photos && console.log('photos:', photos)}
 
     const onSortEnd = ({ oldIndex, newIndex }) => {
-    setItems(arrayMove(items, oldIndex, newIndex));
+        
+        setItems(arrayMoveImmutable(items, oldIndex, newIndex));
+        setImage(arrayMoveImmutable(images, oldIndex, newIndex));
   };
 
     return (
