@@ -164,7 +164,8 @@ DATABASES = {
          'PASSWORD':'Prnjavorska114',
          'HOST':'policplant-azure.postgres.database.azure.com',
          'PORT':'5432',
-         'SSL Mode':'Require'
+         'SSLMode':'required',
+         'SSL': True
 
      }
 }
