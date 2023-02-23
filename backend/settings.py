@@ -166,7 +166,7 @@ DATABASES = {
          'PORT':'5432',
          'OPTIONS': {
             'sslmode': 'verify-full',
-            'sslrootcert': os.path.join(BASE_DIR, 'BaltimoreCyberTrustRoot.crt')
+            'sslrootcert': os.path.join(BASE_DIR, 'BaltimoreCyberTrustRoot.crt.pem')
             },
         #  'SSL': True
 
