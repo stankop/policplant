@@ -26,10 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+kx0b@h6!b((ektn^tgd@c(gb=4r4l1$m*j!5q*shj+!pztrn8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '*',
+    'djangobackend.azurewebsites.net',
     'policplant.herokuapp.com',
     'localhost',
     '127.0.0.1',
@@ -140,19 +141,33 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #      }
 # } 
 
-#ovo je baza u localu
+
+#ovo je DB u localu
+# DATABASES = {
+#      'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#          'NAME': 'PolicPlant',
+#          'USER': 'postgres',
+#          'PASSWORD':'ok',
+#          'HOST':'localhost',
+#          'PORT':'5432'
+
+#      }
+# }
+
+#ovo je DB na Azuru(policplant-azure)
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.postgresql',
          'NAME': 'PolicPlant',
-         'USER': 'postgres',
-         'PASSWORD':'ok',
-         'HOST':'localhost',
-         'PORT':'5432'
+         'USER': 'postgres@policplant-azure',
+         'PASSWORD':'Prnjavorska114',
+         'HOST':'policplant-azure.postgres.database.azure.com',
+         'PORT':'5432',
+         'sslmode':True
 
      }
 }
-
 
 #ovo je DB na HEROKU
 #DATABASES = {
