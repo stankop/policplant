@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_swagger',
     'storages',
+    'webpack_boilerplate'
 ]
 
 REST_FRAMEWORK = {
@@ -228,10 +229,13 @@ MEDIA_URL = 'images/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    BASE_DIR / 'frontend/build/static'
+    BASE_DIR / 'frontend/build',
+    BASE_DIR / 'frontend/build/static',
+    
 ]
 
 MEDIA_ROOT = BASE_DIR / 'static/images' # ovo je bill: MEDIA_ROOT= 'static/images'
+
 
 # email Gmail subsystem
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
