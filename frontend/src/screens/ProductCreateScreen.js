@@ -98,16 +98,8 @@ function ProductCreateScreen( ) {
     useEffect(() => {
         
         dispatch(listCategories()) 
-        console.log('First useEffect') 
         
     }, [dispatch])
-
-    useEffect(() => {
-        
-        console.log('images', images)
-        console.log('items', items)
-        
-    }, [images, items])
 
     const submitHandler = (e) => {
         e.preventDefault()

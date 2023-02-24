@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import {  Button } from 'react-bootstrap'
+import {  Button, Row } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../compontents/Loader'
@@ -14,7 +14,18 @@ import { updateProduct, updateProductReset, updateProductDetails } from '../stor
 import Select from 'react-select';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Gallery from "react-photo-gallery";
+import { arrayMove } from 'react-sortable-hoc';
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import Photo from "../compontents/Photo";
+import {arrayMoveImmutable} from 'array-move';
 toast.configure()
+
+const SortablePhoto = SortableElement(item => <Photo {...item} />);
+const SortableGallery = SortableContainer(({ items }) => (
+        <Gallery photos={items} renderImage={props => <SortablePhoto {...props} />} />
+    
+    ));
 
 function ProductEditScreen( ) {
 
@@ -23,7 +34,7 @@ function ProductEditScreen( ) {
 
     const [name, setName] = useState('')
     const [hesteg, setHesteg] = useState('')
-    const [images, setImage] = useState('')
+    const [images, setImage] = useState([])
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
     const [countInStock, setCountInStock] = useState(0)
@@ -41,6 +52,7 @@ function ProductEditScreen( ) {
     const [type, setType] = useState('')
     const [sirina_biljke, setSirinaBiljke] = useState('')
     const [category, setCategory] = useState([])
+    const [items, setItems] = useState([]);
 
     const [uploading, setUploading] = useState(false)
 
@@ -53,10 +65,60 @@ function ProductEditScreen( ) {
     const productUpd = useSelector(state => state.updateProduct)
     const { error, loading, success, product } = productUpd
 
+    const prod = useSelector(state => state.product)
+    const { product: prodProduct,  success : prodSuccess} = prod
+
+    const ukupno = useRef([])
+
+    const handleMultipleImages =(evnt)=>{
+        const selectedFIles =[];
+        const targetFiles = evnt.target.files;
+        const targetFilesObject= [...targetFiles]
+        targetFilesObject.map((file)=>{
+           return selectedFIles.push(URL.createObjectURL(file))
+        })
+        
+        setImage(evnt.target.files)
+        const photos = selectedFIles?.map(image => {
+              return {
+                  src:image,
+                  width:1,
+                  height:1
+              }
+        })
+        const newItems = items?.map(image => {
+            return {
+                src:image.src,
+                width:1,
+                height:1
+            }
+        })
+        setItems([...newItems, ...photos])
+    }
+
+    useEffect(() => {
+        if(success){
+            const targetFilesObject= [...product?.images?.map(image => {
+                return image.image
+            })]
+           
+        
+        const photos = targetFilesObject?.map(image => {
+              return {
+                  src:image,
+                  width:1,
+                  height:1
+              }
+        })
+        setItems(photos)
+          
+        }   
+    }, [success, product?.images])
 
     useEffect(() => {
         
         dispatch(updateProductDetails(id))
+
         
         if(success){
             //dispatch(updateProductReset())
@@ -81,9 +143,10 @@ function ProductEditScreen( ) {
             setBotanickiNaziv(product.botanicki_naziv)
             setVelicinaSlanja(product.velicina_slanja)
             setSirinaBiljke(product.sirina_biljke)
+            console.log('Merimo Items', items)
         }  
         
-    }, [dispatch, navigate, success])
+    }, [dispatch, navigate, success, prodSuccess])
 
     const notify = ()=>{
  
@@ -92,6 +155,7 @@ function ProductEditScreen( ) {
     }
     const submitHandler = (e) => {
         e.preventDefault()
+        ukupno.current = items
         dispatch(updateProduct({
             _id:id,
             name,
@@ -114,6 +178,7 @@ function ProductEditScreen( ) {
             high,
             category
         },images))
+        setItems(ukupno.current)
         window.scrollTo({
             top: 0,
             left: 0,
@@ -175,6 +240,12 @@ function ProductEditScreen( ) {
         }
     })
 
+    const onSortEnd = ({ oldIndex, newIndex }) => {
+        
+        setItems(arrayMoveImmutable(items, oldIndex, newIndex));
+        setImage(arrayMoveImmutable(images, oldIndex, newIndex));
+    };
+
     return (
         <div>
         <Link to='/admin/productlist'>
@@ -229,10 +300,16 @@ function ProductEditScreen( ) {
                                     controlid="image-file"
                                     type='file'
                                     multiple="multiple"
-                                    onChange={(e) =>  setImage(e.target.files)}
+                                    // onChange={(e) =>  setImage(e.target.files)}
+                                    onChange={handleMultipleImages}
+                                    style={{ marginBottom:'.5rem'}}
                                 > 
 
                                 </Form.Control>
+                                {/* <ImagesGallery  images={prevImages} /> */}
+                                <Row>
+                                    <SortableGallery items={items} onSortEnd={onSortEnd} axis={"xy"} />
+                                </Row>
                                 {uploading && <Loader />}
 
                             </Form.Group>
@@ -291,7 +368,7 @@ function ProductEditScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              defaultValue={mesto_sadnje}
                                              onChange={(e) => setMestoSadnje(e.target.value)}>
-                                    {/* <option>Odaberi mesto sadnje...</option> */}
+                                    <option>{mesto_sadnje}</option>
                                     {allcategories?.mesto_sadnje?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
@@ -304,7 +381,7 @@ function ProductEditScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              defaultValue={type}
                                              onChange={(e) => setType(e.target.value)}>
-                                    {/* <option>Tip biljke...</option> */}
+                                    <option>{type}</option>
                                     {allcategories?.type_of_plant?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
@@ -341,7 +418,7 @@ function ProductEditScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              defaultValue={orezivanje}
                                              onChange={(e) => setOrezivanje(e.target.value)}>
-                                    <option>Orezivanje...</option> 
+                                    <option>{orezivanje}</option> 
                                     {allcategories?.orezivanje?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
@@ -354,7 +431,7 @@ function ProductEditScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              defaultValue={privlaci_insekte}
                                              onChange={(e) => setPrivlaciInsekte(e.target.value)}>
-                                    <option>Privlaci instekte...</option> 
+                                    <option>{privlaci_insekte}</option> 
                                     {allcategories?.privlaci_insekte?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
@@ -367,7 +444,7 @@ function ProductEditScreen( ) {
                                 <Form.Select aria-label="Default select example"
                                              defaultValue={brzina_rasta}
                                              onChange={(e) => setBrzinaRasta(e.target.value)}>
-                                    <option>Brzina rasta...</option>
+                                    <option>{brzina_rasta}</option>
                                     {allcategories?.brzina_rasta?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}

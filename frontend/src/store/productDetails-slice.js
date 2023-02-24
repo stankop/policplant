@@ -5,17 +5,19 @@ const productDetailsSlice = createSlice({
     initialState: {
             product: {},
             loading: false,
+            success: false,
             error:''
 
     },
     reducers:{
         productDetailsRequest(state){
             state.loading = true
-            
+            state.success = false
         },
 
         productDetailsSuccess(state, action) {
                     state.loading = false
+                    state.success = true
                     state.product = action.payload
                     state.error = ''
         },
@@ -23,6 +25,12 @@ const productDetailsSlice = createSlice({
         productDetailsFail(state, action) {
             state.loading = false
             state.error = action.payload
+        },
+        productDetailsReset(state) {
+            
+           
+            state.success = false
+            state.error = ''
         }
 
     }
