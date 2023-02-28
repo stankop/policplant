@@ -72,7 +72,7 @@ function ProductScreen({match}) {
   return (
     <div style={{height:'100%'}}>
         <Breadcrumb>
-          <Breadcrumb.Item href="/#/"><i class="fa fa-home"></i></Breadcrumb.Item>
+          <Breadcrumb.Item href="/#/"><i className="fa fa-home"></i></Breadcrumb.Item>
           <Breadcrumb.Item href={`#/categories/${product?.category?.map(x => x._id)[0]}`}>
                 
           { product?.category?.map(x => x.name)[0]}

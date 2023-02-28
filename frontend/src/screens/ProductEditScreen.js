@@ -417,7 +417,7 @@ function ProductEditScreen( ) {
                                              defaultValue={type}
                                              onChange={(e) => setType(e.target.value)}>
                                     <option>{type}</option>
-                                    {allcategories?.type_of_plant?.map(cat => (
+                                    {[...Array.from(allcategories?.type_of_plant), ""]?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
  
@@ -454,7 +454,7 @@ function ProductEditScreen( ) {
                                              defaultValue={orezivanje}
                                              onChange={(e) => setOrezivanje(e.target.value)}>
                                     <option>{orezivanje}</option> 
-                                    {allcategories?.orezivanje?.map(cat => (
+                                    {[...Array.from(allcategories?.orezivanje), ""]?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
  
@@ -467,7 +467,7 @@ function ProductEditScreen( ) {
                                              defaultValue={privlaci_insekte}
                                              onChange={(e) => setPrivlaciInsekte(e.target.value)}>
                                     <option>{privlaci_insekte}</option> 
-                                    {allcategories?.privlaci_insekte?.map(cat => (
+                                    {[...Array.from(allcategories?.privlaci_insekte), ""]?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
  
@@ -480,7 +480,7 @@ function ProductEditScreen( ) {
                                              defaultValue={brzina_rasta}
                                              onChange={(e) => setBrzinaRasta(e.target.value)}>
                                     <option>{brzina_rasta}</option>
-                                    {allcategories?.brzina_rasta?.map(cat => (
+                                    {[...Array.from(allcategories?.brzina_rasta),""]?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     ))}
  
