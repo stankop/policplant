@@ -113,7 +113,7 @@ function ProductEditScreen( ) {
         setItems(photos)
           
         }   
-    }, [success, product?.images])
+    }, [success,product?.name, product?.images])
 
     useEffect(() => {
         
@@ -146,7 +146,7 @@ function ProductEditScreen( ) {
             console.log('Merimo Items', items)
         }  
         
-    }, [dispatch, navigate, success, prodSuccess])
+    }, [dispatch, navigate, product?.name, success, prodSuccess])
 
     const notify = ()=>{
  
@@ -417,9 +417,9 @@ function ProductEditScreen( ) {
                                              defaultValue={type}
                                              onChange={(e) => setType(e.target.value)}>
                                     <option>{type}</option>
-                                    {[...Array.from(allcategories?.type_of_plant), ""]?.map(cat => (
+                                    {!allcategories ? [...Array.from(allcategories?.type_of_plant), ""]?.map(cat => (
                                         <option value={cat}>{cat}</option>
-                                    ))}
+                                    )) : []}
  
                                 </Form.Select>
                             </Form.Group>
@@ -454,9 +454,9 @@ function ProductEditScreen( ) {
                                              defaultValue={orezivanje}
                                              onChange={(e) => setOrezivanje(e.target.value)}>
                                     <option>{orezivanje}</option> 
-                                    {[...Array.from(allcategories?.orezivanje), ""]?.map(cat => (
+                                    {!allcategories ? [...Array.from(allcategories?.orezivanje), ""]?.map(cat => (
                                         <option value={cat}>{cat}</option>
-                                    ))}
+                                    )) : []}
  
                                 </Form.Select>
                             </Form.Group>
@@ -467,9 +467,9 @@ function ProductEditScreen( ) {
                                              defaultValue={privlaci_insekte}
                                              onChange={(e) => setPrivlaciInsekte(e.target.value)}>
                                     <option>{privlaci_insekte}</option> 
-                                    {[...Array.from(allcategories?.privlaci_insekte), ""]?.map(cat => (
+                                    {!allcategories ? [...Array.from(allcategories?.privlaci_insekte), ""]?.map(cat => (
                                         <option value={cat}>{cat}</option>
-                                    ))}
+                                    )): []}
  
                                 </Form.Select>
                             </Form.Group>
@@ -480,9 +480,9 @@ function ProductEditScreen( ) {
                                              defaultValue={brzina_rasta}
                                              onChange={(e) => setBrzinaRasta(e.target.value)}>
                                     <option>{brzina_rasta}</option>
-                                    {[...Array.from(allcategories?.brzina_rasta),""]?.map(cat => (
+                                    {!allcategories ? [...Array.from(allcategories?.brzina_rasta),""]?.map(cat => (
                                         <option value={cat}>{cat}</option>
-                                    ))}
+                                    )): []}
  
                                 </Form.Select>
                             </Form.Group>
