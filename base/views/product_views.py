@@ -62,18 +62,19 @@ def getProducts(request):
     if query == 'null' or query == None:
         query = ''
     
-
-    products = Product.objects.filter(name__icontains=query).order_by('name')
+    products = Product.objects.all().order_by('name')
+    print('Broj biljaka je:', len(products))
+    #products = Product.objects.filter(name__icontains=query).order_by('name')
     print(products)
     page = request.GET.get('page')
     paginator = Paginator(products, 10)
     
-    try:
-        products = paginator.page(page)
-    except PageNotAnInteger:
-        products = paginator.page(1)
-    except EmptyPage:
-        products = paginator.page(paginator.num_pages)
+    # try:
+    #     products = paginator.page(page)
+    # except PageNotAnInteger:
+    #     products = paginator.page(1)
+    # except EmptyPage:
+    #     products = paginator.page(paginator.num_pages)
     
     if page == None:
         page = 1
@@ -202,7 +203,9 @@ def createProduct(request):
 #@permission_classes([IsAdminUser])
 def deleteProduct(request, pk):
     product = Product.objects.get(_id = pk)
-    product.delete()
+    if(product):
+        product.delete()
+        return Response("There is a error.")
     return Response("Product deleted.")
 
 @api_view(['PUT'])
