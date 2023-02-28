@@ -71,7 +71,7 @@ function ProductScreen({match}) {
  })
   return (
     <div style={{height:'100%'}}>
-        <Breadcrumb>
+        <Breadcrumb style={{ paddingTop:'2rem'}}>
           <Breadcrumb.Item href="/#/"><i className="fa fa-home"></i></Breadcrumb.Item>
           <Breadcrumb.Item href={`#/categories/${product?.category?.map(x => x._id)[0]}`}>
                 
@@ -116,7 +116,7 @@ function ProductScreen({match}) {
                                 <Col sm={12} md={6} lg={8} xl={7} xs={6}>
                                     <ListGroup variant='flush'>
                                         <ListGroup.Item>
-                                            <h2><strong style={{ fontSize:'2.8rem', fontFamily: 'Oswald, sans-serif;'}}>{product.name}</strong> <i style={{fontSize:'1.4rem'}}>{product.botanicki_naziv}</i></h2> 
+                                            <h2><strong style={{ fontSize:'2.8rem', fontFamily: 'Oswald, sans-serif'}}>{product.name}</strong> <i style={{fontSize:'1.4rem'}}>{product.botanicki_naziv}</i></h2> 
                                         </ListGroup.Item>
                                         <ListGroup.Item >
                                             <strong style={{ color:'#228B22', fontSize:30 }}>{product.price} rsd</strong> 

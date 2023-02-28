@@ -37,7 +37,7 @@ function CategoryScreen() {
   return (
     <div>
         { false && <ProductCarucel></ProductCarucel>}
-        <Breadcrumb>
+        <Breadcrumb style={{ paddingTop:'2rem'}}>
           <Breadcrumb.Item href="/"><i className="fa fa-home"></i></Breadcrumb.Item>
           <Breadcrumb.Item  active>
             { catProducts?.find( cat => cat._id?.toString() === id)?.name}

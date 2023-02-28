@@ -49,12 +49,12 @@ function Header(props) {
     <header >
       <Row>
       <Navbar  variant="dark" expand="lg" collapseOnSelect style={{ height:'12rem'}} className={classes["color-navbar"]}>
-        <Container  >
+        <Container  style={{ overflow:'hidden'}}>
         
               <LinkContainer to="/">
-                <Navbar.Brand>
+                <Navbar.Brand >
                   {/* <h1 className={classes["h1"]}>Rasadnik Ema</h1> */}
-                  <img src={image} style={{ width:'22rem', height:'22rem',marginTop: '+2rem'}} alt="Facebook"/>
+                  <img src={image} style={{ width:'22rem', height:'22rem',marginTop: '+2rem', overflow:'hidden'}} alt="Rasadnik Ema"/>
                 </Navbar.Brand>
               </LinkContainer>
               
