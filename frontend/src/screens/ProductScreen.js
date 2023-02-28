@@ -152,22 +152,22 @@ function ProductScreen({match}) {
                                         {product.high && <ListGroup.Item>
                                             <strong>Visina biljke:</strong> {product.high}
                                         </ListGroup.Item>}
-                                        {product.high && <ListGroup.Item>
+                                        {product.type_of_plant && <ListGroup.Item>
                                             <strong>Tip biljke:</strong> {product.type_of_plant}
                                         </ListGroup.Item>}
-                                        {product.high && <ListGroup.Item>
+                                        {product.privlaci_insekte && <ListGroup.Item>
                                             <strong> Medonosna:</strong> {product.privlaci_insekte}
                                         </ListGroup.Item>}
-                                        {product.high && <ListGroup.Item>
+                                        {product.brzina_rasta && <ListGroup.Item>
                                             <strong> Brzina rasta:</strong> {product.brzina_rasta}
                                         </ListGroup.Item>}
-                                        {product.high && <ListGroup.Item>
+                                        {product.prezimljava && <ListGroup.Item>
                                             <strong> Prezimljava:</strong> {product.prezimljava}
                                         </ListGroup.Item>}
-                                        {product.high && <ListGroup.Item>
+                                        {product.sirina_biljke && <ListGroup.Item>
                                             <strong> Sirina:</strong> {product.sirina_biljke}
                                         </ListGroup.Item>}
-                                        {product.high && <ListGroup.Item>
+                                        {product.velicina_slanja && <ListGroup.Item>
                                             <strong> Isporuka:</strong> {product.velicina_slanja}
                                         </ListGroup.Item>}
                                         <ListGroup.Item>
@@ -229,7 +229,7 @@ function ProductScreen({match}) {
                                                             <ListGroup.Item>
                                                                 <Button 
                                                                     className='btn btn-block' 
-                                                                    disabled={product.countInStock == 0} 
+                                                                    disabled={product.countInStock === 0} 
                                                                     type='button'
                                                                     onClick= {addToCartHandler}>
                                                                         Dodaj u Korpu
