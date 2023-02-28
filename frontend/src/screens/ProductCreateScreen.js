@@ -40,7 +40,7 @@ function ProductCreateScreen( ) {
     const [price, setPrice] = useState(0)
     const [countInStock, setCountInStock] = useState(0)
     const [color, setColor] = useState('')
-    const [mesto_sadnje, setMestoSadnje] = useState('')
+    const [mesto_sadnje, setMestoSadnje] = useState([])
     const [place, setPlace] = useState('')
     const [vre_cve, setVremeCvetanja] = useState([])
     const [orezivanje, setOrezivanje] = useState('')
@@ -172,6 +172,11 @@ function ProductCreateScreen( ) {
         setVremeCvetanja(Array.isArray(e) ? e.map(x => x.value) : []);
     }
 
+    const handleChange_Mesto = (e) => {
+        
+        setMestoSadnje(Array.isArray(e) ? e.map(x => x.value) : []);
+    }
+
     const handleChange2 = (e) => {
         
         setCategory(Array.isArray(e) ? e.map(x => x.value) : []);
@@ -188,6 +193,13 @@ function ProductCreateScreen( ) {
         return {
             value:x.name,
             label:x.name
+        }
+    })
+
+    const mesta_sadnje = allcategories?.mesto_sadnje?.map(x => {
+        return {
+            value:x,
+            label:x
         }
     })
 
@@ -329,7 +341,7 @@ function ProductCreateScreen( ) {
                                 </Form.Control>
                             </Form.Group>
 
-                            <Form.Group controlId='mesto_sadnje'>
+                            {/* <Form.Group controlId='mesto_sadnje'>
                                 <Form.Label><strong>MESTO SADNJE</strong></Form.Label>
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setMestoSadnje(e.target.value)}>
@@ -339,6 +351,27 @@ function ProductCreateScreen( ) {
                                     ))}
  
                                 </Form.Select>
+                            </Form.Group> */}
+
+                            <Form.Group controlId='mesto_sadnje'>
+                                <Form.Label><strong>MESTO SADNJE</strong></Form.Label>
+                                <Select aria-label="Default select example"
+                                             isMulti
+                                             
+                                             isClearable
+                                             className="dropdown"
+                                             placeholder="Select Option"
+                                             value={mesta_sadnje?.filter(obj => mesto_sadnje?.includes(obj.value))}
+                                             closeMenuOnSelect={false}
+                                             options={mesta_sadnje}
+                                             onChange={handleChange_Mesto}>
+                                             {/* onChange={(e) => setVremeCvetanja(e.target.value)}> */}
+                                    {/* <option>Tip biljke...</option> */}
+                                    {/* {allcategories?.vre_cve?.map((cat, i) => (
+                                        <option value={cat}>{cat}</option>
+                                    ))} */}
+ 
+                                </Select>
                             </Form.Group>
 
                             <Form.Group controlId='type_plant'>

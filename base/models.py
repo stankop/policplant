@@ -169,6 +169,10 @@ class Product(models.Model):
               ('oktobar', 'oktobar'),
               ('novembar', 'novembar'),
               ('decembar', 'decembar'))
+    
+    MESTO_SADNJE = (('sunce', 'sunce'),
+              ('polusenka', 'polusenka'),
+              ('hlad', 'hlad'))
     class Orezivanje(models.TextChoices):
         DA = 'da', _('da')
         DEFAULT = 'ne', _('ne')
@@ -204,10 +208,11 @@ class Product(models.Model):
     
     #karakteristike
     color = models.CharField(max_length=250, null=True, blank=True)
-    mesto_sadnje = models.CharField(max_length=250, choices=Mesto_Sadnje.choices, default=Mesto_Sadnje.DEFAULT)
+    #mesto_sadnje = models.CharField(max_length=250, choices=Mesto_Sadnje.choices, default=Mesto_Sadnje.DEFAULT)
+    mesto_sadnje = MultiSelectField(choices=MESTO_SADNJE,max_choices=3)
     place_of_planting = models.CharField(max_length=250, choices=Place.choices, default=Place.DEFAULT)
     #vreme_cvetanja = models.CharField(max_length=50, choices=Vreme_Cvetanja.choices, default=Vreme_Cvetanja.DEFAULT)
-    vre_cve = MultiSelectField(choices=VREME_CVETANJA,max_choices=3)
+    vre_cve = MultiSelectField(choices=VREME_CVETANJA,max_choices=6)
     orezivanje = models.CharField(max_length=250,choices=Orezivanje.choices, default=Orezivanje.DEFAULT)
     privlaci_insekte = models.CharField(max_length=250,choices=Privlaci_Insekte.choices, default=Privlaci_Insekte.DEFAULT)
     brzina_rasta = models.CharField(max_length=250,choices=Brzina_Rasta.choices, default=Brzina_Rasta.DEFAULT)

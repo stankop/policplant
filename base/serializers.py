@@ -30,9 +30,9 @@ class ProductSerializer(serializers.ModelSerializer):
         place = [e.value for e in obj.Place]
         return place
     
-    def get_mesto_sadnjeChoises(self, obj):
-        flow = [e.value for e in obj.Mesto_Sadnje]
-        return flow
+    # def get_mesto_sadnjeChoises(self, obj):
+    #     flow = [e.value for e in obj.Mesto_Sadnje]
+    #     return flow
     
     # def get_vreme_cvetanjaChoises(self, obj):
     #     high = [e.value for e in obj.Vreme_Cvetanja]
@@ -65,7 +65,10 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_vre_cveChoises(self, obj):
         high = [e for (e,y) in obj.VREME_CVETANJA]
         return high
-    
+
+    def get_mesto_sadnjeChoises(self, obj):
+        flow = [e for (e,y) in obj.MESTO_SADNJE]
+        return flow
     # def get_categories(self, obj):
     #     serializer = PlantCategorySerializer(obj.category, many=True)
     #     return serializer.data

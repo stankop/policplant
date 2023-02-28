@@ -130,8 +130,11 @@ function ProductScreen({match}) {
                                             <strong>Boja:</strong> {product.color}
                                         </ListGroup.Item>}
 
-                                        {product.mesto_sadnje && <ListGroup.Item>
+                                        {/* {product.mesto_sadnje && <ListGroup.Item>
                                             <strong>Položaj:</strong> {product.mesto_sadnje}
+                                        </ListGroup.Item>} */}
+                                        {product.mesto_sadnje?.length > 0 && <ListGroup.Item>
+                                            <strong>Položaj:</strong> {Array.isArray(product.mesto_sadnje) ? product.mesto_sadnje?.join(', ') : product.mesto_sadnje}
                                         </ListGroup.Item>}
 
                                         {product.place_of_planting && <ListGroup.Item>

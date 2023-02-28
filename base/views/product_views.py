@@ -203,6 +203,7 @@ def createProduct(request):
 #@permission_classes([IsAdminUser])
 def deleteProduct(request, pk):
     product = Product.objects.get(_id = pk)
+    print('Ovo je product:', product)
     if(product):
         product.delete()
         return Response("There is a error.")
