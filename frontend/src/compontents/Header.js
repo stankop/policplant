@@ -12,8 +12,8 @@ import {
   faFlag,
   faStore
 } from "@fortawesome/free-solid-svg-icons";
-import { Fragment, useEffect } from 'react'
-import { LinkContainer } from "react-router-bootstrap";
+import { Fragment, useEffect, useRef, useState } from 'react'
+import { LinkContainer, Link } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
 import { logout } from "../store/user-actions";
@@ -33,13 +33,26 @@ function Header(props) {
   const category = useSelector((state) => state.categoryList);
   const { categories } = category;
   const image = 'https://policplantpublic.s3.eu-west-2.amazonaws.com/veliki+logo+verzija+1.0.png'
+  const listKagetorija= useRef([])
+
+  const [cat, setCat] = useState(categories)
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    
+ 
     dispatch(listCategories())
 
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+   
+
+    localStorage.setItem('categories', JSON.stringify(categories))
+    listKagetorija.current = JSON.parse(localStorage.getItem('categories'))
+    setCat(listKagetorija.current)
+    
+  }, [categories]);
   
   const logoutHandler = (event) => {
     dispatch(logout());
@@ -95,18 +108,16 @@ function Header(props) {
                     <div style={{fontSize: '1.4rem'}}><FontAwesomeIcon icon={faStore}></FontAwesomeIcon>   
                           <NavDropdown title="Prodavnica" 
                                   id="basic-nav-dropdown" 
+                                  
                                   style={{
                                           fontSize: '1.4rem', 
                                           display: 'inline-block'}}>
-                        {categories?.map( (category) => (
-                            <NavDropdown.Item  key={category._id}>
-                                <LinkContainer to={`/categories/${category._id}`} >
-                                    <Nav.Link >
-                                    { category.name }
-                                    </Nav.Link>
+                            {cat?.map( (category) => (
+                              <LinkContainer to={`/categories/${category._id}`} key={category._id}>
+                                  <NavDropdown.Item  key={category._id}>
+                                      { category.name }  
+                                  </NavDropdown.Item>
                                 </LinkContainer>
-                                
-                            </NavDropdown.Item>
                             ))}
                         
                           </NavDropdown>  

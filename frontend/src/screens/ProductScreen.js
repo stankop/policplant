@@ -36,6 +36,7 @@ function ProductScreen({match}) {
   const productDet = useSelector(state => state.product)
   const {loading, error, product} = productDet
 
+
   useEffect(()=>{
         WebFont.load({
         google: {
@@ -82,7 +83,7 @@ function ProductScreen({match}) {
           </Breadcrumb.Item>
         </Breadcrumb>
         <Link to={-1} className='btn btn-primary my-3'> Nazad</Link>
-        
+        {userInfo && <Link to={`/admin/product/${id}/edit`} className='btn btn-primary my-3' style={{ marginLeft:'3rem'}}> Edit Biljke</Link>}
 
         {loading ? 
                  <Loader></Loader>

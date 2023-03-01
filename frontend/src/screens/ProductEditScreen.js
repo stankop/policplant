@@ -260,8 +260,8 @@ function ProductEditScreen( ) {
 
     return (
         <div>
-        <Link to='/admin/productlist'>
-            Go Back
+        <Link to={-1}> 
+            Nazad
         </Link>
 
         <FormContainer>

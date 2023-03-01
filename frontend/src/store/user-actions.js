@@ -52,7 +52,7 @@ export const logout =  () => {
         dispatch(userActions.userLogout())
         dispatch(userDetailsActions.userDetailsReset())
         dispatch(orderOrdersProfileActions.orderOrdersProfileReset())
-        dispatch(userListActions.userDetailsReset())
+        //dispatch(userListActions.userDetailsReset())
     }
 }
 
