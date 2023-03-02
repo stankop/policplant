@@ -47,6 +47,8 @@ function CategoryScreen() {
         </Breadcrumb>
         <Link to={-1} className='btn btn-primary my-3'> Nazad</Link>
         <h1>{ catProducts?.find( cat => cat._id?.toString() === id)?.name}</h1>
+        <br></br>
+        <p>{ catProducts?.find( cat => cat._id?.toString() === id)?.description}</p>
         { loading ? <Loader></Loader>
                  : error ? <Message variant='danger'>{error}</Message> 
                  :
