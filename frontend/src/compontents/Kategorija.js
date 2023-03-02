@@ -5,12 +5,12 @@ import classes from './Product.module.css'
 
 function Kategorija({category}) {
   return (
-    <Card className={`my-1 p-1  ${classes["img/-hover-zoom"]} h-100 `} border="dark"  style={{ width: '18rem', height: '25rem' }}>
+    <Card className={`my-1 p-1  ${classes["img/-hover-zoom"]} h-100 `} border="dark"  style={{ width: '100%', height: '25rem' }}>
         <Card.Header as="h6"></Card.Header>
         <Link to={`/categories/${category._id}`}>
             <Card.Img src={category.image}></Card.Img>
         </Link>
-        <Card.Body style={{ textAlign: "center",textDecoration: 'none'}}>
+        <Card.Body style={{ textAlign: "center", textDecoration: 'none'}}>
             <Link to={`/categories/${category._id}`}>
              <Card.Title as="div" >
                  <strong style={{ display: 'inline-block',fontSize: '1.6rem'}}>{category.name}</strong>
