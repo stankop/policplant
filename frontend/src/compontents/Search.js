@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useRef } from 'react'
+import React, { useEffect, useState, useMemo, useRef, useCallback } from 'react'
 import { Button, Container, Form, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useLocation } from "react-router-dom";
@@ -50,6 +50,7 @@ function Search( { onSearch}) {
     const location = useLocation();
     const keyword = localStorage.getItem('keyword')
 
+    
     const memoizedValue = useMemo(() => {
         const value = {
             color: boja,
@@ -60,13 +61,21 @@ function Search( { onSearch}) {
             search: pretraga,
             keyword: keyword
         }
-        onSearch(value)
+        
+        //onSearch(value)
         return value;
         }, [boja, high, tip, kategorija, pozicija, pretraga, keyword]);
     
-    const debouncedSearchTerm = useDebounce(memoizedValue, 100);
+    const debouncedSearchTerm = useDebounce(memoizedValue, 500);
     const initialRender = useRef(true);
     
+
+    useEffect(()=>{
+
+        onSearch(memoizedValue)
+
+     }, [memoizedValue, onSearch]);
+
     useEffect(()=>{
        if(initialRender.current){
         initialRender.current = false;
@@ -131,7 +140,7 @@ function Search( { onSearch}) {
                                 type='search'
                                 name='pretraga'
                                 inline ='true'
-                                placeholder='Boja...NE radi jos ovo za boje'
+                                placeholder='Select....'
                                 onChange={(e) => setBoja(e.target.value) }>
                             </Form.Control>
                         </Row>

@@ -27,14 +27,14 @@ function HomeScreen() {
   const dispatch = useDispatch()
   const [carucel, setCarucel] = useState(true)
   const [ toggle, setToggle ] = useState(true)
-  const [ val, setVal ] = useState({
-    color: [],
-    high: [],
-    type: [],
-    category: [],
-    flow: [],
-    search: ''
-})
+//   const [ val, setVal ] = useState({
+//     color: '',
+//     high: [],
+//     type: [],
+//     category: [],
+//     flow: [],
+//     search: ''
+// })
   const screenType = useScreenType();
   const cat = useSelector(state => state.categoryList)
   const { error: { categoryError}, loading:{ categoryLoading}, categories } = cat
@@ -49,11 +49,11 @@ function HomeScreen() {
     dispatch(listCategories())
     //dispatch(listFilterProducts(val))
          
-  }, [dispatch, keyword]);
+  }, [dispatch]);
 
 
  const setSearchValue = (value) => {
-    setVal(value)
+    //setVal(value)
     if(value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== ''){
      setToggle(false)
      setCarucel(false)

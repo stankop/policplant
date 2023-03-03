@@ -41,7 +41,8 @@ function Header(props) {
 
   useEffect(() => {
  
-    dispatch(listCategories())
+    
+    //dispatch(listCategories())
 
   }, [dispatch]);
 
