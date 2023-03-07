@@ -28,12 +28,23 @@ export const updateProduct = (product, images) => {
 
             const files = images //e.target.filesconsole.log('form fils:', files)
             const formData = new FormData()
-            const arr = Array.from(files)
-            arr?.forEach(x => 
-                formData.append('images', x)
-            )
-            //formData.append('image', files)
-            formData.append('product_id', product_id)
+            console.log('Type', images)
+            if(images[0] instanceof File ){
+                
+                const arr = Array.from(files)
+                arr?.forEach(x => 
+                    formData.append('images', x)
+                )
+                //formData.append('image', files)
+                formData.append('product_id', product_id)
+            }else{
+                
+                const arr = Array.from(files?.map(x => x.id))
+                
+                formData.append('images', arr)
+                //formData.append('image', files)
+                formData.append('product_id', product_id)
+            }
             
             try {
                 const config = {

@@ -274,10 +274,16 @@ def uploadImage(request):
     data = request.data
 
     product_id = data['product_id']
-    
+
     product = Product.objects.get(_id=product_id)
     if not request.FILES.getlist('images'):
-        pass
+        imagesStay = [int(x) for x in str(data['images']).split(',')]
+        PlantImage.objects.filter(product_id=product_id).exclude(id__in=imagesStay).delete()
+        for index, image_id in enumerate(imagesStay):
+            stay_image = PlantImage.objects.get(id=image_id)
+            stay_image.order = index
+            stay_image.save()
+
     else:
         #PlantImage.objects.filter(product_id = product_id).delete()
         images = request.FILES.getlist('images')

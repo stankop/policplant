@@ -21,11 +21,6 @@ import Photo from "../compontents/Photo";
 import {arrayMoveImmutable} from 'array-move';
 toast.configure()
 
-const SortablePhoto = SortableElement(item => <Photo {...item} />);
-const SortableGallery = SortableContainer(({ items }) => (
-        <Gallery photos={items} renderImage={props => <SortablePhoto {...props} />} />
-    
-    ));
 
 function ProductEditScreen( ) {
 
@@ -70,6 +65,25 @@ function ProductEditScreen( ) {
 
     const ukupno = useRef([])
 
+    const SortablePhoto = SortableElement(item => {
+        return (
+            <div onDoubleClick={()=> console.log('Slika')}>
+                <Photo {...item} />
+            </div>
+        )});
+    const SortableGallery = SortableContainer(({ items }) => (
+        
+        <Gallery photos={items} renderImage={props => {
+        return (
+                
+                <SortablePhoto {...props} />
+                
+            )}} />
+        
+    ));
+
+    
+
     const handleMultipleImages =(evnt)=>{
         const selectedFIles =[];
         const targetFiles = evnt.target.files;
@@ -98,20 +112,28 @@ function ProductEditScreen( ) {
 
     useEffect(() => {
         if(success){
-            const targetFilesObject= [...product?.images?.map(image => {
-                return image.image
-            })]
+            const prvaSlika =  Array.from(product?.images).findLast(x => x.order === 0)
            
-        
-        const photos = targetFilesObject?.map(image => {
+            const targetFilesObject= Array.from([...product?.images])?.sort((x, y) => x.order - y.order).map(image => {
+                return {
+                    image: image?.image,
+                    id: image?.id
+                }
+            })
+            const targetFilesObjectWithoutLast = targetFilesObject?.filter(x => x?.id !== prvaSlika?.id)
+            if(prvaSlika){
+                targetFilesObjectWithoutLast.unshift({image: prvaSlika?.image, id: prvaSlika?.id})
+            }
+
+        const photos = [...new Set(targetFilesObjectWithoutLast)]?.map(image => {
               return {
-                  src:image,
+                  src:image.image,
+                  id:image.id,
                   width:1,
                   height:1
               }
         })
-        setItems(photos)
-          
+        setItems(photos) 
         }   
     }, [success,product?.name, product?.images])
 
@@ -143,7 +165,6 @@ function ProductEditScreen( ) {
             setBotanickiNaziv(product.botanicki_naziv)
             setVelicinaSlanja(product.velicina_slanja)
             setSirinaBiljke(product.sirina_biljke)
-            console.log('Merimo Items', items)
         }  
         
     }, [dispatch, navigate, product?.name, success, prodSuccess])
@@ -185,6 +206,7 @@ function ProductEditScreen( ) {
             behavior: "smooth"
           })
           notify()
+          setImage([])
     }
 
 
@@ -252,14 +274,42 @@ function ProductEditScreen( ) {
         }
     })
 
-    const onSortEnd = ({ oldIndex, newIndex }) => {
-        
+
+    const onSortEnd = ({ oldIndex, newIndex},e) => {
+
         setItems(arrayMoveImmutable(items, oldIndex, newIndex));
         setImage(arrayMoveImmutable(images, oldIndex, newIndex));
+        console.log('Items sort order', items);
+        console.log('Image sort order', images);
     };
 
     return (
-        <div>
+        <div className="ProductEditScreen"
+            onContextMenu={(e) => {
+            e.preventDefault(); // prevent the default behaviour when right clicked
+            const image = JSON.stringify(e.target.src)
+            const newItems = items.filter(item => JSON.stringify(item.src) !== image)
+            setItems(newItems)
+            console.log('Items:', newItems)
+            const newImages= newItems.map((item, index) => {
+                return {
+                    image: item.src,
+                    order: index,
+                    product: id,
+                    id: item.id
+                }
+            })
+            console.log('Images:', newImages)
+            setImage(newImages)
+
+            // const slanje= []
+            // newImages.forEach(x => {
+            //     var file = new File(["hello"], x.image
+            //     , {type:"image/png", lastModified: new Date().getTime()})
+            //     slanje.append(file)
+            // })
+            // console.log('Za slanje:', slanje)
+        }}>
         <Link to={-1}> 
             Nazad
         </Link>
@@ -320,7 +370,7 @@ function ProductEditScreen( ) {
                                 </Form.Control>
                                 {/* <ImagesGallery  images={prevImages} /> */}
                                 <Row>
-                                    <SortableGallery items={items} onSortEnd={onSortEnd} axis={"xy"} />
+                                    <SortableGallery items={items}   onSortEnd={onSortEnd} axis={"xy"} />
                                 </Row>
                                 {uploading && <Loader />}
 
@@ -581,7 +631,7 @@ function ProductEditScreen( ) {
                 )}
 
         </FormContainer >
-    </div>
+        </div>
 
     )
 }

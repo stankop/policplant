@@ -100,26 +100,28 @@ function Search( { onSearch}) {
   return (
     
     <Form onSubmit={submitHandler} >
-        <Container style={{ padding: '0.2rem'}}>
+        <Container fluid style={{ padding: '0.2rem'}}>
            
             
-            <Row md={12} xl={12} style={{margin: 'auto', display: 'flex',  justifyContent:'center', alignItems:'start' }}>
+            <Row md={12} xl={12} style={{margin: 'auto', display: 'flex' }}>
                 
                 
-                    <Row md={12} xl={12} style={{ padding:'0.5rem', width: '94%', justifyContent:'start'}}>
-                    <h6><strong>Pretraga Proizvoda:</strong></h6>
-                        <Form.Control 
-                            type='search'
-                            name='pretraga'
-                            inline ='true'
-                            placeholder='Trazeni proizvod...'
-                            onChange={(e) => setPretraga(e.target.value) }>
-                        </Form.Control>
-                    </Row>
+                    <Row md={12} xl={12} style={{ display: 'flex', padding:'0.5rem', width: '100%'}}>
+                        <Row >
+                            <h6><strong>Pretraga Proizvoda:</strong></h6>
+                        </Row>
+                        <Row>
+                            <Form.Control 
+                                type='search'
+                                name='pretraga'
+                                inline ='true'
+                                placeholder='Trazeni proizvod...'
+                                onChange={(e) => setPretraga(e.target.value) }>
+                            </Form.Control>
+                            </Row>
+                        </Row>
                
-                
-                
-                    <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%', justifyContent:'center'}}>
+                    <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                     
                     <h6><strong>Pozicija za sadnju</strong></h6>
                         <CustomSelect values={ allcategories?.mesto_sadnje?.map(col => (
@@ -129,9 +131,7 @@ function Search( { onSearch}) {
                         </CustomSelect>
                     </Row>
                     
-              
-                
-                    <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%', justifyContent:'center'}}>
+                    <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                         <Row>
                             <h6><strong>Boja cveta</strong></h6>
                         </Row>
@@ -146,10 +146,9 @@ function Search( { onSearch}) {
                         </Row>
                     </Row>
              
-                
-                
-                    <Row md={12} xl={12} style={{ paddingBottom:'0.5rem', width: '100%', justifyContent:'center'}}>
-                        <h6><strong>Tip biljke</strong></h6>
+                    <Row md={12} xl={12} style={{ paddingBottom:'0.5rem', width: '100%'}}>
+
+                    <h6><strong>Tip biljke</strong></h6>
                         <CustomSelect values={ allcategories?.type_of_plant?.map(col => (
                             { value: col, label: col}
                             ))} onAction={setTip}>

@@ -15,12 +15,14 @@ const Photo = ({ index, onClick, photo, margin, direction, top, left }) => {
   };
 
   return (
+    
     <img
       style={onClick ? { ...imgStyle, ...imgWithClick } : imgStyle}
       {...photo}
       onClick={onClick ? handleClick : null}
-      alt="img"
-    />
+      onDoubleClick={()=> console.log('Double click')}
+      alt="img"/>
+   
   );
 };
 
