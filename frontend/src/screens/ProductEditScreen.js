@@ -200,13 +200,21 @@ function ProductEditScreen( ) {
             category
         },images))
         setItems(ukupno.current)
+        // setImage(ukupno.current.map((index,item) => {
+        //     return {
+        //         id:item.id,
+        //         image:item.src,
+        //         order: index,
+        //         product:id
+        //     }
+        // }))
         window.scrollTo({
             top: 0,
             left: 0,
             behavior: "smooth"
           })
-          notify()
-          setImage([])
+        notify()
+        setImage([])
     }
 
 
@@ -278,7 +286,14 @@ function ProductEditScreen( ) {
     const onSortEnd = ({ oldIndex, newIndex},e) => {
 
         setItems(arrayMoveImmutable(items, oldIndex, newIndex));
-        setImage(arrayMoveImmutable(images, oldIndex, newIndex));
+        setImage(arrayMoveImmutable(Array.from(items?.map((item, index) => {
+            return {
+                id: item.id,
+                image: item.src,
+                order:index,
+                product: id
+            }
+        })), oldIndex, newIndex));
         console.log('Items sort order', items);
         console.log('Image sort order', images);
     };
