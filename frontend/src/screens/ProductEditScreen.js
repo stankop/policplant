@@ -350,6 +350,18 @@ function ProductEditScreen( ) {
                                 </Form.Control>
                             </Form.Group>
 
+                            <Form.Group controlId='botanicki_naziv'>
+                                <Form.Label><strong>BOTANICKI NAZIV</strong></Form.Label>
+                                <Form.Control
+
+                                    type='text'
+                                    placeholder=''
+                                    defaultValue={botanicki_naziv}
+                                    onChange={(e) => setBotanickiNaziv(e.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
+
                             <Form.Group controlId='hesteg'>
                                 <Form.Label><strong>HESTEG</strong></Form.Label>
                                 <Form.Control
@@ -560,18 +572,6 @@ function ProductEditScreen( ) {
                                     placeholder=''
                                     defaultValue={prezimljava}
                                     onChange={(e) => setPrezimljava(e.target.value)}
-                                >
-                                </Form.Control>
-                            </Form.Group>
-
-                            <Form.Group controlId='botanicki_naziv'>
-                                <Form.Label><strong>BOTANICKI NAZIV</strong></Form.Label>
-                                <Form.Control
-
-                                    type='text'
-                                    placeholder=''
-                                    defaultValue={botanicki_naziv}
-                                    onChange={(e) => setBotanickiNaziv(e.target.value)}
                                 >
                                 </Form.Control>
                             </Form.Group>

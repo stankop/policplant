@@ -97,14 +97,14 @@ function Header(props) {
       <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>
         <Container >
           
-          <Row >
+          <Row style={{width:'auto', display: 'flex'}}>
           
-          <Navbar.Toggle aria-controls="basic-navbar-nav" md={4} style={{ pading:2}}/>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" md={4}/>
           
-            <Navbar.Collapse id="basic-navbar-nav">
+            <Navbar.Collapse id="basic-navbar-nav" style={{width:'100%'}}>
               
-              <Col md={{ span: 12, offset: 10 }}>
-                <Nav>
+              <Col md={{ span: 12, offset: 14 }}>
+                <Nav style={{width:'100%'}}>
                     
                     <div style={{fontSize: '1.4rem'}}><FontAwesomeIcon icon={faStore}></FontAwesomeIcon>   
                           <NavDropdown title="Prodavnica" 
