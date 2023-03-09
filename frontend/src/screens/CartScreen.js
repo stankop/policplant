@@ -44,11 +44,13 @@ function CartScreen() {
   //console.log("Ovo je cart:",cartItems);
 
   useEffect(() => {
-    if (id  ) {
-
-
+    if (id) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      });
     }
-
   }, [id]);
 
   const removeFromCartHandler = (id) => {

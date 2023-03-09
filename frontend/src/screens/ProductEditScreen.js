@@ -335,6 +335,18 @@ function ProductEditScreen( ) {
                 : (
                     <Form onSubmit={submitHandler}>
 
+                            <Form.Group controlId='id'>
+                                <Form.Label><strong>ID</strong></Form.Label>
+                                <Form.Control
+                                    required
+                                    type='text'
+                                    placeholder=''
+                                    defaultValue={id}
+                                    
+                                >
+                                </Form.Control>
+                            </Form.Group>
+
                             <Form.Group controlId='name'>
                                 <Form.Label><strong>NAME</strong></Form.Label>
                                 <Form.Control

@@ -51,8 +51,13 @@ function ProductScreen({match}) {
 
   const addToCartHandler = () => {
       dispatch(addToCart(Number(id), Number(qty)));
-      console.log(`Add to cart where id: ${ id } and ${ qty }`)
-      navigate(`/cart/?id=${id}&qty=${qty}`)
+      
+      //navigate(`/cart/?id=${id}&qty=${qty}`)
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      })
   }
 
 

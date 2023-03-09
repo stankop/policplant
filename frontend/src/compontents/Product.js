@@ -1,18 +1,31 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 import Rating from './Rating'
 import { Link } from 'react-router-dom'
 import classes from './Product.module.css'
+import {useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+import {  addToCart,removeFromCart } from '../store/cart-actions'
+import { useParams } from 'react-router';
 
 function Product({product}) {
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
+
+    const addToCartHandler = () => {
+        console.log('Klik')
+        dispatch(addToCart(Number(product._id), Number(1)));
+        navigate(`/cart/?id=${product._id}&qty=${1}`)
+    }
   return (
-    <Card className={`my-1 p-1 rounded ${classes["img-hover-zoomA"]}`} border="primary"  style={{ width: '17.5rem', height: '21.5rem' }}>
-        <Link to={`/products/${product._id}`}>
+    <Card className={`my-1 p-1 rounded ${classes["img-hover-zoomA"]}`} border="primary"  style={{ width: '17.5rem', height: 'auto' }}>
+        <Link to={`/products/${product._id}`}> 
             <Card.Img src={product.images?.findLast( image => image.order === 0)?.image} style={{width: '100%', height: '14rem' }}></Card.Img>
-            <Card.ImgOverlay>
+            <Card.ImgOverlay style={{width: '100%', height: '14rem' }}>
                 {product?.countInStock < 1 && <Card.Title><div style={{ backgroundColor:"red", color:"white", display: 'inline-flex', padding: '5px', marginBottom: '1em'}}>Nema na stanju</div></Card.Title>}
-            </Card.ImgOverlay>
-        </Link>
+            </Card.ImgOverlay> 
+        </Link> 
         <Card.Body style={{ textAlign: "center"}}>
             <Link to={`/products/${product._id}`}>
              <Card.Title as="div" >
@@ -31,6 +44,12 @@ function Product({product}) {
                     {/* {product.countInStock > 0 ? <strong style={{ color:'green'}}>Na stanju</strong> : ''}  */}
                     {/* {product.countInStock > 0 ? '' : <strong style={{ color:'red'}}>Nema na stanju</strong>}  */}
             {/* </Card.Text> */}
+            <Button     variant="primary" 
+                        disabled={product.countInStock < 1} 
+                        type='button'
+                        onClick= {addToCartHandler}>
+                                Dodaj u Korpu
+            </Button>
         </Card.Body>
     </Card>
   )
