@@ -350,7 +350,7 @@ function ProductEditScreen( ) {
                                     type='text'
                                     placeholder=''
                                     defaultValue={id}
-                                    
+                                    disabled
                                 >
                                 </Form.Control>
                             </Form.Group>

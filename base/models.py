@@ -86,8 +86,7 @@ class PlantCategory(models.Model):
 
     class Category(models.TextChoices):
         TRAJNICE = 'Trajnice-perene', _('Trajnice-perene')
-        PENJACICE = 'Penjačice', _ ('Penjačice')
-        PUZAVICA = 'Puzavice', _ ('Puzavice')
+        PENJACICE_I_PUZAVICE = 'Penjačice i Puzavice', _ ('Penjačice i Puzavice')
         UKRASNO_ZBUNJE = 'Ukrasno žbunje', _('Ukrasno žbunje')
         ZACINSKO_I_AROMATICNO_BILJE = 'Začinsko i aromatično bilje',_('Začinsko i aromatično bilje')
         UKRASNE_TRAVE = 'Ukrasne trave', _ ('Ukrasne trave')
@@ -103,7 +102,7 @@ class PlantCategory(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
     description = models.TextField(null=True, blank=True)
     image = models.ImageField(null=True, blank=True, default='/default.jpg')
-   
+    order = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
         return str(self.name)

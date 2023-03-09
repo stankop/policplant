@@ -20,6 +20,7 @@ import MUISearchModal from '../compontents/UI/MUISearchModal'
 import MDBCarusel from '../compontents/MDBCarusel'
 import ReactCarusel from '../compontents/ReactCarusel'
 import ProductCarusel from '../compontents/ProductCarusel'
+import CarouselFadeExample from '../compontents/StaticCarusel'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function HomeScreen() {
@@ -65,8 +66,9 @@ function HomeScreen() {
  
   return (
     <div>
-        { carucel && <MDBCarusel itemRef={customerLogo}></MDBCarusel>} 
+        { carucel && <MDBCarusel itemRef={customerLogo}></MDBCarusel>}  
         {/* { carucel && <ReactCarusel ></ReactCarusel>} */}
+        {/* { carucel && <CarouselFadeExample></CarouselFadeExample>} */}
         <h1> {carucel ? 'Kategorije:' : 'Filtrirani Proizvodi:'}</h1>
         {/* <Sidebar></Sidebar> */}
         {screenType.isMobile && <SearchModal onSearch={ setSearchValue}></SearchModal>} 
