@@ -308,7 +308,7 @@ function ProductCreateScreen( ) {
                                 <Form.Label><strong>CENA</strong></Form.Label>
                                 <Form.Control
                                     required
-                                    type='number'
+                                    type='text'
                                     placeholder=''
                                     defaultValue=''
                                     onChange={(e) => setPrice(e.target.value)}
@@ -320,7 +320,7 @@ function ProductCreateScreen( ) {
                                 <Form.Label><strong>STANJE</strong></Form.Label>
                                 <Form.Control
                                     required
-                                    type='number'
+                                    type='text'
                                     placeholder=''
                                     defaultValue=''
                                     onChange={(e) => setCountInStock(e.target.value)}

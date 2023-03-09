@@ -175,20 +175,24 @@ class Product(models.Model):
               ('polusenka', 'polusenka'),
               ('hlad', 'hlad'))
     class Orezivanje(models.TextChoices):
+        PRAZNA = '', _('')
         DA = 'da', _('da')
         DEFAULT = 'ne', _('ne')
 
     class Privlaci_Insekte(models.TextChoices):
+        PRAZNA = '', _('')
         DA = 'da', _('da')
         DEFAULT = 'ne', _('ne')
         
 
     class Brzina_Rasta(models.TextChoices):
+        PRAZNA = '', _('')
         BRZORASTUCE = 'brzorastuće', _('brzorastuće')
         SREDNJERASTUCE = 'srednje brzine', _('srednje brzine')
         DEFAULT = 'spororastuće',_('spororastuće')
     
     class Type(models.TextChoices):
+        PRAZNA = '', _('')
         ZIMZELANA = 'zimzelena', _('zimzelena')
         LISTOPADNA = 'listopadna', _('listopadna')
         VISEGODISNJA = 'višegodišnja', _('višegodišnja')

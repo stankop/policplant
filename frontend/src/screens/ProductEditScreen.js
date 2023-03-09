@@ -11,6 +11,7 @@ import { listProducts, productDetails } from '../store/product-actions'
 import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import { updateProduct, updateProductReset, updateProductDetails } from '../store/updateProduct-actions'
+import { listCategories } from '../store/category-actions'
 import Select from 'react-select';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -48,6 +49,7 @@ function ProductEditScreen( ) {
     const [sirina_biljke, setSirinaBiljke] = useState('')
     const [category, setCategory] = useState([])
     const [items, setItems] = useState([]);
+    const [flick, setFlick] = useState(false);
 
     const [uploading, setUploading] = useState(false)
 
@@ -65,24 +67,11 @@ function ProductEditScreen( ) {
 
     const ukupno = useRef([])
 
-    const SortablePhoto = SortableElement(item => {
-        return (
-            <div onDoubleClick={()=> console.log('Slika')}>
-                <Photo {...item} />
-            </div>
-        )});
+    const SortablePhoto = SortableElement(item => <Photo {...item} />);
     const SortableGallery = SortableContainer(({ items }) => (
+            <Gallery photos={items} renderImage={props => <SortablePhoto {...props} />} />
         
-        <Gallery photos={items} renderImage={props => {
-        return (
-                
-                <SortablePhoto {...props} />
-                
-            )}} />
-        
-    ));
-
-    
+        ));
 
     const handleMultipleImages =(evnt)=>{
         const selectedFIles =[];
@@ -111,6 +100,13 @@ function ProductEditScreen( ) {
     }
 
     useEffect(() => {
+        
+        dispatch(listCategories()) 
+        
+    }, [dispatch])
+
+    useEffect(() => {
+        console.log('Renderovanje')
         if(success){
             const prvaSlika =  Array.from(product?.images).findLast(x => x.order === 0)
            
@@ -143,6 +139,7 @@ function ProductEditScreen( ) {
 
         
         if(success){
+            console.log('Flicking')
             //dispatch(updateProductReset())
             //navigate(`/admin/productlist`)
             setName(product.name)
@@ -274,7 +271,7 @@ function ProductEditScreen( ) {
             label:x
         }
     })
-
+  
     const data2 = categories?.map(x => {
         return {
             value:x.name,
@@ -316,7 +313,7 @@ function ProductEditScreen( ) {
             })
             console.log('Images:', newImages)
             setImage(newImages)
-
+            setFlick(true)
             // const slanje= []
             // newImages.forEach(x => {
             //     var file = new File(["hello"], x.image
@@ -396,9 +393,9 @@ function ProductEditScreen( ) {
 
                                 </Form.Control>
                                 {/* <ImagesGallery  images={prevImages} /> */}
-                                <Row>
+                                {<Row>
                                     <SortableGallery items={items}   onSortEnd={onSortEnd} axis={"xy"} />
-                                </Row>
+                                </Row>}
                                 {uploading && <Loader />}
 
                             </Form.Group>
@@ -419,7 +416,7 @@ function ProductEditScreen( ) {
                                 <Form.Label><strong>CENA</strong></Form.Label>
                                 <Form.Control
                                     required
-                                    type='number'
+                                    type='text'
                                     placeholder=''
                                     defaultValue={price}
                                     onChange={(e) => setPrice(e.target.value)}
@@ -431,7 +428,7 @@ function ProductEditScreen( ) {
                                 <Form.Label><strong>STANJE</strong></Form.Label>
                                 <Form.Control
                                     required
-                                    type='number'
+                                    type='text'
                                     placeholder=''
                                     defaultValue={countInStock}
                                     onChange={(e) => setCountInStock(e.target.value)}
@@ -488,15 +485,28 @@ function ProductEditScreen( ) {
                                 </Select>
                             </Form.Group>
 
-                            <Form.Group controlId='type_plant'>
+                            {/* <Form.Group controlId='type_plant'>
                                 <Form.Label><strong>TIP BILJKE</strong></Form.Label>
                                 <Form.Select aria-label="Default select example"
                                              defaultValue={type}
                                              onChange={(e) => setType(e.target.value)}>
                                     <option>{type}</option>
-                                    {!allcategories ? [...Array.from(allcategories?.type_of_plant), ""]?.map(cat => (
+                                    {!allcategories ? [...Array.from(...allcategories?.type_of_plant), ""]?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     )) : []}
+ 
+                                </Form.Select>
+                            </Form.Group> */}
+
+                            <Form.Group controlId='type_plant'>
+                                <Form.Label><strong>TIP BILJKE</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             defaultValue={type}
+                                             onChange={(e) => setType(e.target.value)}>
+                                    <option key={0}>{type}</option>
+                                    {allcategories?.type_of_plant?.map(cat => (
+                                        <option key={cat} value={cat}>{cat}</option>
+                                    ))}
  
                                 </Form.Select>
                             </Form.Group>
@@ -525,7 +535,7 @@ function ProductEditScreen( ) {
                             </Form.Group>
 
 
-                            <Form.Group controlId='orezivanje'>
+                            {/* <Form.Group controlId='orezivanje'>
                                 <Form.Label><strong>OREZIVANJE:</strong></Form.Label>
                                 <Form.Select aria-label="Default select example"
                                              defaultValue={orezivanje}
@@ -536,9 +546,22 @@ function ProductEditScreen( ) {
                                     )) : []}
  
                                 </Form.Select>
-                            </Form.Group>
+                            </Form.Group> */}
 
-                            <Form.Group controlId='privlaci_insekte'>
+                            <Form.Group controlId='orezivanje'>
+                                <Form.Label><strong>OREZIVANJE:</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             defaultValue={orezivanje}
+                                             onChange={(e) => setOrezivanje(e.target.value)}>
+                                    <option key={0}>{orezivanje}</option> 
+                                    {allcategories?.orezivanje?.map(cat => (
+                                        <option key={cat} value={cat}>{cat}</option>
+                                    ))}
+ 
+                                </Form.Select>
+                            </Form.Group>   
+
+                            {/* <Form.Group controlId='privlaci_insekte'>
                                 <Form.Label><strong>MEDONOSNA:</strong></Form.Label>
                                 <Form.Select aria-label="Default select example"
                                              defaultValue={privlaci_insekte}
@@ -549,9 +572,22 @@ function ProductEditScreen( ) {
                                     )): []}
  
                                 </Form.Select>
+                            </Form.Group> */}
+
+                            <Form.Group controlId='privlaci_insekte'>
+                                <Form.Label><strong>MEDONOSNA:</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             defaultValue={privlaci_insekte}
+                                             onChange={(e) => setPrivlaciInsekte(e.target.value)}>
+                                    <option key={0}>{privlaci_insekte}</option> 
+                                    {allcategories?.privlaci_insekte?.map(cat => (
+                                        <option key={cat} value={cat}>{cat}</option>
+                                    ))}
+ 
+                                </Form.Select>
                             </Form.Group>
 
-                            <Form.Group controlId='brzina_rasta'>
+                            {/* <Form.Group controlId='brzina_rasta'>
                                 <Form.Label><strong>BRZINA RASTA</strong></Form.Label>
                                 <Form.Select aria-label="Default select example"
                                              defaultValue={brzina_rasta}
@@ -560,6 +596,19 @@ function ProductEditScreen( ) {
                                     {!allcategories ? [...Array.from(allcategories?.brzina_rasta),""]?.map(cat => (
                                         <option value={cat}>{cat}</option>
                                     )): []}
+ 
+                                </Form.Select>
+                            </Form.Group> */}
+
+                            <Form.Group controlId='brzina_rasta'>
+                                <Form.Label><strong>BRZINA RASTA</strong></Form.Label>
+                                <Form.Select aria-label="Default select example"
+                                             defaultValue={brzina_rasta}
+                                             onChange={(e) => setBrzinaRasta(e.target.value)}>
+                                    <option key={0}>{brzina_rasta}</option>
+                                    {allcategories?.brzina_rasta?.map(cat => (
+                                        <option key={cat} value={cat}>{cat}</option>
+                                    ))}
  
                                 </Form.Select>
                             </Form.Group>
@@ -591,7 +640,7 @@ function ProductEditScreen( ) {
                             <Form.Group controlId='sirina_biljke'>
                                 <Form.Label><strong>SIRINA:</strong></Form.Label>
                                 <Form.Control
-
+                                    
                                     type='text'
                                     placeholder=''
                                     defaultValue={sirina_biljke}
