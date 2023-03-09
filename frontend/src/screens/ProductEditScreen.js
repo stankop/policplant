@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo  } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {  Button, Row } from 'react-bootstrap'
@@ -295,6 +295,14 @@ function ProductEditScreen( ) {
         console.log('Image sort order', images);
     };
 
+    const memoizedImageCard = useMemo(() => {
+        return (
+            <Row>
+                <SortableGallery items={items}   onSortEnd={onSortEnd} axis={"xy"} />
+            </Row>
+        )
+    },[items]);
+
     return (
         <div className="ProductEditScreen"
             onContextMenu={(e) => {
@@ -405,9 +413,7 @@ function ProductEditScreen( ) {
 
                                 </Form.Control>
                                 {/* <ImagesGallery  images={prevImages} /> */}
-                                {<Row>
-                                    <SortableGallery items={items}   onSortEnd={onSortEnd} axis={"xy"} />
-                                </Row>}
+                                {memoizedImageCard} 
                                 {uploading && <Loader />}
 
                             </Form.Group>
