@@ -113,7 +113,7 @@ function Header(props) {
                                   style={{
                                           fontSize: '1.4rem', 
                                           display: 'inline-block'}}>
-                            {cat?.map( (category) => (
+                            {cat?.slice().sort((a, b) =>{return a.order - b.order}).map( (category) => (
                               <LinkContainer to={`/categories/${category._id}`} key={category._id}>
                                   <NavDropdown.Item  key={category._id}>
                                       { category.name }  

@@ -22,6 +22,7 @@ import ReactCarusel from '../compontents/ReactCarusel'
 import ProductCarusel from '../compontents/ProductCarusel'
 import CarouselFadeExample from '../compontents/StaticCarusel'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { sliderClasses } from '@mui/material'
 
 function HomeScreen() {
 
@@ -64,6 +65,8 @@ function HomeScreen() {
    }
  }
  
+  const orderCategories = categories?.slice().sort((a, b) =>{return a.order - b.order})
+
   return (
     <div>
         { carucel && <MDBCarusel itemRef={customerLogo}></MDBCarusel>}  
@@ -85,7 +88,7 @@ function HomeScreen() {
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
                         { toggle ? (
                         <Row  className={'gy-2'}>
-                          {categories?.map(category => (
+                          {orderCategories?.map(category => (
                           <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={4} className="d-flex">
                               <Kategorija category={category} />
                           </Col>

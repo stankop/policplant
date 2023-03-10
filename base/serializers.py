@@ -146,7 +146,7 @@ class PlantCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = PlantCategory
         fields =  [
-            '_id','name','description', 'image', 'productNumber'
+            '_id','name','description', 'image', 'productNumber','order'
         ]
     def get_productNumber(self, obj):
          #print('objekat:', obj)
