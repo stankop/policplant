@@ -422,7 +422,8 @@ function ProductEditScreen( ) {
                                 <Form.Label><strong>DESCRIPTION</strong></Form.Label>
                                 <Form.Control
 
-                                    type='text'
+                                    as="textarea" rows={5}
+                                    type='textarea'
                                     placeholder=''
                                     defaultValue={description}
                                     onChange={(e) => setDescription(e.target.value)}

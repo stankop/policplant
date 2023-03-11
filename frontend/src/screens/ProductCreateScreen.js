@@ -249,6 +249,18 @@ function ProductCreateScreen( ) {
                                 </Form.Control>
                             </Form.Group>
 
+                            <Form.Group controlId='botanicki_naziv'>
+                                <Form.Label><strong>BOTANICKI NAZIV</strong></Form.Label>
+                                <Form.Control
+
+                                    type='text'
+                                    placeholder=''
+                                    defaultValue={botanicki_naziv}
+                                    onChange={(e) => setBotanickiNaziv(e.target.value)}
+                                >
+                                </Form.Control>
+                            </Form.Group>
+
                             <Form.Group controlId='hesteg'>
                                 <Form.Label><strong>HESTEG</strong></Form.Label>
                                 <Form.Control
@@ -467,7 +479,7 @@ function ProductCreateScreen( ) {
                                 </Form.Control>
                             </Form.Group>
 
-                            <Form.Group controlId='botanicki_naziv'>
+                            {/* <Form.Group controlId='botanicki_naziv'>
                                 <Form.Label><strong>BOTANICKI NAZIV</strong></Form.Label>
                                 <Form.Control
 
@@ -477,7 +489,7 @@ function ProductCreateScreen( ) {
                                     onChange={(e) => setBotanickiNaziv(e.target.value)}
                                 >
                                 </Form.Control>
-                            </Form.Group>
+                            </Form.Group> */}
 
                             <Form.Group controlId='high'>
                                 <Form.Label><strong>VISINA:</strong></Form.Label>
