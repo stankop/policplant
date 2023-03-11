@@ -1,28 +1,29 @@
 {
   "files": {
     "main.css": "/static/css/main.eaabc329.chunk.css",
-    "main.js": "/static/js/main.f3166d5e.chunk.js",
-    "main.js.map": "/static/js/main.f3166d5e.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.a4b5e9f8.js",
-    "runtime-main.js.map": "/static/js/runtime-main.a4b5e9f8.js.map",
-    "static/css/2.c6d73b2e.chunk.css": "/static/css/2.c6d73b2e.chunk.css",
-    "static/js/2.20aa27a0.chunk.js": "/static/js/2.20aa27a0.chunk.js",
-    "static/js/2.20aa27a0.chunk.js.map": "/static/js/2.20aa27a0.chunk.js.map",
-    "static/js/3.c4c576aa.chunk.js": "/static/js/3.c4c576aa.chunk.js",
-    "static/js/3.c4c576aa.chunk.js.map": "/static/js/3.c4c576aa.chunk.js.map",
+    "main.js": "/static/js/main.88853501.chunk.js",
+    "main.js.map": "/static/js/main.88853501.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.6b305e37.js",
+    "runtime-main.js.map": "/static/js/runtime-main.6b305e37.js.map",
+    "static/css/2.09c49638.chunk.css": "/static/css/2.09c49638.chunk.css",
+    "static/js/2.3dac71c3.chunk.js": "/static/js/2.3dac71c3.chunk.js",
+    "static/js/2.3dac71c3.chunk.js.map": "/static/js/2.3dac71c3.chunk.js.map",
+    "static/js/3.55d09a82.chunk.js": "/static/js/3.55d09a82.chunk.js",
+    "static/js/3.55d09a82.chunk.js.map": "/static/js/3.55d09a82.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/2.c6d73b2e.chunk.css.map": "/static/css/2.c6d73b2e.chunk.css.map",
+    "static/css/2.09c49638.chunk.css.map": "/static/css/2.09c49638.chunk.css.map",
     "static/css/main.eaabc329.chunk.css.map": "/static/css/main.eaabc329.chunk.css.map",
-    "static/js/2.20aa27a0.chunk.js.LICENSE.txt": "/static/js/2.20aa27a0.chunk.js.LICENSE.txt",
-    "static/js/main.f3166d5e.chunk.js.LICENSE.txt": "/static/js/main.f3166d5e.chunk.js.LICENSE.txt",
+    "static/js/2.3dac71c3.chunk.js.LICENSE.txt": "/static/js/2.3dac71c3.chunk.js.LICENSE.txt",
+    "static/js/main.88853501.chunk.js.LICENSE.txt": "/static/js/main.88853501.chunk.js.LICENSE.txt",
     "static/media/berberis-erecta-1-350x350.355e0771.jpg": "/static/media/berberis-erecta-1-350x350.355e0771.jpg",
-    "static/media/all.min.css": "/static/media/fa-solid-900.eeccf4f6.woff"
+    "static/media/all.min.css": "/static/media/fa-solid-900.eeccf4f6.woff",
+    "static/media/styles.css": "/static/media/revicons.e8746a62.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.a4b5e9f8.js",
-    "static/css/2.c6d73b2e.chunk.css",
-    "static/js/2.20aa27a0.chunk.js",
+    "static/js/runtime-main.6b305e37.js",
+    "static/css/2.09c49638.chunk.css",
+    "static/js/2.3dac71c3.chunk.js",
     "static/css/main.eaabc329.chunk.css",
-    "static/js/main.f3166d5e.chunk.js"
+    "static/js/main.88853501.chunk.js"
   ]
 }

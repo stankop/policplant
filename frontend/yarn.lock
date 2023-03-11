@@ -10578,6 +10578,11 @@
   "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.43.0.tgz"
   "version" "7.43.0"
 
+"react-image-button@^1.0.6":
+  "integrity" "sha512-wmDUM6jURrjZXBcdYyn408b2NvMZwfpVysVQF19JK3jDizDCyeJ/usjHKFZK6L/7z60YAMceRkZc/702OrL5cQ=="
+  "resolved" "https://registry.npmjs.org/react-image-button/-/react-image-button-1.0.6.tgz"
+  "version" "1.0.6"
+
 "react-image-gallery@^1.2.11":
   "integrity" "sha512-YLMCdNSCf3YPhRmnjEOdEZGEXghTMx4o3dlAqd0rz0nAyebUvTz/xJnIHPActbPSHCvVJgt5A09EPHYbGqw++w=="
   "resolved" "https://registry.npmjs.org/react-image-gallery/-/react-image-gallery-1.2.11.tgz"

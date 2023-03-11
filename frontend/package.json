@@ -39,6 +39,7 @@
     "react-dom": "^18.2.0",
     "react-drag-reorder": "^1.2.0",
     "react-hook-form": "^7.39.4",
+    "react-image-button": "^1.0.6",
     "react-image-gallery": "^1.2.11",
     "react-image-zooom": "^1.1.0",
     "react-medium-image-zoom": "^5.1.2",

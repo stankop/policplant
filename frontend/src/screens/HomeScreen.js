@@ -25,6 +25,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { sliderClasses } from '@mui/material'
 import { SimpleCarouselSlider } from 'react-simple-carousel-image-slider'
 import Carousel from 'flat-carousel';
+import MultiCaroseul from '../compontents/MultiCaroseul'
 
 function HomeScreen() {
 
@@ -83,6 +84,7 @@ function HomeScreen() {
         {/* { carucel && <CarouselFadeExample></CarouselFadeExample>}  */}
         {/* { carucel && <SimpleCarouselSlider images={slike} autoplay={false} width= "100%" height="450px"/>} */}
         {/* {  carucel && <DragCoruseal></DragCoruseal>} */}
+        { carucel && <MultiCaroseul></MultiCaroseul>}
 
         <h1> {carucel ? 'Kategorije:' : 'Filtrirani Proizvodi:'}</h1>
         {/* <Sidebar></Sidebar> */}
