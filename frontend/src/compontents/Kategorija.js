@@ -8,7 +8,7 @@ function Kategorija({category}) {
     <Card className={`my-1 p-1  ${classes["img/-hover-zoom"]} h-100 `} border="dark"  style={{ width: '100%', height: '25rem' }}>
         <Card.Header as="h6"></Card.Header>
         <Link to={`/categories/${category._id}`}>
-            <Card.Img src={category.image} style={{ width: '100%', height: '32vh', objectFit: 'cover' }}></Card.Img>
+            <Card.Img src={category.image} loading='lazy' style={{ width: '100%', height: '32vh', objectFit: 'cover' }}></Card.Img>
         </Link>
         <Card.Body style={{ textAlign: "center", textDecoration: 'none'}}>
             <Link to={`/categories/${category._id}`}>

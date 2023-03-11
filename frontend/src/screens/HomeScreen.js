@@ -23,6 +23,8 @@ import ProductCarusel from '../compontents/ProductCarusel'
 import CarouselFadeExample from '../compontents/StaticCarusel'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { sliderClasses } from '@mui/material'
+import { SimpleCarouselSlider } from 'react-simple-carousel-image-slider'
+import Carousel from 'flat-carousel';
 
 function HomeScreen() {
 
@@ -66,12 +68,22 @@ function HomeScreen() {
  }
  
   const orderCategories = categories?.slice().sort((a, b) =>{return a.order - b.order})
+  const slike = [
+    
+      "https://policplantpublic.s3.eu-west-2.amazonaws.com/slika1.jpg",
+    
+      "https://policplantpublic.s3.eu-west-2.amazonaws.com/jesenji+izgled.jpg"
+    ]
+  
 
   return (
     <div>
-        { carucel && <MDBCarusel itemRef={customerLogo}></MDBCarusel>}  
+        {/* { carucel && <MDBCarusel itemRef={customerLogo}></MDBCarusel>}   */}
         {/* { carucel && <ReactCarusel ></ReactCarusel>} */}
-        {/* { carucel && <CarouselFadeExample></CarouselFadeExample>} */}
+        {/* { carucel && <CarouselFadeExample></CarouselFadeExample>}  */}
+        {/* { carucel && <SimpleCarouselSlider images={slike} autoplay={false} width= "100%" height="450px"/>} */}
+        {/* {  carucel && <DragCoruseal></DragCoruseal>} */}
+
         <h1> {carucel ? 'Kategorije:' : 'Filtrirani Proizvodi:'}</h1>
         {/* <Sidebar></Sidebar> */}
         {screenType.isMobile && <SearchModal onSearch={ setSearchValue}></SearchModal>} 
