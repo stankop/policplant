@@ -267,12 +267,25 @@ CORS_ORIGIN_WHITELIST = (
         'http://localhost:3000',
     )
 
-AWS_ACCESS_KEY_ID='AKIA4GLCWMLIDBYACJS3'
-AWS_SECRET_ACCESS_KEY='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'
-AWS_STORAGE_BUCKET_NAME='policplant'
-AWS_S3_FILE_OVERWRITE=False
-AWS_DEFAULT_ACL=None
-DEFAULT_FILE_STORAGE='storages.backends.s3boto3.S3Boto3Storage'
+#AWS S3
+# AWS_ACCESS_KEY_ID='AKIA4GLCWMLIDBYACJS3'
+# AWS_SECRET_ACCESS_KEY='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'
+# AWS_STORAGE_BUCKET_NAME='policplant'
+# AWS_S3_FILE_OVERWRITE=False
+# AWS_DEFAULT_ACL=None
+# DEFAULT_FILE_STORAGE='storages.backends.s3boto3.S3Boto3Storage'
+
+#Azure Blob Storage
+DEFAULT_FILE_STORAGE = 'backend.custom_azure.AzureMediaStorage'
+STATICFILES_STORAGE = 'backend.custom_azure.AzureStaticStorage'
+STATIC_LOCATION = "static"
+MEDIA_LOCATION = "policplant-container"
+AZURE_ACCOUNT_NAME = "policplantblob"
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+
+
 
 django_heroku.settings(locals())
 AUTH_USER_MODEL = 'base.UserAccount'

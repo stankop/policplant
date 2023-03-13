@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.eaabc329.chunk.css",
-    "main.js": "/static/js/main.641657c0.chunk.js",
-    "main.js.map": "/static/js/main.641657c0.chunk.js.map",
+    "main.js": "/static/js/main.de287091.chunk.js",
+    "main.js.map": "/static/js/main.de287091.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.6b305e37.js",
     "runtime-main.js.map": "/static/js/runtime-main.6b305e37.js.map",
     "static/css/2.09c49638.chunk.css": "/static/css/2.09c49638.chunk.css",
@@ -14,7 +14,7 @@
     "static/css/2.09c49638.chunk.css.map": "/static/css/2.09c49638.chunk.css.map",
     "static/css/main.eaabc329.chunk.css.map": "/static/css/main.eaabc329.chunk.css.map",
     "static/js/2.3dac71c3.chunk.js.LICENSE.txt": "/static/js/2.3dac71c3.chunk.js.LICENSE.txt",
-    "static/js/main.641657c0.chunk.js.LICENSE.txt": "/static/js/main.641657c0.chunk.js.LICENSE.txt",
+    "static/js/main.de287091.chunk.js.LICENSE.txt": "/static/js/main.de287091.chunk.js.LICENSE.txt",
     "static/media/berberis-erecta-1-350x350.355e0771.jpg": "/static/media/berberis-erecta-1-350x350.355e0771.jpg",
     "static/media/all.min.css": "/static/media/fa-solid-900.eeccf4f6.woff",
     "static/media/styles.css": "/static/media/revicons.e8746a62.woff"
@@ -24,6 +24,6 @@
     "static/css/2.09c49638.chunk.css",
     "static/js/2.3dac71c3.chunk.js",
     "static/css/main.eaabc329.chunk.css",
-    "static/js/main.641657c0.chunk.js"
+    "static/js/main.de287091.chunk.js"
   ]
 }

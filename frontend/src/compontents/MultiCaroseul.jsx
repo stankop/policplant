@@ -25,7 +25,7 @@ const responsive = {
 function MultiCaroseul(props) {
     const image1 = <Image
             className='img-fluid shadow-5'
-            src= "https://policplantpublic.s3.eu-west-2.amazonaws.com/slika1.jpg"
+            src= "https://policplantblob.blob.core.windows.net/policplant-banner/banner-1.jpg"
             alt="First slide"
             rounded
             responsive 
@@ -34,7 +34,7 @@ function MultiCaroseul(props) {
 
     const image2 = <Image
             className='img-fluid shadow-4'
-            src= "https://policplantpublic.s3.eu-west-2.amazonaws.com/jesenji+izgled.jpg"
+            src= "https://policplantblob.blob.core.windows.net/policplant-banner/banner2.jpg"
             alt="Second slide"
             rounded
             style={{ height:'50%'}}
