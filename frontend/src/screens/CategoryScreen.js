@@ -15,6 +15,7 @@ import { CSSTransition } from 'react-transition-group'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from "react-router-dom";
+import DOMPurify from 'dompurify';
 
 function CategoryScreen() {
 
@@ -33,6 +34,8 @@ function CategoryScreen() {
         
  }, [dispatch, id]);
 
+ const htmlString = {__html: DOMPurify.sanitize(catProducts?.find( cat => cat._id?.toString() === id)?.description)}
+ 
  
   return (
     <div>
@@ -48,7 +51,8 @@ function CategoryScreen() {
         <Link to={-1} className='btn btn-primary my-3'> Nazad</Link>
         <h1>{ catProducts?.find( cat => cat._id?.toString() === id)?.name}</h1>
         
-        <p>{ catProducts?.find( cat => cat._id?.toString() === id)?.description}</p>
+        {/* <p>{ catProducts?.find( cat => cat._id?.toString() === id)?.description}</p> */}
+        <p dangerouslySetInnerHTML={htmlString}></p>
         { loading ? <Loader></Loader>
                  : error ? <Message variant='danger'>{error}</Message> 
                  :

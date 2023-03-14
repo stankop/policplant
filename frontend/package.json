@@ -28,6 +28,7 @@
     "axios": "^0.26.1",
     "babel-plugin-macros": "^3.1.0",
     "cdbreact": "^1.5.3",
+    "dompurify": "^3.0.1",
     "flat-carousel": "^0.0.1",
     "formik": "^2.2.9",
     "google-map-react": "^2.2.0",
@@ -66,7 +67,9 @@
     "rerousel": "^0.1.9",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "xml-to-react": "^1.2.0-alpha.2",
+    "xml2js": "^0.4.23"
   },
   "scripts": {
     "start": "react-scripts start",

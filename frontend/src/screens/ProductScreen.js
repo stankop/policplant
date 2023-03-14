@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Button, Card, Form} from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Button, Card, Form, Container} from 'react-bootstrap'
 import Rating from '../compontents/Rating'
 import Loader from '../compontents/Loader'
 import Message from '../compontents/Message'
@@ -11,7 +11,8 @@ import {  productDetails } from '../store/product-actions'
 import {  addToCart,removeFromCart } from '../store/cart-actions'
 import { LinkContainer } from 'react-router-bootstrap'
 import WebFont from 'webfontloader';
-
+import XMLToReact from 'xml-to-react';
+import DOMPurify from 'dompurify';
 
 import {  createReview } from '../store/review-actions'
 import { reviewCreateActions } from '../store/review-slice'
@@ -75,6 +76,9 @@ function ProductScreen({match}) {
         thumbnail: image.image
     }
  })
+
+ const htmlString = {__html: DOMPurify.sanitize(product?.description)}
+
   return (
     <div style={{height:'100%'}}>
         <Breadcrumb style={{ paddingTop:'2rem'}}>
@@ -320,11 +324,16 @@ function ProductScreen({match}) {
                         <Row>
                             <Col sm={12} md={12} lg={12} xl={12} xs={12} >
                             <h2 style={{color:'black'}}>Detaljni opis:</h2>
-                                <ListGroup variant='flush'>
+                                {/* <ListGroup variant='flush'>
                                         <ListGroup.Item>
                                             {product.description}
                                         </ListGroup.Item>
-                                </ListGroup>
+                                </ListGroup> */}
+                                {/* {product?.description && description} */}
+                                {/* <Container child={ doc}/> 
+                                {doc} */}
+                                <p dangerouslySetInnerHTML={htmlString}></p>
+                                
                             </Col>
                             {/* <Col md={6}>
                                 <h4>Detaljni opis:</h4>

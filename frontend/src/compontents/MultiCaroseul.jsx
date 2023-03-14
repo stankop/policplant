@@ -28,7 +28,7 @@ function MultiCaroseul(props) {
             src= "https://policplantblob.blob.core.windows.net/policplant-banner/banner-1.jpg"
             alt="First slide"
             rounded
-            responsive 
+            responsive={true} 
             style={{ height:'50%'}}
             />
 
@@ -63,14 +63,14 @@ function MultiCaroseul(props) {
                              zoomOnHover={0}
                              buttonPosition="bottom"
                              alwaysShowButton={true} >
-                    <button primary  className="btn success" style={{ border: '2px solid black'}} > Cetinari pogledajte  </button>
+                    <button primary={true}  className="btn success" style={{ border: '2px solid black'}} > Cetinari pogledajte  </button>
                 </ImageButton>
             </div>
             <div style={{padding:'1rem'}}>
                 <ImageButton img={image2}
                              alwaysShowButton={true}
                              buttonPosition="bottom" >
-                    <button primary className="btn success" style={{ border: '2px solid black'}} > Puzavice pogledajte </button>
+                    <button primary={true} className="btn success" style={{ border: '2px solid black'}} > Puzavice pogledajte </button>
                 </ImageButton>
             </div> 
         </Carousel>
