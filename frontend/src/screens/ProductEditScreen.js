@@ -50,6 +50,7 @@ function ProductEditScreen( ) {
     const [category, setCategory] = useState([])
     const [items, setItems] = useState([]);
     const [flick, setFlick] = useState(false);
+    const [prodajno_mesto, setProdajnoMesto] = useState(false)
 
     const [uploading, setUploading] = useState(false)
 
@@ -162,6 +163,7 @@ function ProductEditScreen( ) {
             setBotanickiNaziv(product.botanicki_naziv)
             setVelicinaSlanja(product.velicina_slanja)
             setSirinaBiljke(product.sirina_biljke)
+            setProdajnoMesto(product.prodajno_mesto)
         }  
         
     }, [dispatch, navigate, product?.name, success, prodSuccess])
@@ -194,8 +196,9 @@ function ProductEditScreen( ) {
             place,
             type,
             high,
-            category
-        },images))
+            category,
+            prodajno_mesto
+        }, images))
         setItems(ukupno.current)
         // setImage(ukupno.current.map((index,item) => {
         //     return {
@@ -389,6 +392,18 @@ function ProductEditScreen( ) {
                                     onChange={(e) => setHesteg(e.target.value)}
                                 >
                                 </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group controlId='prodajno_mesto'>
+                                <Form.Label><strong>NA PRODAJNOM MESTU</strong></Form.Label>
+                                
+                                <Form.Check 
+                                    type='checkbox'
+                                    id='prodaja'
+                                    defaultChecked={prodajno_mesto}
+                                    onChange={(e) => setProdajnoMesto(e.target.checked)}
+                                />
+                               
                             </Form.Group>
 
                             <Form.Group controlId='image'>

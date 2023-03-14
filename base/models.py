@@ -227,6 +227,9 @@ class Product(models.Model):
     type_of_plant = models.CharField(max_length=250, choices=Type.choices, default=Type.DEFAULT)
     sirina_biljke = models.CharField(max_length=250,  null=True, blank=True )
     category = models.ManyToManyField(PlantCategory, related_name='products')
+    prodajno_mesto = models.BooleanField(null=True, blank=True, default=False)
+    novo = models.CharField(max_length=550,  null=True, blank=True)
+    popust = models.CharField(max_length=550,  null=True, blank=True)
 
     createdAt = models.DateTimeField(auto_now_add=True)
 

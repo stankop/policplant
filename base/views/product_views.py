@@ -183,7 +183,8 @@ def createProduct(request):
         mesto_sadnje=data['mesto_sadnje'],
         place_of_planting= data['place'],
         type_of_plant=data['type'],
-        high=data['high']
+        high=data['high'],
+        prodajno_mesto=bool(data['prodajno_mesto'])
     )
 
     if type(data['category']) == str:
@@ -245,6 +246,7 @@ def updateProduct(request,pk):
     product.place_of_planting= data['place']
     product.type_of_plant=data['type']
     product.high=data['high']
+    product.prodajno_mesto=bool(data['prodajno_mesto'])
     product.save()
 
 
@@ -296,7 +298,7 @@ def uploadImage(request):
     product = Product.objects.get(_id=product_id)
     if not request.FILES.getlist('images'):
         imagesStay=[]
-        if data['images'] is not '':
+        if request.data.get('images', False):
             imagesStay = [int(x) for x in str(data['images']).split(',')]
         
         PlantImage.objects.filter(product_id=product_id).exclude(id__in=imagesStay).delete()

@@ -54,6 +54,7 @@ function ProductCreateScreen( ) {
     const [sirina_biljke, setSirinaBiljke] = useState('')
     const [category, setCategory] = useState('Četinari')
     const [items, setItems] = useState([]);
+    const [prodajno_mesto, setProdajnoMesto] = useState(false)
 
     const [uploading, setUploading] = useState(false)
 
@@ -122,7 +123,8 @@ function ProductCreateScreen( ) {
             place,
             type,
             high,
-            category  
+            category,
+            prodajno_mesto  
         }, images))
         navigate('/admin/productlist')
         notify()
@@ -272,6 +274,17 @@ function ProductCreateScreen( ) {
                                     ref={inputHesh}
                                 >
                                 </Form.Control>
+                            </Form.Group>
+
+                            <Form.Group controlId='prodajno_mesto'>
+                                <Form.Label><strong>NA PRODAJNOM MESTU</strong></Form.Label>
+                                
+                                <Form.Check 
+                                    type='checkbox'
+                                    id='prodaja'
+                                    onChange={(e) => setProdajnoMesto(e.target.value)}
+                                />
+                               
                             </Form.Group>
 
                             <Form.Group controlId='image'>

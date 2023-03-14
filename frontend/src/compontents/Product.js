@@ -22,8 +22,15 @@ function Product({product}) {
     <Card className={`my-1 p-1 rounded ${classes["img-hover-zoomA"]}`} border="primary"  style={{ width: '17.5rem', height: 'auto' }}>
         <Link to={`/products/${product._id}`}> 
             <Card.Img src={product.images?.findLast( image => image.order === 0)?.image} loading='lazy' style={{width: '100%', height: '14rem' }}></Card.Img>
-            <Card.ImgOverlay style={{width: '100%', height: '14rem' }}>
-                {product?.countInStock < 1 && <Card.Title><div style={{ backgroundColor:"red", color:"white", display: 'inline-flex', padding: '5px', marginBottom: '1em'}}>Nema na stanju</div></Card.Title>}
+            <Card.ImgOverlay style={{width: '95%', height: '14rem' }}>
+                {product?.countInStock < 1 && <Card.Title><div style={{ backgroundColor:"red", color:"white", display: 'inline-flex', padding: '4px', marginBottom: '1em'}}>Nema na stanju</div></Card.Title>}
+            </Card.ImgOverlay>
+            <Card.ImgOverlay className="card-img-overlay d-flex align-items-end flex-column bd-highlight mb-3" style={{width: '100%', height: '14rem' }}>
+                {product?.prodajno_mesto && 
+                    <Card.Img src='https://policplantblob.blob.core.windows.net/policplant-banner/samo_na_projadnom_mestu1.png' 
+                              loading='lazy'
+                              style={{width: '40%', height: '50%' }}>
+                    </Card.Img>}
             </Card.ImgOverlay> 
         </Link> 
         <Card.Body style={{ textAlign: "center"}}>
