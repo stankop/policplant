@@ -262,12 +262,12 @@ def getFilterProducts(request):
             search.append(str(data['color']).lower().replace('ž','z'))
             search.append(str(data['color']).lower().replace('z','ž'))
 
-        if 'č' in str(data['color']).lower():
+        if 'č' or 'c' in str(data['color']).lower():
             search.append(str(data['color']).lower())
             search.append(str(data['color']).lower().replace('č','z'))
             search.append(str(data['color']).lower().replace('z','č'))
             
-        if 'Š' in str(data['color']).lower():
+        if 'š' or 's' in str(data['color']).lower():
             search.append(str(data['color']).lower())
             search.append(str(data['color']).lower().replace('š','z'))
             search.append(str(data['color']).lower().replace('z','š'))
