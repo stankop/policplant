@@ -264,13 +264,13 @@ def getFilterProducts(request):
 
         if 'č' or 'c' in str(data['color']).lower():
             search.append(str(data['color']).lower())
-            search.append(str(data['color']).lower().replace('č','z'))
-            search.append(str(data['color']).lower().replace('z','č'))
+            search.append(str(data['color']).lower().replace('č','c'))
+            search.append(str(data['color']).lower().replace('c','č'))
             
         if 'š' or 's' in str(data['color']).lower():
             search.append(str(data['color']).lower())
-            search.append(str(data['color']).lower().replace('š','z'))
-            search.append(str(data['color']).lower().replace('z','š'))
+            search.append(str(data['color']).lower().replace('š','s'))
+            search.append(str(data['color']).lower().replace('s','š'))
             
     print('Search:', search)
     
