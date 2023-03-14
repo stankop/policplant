@@ -86,7 +86,7 @@ function HomeScreen() {
         {/* {  carucel && <DragCoruseal></DragCoruseal>} */}
         { carucel && <MultiCaroseul></MultiCaroseul>}
 
-        <h1> {carucel ? 'Kategorije:' : 'Filtrirani Proizvodi:'}</h1>
+        <h1> {carucel ? 'Detaljna pretraga:' : 'Filtrirani Proizvodi:'}</h1>
         {/* <Sidebar></Sidebar> */}
         {screenType.isMobile && <SearchModal onSearch={ setSearchValue}></SearchModal>} 
         {/* {screenType.isMobile && <MUISearchModal onSearch={ setSearchValue}></MUISearchModal>} */}

@@ -254,11 +254,29 @@ def updateProduct(request,pk):
 @api_view(['POST'])
 def getFilterProducts(request):
     data = request.data
-    print('data request:',data)
+    color = str(data['color']).lower()
+    search = [str(data['color']).lower()]
+    if data['color']:
+        if 'ž' or 'z' in str(data['color']).lower():
+            search.append(str(data['color']).lower())
+            search.append(str(data['color']).lower().replace('ž','z'))
+            search.append(str(data['color']).lower().replace('z','ž'))
 
+        if 'č' in str(data['color']).lower():
+            search.append(str(data['color']).lower())
+            search.append(str(data['color']).lower().replace('č','z'))
+            search.append(str(data['color']).lower().replace('z','č'))
+            
+        if 'Š' in str(data['color']).lower():
+            search.append(str(data['color']).lower())
+            search.append(str(data['color']).lower().replace('š','z'))
+            search.append(str(data['color']).lower().replace('z','š'))
+            
+    print('Search:', search)
+    
     products = Product.objects.filter((Q(pk__gte=0) if (data['search'] == '' or data['search'] == [] or data['search'] == None) else Q(name__icontains=data['search']) | Q(hesteg__icontains=data['search']))
             & (Q(pk__gte=0) if data['keyword'] == '' else Q(name__icontains=data['keyword']))
-            & (Q(pk__gte=0) if (data['color'] == [] or data['color'] == '' or data['color'] == None)  else Q(name__icontains=data['color']))
+            & (Q(pk__gte=0) if (data['color'] == [] or data['color'] == '' or data['color'] == None)  else (reduce(operator.or_,(Q(color__icontains=x) for x in search))))
             & (Q(pk__gte=0) if (data['flow'] == [] or data['flow'] =='' or data['flow'] ==None) else (reduce(operator.or_,(Q(mesto_sadnje__icontains=x) for x in ( y['value'] for y in data['flow'])))))
             & (Q(pk__gte=0) if (data['type'] == [] or data['type'] == '' or data['type'] == None) else (reduce(operator.or_,(Q(type_of_plant__icontains=x) for x in ( y['value'] for y in data['type'])))))
             & (Q(pk__gte=0) if (data['category'] == [] or data['category'] == '' or data['category'] == None) else (reduce(operator.or_,(Q(category__name__icontains=x) for x in ( y['value'] for y in data['category']))))) ).order_by('name')

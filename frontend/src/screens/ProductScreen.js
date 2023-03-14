@@ -20,6 +20,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import HomeIcon from '@mui/icons-material/Home';
 import ImageZoom from "react-image-zooom";
 import '../../node_modules/react-image-gallery/styles/css/image-gallery.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ImageGallery from 'react-image-gallery';
 
 function ProductScreen({match}) {
@@ -184,6 +185,7 @@ function ProductScreen({match}) {
                                             
                                                 
                                                  <Col sm={12} md={6} lg={4} xl={6} xs={12}>
+                                                    <br />
                                                     <Card>
                                                     <Card.Title style={{ textAlign:'center', color:'black'}}>Kupovina</Card.Title>
                                                         <ListGroup variant='flush' >
@@ -239,10 +241,18 @@ function ProductScreen({match}) {
                                                             <ListGroup.Item>
                                                                 <Button 
                                                                     className='btn btn-block' 
-                                                                    disabled={product.countInStock === 0} 
+                                                                    disabled={product.countInStock < 1} 
                                                                     type='button'
                                                                     onClick= {addToCartHandler}>
                                                                         Dodaj u Korpu
+                                                                </Button>
+                                                            </ListGroup.Item>
+                                                            <ListGroup.Item>
+                                                                <Button 
+                                                                    className='btn btn-block' 
+                                                                    disabled={product.countInStock < 1}
+                                                                    onClick={() => window.open('#/cart',"_self")}>
+                                                                        Poruci
                                                                 </Button>
                                                             </ListGroup.Item>
                                                         </ListGroup>
@@ -252,6 +262,27 @@ function ProductScreen({match}) {
                                                
                                         </ListGroup.Item>
                                     </ListGroup>
+                                    <br/>
+                                    <br/>
+                                    <div style={{margin:'0.3rem'}}>
+                                        Share:
+                                        <a href='https//:' style={{margin:'0.3rem'}} TITLE="Face">
+                                                <i class="fa-brands fa-facebook"></i>
+                                        </a>
+                                        <a href='https//:' style={{margin:'0.3rem'}} TITLE="Twitter">
+                                                <i class="fa-brands fa-twitter"></i>
+                                        </a>
+                                        <a href='https//:' style={{margin:'0.3rem'}} TITLE="Instagram">
+                                                <i class="fa-brands fa-instagram"></i>
+                                        </a>
+                                        <a href='https//:' style={{margin:'0.3rem'}} TITLE="Messenger">
+                                                <i class="fa-brands fa-facebook-messenger"></i>
+                                        </a>
+                                        <a href='https//:' style={{margin:'0.3rem'}} TITLE="Mail">
+                                                <i class="fa-regular fa-envelope"></i>
+                                        </a>
+                                    </div>
+                                    
                                 </Col>
                                 {/* <Col sm={12} md={6} lg={4} xl={3} xs={12}>
                                     <Card>

@@ -100,13 +100,53 @@ function Search( { onSearch}) {
   return (
     
     <Form onSubmit={submitHandler} >
-        <Container fluid style={{ padding: '0.2rem'}}>
-           
-            
-            <Row md={12} xl={12} style={{margin: 'auto', display: 'flex' }}>
+        <Container fluid style={{display: 'flex', padding: '0.2rem'}}>
+            <Row md={12} xl={12} style={{margin: 'auto', display: 'flex', textAlign:'left' , justifyContent:'left' , width:'100%' }}>
                 
+                <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
+                    <h6><strong>Kategorija biljke</strong></h6>
+                        <CustomSelect  values={ allcategories?.categories?.map(col => (
+                            { value: col.name, label: col.name}
+                            ))} onAction={setKategorija}>
+
+                        </CustomSelect>
+                </Row>
+
+                <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
+
+                    <h6><strong>Tip biljke</strong></h6>
+                        <CustomSelect values={ allcategories?.type_of_plant?.map(col => (
+                            { value: col, label: col}
+                            ))} onAction={setTip}>
+
+                        </CustomSelect>
+                </Row>
+
+                <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                 
-                    <Row md={12} xl={12} style={{ display: 'flex', padding:'0.5rem', width: '100%'}}>
+                    <h6><strong>Pozicija za sadnju</strong></h6>
+                        <CustomSelect values={ allcategories?.mesto_sadnje?.map(col => (
+                            { value: col, label: col}
+                            ))} onAction={setPozicija}>
+
+                        </CustomSelect>
+                </Row>
+
+                <Row md={12} xl={12} style={{}}>
+                    
+                    
+                    <h6><strong>Boja cveta</strong></h6>
+                        <Form.Control 
+                            type='search'
+                            name='pretraga'
+                            inline ='true'
+                            placeholder='Select....'
+                            onChange={(e) => setBoja(e.target.value) }>
+                        </Form.Control>
+                   
+                </Row>
+
+                {/* <Row md={12} xl={12} style={{ display: 'flex', padding:'0.5rem', width: '100%'}}>
                         <Row >
                             <h6><strong>Pretraga Proizvoda:</strong></h6>
                         </Row>
@@ -118,64 +158,11 @@ function Search( { onSearch}) {
                                 placeholder='Trazeni proizvod...'
                                 onChange={(e) => setPretraga(e.target.value) }>
                             </Form.Control>
-                            </Row>
+                            
                         </Row>
-               
-                    <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
-                    
-                    <h6><strong>Pozicija za sadnju</strong></h6>
-                        <CustomSelect values={ allcategories?.mesto_sadnje?.map(col => (
-                            { value: col, label: col}
-                            ))} onAction={setPozicija}>
+                </Row> */}
 
-                        </CustomSelect>
-                    </Row>
-                    
-                    <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
-                        <Row>
-                            <h6><strong>Boja cveta</strong></h6>
-                        </Row>
-                        <Row>
-                            <Form.Control 
-                                type='search'
-                                name='pretraga'
-                                inline ='true'
-                                placeholder='Select....'
-                                onChange={(e) => setBoja(e.target.value) }>
-                            </Form.Control>
-                        </Row>
-                    </Row>
-             
-                    <Row md={12} xl={12} style={{ paddingBottom:'0.5rem', width: '100%'}}>
-
-                    <h6><strong>Tip biljke</strong></h6>
-                        <CustomSelect values={ allcategories?.type_of_plant?.map(col => (
-                            { value: col, label: col}
-                            ))} onAction={setTip}>
-
-                        </CustomSelect>
-                    </Row>
-              
-                
-                {/* <h6><strong>Visina biljke</strong></h6>
-                    <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
-                        <CustomSelect values={ allcategories?.high?.map(col => (
-                            { value: col, label: col}
-                        ))} onAction={setHigh}></CustomSelect>
-                    </Row>
-                <hr/> */}
-                
-                
-                    <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
-                        <h6><strong>Kategorija biljke</strong></h6>
-                        <CustomSelect  values={ allcategories?.categories?.map(col => (
-                            { value: col.name, label: col.name}
-                            ))} onAction={setKategorija}>
-
-                        </CustomSelect>
-                    </Row>
-              
-                <Row md={12}>
+                {/* <Row md={12}>
                     
                         <Button 
                             type='submit'
@@ -186,8 +173,8 @@ function Search( { onSearch}) {
                             Filter
                         </Button>
                 
-                </Row>
-               
+                </Row> */}
+            
             </Row>
         </Container>
     </Form>
