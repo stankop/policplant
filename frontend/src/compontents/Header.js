@@ -19,7 +19,6 @@ import SearchBox from "./SearchBox";
 import { logout } from "../store/user-actions";
 import HeaderCardButton from './/UI/HeaderCardButton'
 import classes from './Header.module.css'
-import image from '../../src/assets/images/berberis-erecta-1-350x350.jpg'
 import { listCategories } from "../store/category-actions";
 //import { plantCategories } from '../store/plantCategory-actions'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -32,7 +31,7 @@ function Header(props) {
 
   const category = useSelector((state) => state.categoryList);
   const { categories } = category;
-  const image = 'https://policplantpublic.s3.eu-west-2.amazonaws.com/veliki+logo+verzija+1.0.png'
+  const image = 'https://policplantblob.blob.core.windows.net/policplant-container/veliki logo verzija 1.0.png'
   const listKagetorija= useRef([])
 
   const [cat, setCat] = useState(categories)
@@ -68,7 +67,7 @@ function Header(props) {
               <LinkContainer to="/">
                 <Navbar.Brand >
                   {/* <h1 className={classes["h1"]}>Rasadnik Ema</h1> */}
-                  <img src={image} style={{ width:'22rem', height:'22rem',marginTop: '+2rem', overflow:'hidden'}} alt="Rasadnik Ema"/>
+                  <img src={image} loading="eager" style={{ width:'22rem', height:'22rem',marginTop: '+2rem', overflow:'hidden'}} alt="Rasadnik Ema"/>
                 </Navbar.Brand>
               </LinkContainer>
               

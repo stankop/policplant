@@ -140,27 +140,23 @@ function Search( { onSearch}) {
                             type='search'
                             name='pretraga'
                             inline ='true'
-                            placeholder='Select....'
+                            placeholder='Unesite boju...'
                             onChange={(e) => setBoja(e.target.value) }>
                         </Form.Control>
                    
                 </Row>
-
-                {/* <Row md={12} xl={12} style={{ display: 'flex', padding:'0.5rem', width: '100%'}}>
-                        <Row >
-                            <h6><strong>Pretraga Proizvoda:</strong></h6>
-                        </Row>
-                        <Row>
+                {/* style={{ display: 'flex', padding:'0.5rem', width: '100%'}} */}
+                <Row md={12} xl={12} style={{ }}> 
+                        
+                        <h6><strong>Pretraga Proizvoda:</strong></h6>
                             <Form.Control 
                                 type='search'
                                 name='pretraga'
                                 inline ='true'
                                 placeholder='Trazeni proizvod...'
                                 onChange={(e) => setPretraga(e.target.value) }>
-                            </Form.Control>
-                            
-                        </Row>
-                </Row> */}
+                            </Form.Control>     
+                </Row>
 
                 {/* <Row md={12}>
                     

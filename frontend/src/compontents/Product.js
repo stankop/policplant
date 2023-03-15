@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Card, Button } from 'react-bootstrap'
 import Rating from './Rating'
 import { Link } from 'react-router-dom'
@@ -7,6 +7,7 @@ import {useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import {  addToCart,removeFromCart } from '../store/cart-actions'
 import { useParams } from 'react-router';
+import WebFont from 'webfontloader';
 
 function Product({product}) {
 
@@ -18,6 +19,15 @@ function Product({product}) {
         dispatch(addToCart(Number(product._id), Number(1)));
         navigate(`/cart/?id=${product._id}&qty=${1}`)
     }
+
+    useEffect(() => {
+        WebFont.load({
+          google: {
+            families: ['Poppins', 'Chilanka']
+          }
+        });
+    }, [])
+
   return (
     <Card className={`my-1 p-1 rounded ${classes["img-hover-zoomA"]}`} border="primary"  style={{ width: '17.5rem', height: 'auto' }}>
         <Link to={`/products/${product._id}`}> 
@@ -34,18 +44,19 @@ function Product({product}) {
             </Card.ImgOverlay> 
         </Link> 
         <Card.Body style={{ textAlign: "center"}}>
-            <Link to={`/products/${product._id}`}>
-             <Card.Title as="div" >
-                 <strong style={{ fontSize: '1.2rem'}}>{product.name}</strong>
+            <Link style={{ textDecoration: 'none' }} to={`/products/${product._id}`}> 
+             <Card.Title as="h3" >
+                 <div style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif', colorHover:'rgb(51 51 51 / 65%)'}}>{product?.name}</div>
+                 <div style={{ fontSize: '1rem', color:'#333333', fontFamily: 'Poppins', colorHover:'rgb(51 51 51 / 65%)'}}>{product?.botanicki_naziv}</div>
              </Card.Title>
-            </Link>
+             </Link> 
             {/* <Card.Text as="div">
                 <div className="my-3">
                         <Rating value={product.rating} text={`${product.numReviews} komentara`} color={'#f8e825'}></Rating>
                 </div>
             </Card.Text> */}
-            <Card.Text as="h4" style={{ color:'black', fontSize: '1.4rem'}}>
-                    {product.price} rsd
+            <Card.Text as="h4" style={{ color:'#83b735', fontSize: '1rem'}}>
+                    {product.price} RSD
             </Card.Text>
             {/* <Card.Text as="h6"> */}
                     {/* {product.countInStock > 0 ? <strong style={{ color:'green'}}>Na stanju</strong> : ''}  */}
