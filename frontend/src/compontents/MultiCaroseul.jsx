@@ -3,6 +3,7 @@ import "react-multi-carousel/lib/styles.css";
 import "bootstrap/dist/css/bootstrap.css";
 import Image from "react-bootstrap/Image";
 import ImageButton from 'react-image-button';
+import { useNavigate } from 'react-router-dom';
 
 const responsive = {
     desktop: {
@@ -23,6 +24,8 @@ const responsive = {
   };
 
 function MultiCaroseul(props) {
+
+    const navigate = useNavigate();
     const image1 = <Image
             className='img-fluid shadow-5'
             src= "https://policplantblob.blob.core.windows.net/policplant-banner/banner-1.jpg"
@@ -63,14 +66,14 @@ function MultiCaroseul(props) {
                              zoomOnHover={0}
                              buttonPosition="bottom"
                              alwaysShowButton={true} >
-                    <button primary={true}  className="btn success" style={{ border: '2px solid black'}} > Cetinari pogledajte  </button>
+                    <button onClick={() => { navigate('/categories/36')}} primary={true}  className="btn success" style={{ border: '2px solid black'}} > Cetinari pogledajte  </button>
                 </ImageButton>
             </div>
             <div style={{padding:'1rem'}}>
                 <ImageButton img={image2}
                              alwaysShowButton={true}
                              buttonPosition="bottom" >
-                    <button primary={true} className="btn success" style={{ border: '2px solid black'}} > Puzavice pogledajte </button>
+                    <button onClick={() => { navigate('/categories/30')}} primary={true} className="btn success" style={{ border: '2px solid black'}} > Puzavice pogledajte </button>
                 </ImageButton>
             </div> 
         </Carousel>

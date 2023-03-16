@@ -23,6 +23,7 @@ import { listCategories } from "../store/category-actions";
 //import { plantCategories } from '../store/plantCategory-actions'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Image from 'react-bootstrap/Image'
+import '../compontents/Header.css'
 
 
 function Header(props) {
@@ -179,7 +180,7 @@ function Header(props) {
                                           display: 'inline-block'}}>
                             {info?.map( (i) => (
                               <LinkContainer to={`/${i.src}/`} key={i.id}>
-                                  <NavDropdown.Item  key={i.id}>
+                                  <NavDropdown.Item className='click'  key={i.id}>
                                       { i.value }  
                                   </NavDropdown.Item>
                                 </LinkContainer>

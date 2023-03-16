@@ -40,7 +40,7 @@ function Footer() {
                 <Image xs={6} md={4} src={image}
                        
                        fluid
-                       responsive
+                       responsive='true'
                        style={{width:'50%', height:'auto', objectFit:'fill'}}  >
                        
                 </Image>
@@ -55,14 +55,14 @@ function Footer() {
                 </div>
                 <div style={{padding:'.5rem'}}>
                     
-                    <a href='https://www.facebook.com/rasadnikema ' style={{margin:'0.5rem' }} TITLE="Face">
-                            <i class="fa-brands fa-facebook fa-2x"></i>
+                    <a href='https://www.facebook.com/rasadnikema ' style={{margin:'0.5rem' }} title="Face">
+                            <i className="fa-brands fa-facebook fa-2x"></i>
                     </a>
                     {/* <a href='https//:' style={{margin:'0.3rem'}} TITLE="Twitter">
                             <i class="fa-brands fa-twitter"></i>
                     </a> */}
                     <a href='https//:' style={{margin:'0.3rem'}} TITLE="Instagram">
-                            <i class="fa-brands fa-instagram fa-2x"></i>
+                            <i className="fa-brands fa-instagram fa-2x"></i>
                     </a>
                     {/* <a href='https//:' style={{margin:'0.3rem'}} TITLE="Messenger">
                             <i class="fa-brands fa-facebook-messenger"></i>
@@ -72,16 +72,16 @@ function Footer() {
                     </a> */}
                 </div>
               </Col>
-              <Col style={{ padding:'2rem'}}>
-                <h4 style={{ fontSize: '1.2rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}><strong>Korisni linkovi</strong></h4>
+              <Col style={{margin:'2rem', paddingTop:'2rem'}}>
+                <h4 style={{ fontSize: '1.2rem', color:'#333333', fontFamily: '"Poppins", sans-serif', marginBottom:'1.2rem'}}><strong>Korisni linkovi</strong></h4>
                 <Link to="/porucivanje" style={{ textDecoration: 'none' }}>
-                  <h5 className='click' style={{ fontSize: '1.2rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Kako poručiti putem sajta</h5>
+                  <h5 className='click' style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Kako poručiti putem sajta</h5>
                 </Link>
-                <h5 style={{ fontSize: '1.2rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Izrada plana sadnje</h5>
-                <h5 style={{ fontSize: '1.2rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Najčešća pitanja</h5>
-                <h5 style={{ fontSize: '1.2rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Način plaćanja</h5>
+                <h5 style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Izrada plana sadnje</h5>
+                <h5 style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Najčešća pitanja</h5>
+                <h5 style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Način plaćanja</h5>
                 <Link to="/isporuka" style={{ textDecoration: 'none' }}>
-                  <h5 className='click' style={{ fontSize: '1.2rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Isporuka</h5>
+                  <h5 className='click' style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Isporuka</h5>
                 </Link>
               </Col>
             </Row>
