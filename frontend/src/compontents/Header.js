@@ -22,7 +22,7 @@ import classes from './Header.module.css'
 import { listCategories } from "../store/category-actions";
 //import { plantCategories } from '../store/plantCategory-actions'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Image from 'react-bootstrap/Image'
 
 
 function Header(props) {
@@ -67,7 +67,7 @@ function Header(props) {
               <LinkContainer to="/">
                 <Navbar.Brand >
                   {/* <h1 className={classes["h1"]}>Rasadnik Ema</h1> */}
-                  <img src={image} loading="eager" style={{ width:'22rem', height:'22rem',marginTop: '+2rem', overflow:'hidden'}} alt="Rasadnik Ema"/>
+                  <Image fluid  src={image} loading="eager" style={{ width:'22rem', height:'22rem',marginTop: '+2rem', overflow:'hidden'}} alt="Rasadnik Ema"/>
                 </Navbar.Brand>
               </LinkContainer>
               

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import {  addToCart,removeFromCart } from '../store/cart-actions'
 import { useParams } from 'react-router';
 import WebFont from 'webfontloader';
+import '../compontents/Product.css'
 
 function Product({product}) {
 
@@ -46,8 +47,8 @@ function Product({product}) {
         <Card.Body style={{ textAlign: "center"}}>
             <Link style={{ textDecoration: 'none' }} to={`/products/${product._id}`}> 
              <Card.Title as="h3" >
-                 <div style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif', colorHover:'rgb(51 51 51 / 65%)'}}>{product?.name}</div>
-                 <div style={{ fontSize: '1rem', color:'#333333', fontFamily: 'Poppins', colorHover:'rgb(51 51 51 / 65%)'}}>{product?.botanicki_naziv}</div>
+                 <div className='click' style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>{product?.name}</div>
+                 <div className='click' style={{ fontSize: '1rem', fontStyle: 'italic', color:'#333333', fontFamily: 'Poppins'}}>{product?.botanicki_naziv}</div>
              </Card.Title>
              </Link> 
             {/* <Card.Text as="div">
