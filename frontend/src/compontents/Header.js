@@ -57,6 +57,53 @@ function Header(props) {
   const logoutHandler = (event) => {
     dispatch(logout());
   };
+
+  const info = [
+    {
+      id:0,
+      value: 'Informacije',
+      src: 'a'
+    },
+    { 
+      id:1,
+      value: 'Poručivanje',
+      src: 'porucivanje'},
+    {
+      id:2,
+      value: 'Kako poručiti putem sajta',
+      src: 'b'
+    },
+    {
+      id:3,
+      value:'Izrada plana sadnje',
+      src: 'c'
+    },
+    {
+      id:4,
+      value:'Najčešća pitanja',
+      src: 'd'
+    },
+    {
+      id:5,
+      value:'Način plaćanja',
+      src: 'e'
+    },
+    {
+      id:6,
+      value:'Isporuka',
+      src: 'isporuka'
+    },
+    {
+      id:7,
+      value:'Reklamacije',
+      src: 'f'
+    },
+    {
+      id:8,
+      value:'Politika privatnosti',
+      src: 'g'
+    }]
+
   return (
     <Fragment >
     <header >
@@ -105,7 +152,7 @@ function Header(props) {
               <Col md={{ span: 12, offset: 14 }}>
                 <Nav style={{width:'100%'}}>
                     
-                    <div style={{fontSize: '1.4rem'}}><FontAwesomeIcon icon={faStore}></FontAwesomeIcon>   
+                    <div style={{fontSize: '1.4rem', paddingRight:'2rem'}}><FontAwesomeIcon icon={faStore}></FontAwesomeIcon>   
                           <NavDropdown title="Prodavnica" 
                                   id="basic-nav-dropdown" 
                                   
@@ -122,7 +169,24 @@ function Header(props) {
                         
                           </NavDropdown>  
                     </div>
-                  
+                    
+                    <div style={{fontSize: '1.4rem'}}><FontAwesomeIcon icon={faInfo}></FontAwesomeIcon>   
+                          <NavDropdown title="Info" 
+                                  id="basic-nav-dropdown" 
+                                  
+                                  style={{
+                                          fontSize: '1.4rem', 
+                                          display: 'inline-block'}}>
+                            {info?.map( (i) => (
+                              <LinkContainer to={`/${i.src}/`} key={i.id}>
+                                  <NavDropdown.Item  key={i.id}>
+                                      { i.value }  
+                                  </NavDropdown.Item>
+                                </LinkContainer>
+                            ))}
+                        
+                          </NavDropdown>  
+                    </div>
                    
                   <LinkContainer to="/onama" >
                   

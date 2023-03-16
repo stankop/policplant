@@ -27,6 +27,7 @@ import { useState } from "react";
 import Cart from './compontents/UI/Cart/Cart'
 import Order from './compontents/UI/Order/Order'
 import InformacijeIsporuka from './screens/InformacijeIsporuka'
+import InformacijePorucivanje from './screens/InformacijePorucivanje'
 
 function App() {
 
@@ -87,6 +88,7 @@ function App() {
             <Route path="/admin/product/:id/edit" element={<ProductEditScreen />}></Route>
             <Route path="/admin/orderlist" element={<OrderListScreen />}></Route>
             <Route path="/isporuka" element={<InformacijeIsporuka />}></Route>
+            <Route path="/porucivanje" element={<InformacijePorucivanje />}></Route>
           </Routes>
         </div>
         
