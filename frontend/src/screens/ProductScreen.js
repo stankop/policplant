@@ -218,7 +218,7 @@ function ProductScreen({match}) {
                                                             {product.countInStock > 0 && (
                                                                 <ListGroup.Item>
                                                                     <Row>
-                                                                        <Col>Kolicina:</Col>
+                                                                        <Col>Količina:</Col>
                                                                         <Col xs='auto' className='my-1'>
                                                                             <Form.Control 
                                                                                 as='select'
@@ -252,7 +252,7 @@ function ProductScreen({match}) {
                                                                     className='btn btn-block' 
                                                                     disabled={product.countInStock < 1}
                                                                     onClick={() => window.open('#/cart',"_self")}>
-                                                                        Poruci
+                                                                        Poruči
                                                                 </Button>
                                                             </ListGroup.Item>
                                                         </ListGroup>

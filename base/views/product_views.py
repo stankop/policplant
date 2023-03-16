@@ -20,6 +20,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
 import operator
 from django.db.models import Q
+from django.views.decorators.cache import cache_page
 
 
 @api_view(['GET'])
@@ -51,9 +52,9 @@ def getAllCategories(request):
         #     color = [x for (x,y) in f.choices]
         elif f.name == 'vre_cve':
             vre_cve = [x for (x,y) in f.choices]
-    serializerCategory = PlantCategorySerializer(categoriess, many= True)
+    #serializerCategory = PlantCategorySerializer(categoriess, many= True)
 
-    return Response({'categories': serializerCategory.data,'place_of_planting': place_of_planting,'brzina_rasta': brzina_rasta,'privlaci_insekte': privlaci_insekte,'orezivanje': orezivanje, 'vre_cve': vre_cve,'mesto_sadnje': mesto_sadnje, 'place_of_planting': place_of_planting, 'type_of_plant': type_of_plant})
+    return Response({'place_of_planting': place_of_planting,'brzina_rasta': brzina_rasta,'privlaci_insekte': privlaci_insekte,'orezivanje': orezivanje, 'vre_cve': vre_cve,'mesto_sadnje': mesto_sadnje, 'place_of_planting': place_of_planting, 'type_of_plant': type_of_plant})
 
 @api_view(['GET'])
 def getProducts(request):
@@ -81,6 +82,8 @@ def getProducts(request):
     elif page == 'null':
         page = 1
     elif page == 'undefined':
+        page = 1
+    elif page == '':
         page = 1
     page = int(page)
 
@@ -287,6 +290,17 @@ def getFilterProducts(request):
    
     serializer = ProductSerializer(products, many= True)
     return Response({'products': serializer.data} )
+
+@api_view(['GET'])
+def getProductsByCategoryId(request, pk):
+    
+    products = PlantCategory.objects.get(pk=pk).products.order_by('name')
+    print('Broj biljaka po Categoriji je:', len(products))
+    #products = Product.objects.filter(name__icontains=query).order_by('name')
+    print('Products:', products)
+
+    serializer = ProductSerializer(products, many= True)
+    return Response({'products': serializer.data })
 
 
 @api_view(['POST'])

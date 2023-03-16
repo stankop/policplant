@@ -29,8 +29,12 @@ function CategoryScreen() {
   //const id = search.get("id");
 
   useEffect(()=>{
-    window.scrollTo(0, 0)
-    dispatch(listProducts())
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+      })
+    dispatch(listProducts(id))
         
  }, [dispatch, id]);
 

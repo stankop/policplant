@@ -2,7 +2,7 @@ import { productListActions} from './product-slice'
 import { productDetailsActions} from './productDetails-slice'
 import axios from 'axios'
 
-export const listProducts = (keyword = '', page) => {
+export const listProducts = (pk=null, keyword = '', page='') => {
     return async (dispatch) => {
 
         const fetchData = async () => {
@@ -11,8 +11,15 @@ export const listProducts = (keyword = '', page) => {
                 keyword = ''
             }
            
-            const { data } = await axios.get(`/api/products/?keyword=${keyword}&page=${page}`)
-            return data;
+            // const { data } = await axios.get(`/api/products/?pk=${pk}&keyword=${keyword}&page=${page}`)
+            // return data;
+            if(pk === null){
+                const { data } = await axios.get(`/api/products/?keyword=${keyword}&page=${page}`)
+                return data;
+            }else{
+                const { data } = await axios.get(`/api/products/categoryProducts/${pk}`)
+                return data;
+            }
         }
 
         try {
