@@ -35,7 +35,7 @@ function Search( { onSearch}) {
 
     const dispatch = useDispatch()
     const cat = useSelector(state => state.categoryList)
-    const { allcategories } = cat
+    const { allcategories, categories } = cat
     const prod = useSelector(state => state.productList)
     const { products } = prod
 
@@ -105,7 +105,7 @@ function Search( { onSearch}) {
                 
                 <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                     <h6><strong>Kategorija biljke</strong></h6>
-                        <CustomSelect  values={ allcategories?.categories?.map(col => (
+                        <CustomSelect  values={ categories?.slice().sort((a, b) =>{return a.order - b.order}).map(col => (
                             { value: col.name, label: col.name}
                             ))} onAction={setKategorija}>
 
