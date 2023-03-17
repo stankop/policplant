@@ -53,7 +53,7 @@ function CategoryScreen() {
           
         </Breadcrumb>
         <Link to={-1} className='btn btn-primary my-3'> Nazad</Link>
-        <h1>{ catProducts?.find( cat => cat._id?.toString() === id)?.name}</h1>
+        <h1 style={{color:'#333333'}}>{ catProducts?.find( cat => cat._id?.toString() === id)?.name}</h1>
         
         {/* <p>{ catProducts?.find( cat => cat._id?.toString() === id)?.description}</p> */}
         <p dangerouslySetInnerHTML={htmlString}></p>

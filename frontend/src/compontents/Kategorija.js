@@ -13,7 +13,7 @@ function Kategorija({category}) {
         <Card.Body style={{ textAlign: "center", textDecoration: 'none'}}>
             <Link to={`/categories/${category._id}`}>
              <Card.Title as="div" >
-                 <strong style={{ display: 'inline-block',fontSize: '1.6rem'}}>{category.name}</strong>
+                 <strong style={{ display: 'inline-block',fontSize: '1.6rem', color:'#333333'}}>{category.name}</strong>
              </Card.Title>
             </Link>
             

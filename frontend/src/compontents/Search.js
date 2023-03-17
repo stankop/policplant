@@ -104,7 +104,7 @@ function Search( { onSearch}) {
             <Row md={12} xl={12} style={{margin: 'auto', display: 'flex', textAlign:'left' , justifyContent:'left' , width:'100%' }}>
                 
                 <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
-                    <h6><strong>Kategorija biljke</strong></h6>
+                    <h6><strong style={{color:'#333333'}}>Kategorija biljke</strong></h6>
                         <CustomSelect  values={ categories?.slice().sort((a, b) =>{return a.order - b.order}).map(col => (
                             { value: col.name, label: col.name}
                             ))} onAction={setKategorija}>
@@ -114,7 +114,7 @@ function Search( { onSearch}) {
 
                 <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
 
-                    <h6><strong>Tip biljke</strong></h6>
+                    <h6><strong style={{color:'#333333'}}>Tip biljke</strong></h6>
                         <CustomSelect values={ allcategories?.type_of_plant?.map(col => (
                             { value: col, label: col}
                             ))} onAction={setTip}>
@@ -124,7 +124,7 @@ function Search( { onSearch}) {
 
                 <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                 
-                    <h6><strong>Pozicija za sadnju</strong></h6>
+                    <h6><strong style={{color:'#333333'}}>Pozicija za sadnju</strong></h6>
                         <CustomSelect values={ allcategories?.mesto_sadnje?.map(col => (
                             { value: col, label: col}
                             ))} onAction={setPozicija}>
@@ -135,7 +135,7 @@ function Search( { onSearch}) {
                 <Row md={12} xl={12} style={{}}>
                     
                     
-                    <h6><strong>Boja cveta</strong></h6>
+                    <h6><strong style={{color:'#333333'}}>Boja cveta</strong></h6>
                         <Form.Control 
                             type='search'
                             name='pretraga'
@@ -148,7 +148,7 @@ function Search( { onSearch}) {
                 {/* style={{ display: 'flex', padding:'0.5rem', width: '100%'}} */}
                 <Row md={12} xl={12} style={{ }}> 
                         
-                        <h6><strong>Pretraga Proizvoda:</strong></h6>
+                        <h6><strong style={{color:'#333333'}}>Pretraga Proizvoda:</strong></h6>
                             <Form.Control 
                                 type='search'
                                 name='pretraga'

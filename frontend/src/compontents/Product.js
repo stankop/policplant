@@ -66,6 +66,7 @@ function Product({product}) {
             <Button     variant="primary" 
                         disabled={product.countInStock < 1} 
                         type='button'
+                        style={{background:'#83b735', border:'1px solid #83b735'}}
                         onClick= {addToCartHandler}>
                                 Dodaj u Korpu
             </Button>

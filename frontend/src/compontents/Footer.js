@@ -61,7 +61,7 @@ function Footer() {
                     {/* <a href='https//:' style={{margin:'0.3rem'}} TITLE="Twitter">
                             <i class="fa-brands fa-twitter"></i>
                     </a> */}
-                    <a href='https//:' style={{margin:'0.3rem'}} TITLE="Instagram">
+                    <a href='https//:' style={{margin:'0.3rem'}} title="Instagram">
                             <i className="fa-brands fa-instagram fa-2x"></i>
                     </a>
                     {/* <a href='https//:' style={{margin:'0.3rem'}} TITLE="Messenger">

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const productDetailsSlice = createSlice({
     name: 'product',
     initialState: {
-            product: {},
+            product: null,
             loading: false,
             success: false,
             error:''

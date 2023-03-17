@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Button, Card, Form, Container} from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Button, Card, Form, Container, ListGroupItem} from 'react-bootstrap'
 import Rating from '../compontents/Rating'
 import Loader from '../compontents/Loader'
 import Message from '../compontents/Message'
@@ -22,6 +22,7 @@ import ImageZoom from "react-image-zooom";
 import '../../node_modules/react-image-gallery/styles/css/image-gallery.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ImageGallery from 'react-image-gallery';
+import Ikonice from '../compontents/UI/Ikonice';
 
 function ProductScreen({match}) {
     
@@ -127,63 +128,61 @@ function ProductScreen({match}) {
                                 <Col sm={12} md={6} lg={8} xl={7} xs={6}>
                                     <ListGroup variant='flush'>
                                         <ListGroup.Item>
-                                            <h2><strong style={{ fontSize:'2.8rem', fontFamily: 'Oswald, sans-serif'}}>{product.name}</strong> <i style={{fontSize:'1.4rem'}}>{product.botanicki_naziv}</i></h2> 
+                                            <h2><strong style={{ color:'#333333', fontSize:'2.8rem', fontFamily: 'Oswald, sans-serif'}}>{product?.name}</strong> <i style={{fontSize:'1.4rem' , color:'#333333'}}>{product?.botanicki_naziv}</i></h2> 
                                         </ListGroup.Item>
                                         <ListGroup.Item >
-                                            <strong style={{ color:'#228B22', fontSize:30 }}>{product.price} rsd</strong> 
+                                            <strong style={{ color:'#228B22', fontSize:30 }}>{product?.price} rsd</strong> 
                                         </ListGroup.Item>
 
                                         <ListGroup.Item>
-                                            <strong>Kategorija:</strong> {product.category?.map(x => x.name).join(', ')}
+                                            <strong>Kategorija:</strong> {product?.category?.map(x => x.name).join(', ')}
                                         </ListGroup.Item>
 
-                                        {product.color && <ListGroup.Item>
-                                            <strong>Boja:</strong> {product.color}
+                                        {product?.color && <ListGroup.Item>
+                                            <strong>Boja:</strong> {product?.color}
                                         </ListGroup.Item>}
 
                                         {/* {product.mesto_sadnje && <ListGroup.Item>
                                             <strong>Položaj:</strong> {product.mesto_sadnje}
                                         </ListGroup.Item>} */}
-                                        {product.mesto_sadnje?.length > 0 && <ListGroup.Item>
-                                            <strong>Položaj:</strong> {Array.isArray(product.mesto_sadnje) ? product.mesto_sadnje?.join(', ') : product.mesto_sadnje}
+                                        {product?.mesto_sadnje?.length > 0 && <ListGroup.Item>
+                                            <strong>Položaj:</strong> {Array.isArray(product?.mesto_sadnje) ? product?.mesto_sadnje?.join(', ') : product?.mesto_sadnje}
                                         </ListGroup.Item>}
 
-                                        {product.place_of_planting && <ListGroup.Item>
-                                            <strong>Mesto sadnje:</strong> {product.place_of_planting}
+                                        {product?.place_of_planting && <ListGroup.Item>
+                                            <strong>Mesto sadnje:</strong> {product?.place_of_planting}
                                         </ListGroup.Item>}
 
-                                        {product.vre_cve?.length > 0 && <ListGroup.Item>
-                                            <strong>Vreme cvetanja:</strong> {Array.isArray(product.vre_cve) ? product.vre_cve?.join(', ') : product.vre_cve}
+                                        {product?.vre_cve?.length > 0 && <ListGroup.Item>
+                                            <strong>Vreme cvetanja:</strong> {Array.isArray(product?.vre_cve) ? product?.vre_cve?.join(', ') : product?.vre_cve}
                                         </ListGroup.Item>}
 
-                                        {product.orezivanje && <ListGroup.Item>
-                                            <strong>Orezivanje:</strong> {product.orezivanje}
+                                        {product?.orezivanje && <ListGroup.Item>
+                                            <strong>Orezivanje:</strong> {product?.orezivanje}
                                         </ListGroup.Item>}
 
-                                        {product.high && <ListGroup.Item>
-                                            <strong>Visina biljke:</strong> {product.high}
+                                        {product?.high && <ListGroup.Item>
+                                            <strong>Visina biljke:</strong> {product?.high}
                                         </ListGroup.Item>}
-                                        {product.type_of_plant && <ListGroup.Item>
-                                            <strong>Tip biljke:</strong> {product.type_of_plant}
+                                        {product?.type_of_plant && <ListGroup.Item>
+                                            <strong>Tip biljke:</strong> {product?.type_of_plant}
                                         </ListGroup.Item>}
-                                        {product.privlaci_insekte && <ListGroup.Item>
-                                            <strong> Medonosna:</strong> {product.privlaci_insekte}
+                                        {product?.privlaci_insekte && <ListGroup.Item>
+                                            <strong> Medonosna:</strong> {product?.privlaci_insekte}
                                         </ListGroup.Item>}
-                                        {product.brzina_rasta && <ListGroup.Item>
-                                            <strong> Brzina rasta:</strong> {product.brzina_rasta}
+                                        {product?.brzina_rasta && <ListGroup.Item>
+                                            <strong> Brzina rasta:</strong> {product?.brzina_rasta}
                                         </ListGroup.Item>}
-                                        {product.prezimljava && <ListGroup.Item>
-                                            <strong> Prezimljava:</strong> {product.prezimljava}
+                                        {product?.prezimljava && <ListGroup.Item>
+                                            <strong> Prezimljava:</strong> {product?.prezimljava}
                                         </ListGroup.Item>}
-                                        {product.sirina_biljke && <ListGroup.Item>
-                                            <strong> Sirina:</strong> {product.sirina_biljke}
+                                        {product?.sirina_biljke && <ListGroup.Item>
+                                            <strong> Sirina:</strong> {product?.sirina_biljke}
                                         </ListGroup.Item>}
-                                        {product.velicina_slanja && <ListGroup.Item>
-                                            <strong> Isporuka:</strong> {product.velicina_slanja}
+                                        {product?.velicina_slanja && <ListGroup.Item>
+                                            <strong> Isporuka:</strong> {product?.velicina_slanja}
                                         </ListGroup.Item>}
-                                        <ListGroup.Item>
-                                            
-                                                
+                                        <ListGroup.Item style={{paddingBottom:'2rem'}}>
                                                  <Col sm={12} md={6} lg={4} xl={6} xs={12}>
                                                     <br />
                                                     <Card>
@@ -215,7 +214,7 @@ function ProductScreen({match}) {
                                                                 </Row>
                                                             </ListGroup.Item> */}
 
-                                                            {product.countInStock > 0 && (
+                                                            {product?.countInStock > 0 && (
                                                                 <ListGroup.Item>
                                                                     <Row>
                                                                         <Col>Količina:</Col>
@@ -225,7 +224,7 @@ function ProductScreen({match}) {
                                                                                 value={qty} 
                                                                                 onChange={(e) => setQty(Number(e.target.value)) }>
                                                                                     {
-                                                                                        [...Array(product.countInStock).keys()].map((x) => (
+                                                                                        [...Array(product?.countInStock).keys()].map((x) => (
                                                                                             <option key={x +1} value={x +1}>
                                                                                                 {x+1}
                                                                                             </option>
@@ -240,8 +239,10 @@ function ProductScreen({match}) {
 
                                                             <ListGroup.Item>
                                                                 <Button 
+                                                                   
+                                                                    style={{ background :'#83b735', border:'1px solid #83b735'}}
                                                                     className='btn btn-block' 
-                                                                    disabled={product.countInStock < 1} 
+                                                                    disabled={product?.countInStock < 1} 
                                                                     type='button'
                                                                     onClick= {addToCartHandler}>
                                                                         Dodaj u Korpu
@@ -249,8 +250,9 @@ function ProductScreen({match}) {
                                                             </ListGroup.Item>
                                                             <ListGroup.Item>
                                                                 <Button 
+                                                                    style={{ background :'#83b735', border:'1px solid #83b735'}}
                                                                     className='btn btn-block' 
-                                                                    disabled={product.countInStock < 1}
+                                                                    disabled={product?.countInStock < 1}
                                                                     onClick={() => window.open('#/cart',"_self")}>
                                                                         Poruči
                                                                 </Button>
@@ -261,24 +263,27 @@ function ProductScreen({match}) {
                                                 </Col>
                                                
                                         </ListGroup.Item>
+                                        <ListGroupItem style={{paddingTop:'2rem'}}>
+                                            {product && <Ikonice product={product}></Ikonice>}
+                                        </ListGroupItem>
                                     </ListGroup>
                                     <br/>
                                     <br/>
                                     <div style={{margin:'0.3rem'}}>
                                         Share:
-                                        <a href='https//:' style={{margin:'0.3rem'}} TITLE="Face">
+                                        <a href='https//:' style={{margin:'0.3rem'}} title="Face">
                                                 <i class="fa-brands fa-facebook"></i>
                                         </a>
-                                        <a href='https//:' style={{margin:'0.3rem'}} TITLE="Twitter">
+                                        <a href='https//:' style={{margin:'0.3rem'}} title="Twitter">
                                                 <i class="fa-brands fa-twitter"></i>
                                         </a>
-                                        <a href='https//:' style={{margin:'0.3rem'}} TITLE="Instagram">
+                                        <a href='https//:' style={{margin:'0.3rem'}} title="Instagram">
                                                 <i class="fa-brands fa-instagram"></i>
                                         </a>
-                                        <a href='https//:' style={{margin:'0.3rem'}} TITLE="Messenger">
+                                        <a href='https//:' style={{margin:'0.3rem'}} title="Messenger">
                                                 <i class="fa-brands fa-facebook-messenger"></i>
                                         </a>
-                                        <a href='https//:' style={{margin:'0.3rem'}} TITLE="Mail">
+                                        <a href='https//:' style={{margin:'0.3rem'}} title="Mail">
                                                 <i class="fa-regular fa-envelope"></i>
                                         </a>
                                     </div>
