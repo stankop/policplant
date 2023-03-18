@@ -110,6 +110,7 @@ function ProductListScreen() {
                     <Table striped bordered hover responsive className='table-sm'>
                             <thead>
                                 <tr>
+                                    <th>RB</th>
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Cena</th>
@@ -121,22 +122,23 @@ function ProductListScreen() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {products.map(product => (
+                                {products?.map((product, index) => (
 
                                     <tr key={product._id}>
-                                        <td>{product._id}</td>
-                                        <td>{product.name}</td>
-                                        <td>{product.price} din</td>
-                                        <td>{product.category.map(x => x.name).join(', ')}</td>
-                                        <td>{product.color}</td>
-                                        <td style={{whiteSpace: "nowrap"}}>{product.countInStock}</td>
-                                        <td><Link to={`/admin/product/${product._id}/edit`}>
+                                        <td style={{width:'4rem'}}>{index + 1}</td>
+                                        <td style={{width:'4rem'}}>{product._id}</td>
+                                        <td style={{width:'15rem'}}><strong>{product.name}</strong></td>
+                                        <td style={{width:'5rem'}}>{product.price} din</td>
+                                        <td style={{width:'20rem'}}>{product.category.map(x => x.name).join(', ')}</td>
+                                        <td style={{width:'20rem'}}>{product.color}</td>
+                                        <td style={{whiteSpace: "nowrap", width:'5rem'}}>{product.countInStock}</td>
+                                        <td style={{width:'5rem'}}><Link to={`/admin/product/${product._id}/edit`}>
 
                                                 <Button variant = 'light' className='btn-sm'>
                                                      <i className='fas fa-edit'></i>
                                                 </Button>
                                             </Link></td>
-                                        <td>
+                                        <td style={{width:'5rem'}}>
                                                 <Button  className='btn-sm' onClick={(e) => deleteHandler(product._id)}>
                                                      <i className='fas fa-trash'></i>
                                                 </Button>
