@@ -63,7 +63,7 @@ function App() {
         <div className="container-fluid" style={{   backgroundColor: '#FFF' , width:'80%'}}>
           <Routes>
             <Route path="/" element={<HomeScreen />} exact></Route>
-            <Route path="/products/:id" element={<ProductScreen />}></Route>
+            <Route path="/products/:id/:catId" element={<ProductScreen />}></Route>
             <Route path="/categories/:id" element={<CategoryScreen />}></Route>
             <Route path="/filter" element={<FilterScreen />}></Route>
             <Route path="/cart" >

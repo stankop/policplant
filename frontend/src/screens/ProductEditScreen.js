@@ -344,12 +344,12 @@ function ProductEditScreen( ) {
             // })
             // console.log('Za slanje:', slanje)
         }}>
-        <Link to={-1}> 
+        <Link to={-1} className='btn btn-success  my-3'> 
             Nazad
         </Link>
 
         <FormContainer>
-            <h1>Edituj Biljku</h1>
+            <h1 style={{color:'green'}}>Edituj Biljku</h1>
             {loading && <Loader />}
             {error && <Message variant='danger'>{error}</Message>} 
 
@@ -764,7 +764,7 @@ function ProductEditScreen( ) {
                                 </Select>
                             </Form.Group>
 
-                            <Button type='submit' variant='primary'>
+                            <Button type='submit' variant='success'  className='my-3'>
                                 Edituj Biljku
                         </Button>
 

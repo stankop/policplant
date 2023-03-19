@@ -233,12 +233,12 @@ function ProductCreateScreen( ) {
 
     return (
         <div>
-            <Link to='/admin/productlist'>
-                Go Back
+            <Link to='/admin/productlist' className='btn btn-success my-3'>
+                Nazad
             </Link>
 
             <FormContainer>
-                <h1>Kreiranje biljke</h1>
+                <h1 style={{color:'green'}}>Kreiranje biljke</h1>
                 {categoryLoading && <Loader />}
                 {categoryError && <Message variant='danger'>{categoryError}</Message>} 
 
@@ -639,8 +639,8 @@ function ProductCreateScreen( ) {
                                 </Select>
                             </Form.Group>
 
-                            <Button type='submit' variant='primary'>
-                                Create Product
+                            <Button type='submit' variant='success' className='my-3'>
+                                Kreiraj biljku
                         </Button>
 
                         </Form>

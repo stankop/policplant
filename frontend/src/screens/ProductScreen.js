@@ -26,7 +26,7 @@ import Ikonice from '../compontents/UI/Ikonice';
 
 function ProductScreen({match}) {
     
-  const { id } = useParams();
+  const { id, catId } = useParams();
   
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
@@ -83,11 +83,11 @@ function ProductScreen({match}) {
 
   return (
     <div style={{height:'100%'}}>
-        <Breadcrumb style={{ paddingTop:'2rem'}}>
+        <Breadcrumb style={{ paddingTop:'2rem', textDecoration: 'none'}}>
           <Breadcrumb.Item href="/#/"><i className="fa fa-home" style={{color:'green'}}></i></Breadcrumb.Item>
-          <Breadcrumb.Item as='a' style={{color:'red'}} href={`#/categories/${product?.category?.map(x => x._id)[0]}`}>
+          <Breadcrumb.Item  href={`#/categories/${catId}`}>
                 
-            {product?.category?.map(x => x.name)[0]}
+            <font style={{color:'green' , textDecoration: 'none', textDecorationLine: 'none'}}>{product?.category?.find(x => x._id.toString() === catId)?.name}</font> 
           </Breadcrumb.Item>
           <Breadcrumb.Item active>
             {product?.name}

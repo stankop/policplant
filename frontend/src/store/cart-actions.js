@@ -45,7 +45,7 @@ export const removeFromCart = (id) => {
 
 export const addDostavaAndPlacanjeCart = (dostava, placanje) => {
     return  (dispatch) => {
-            console.log("ovo je actions");
+            
             const item = {
                 dostava,
                 placanje

@@ -10,13 +10,13 @@ import { useParams } from 'react-router';
 import WebFont from 'webfontloader';
 import '../compontents/Product.css'
 
-function Product({product}) {
+function Product({product, catId}) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
     const addToCartHandler = () => {
-        console.log('Klik')
+        
         dispatch(addToCart(Number(product._id), Number(1)));
         navigate(`/cart/?id=${product._id}&qty=${1}`)
     }
@@ -27,11 +27,12 @@ function Product({product}) {
             families: ['Poppins', 'Chilanka']
           }
         });
+        console.log('CatId:', catId)
     }, [])
 
   return (
     <Card className={`my-1 p-1 rounded ${classes["img-hover-zoomA"]}`} border="success"  style={{ width: '17.5rem', height: 'auto' }}>
-        <Link to={`/products/${product._id}`}> 
+        <Link to={`/products/${product._id}/${catId}`}> 
             <Card.Img src={product.images?.findLast( image => image.order === 0)?.image} loading='lazy' style={{width: '100%', height: '14rem' }}></Card.Img>
             <Card.ImgOverlay style={{width: '95%', height: '14rem' }}>
                 {product?.countInStock < 1 && <Card.Title><div style={{ backgroundColor:"red", color:"white", display: 'inline-flex', padding: '4px', marginBottom: '1em'}}>Nema na stanju</div></Card.Title>}
