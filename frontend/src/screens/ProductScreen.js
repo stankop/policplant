@@ -85,7 +85,7 @@ function ProductScreen({match}) {
     <div style={{height:'100%'}}>
         <Breadcrumb style={{ paddingTop:'2rem', textDecoration: 'none'}}>
           <Breadcrumb.Item href="/#/"><i className="fa fa-home" style={{color:'green'}}></i></Breadcrumb.Item>
-          <Breadcrumb.Item  href={`#/categories/${catId}`}>
+          <Breadcrumb.Item as='a' style={{ textDecoration:'none'}} href={`#/categories/${catId}`}>
                 
             <font style={{color:'green' , textDecoration: 'none', textDecorationLine: 'none'}}>{product?.category?.find(x => x._id.toString() === catId)?.name}</font> 
           </Breadcrumb.Item>

@@ -96,7 +96,7 @@ function CartScreen() {
                     ></Image>
                   </Col>
                   <Col sm={12} md={3} lg={4} xl={3} xs={3}>
-                    <Link to={`/products/${item.id}`}><strong><h4>{item.name}</h4></strong></Link>
+                    <Link style={{ textDecoration:'none'}} to={`/products/${item.id}`}><strong><h4 style={{color:'green', textDecoration:'none'}}>{item.name}</h4></strong></Link>
                   </Col>
                   <Col sm={12} md={6} lg={4} xl={3} xs={3}><strong>{item.price.toFixed(2)} rsd</strong></Col>
                   <Col sm={12} md={6} lg={4} xl={2} xs={2}>
@@ -178,8 +178,8 @@ function CartScreen() {
                     value={dostava}
                     onChange={(e) => setDostava(e.target.value)}
                   >
-                    <FormControlLabel value="licno" control={<Radio />} label="Licno preuzimanje" />
-                    <FormControlLabel value="posta" control={<Radio />} label="Slanje brzom postom" />
+                    <FormControlLabel value="licno" control={<Radio color="success"/>} label="Licno preuzimanje" />
+                    <FormControlLabel value="posta" control={<Radio color="success"/>} label="Slanje brzom postom" />
                   </RadioGroup>
                 </FormControl>
             </ListGroup.Item>
@@ -194,8 +194,8 @@ function CartScreen() {
                     value={placanje}
                     onChange={(e) => setPlacanje(e.target.value)}
                   >
-                    <FormControlLabel value="uplata" control={<Radio />} label="Uplata na racun" />
-                    <FormControlLabel value="pouzece" control={<Radio />} label="Prilikom preuzimanja" />
+                    <FormControlLabel value="uplata" control={<Radio color="success"/>} label="Uplata na racun" />
+                    <FormControlLabel value="pouzece" control={<Radio color="success"/>} label="Prilikom preuzimanja" />
                   </RadioGroup>
                 </FormControl>
             </ListGroup.Item>

@@ -285,10 +285,11 @@ function ProductCreateScreen( ) {
                                 </Form.Control>
                             </Form.Group>
 
-                            <Form.Group controlId='prodajno_mesto'>
+                            <Form.Group controlId='prodajno_mesto' className="mb-3">
                                 <Form.Label><strong>NA PRODAJNOM MESTU</strong></Form.Label>
                                 
                                 <Form.Check 
+                                    isValid
                                     type='checkbox'
                                     id='prodaja'
                                     onChange={(e) => setProdajnoMesto(e.target.checked)}
@@ -296,10 +297,11 @@ function ProductCreateScreen( ) {
                                
                             </Form.Group>
 
-                            <Form.Group controlId='novo'>
+                            <Form.Group controlId='novo' className="mb-3">
                                 <Form.Label><strong>NOVO</strong></Form.Label>
                                 
                                 <Form.Check 
+                                    isValid
                                     type='checkbox'
                                     id='novo'
                                     onChange={(e) => setNovo(e.target.checked)}
@@ -307,22 +309,23 @@ function ProductCreateScreen( ) {
                                
                             </Form.Group>
 
-                            <Form.Group controlId='popust'>
+                            <Form.Group controlId='popust' className="mb-3">
                                 {/* <Form.Label><strong>NOVO</strong></Form.Label> */}
                                 
                                 <FormControl>
-                                    <FormLabel id="demo-controlled-radio-buttons-group"><strong>POPUST</strong></FormLabel>
+                                    <FormLabel id="demo-controlled-radio-buttons-group" color='success'><strong>POPUST</strong></FormLabel>
                                     <RadioGroup
                                         aria-labelledby="demo-controlled-radio-buttons-group"
                                         name="controlled-radio-buttons-group"
                                         value={popust}
                                         onChange={(e) => setPopust(e.target.value)}
                                         row
+                                        color="success"
                                     >
-                                        <FormControlLabel value="0" control={<Radio />} label="0%" />
-                                        <FormControlLabel value="10" control={<Radio />} label="10%" />
-                                        <FormControlLabel value="20" control={<Radio />} label="20%" />
-                                        <FormControlLabel value="30" control={<Radio />} label="30%" />
+                                        <FormControlLabel value="0" control={<Radio color="success"/>} label="0%" />
+                                        <FormControlLabel value="10" control={<Radio color="success"/>} label="10%" />
+                                        <FormControlLabel value="20" control={<Radio color="success"/>} label="20%" />
+                                        <FormControlLabel value="30" control={<Radio color="success"/>} label="30%" />
                                     </RadioGroup>
                                 </FormControl>
                                

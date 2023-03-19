@@ -114,7 +114,7 @@ function ProductEditScreen( ) {
     }, [dispatch])
 
     useEffect(() => {
-        console.log('Renderovanje')
+        
         if(success){
             const prvaSlika =  Array.from(product?.images).findLast(x => x.order === 0)
            
@@ -305,8 +305,6 @@ function ProductEditScreen( ) {
                 product: id
             }
         })), oldIndex, newIndex));
-        console.log('Items sort order', items);
-        console.log('Image sort order', images);
     };
 
     const memoizedImageCard = useMemo(() => {
@@ -319,31 +317,7 @@ function ProductEditScreen( ) {
 
     return (
         <div className="ProductEditScreen"
-            onContextMenu={(e) => {
-            e.preventDefault(); // prevent the default behaviour when right clicked
-            const image = JSON.stringify(e.target.src)
-            const newItems = items.filter(item => JSON.stringify(item.src) !== image)
-            setItems(newItems)
-            console.log('Items:', newItems)
-            const newImages= newItems.map((item, index) => {
-                return {
-                    image: item.src,
-                    order: index,
-                    product: id,
-                    id: item.id
-                }
-            })
-            console.log('Images:', newImages)
-            setImage(newImages)
-            setFlick(true)
-            // const slanje= []
-            // newImages.forEach(x => {
-            //     var file = new File(["hello"], x.image
-            //     , {type:"image/png", lastModified: new Date().getTime()})
-            //     slanje.append(file)
-            // })
-            // console.log('Za slanje:', slanje)
-        }}>
+           >
         <Link to={-1} className='btn btn-success  my-3'> 
             Nazad
         </Link>
@@ -409,6 +383,7 @@ function ProductEditScreen( ) {
                                 <Form.Label><strong>NA PRODAJNOM MESTU</strong></Form.Label>
                                 
                                 <Form.Check 
+                                    isValid
                                     type='checkbox'
                                     id='prodaja'
                                     defaultChecked={prodajno_mesto}
@@ -421,6 +396,7 @@ function ProductEditScreen( ) {
                                 <Form.Label><strong>NOVO</strong></Form.Label>
                                 
                                 <Form.Check 
+                                    isValid
                                     type='checkbox'
                                     id='novo'
                                     defaultChecked={novo}
@@ -433,7 +409,7 @@ function ProductEditScreen( ) {
                                 {/* <Form.Label><strong>NOVO</strong></Form.Label> */}
                                 
                                 <FormControl>
-                                    <FormLabel id="demo-controlled-radio-buttons-group"><strong>POPUST</strong></FormLabel>
+                                    <FormLabel id="demo-controlled-radio-buttons-group" color='success'><strong>POPUST</strong></FormLabel>
                                     <RadioGroup
                                         aria-labelledby="demo-controlled-radio-buttons-group"
                                         name="controlled-radio-buttons-group"
@@ -441,15 +417,41 @@ function ProductEditScreen( ) {
                                         onChange={(e) => setPopust(e.target.value)}
                                         row
                                     >
-                                        <FormControlLabel value="10" control={<Radio />} label="10%" />
-                                        <FormControlLabel value="20" control={<Radio />} label="20%" />
-                                        <FormControlLabel value="30" control={<Radio />} label="30%" />
+                                        <FormControlLabel value="10" control={<Radio color='success'/>} label="10%" />
+                                        <FormControlLabel value="20" control={<Radio color='success'/>} label="20%" />
+                                        <FormControlLabel value="30" control={<Radio color='success'/>} label="30%" />
                                     </RadioGroup>
                                 </FormControl>
                                
                             </Form.Group>
 
-                            <Form.Group controlId='image'>
+                            <Form.Group controlId='image'
+                                onContextMenu={(e) => {
+                                    console.log('Doublew:', e.detail)
+                                    e.preventDefault(); // prevent the default behaviour when right clicked
+                                    const image = JSON.stringify(e.target.src)
+                                    const newItems = items.filter(item => JSON.stringify(item.src) !== image)
+                                    setItems(newItems)
+                                    
+                                    const newImages= newItems.map((item, index) => {
+                                        return {
+                                            image: item.src,
+                                            order: index,
+                                            product: id,
+                                            id: item.id
+                                        }
+                                    })
+                                    console.log('Hi')
+                                    setImage(newImages)
+                                    setFlick(true)
+                                    // const slanje= []
+                                    // newImages.forEach(x => {
+                                    //     var file = new File(["hello"], x.image
+                                    //     , {type:"image/png", lastModified: new Date().getTime()})
+                                    //     slanje.append(file)
+                                    // })
+                                    // console.log('Za slanje:', slanje)
+                                }}>
                                 <Form.Label><strong>IMAGES</strong></Form.Label>
                                 {/* <Form.Control
 
