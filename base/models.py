@@ -175,6 +175,7 @@ class Product(models.Model):
               ('hlad', 'hlad'))
     
     POPUST_CHOICES = (
+              ('0','0'),
               ('10', '10'),
               ('20', '20'),
               ('30', '30'))

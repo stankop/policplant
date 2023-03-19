@@ -319,6 +319,7 @@ function ProductCreateScreen( ) {
                                         onChange={(e) => setPopust(e.target.value)}
                                         row
                                     >
+                                        <FormControlLabel value="0" control={<Radio />} label="0%" />
                                         <FormControlLabel value="10" control={<Radio />} label="10%" />
                                         <FormControlLabel value="20" control={<Radio />} label="20%" />
                                         <FormControlLabel value="30" control={<Radio />} label="30%" />

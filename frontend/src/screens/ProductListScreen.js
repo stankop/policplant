@@ -61,7 +61,7 @@ function ProductListScreen() {
 
     const deleteHandler = (id) => {
         
-        if(window.confirm("Are you sure you want to delete this user?")){
+        if(window.confirm("Are you sure you want to delete this product?")){
 
             dispatch(deleteProduct(id))
             dispatch(deleteProductReset())
@@ -115,6 +115,8 @@ function ProductListScreen() {
                                     <th>Name</th>
                                     <th>Cena</th>
                                     <th>Kategorija</th>
+                                    <th>Novo</th>
+                                    <th>Popust</th>
                                     <th>Boja</th>
                                     <th>Stanje</th>
                                     <th>Edit</th>
@@ -130,6 +132,8 @@ function ProductListScreen() {
                                         <td style={{width:'15rem'}}><strong>{product.name}</strong></td>
                                         <td style={{width:'5rem'}}>{product.price} din</td>
                                         <td style={{width:'20rem'}}>{product.category.map(x => x.name).join(', ')}</td>
+                                        <td style={{width:'4rem'}}>{product.novo ?? product.novo ? 'Yes' : 'No'}</td>
+                                        <td style={{width:'4rem'}}>{product.popust ?? product.popust ? product.popust : 'No'}</td>
                                         <td style={{width:'20rem'}}>{product.color}</td>
                                         <td style={{whiteSpace: "nowrap", width:'5rem'}}>{product.countInStock}</td>
                                         <td style={{width:'5rem'}}><Link to={`/admin/product/${product._id}/edit`}>
