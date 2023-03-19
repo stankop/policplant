@@ -76,7 +76,7 @@ function CartScreen() {
     <div>
     <Row>
       <Col sm={12} md={6} lg={4} xl={6} xs={12}>
-        <h1>Korpa</h1>
+        <h1 style={{color:'green'}}>Korpa</h1>
         {cartItems?.length === 0 ? (
           <Message variant="info">
             Vasa korpa je prazna <Link to="/">Vratite se Nazad</Link>
@@ -134,7 +134,7 @@ function CartScreen() {
         )}
       </Col>
       <Col sm={12} md={6} lg={4} xl={6} xs={12}>
-        <Card border="info">
+        <Card border="success">
            <Card.Header as="h4">Vasa Porudzbina</Card.Header>
           <ListGroup variant="flush">
             <ListGroup.Item >
@@ -171,7 +171,7 @@ function CartScreen() {
             <ListGroup.Item>
 
                 <FormControl>
-                  <FormLabel id="demo-controlled-radio-buttons-group"><h4>Dostava</h4></FormLabel>
+                  <FormLabel id="demo-controlled-radio-buttons-group"><h4 style={{color:'black'}}>Dostava</h4></FormLabel>
                   <RadioGroup
                     aria-labelledby="demo-controlled-radio-buttons-group"
                     name="controlled-radio-buttons-group"
@@ -187,7 +187,7 @@ function CartScreen() {
             <ListGroup.Item>
 
                 <FormControl>
-                  <FormLabel id="demo-controlled-radio-buttons-group"><h4>Placanje</h4></FormLabel>
+                  <FormLabel id="demo-controlled-radio-buttons-group"><h4 style={{color:'black'}}>Placanje</h4></FormLabel>
                   <RadioGroup
                     aria-labelledby="demo-controlled-radio-buttons-group"
                     name="controlled-radio-buttons-group"
@@ -203,7 +203,7 @@ function CartScreen() {
             <ListGroup.Item>
               <Button
                 type='button'
-                className='btn-block'
+                className='btn-block btn-success'
                 disabled={ cartItems.length === 0 }
                 onClick={chechoutHandler}>
                     Nastavite sa kupovinom
@@ -216,7 +216,7 @@ function CartScreen() {
     <Row>
       <Col style={{ padding:'1.2rem'}} md={4}>
           <Button type='button'
-                className='btn-block'
+                className='btn-block btn-success'
                 
                 onClick={backHandler}>
                 Nazad na listu proizvoda          

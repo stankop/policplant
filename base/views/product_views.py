@@ -187,7 +187,9 @@ def createProduct(request):
         place_of_planting= data['place'],
         type_of_plant=data['type'],
         high=data['high'],
-        prodajno_mesto=bool(data['prodajno_mesto'])
+        prodajno_mesto=bool(data['prodajno_mesto']),
+        novo = bool(data['novo']),
+        popust = data['popust']
     )
 
     if type(data['category']) == str:
@@ -250,6 +252,8 @@ def updateProduct(request,pk):
     product.type_of_plant=data['type']
     product.high=data['high']
     product.prodajno_mesto=bool(data['prodajno_mesto'])
+    product.novo = bool(data['novo'])
+    product.popust = data['popust']
     product.save()
 
 

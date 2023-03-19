@@ -84,17 +84,17 @@ function ProductScreen({match}) {
   return (
     <div style={{height:'100%'}}>
         <Breadcrumb style={{ paddingTop:'2rem'}}>
-          <Breadcrumb.Item href="/#/"><i className="fa fa-home"></i></Breadcrumb.Item>
-          <Breadcrumb.Item href={`#/categories/${product?.category?.map(x => x._id)[0]}`}>
+          <Breadcrumb.Item href="/#/"><i className="fa fa-home" style={{color:'green'}}></i></Breadcrumb.Item>
+          <Breadcrumb.Item as='a' style={{color:'red'}} href={`#/categories/${product?.category?.map(x => x._id)[0]}`}>
                 
-          { product?.category?.map(x => x.name)[0]}
+            {product?.category?.map(x => x.name)[0]}
           </Breadcrumb.Item>
           <Breadcrumb.Item active>
-            { product?.name}
+            {product?.name}
           </Breadcrumb.Item>
         </Breadcrumb>
-        <Link to={-1} className='btn btn-primary my-3'> Nazad</Link>
-        {userInfo && <Link to={`/admin/product/${id}/edit`} className='btn btn-primary my-3' style={{ marginLeft:'3rem'}}> Edit Biljke</Link>}
+        <Link to={-1} className='btn btn-success my-3'> Nazad</Link>
+        {userInfo && <Link to={`/admin/product/${id}/edit`} className='btn btn-success my-3' style={{ marginLeft:'3rem'}}> Edit Biljke</Link>}
 
         {loading ? 
                  <Loader></Loader>
@@ -272,19 +272,19 @@ function ProductScreen({match}) {
                                     <div style={{margin:'0.3rem'}}>
                                         Share:
                                         <a href='https//:' style={{margin:'0.3rem'}} title="Face">
-                                                <i class="fa-brands fa-facebook"></i>
+                                                <i class="fa-brands fa-facebook" style={{color:'green'}}></i>
                                         </a>
                                         <a href='https//:' style={{margin:'0.3rem'}} title="Twitter">
-                                                <i class="fa-brands fa-twitter"></i>
+                                                <i class="fa-brands fa-twitter" style={{color:'green'}}></i>
                                         </a>
                                         <a href='https//:' style={{margin:'0.3rem'}} title="Instagram">
-                                                <i class="fa-brands fa-instagram"></i>
+                                                <i class="fa-brands fa-instagram" style={{color:'green'}}></i>
                                         </a>
                                         <a href='https//:' style={{margin:'0.3rem'}} title="Messenger">
-                                                <i class="fa-brands fa-facebook-messenger"></i>
+                                                <i class="fa-brands fa-facebook-messenger" style={{color:'green'}}></i>
                                         </a>
                                         <a href='https//:' style={{margin:'0.3rem'}} title="Mail">
-                                                <i class="fa-regular fa-envelope"></i>
+                                                <i class="fa-regular fa-envelope" style={{color:'green'}}></i>
                                         </a>
                                     </div>
                                     

@@ -173,6 +173,11 @@ class Product(models.Model):
     MESTO_SADNJE = (('sunce', 'sunce'),
               ('polusenka', 'polusenka'),
               ('hlad', 'hlad'))
+    
+    POPUST_CHOICES = (
+              ('10', '10'),
+              ('20', '20'),
+              ('30', '30'))
     class Orezivanje(models.TextChoices):
         PRAZNA = '', _('')
         DA = 'da', _('da')
@@ -228,8 +233,8 @@ class Product(models.Model):
     sirina_biljke = models.CharField(max_length=250,  null=True, blank=True )
     category = models.ManyToManyField(PlantCategory, related_name='products')
     prodajno_mesto = models.BooleanField(null=True, blank=True, default=False)
-    novo = models.CharField(max_length=550,  null=True, blank=True)
-    popust = models.CharField(max_length=550,  null=True, blank=True)
+    novo = models.BooleanField(null=True, blank=True, default=False)
+    popust = models.CharField(null=True, blank=True, max_length=3, choices=POPUST_CHOICES)
 
     createdAt = models.DateTimeField(auto_now_add=True)
 

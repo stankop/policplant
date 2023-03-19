@@ -45,14 +45,14 @@ function CategoryScreen() {
     <div>
         { false && <ProductCarucel></ProductCarucel>}
         <Breadcrumb style={{ paddingTop:'2rem'}}>
-          <Breadcrumb.Item href="/"><i className="fa fa-home"></i></Breadcrumb.Item>
+          <Breadcrumb.Item href="/"><i className="fa fa-home" style={{color:'green'}}></i></Breadcrumb.Item>
           <Breadcrumb.Item  active>
             { catProducts?.find( cat => cat._id?.toString() === id)?.name}
           
           </Breadcrumb.Item>
           
         </Breadcrumb>
-        <Link to={-1} className='btn btn-primary my-3'> Nazad</Link>
+        <Link to={-1} className='btn btn-success  my-3'> Nazad</Link>
         <h1 style={{color:'#333333'}}>{ catProducts?.find( cat => cat._id?.toString() === id)?.name}</h1>
         
         {/* <p>{ catProducts?.find( cat => cat._id?.toString() === id)?.description}</p> */}

@@ -20,6 +20,11 @@ import { arrayMove } from 'react-sortable-hoc';
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import Photo from "../compontents/Photo";
 import {arrayMoveImmutable} from 'array-move';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import RadioGroup from '@mui/material/RadioGroup';
+import Radio from '@mui/material/Radio';
+import FormControlLabel from '@mui/material/FormControlLabel';
 toast.configure()
 
 
@@ -51,6 +56,8 @@ function ProductEditScreen( ) {
     const [items, setItems] = useState([]);
     const [flick, setFlick] = useState(false);
     const [prodajno_mesto, setProdajnoMesto] = useState(false)
+    const [novo, setNovo] = useState(false)
+    const [popust, setPopust] = useState(null)
 
     const [uploading, setUploading] = useState(false)
 
@@ -164,6 +171,8 @@ function ProductEditScreen( ) {
             setVelicinaSlanja(product.velicina_slanja)
             setSirinaBiljke(product.sirina_biljke)
             setProdajnoMesto(product.prodajno_mesto)
+            setNovo(product.novo)
+            setPopust(product.popust)
         }  
         
     }, [dispatch, navigate, product?.name, success, prodSuccess])
@@ -197,7 +206,9 @@ function ProductEditScreen( ) {
             type,
             high,
             category,
-            prodajno_mesto
+            prodajno_mesto,
+            novo,
+            popust
         }, images))
         setItems(ukupno.current)
         // setImage(ukupno.current.map((index,item) => {
@@ -403,6 +414,38 @@ function ProductEditScreen( ) {
                                     defaultChecked={prodajno_mesto}
                                     onChange={(e) => setProdajnoMesto(e.target.checked)}
                                 />
+                               
+                            </Form.Group>
+
+                            <Form.Group controlId='novo'>
+                                <Form.Label><strong>NOVO</strong></Form.Label>
+                                
+                                <Form.Check 
+                                    type='checkbox'
+                                    id='novo'
+                                    defaultChecked={novo}
+                                    onChange={(e) => setNovo(e.target.checked)}
+                                />
+                               
+                            </Form.Group>
+
+                            <Form.Group controlId='popust'>
+                                {/* <Form.Label><strong>NOVO</strong></Form.Label> */}
+                                
+                                <FormControl>
+                                    <FormLabel id="demo-controlled-radio-buttons-group"><strong>POPUST</strong></FormLabel>
+                                    <RadioGroup
+                                        aria-labelledby="demo-controlled-radio-buttons-group"
+                                        name="controlled-radio-buttons-group"
+                                        value={popust}
+                                        onChange={(e) => setPopust(e.target.value)}
+                                        row
+                                    >
+                                        <FormControlLabel value="10" control={<Radio />} label="10%" />
+                                        <FormControlLabel value="20" control={<Radio />} label="20%" />
+                                        <FormControlLabel value="30" control={<Radio />} label="30%" />
+                                    </RadioGroup>
+                                </FormControl>
                                
                             </Form.Group>
 

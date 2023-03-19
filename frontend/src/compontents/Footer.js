@@ -56,13 +56,13 @@ function Footer() {
                 <div style={{padding:'.5rem'}}>
                     
                     <a href='https://www.facebook.com/rasadnikema ' style={{margin:'0.5rem' }} title="Face">
-                            <i className="fa-brands fa-facebook fa-2x"></i>
+                            <i className="fa-brands fa-facebook fa-2x" style={{color:'green'}}></i>
                     </a>
                     {/* <a href='https//:' style={{margin:'0.3rem'}} TITLE="Twitter">
                             <i class="fa-brands fa-twitter"></i>
                     </a> */}
                     <a href='https//:' style={{margin:'0.3rem'}} title="Instagram">
-                            <i className="fa-brands fa-instagram fa-2x"></i>
+                            <i className="fa-brands fa-instagram fa-2x" style={{color:'green'}}></i>
                     </a>
                     {/* <a href='https//:' style={{margin:'0.3rem'}} TITLE="Messenger">
                             <i class="fa-brands fa-facebook-messenger"></i>

@@ -30,7 +30,7 @@ function Product({product}) {
     }, [])
 
   return (
-    <Card className={`my-1 p-1 rounded ${classes["img-hover-zoomA"]}`} border="primary"  style={{ width: '17.5rem', height: 'auto' }}>
+    <Card className={`my-1 p-1 rounded ${classes["img-hover-zoomA"]}`} border="success"  style={{ width: '17.5rem', height: 'auto' }}>
         <Link to={`/products/${product._id}`}> 
             <Card.Img src={product.images?.findLast( image => image.order === 0)?.image} loading='lazy' style={{width: '100%', height: '14rem' }}></Card.Img>
             <Card.ImgOverlay style={{width: '95%', height: '14rem' }}>

@@ -77,12 +77,12 @@ function ProductListScreen() {
   return (
     <div>
         <Row className='align-items-center'>
-            <Col>
-                <h1>Biljke</h1>
+            <Col >
+                <h1 style={{color:'green'}}>Biljke</h1>
             </Col>
             <Col className='text-right'>
                 <LinkContainer to={`/admin/createproduct`}>
-                    <Button className='my-3'>
+                    <Button className='btn-success my-3'>
                         <i className='fas fa-plus'></i> Kreiraj Proizvod
                     </Button>
                 </LinkContainer>     
@@ -139,7 +139,7 @@ function ProductListScreen() {
                                                 </Button>
                                             </Link></td>
                                         <td style={{width:'5rem'}}>
-                                                <Button  className='btn-sm' onClick={(e) => deleteHandler(product._id)}>
+                                                <Button  className='btn-sm' variant="danger" onClick={(e) => deleteHandler(product._id)}>
                                                      <i className='fas fa-trash'></i>
                                                 </Button>
                                         </td>
