@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Button, Card, Form, Container, ListGroupItem} from 'react-bootstrap'
@@ -39,6 +39,7 @@ function ProductScreen({match}) {
   const productDet = useSelector(state => state.product)
   const {loading, error, product} = productDet
 
+  const [images, setImages] = useState(null)
 
   useEffect(()=>{
         WebFont.load({
@@ -63,36 +64,40 @@ function ProductScreen({match}) {
       })
   }
 
+ 
 
   useEffect(() => {
+    if(product?.images){
+        const prvaSlika =  Array.from(product?.images).findLast(x => x.order === 0)
+           
+        const targetFilesObject= Array.from([...product?.images])?.sort((x, y) => x.order - y.order).map(image => {
+            return {
+                image: image?.image,
+                id: image?.id
+            }
+        })
+
+        const targetFilesObjectWithoutLast = targetFilesObject?.filter(x => x?.id !== prvaSlika?.id)
+        if(prvaSlika){
+            targetFilesObjectWithoutLast.unshift({image: prvaSlika?.image, id: prvaSlika?.id})
+        }
+
+        const imgs = [...new Set(targetFilesObjectWithoutLast)]?.map(image => {
+            return {
+                original: image.image,
+                thumbnail: image.image
+            }
+        })
+        setImages(imgs)
+    }
     window.scrollTo({
         top: 0,
         left: 0,
         behavior: "smooth"
       })
-    }, [])
+    }, [product?.images])
   
     console.log('Image in product:', product?.images)
-    const prvaSlika =  Array.from(product?.images).findLast(x => x.order === 0)
-           
-    const targetFilesObject= Array.from([...product?.images])?.sort((x, y) => x.order - y.order).map(image => {
-        return {
-            image: image?.image,
-            id: image?.id
-        }
-    })
-
-    const targetFilesObjectWithoutLast = targetFilesObject?.filter(x => x?.id !== prvaSlika?.id)
-    if(prvaSlika){
-        targetFilesObjectWithoutLast.unshift({image: prvaSlika?.image, id: prvaSlika?.id})
-    }
-
-    const images = [...new Set(targetFilesObjectWithoutLast)]?.map(image => {
-        return {
-            original: image.image,
-            thumbnail: image.image
-        }
-    })
     
 
  const htmlString = {__html: DOMPurify.sanitize(product?.description)}
