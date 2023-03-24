@@ -49,7 +49,7 @@ function Product({product, catId}) {
             <Link style={{ textDecoration: 'none' }} to={`/products/${product._id}`}> 
              <Card.Title as="h3" >
                  <div className='click' style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>{product?.name}</div>
-                 <div className='click' style={{ fontSize: '1rem', fontStyle: 'italic', color:'#333333', fontFamily: 'Poppins'}}>{product?.botanicki_naziv}</div>
+                 <div className='click' style={{ fontSize: '.8rem', fontStyle: 'italic', color:'#333333', fontFamily: 'Poppins'}}>{product?.botanicki_naziv}</div>
              </Card.Title>
              </Link> 
             {/* <Card.Text as="div">

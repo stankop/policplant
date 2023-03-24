@@ -46,7 +46,7 @@ function ProductScreen({match}) {
           families: ['Droid Sans', 'Chilanka']
             }
         });
-       dispatch(productDetails(id))
+            dispatch(productDetails(id))
        return () => {}
         
   }, [dispatch, id]);
@@ -72,12 +72,28 @@ function ProductScreen({match}) {
       })
     }, [])
   
- const images = product?.images?.map(image => {
-    return {
-        original: image.image,
-        thumbnail: image.image
+    console.log('Image in product:', product?.images)
+    const prvaSlika =  Array.from(product?.images).findLast(x => x.order === 0)
+           
+    const targetFilesObject= Array.from([...product?.images])?.sort((x, y) => x.order - y.order).map(image => {
+        return {
+            image: image?.image,
+            id: image?.id
+        }
+    })
+
+    const targetFilesObjectWithoutLast = targetFilesObject?.filter(x => x?.id !== prvaSlika?.id)
+    if(prvaSlika){
+        targetFilesObjectWithoutLast.unshift({image: prvaSlika?.image, id: prvaSlika?.id})
     }
- })
+
+    const images = [...new Set(targetFilesObjectWithoutLast)]?.map(image => {
+        return {
+            original: image.image,
+            thumbnail: image.image
+        }
+    })
+    
 
  const htmlString = {__html: DOMPurify.sanitize(product?.description)}
 

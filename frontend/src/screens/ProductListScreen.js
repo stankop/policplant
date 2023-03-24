@@ -124,7 +124,7 @@ function ProductListScreen() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {products?.map((product, index) => (
+                                {products?.slice().sort((a,b) => a.order - b.order).map((product, index) => (
 
                                     <tr key={product._id}>
                                         <td style={{width:'4rem'}}>{index + 1}</td>
