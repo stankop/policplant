@@ -63,9 +63,9 @@ function ShippingScreen() {
     <div>
       <CheckoutSteps step1 step2></CheckoutSteps>
       <TabContext value={value}>
-      <Box sx={{ borderBottom:1, borderColor: 'divider' }}>
+      <Box sx={{ borderBottom:1, borderColor: 'divider', textDocorationColor:'green' }}>
         <TabList onChange={handleTab} aria-label="lab API tabs example">
-          <Tab label="Podaci Kupca" value="1" />
+          <Tab style={{color:'green'}} label="Podaci Kupca" value="1" />
           <Tab label="Postojeci Kupac" value="2" disabled/>
 
         </TabList>
@@ -73,7 +73,7 @@ function ShippingScreen() {
       <TabPanel value="1">
           <FormContainer>
 
-            <h1>Podaci Kupca</h1>
+            <h1 style={{color:'green'}}>Podaci Kupca</h1>
             <Form onSubmit={handleSubmit(submitHandler1)}>
 
                 <Form.Group controlId='name'>
@@ -207,7 +207,7 @@ function ShippingScreen() {
 
                     </Form.Control>
 
-                    <Button type='submit' variant='primary'>
+                    <Button type='submit' variant='primary' className='m-2 py-2 btn-success'>
                         Nastavite sa Narudzbom
                     </Button>
                 </Form.Group>
@@ -219,7 +219,7 @@ function ShippingScreen() {
       <TabPanel value="2" disabled={true}>
         <FormContainer>
 
-            <h1>Podaci Kupca</h1>
+            <h1 style={{color:'green'}}>Podaci Kupca</h1>
             <Form onSubmit={submitHandler2}>
 
                 <Form.Group controlId='name'>

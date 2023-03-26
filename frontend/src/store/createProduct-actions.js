@@ -1,7 +1,7 @@
 import { createProductActions} from './createProduct-slice'
 import axios from 'axios'
 
-export const createProduct = (prod, images) => {
+export const createProduct = (prod, images, items) => {
     return async (dispatch, getState) => {
 
 
@@ -23,15 +23,22 @@ export const createProduct = (prod, images) => {
         }
 
 
-        const uploadData = async (product_id, img) => {
+        const uploadData = async (product_id, img, itms) => {
 
-            const files = img //e.target.filesconsole.log('form fils:', files)
+            const items = itms
+            const files = img //e.target.files
             const formData = new FormData()
-            const arr = Array.from(files)
-            arr?.forEach(x => 
-                formData.append('images', x)
-            )
-            //formData.append('image', files)
+            if(items){
+                formData.append('items', JSON.stringify(items))
+            }
+            if(files){
+                const arr = Array.from(files)
+                arr?.forEach(x => 
+                    formData.append('images', x)
+                )
+            }
+           
+            
             formData.append('product_id', product_id)
             
             try {
@@ -59,7 +66,7 @@ export const createProduct = (prod, images) => {
                 createProduct:{ product, success }
             } = getState()
             if(success){
-                const imageData = await uploadData(product._id, images)
+                const imageData = await uploadData(product._id, images, items)
             }
             dispatch(createProductActions.createProductReset())
 

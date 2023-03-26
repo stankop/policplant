@@ -26,7 +26,7 @@ const userListSlice = createSlice({
             userListFail(state, action) {
                 state.loading = false;
                 state.error = action.payload;
-                console.log('jel se ovo ispalilo?')
+               
             },
 
             userListReset(state, action) {

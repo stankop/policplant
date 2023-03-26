@@ -1,4 +1,5 @@
 import email
+import json
 from functools import reduce
 from django.shortcuts import render
 
@@ -312,27 +313,52 @@ def uploadImage(request):
     data = request.data
 
     product_id = data['product_id']
+    
+    images_data = json.loads(data['items'])
+    images = request.FILES.getlist('images')
 
     product = Product.objects.get(_id=product_id)
-    if not request.FILES.getlist('images'):
-        imagesStay=[]
-        if request.data.get('images', False):
-            imagesStay = [int(x) for x in str(data['images']).split(',')]
-        
-        PlantImage.objects.filter(product_id=product_id).exclude(id__in=imagesStay).delete()
-        for index, image_id in enumerate(imagesStay):
-            stay_image = PlantImage.objects.get(id=image_id)
-            if not PlantImage.DoesNotExist:
-                pass
-            stay_image.order = index
-            stay_image.save()
 
-    else:
-        #PlantImage.objects.filter(product_id = product_id).delete()
-        images = request.FILES.getlist('images')
-        print('Ovo su slike:',images)
-        for index, image in enumerate(images):
-            PlantImage.objects.create(product=product , image=image, order=index)
+    PlantImage.objects.filter(product_id=product_id).exclude(image__in=[x['name'] for x in images_data]).delete()
+
+    if images:
+        for image in images:
+            if image.name in [x['name'] for x in images_data]:
+                PlantImage.objects.create(product=product , image=image, order=0)
+
+    
+
+    current_images = PlantImage.objects.filter(product_id=product_id)
+    for index, image_name in enumerate([x['name'] for x in images_data]):
+        print('image:',image_name)
+        
+        try:
+            product_image = current_images.filter(image__icontains=image_name.split('.')[0]).first()
+        except PlantImage.DoesNotExist:
+            product_image = None
+        if product_image:
+            product_image.order = index
+        product_image.save()
+
+    # if not request.FILES.getlist('images'):
+    #     imagesStay=[]
+    #     if request.data.get('images', False):
+    #         imagesStay = [int(x) for x in str(data['images']).split(',')]
+        
+    #     PlantImage.objects.filter(product_id=product_id).exclude(id__in=imagesStay).delete()
+    #     for index, image_id in enumerate(imagesStay):
+    #         stay_image = PlantImage.objects.get(id=image_id)
+    #         if not PlantImage.DoesNotExist:
+    #             pass
+    #         stay_image.order = index
+    #         stay_image.save()
+
+    # else:
+    #     #PlantImage.objects.filter(product_id = product_id).delete()
+    #     images = request.FILES.getlist('images')
+       
+    #     for index, image in enumerate(images):
+    #         PlantImage.objects.create(product=product , image=image, order=index)
     product.save()
     return Response(data={'message':'Image was uploaded'})
 

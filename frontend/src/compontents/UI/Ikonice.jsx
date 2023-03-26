@@ -17,7 +17,6 @@ const Ikonice = ({product}) => {
      
     }
     
-    console.log('F:', filter)
     
     const images = [
         {
@@ -52,7 +51,7 @@ const Ikonice = ({product}) => {
         }
     ]
 
-    console.log('Images:', images)
+    
     const filterImages = images?.filter(x => x.value?.length)
    
     

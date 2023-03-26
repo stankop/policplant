@@ -1,7 +1,7 @@
 function ImagesGallery({images}){
 
     const handleFirstImage = (e) => {
-        console.log('text:', e)
+        
     }
 
     return(

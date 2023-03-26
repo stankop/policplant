@@ -76,22 +76,24 @@ function ProductCreateScreen( ) {
     const inputHesh = useRef();
 
     const handleMultipleImages =(evnt)=>{
+        
         const selectedFIles =[];
         const targetFiles = evnt.target.files;
         const targetFilesObject= [...targetFiles]
         targetFilesObject.map((file)=>{
-           return selectedFIles.push(URL.createObjectURL(file))
+           return selectedFIles.push({file: URL.createObjectURL(file), name: file.name})
         })
         
         setImage(evnt.target.files)
         const photos = selectedFIles?.map(image => {
               return {
-                  src:image,
+                  src:image.file,
+                  name:image.name,
                   width:1,
                   height:1
               }
         })
-        
+       
         setItems(photos)
     }
 
@@ -134,7 +136,7 @@ function ProductCreateScreen( ) {
             prodajno_mesto,
             novo,
             popust  
-        }, images))
+        }, images, items))
         navigate('/admin/productlist')
         notify()
     }
@@ -247,8 +249,9 @@ function ProductCreateScreen( ) {
                         <Form onSubmit={submitHandler}>
 
                             <Form.Group controlId='name'>
-                                <Form.Label><strong>NAME</strong></Form.Label>
+                                <Form.Label id='label_name'><strong>NAME</strong></Form.Label>
                                 <Form.Control
+                                    
                                     required
                                     type='text'
                                     placeholder=''
@@ -263,7 +266,7 @@ function ProductCreateScreen( ) {
                             <Form.Group controlId='botanicki_naziv'>
                                 <Form.Label><strong>BOTANICKI NAZIV</strong></Form.Label>
                                 <Form.Control
-
+                                    
                                     type='text'
                                     placeholder=''
                                     defaultValue={botanicki_naziv}
@@ -275,7 +278,7 @@ function ProductCreateScreen( ) {
                             <Form.Group controlId='hesteg'>
                                 <Form.Label><strong>HESTEG</strong></Form.Label>
                                 <Form.Control
-
+                                    
                                     type='text'
                                     placeholder=''
                                     defaultValue={hesteg}
@@ -291,7 +294,7 @@ function ProductCreateScreen( ) {
                                 <Form.Check 
                                     isValid
                                     type='checkbox'
-                                    id='prodaja'
+                                   
                                     onChange={(e) => setProdajnoMesto(e.target.checked)}
                                 />
                                
@@ -303,7 +306,7 @@ function ProductCreateScreen( ) {
                                 <Form.Check 
                                     isValid
                                     type='checkbox'
-                                    id='novo'
+                                    
                                     onChange={(e) => setNovo(e.target.checked)}
                                 />
                                
@@ -377,7 +380,7 @@ function ProductCreateScreen( ) {
                                 </Form.Control> */}
                                 
                                 <Form.Control
-                                    controlid="image-file"
+                                    
                                     type='file'
                                     multiple="multiple"
                                     // onChange={(e) =>  setImage(e.target.files)}
@@ -481,9 +484,9 @@ function ProductCreateScreen( ) {
                                 <Form.Label><strong>TIP BILJKE</strong></Form.Label>
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setType(e.target.value)}>
-                                    <option></option>
+                                    <option id='0'></option>
                                     {allcategories?.type_of_plant?.map(cat => (
-                                        <option value={cat}>{cat}</option>
+                                        <option id={cat} value={cat}>{cat}</option>
                                     ))}
  
                                 </Form.Select>
@@ -526,9 +529,9 @@ function ProductCreateScreen( ) {
                                 <Form.Label><strong>OREZIVANJE:</strong></Form.Label>
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setOrezivanje(e.target.value)}>
-                                    <option></option>
+                                    <option id='0'></option>
                                     {allcategories?.orezivanje?.map(cat => (
-                                        <option value={cat}>{cat}</option>
+                                        <option  id={cat} value={cat}>{cat}</option>
                                     ))}
  
                                 </Form.Select>
@@ -538,9 +541,9 @@ function ProductCreateScreen( ) {
                                 <Form.Label><strong>MEDONOSNA:</strong></Form.Label>
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setPrivlaciInsekte(e.target.value)}>
-                                    <option></option>
+                                    <option id='0'></option>
                                     {allcategories?.privlaci_insekte?.map(cat => (
-                                        <option value={cat}>{cat}</option>
+                                        <option id={cat} value={cat}>{cat}</option>
                                     ))}
  
                                 </Form.Select>
@@ -550,9 +553,9 @@ function ProductCreateScreen( ) {
                                 <Form.Label><strong>BRZINA RASTA</strong></Form.Label>
                                 <Form.Select aria-label="Default select example"
                                              onChange={(e) => setBrzinaRasta(e.target.value)}>
-                                    <option></option>
+                                    <option id='0'></option>
                                     {allcategories?.brzina_rasta?.map(cat => (
-                                        <option value={cat}>{cat}</option>
+                                        <option id={cat} value={cat}>{cat}</option>
                                     ))}
  
                                 </Form.Select>

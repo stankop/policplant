@@ -9,7 +9,7 @@ export const payOrder = (id, paymentResult) => {
             userLogin:{ userInfo }
         } = getState()
 
-        console.log('starting fething data.........')
+        
         const fetchData = async () => {
 
             const config = {
@@ -19,16 +19,16 @@ export const payOrder = (id, paymentResult) => {
                 },
                 
             }
-            console.log('Before axios.........:',`/api/orders/${id}`)
+            
             const { data } = await axios.put(`/api/orders/${id}/pay`, paymentResult, config)
-            console.log('Fetched data:',data)
+           
             return data;
         }
 
         try {
             dispatch(orderPayActions.orderPayRequest())
             const data = await fetchData()
-            console.log('This is a data:',data)
+            
             dispatch(orderPayActions.orderPaySuccess(data))
            
 

@@ -95,10 +95,7 @@ function ProductScreen({match}) {
         left: 0,
         behavior: "smooth"
       })
-    }, [product?.images])
-  
-    console.log('Image in product:', product?.images)
-    
+    }, [product?.images])  
 
  const htmlString = {__html: DOMPurify.sanitize(product?.description)}
 
@@ -106,7 +103,7 @@ function ProductScreen({match}) {
     <div style={{height:'100%'}}>
         <Breadcrumb style={{ paddingTop:'2rem', textDecoration: 'none'}}>
           <Breadcrumb.Item href="/#/"><i className="fa fa-home" style={{color:'green'}}></i></Breadcrumb.Item>
-          <Breadcrumb.Item as='a' style={{ textDecoration:'none'}} href={`#/categories/${catId}`}>
+          <Breadcrumb.Item as='li' style={{ textDecoration:'none', textDecorationLine: 'none'}} href={`#/categories/${catId}`}>
                 
             <font style={{color:'green' , textDecoration: 'none', textDecorationLine: 'none'}}>{product?.category?.find(x => x._id.toString() === catId)?.name}</font> 
           </Breadcrumb.Item>
@@ -293,19 +290,19 @@ function ProductScreen({match}) {
                                     <div style={{margin:'0.3rem'}}>
                                         Share:
                                         <a href='https//:' style={{margin:'0.3rem'}} title="Face">
-                                                <i class="fa-brands fa-facebook" style={{color:'green'}}></i>
+                                                <i className="fa-brands fa-facebook" style={{color:'green'}}></i>
                                         </a>
                                         <a href='https//:' style={{margin:'0.3rem'}} title="Twitter">
-                                                <i class="fa-brands fa-twitter" style={{color:'green'}}></i>
+                                                <i className="fa-brands fa-twitter" style={{color:'green'}}></i>
                                         </a>
                                         <a href='https//:' style={{margin:'0.3rem'}} title="Instagram">
-                                                <i class="fa-brands fa-instagram" style={{color:'green'}}></i>
+                                                <i className="fa-brands fa-instagram" style={{color:'green'}}></i>
                                         </a>
                                         <a href='https//:' style={{margin:'0.3rem'}} title="Messenger">
-                                                <i class="fa-brands fa-facebook-messenger" style={{color:'green'}}></i>
+                                                <i className="fa-brands fa-facebook-messenger" style={{color:'green'}}></i>
                                         </a>
                                         <a href='https//:' style={{margin:'0.3rem'}} title="Mail">
-                                                <i class="fa-regular fa-envelope" style={{color:'green'}}></i>
+                                                <i className="fa-regular fa-envelope" style={{color:'green'}}></i>
                                         </a>
                                     </div>
                                     

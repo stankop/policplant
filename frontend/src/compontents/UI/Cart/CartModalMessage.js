@@ -28,7 +28,7 @@ const CartModalMessage = (props) => {
         dispatch(addItem(id))
     }
     const filter = cartItems?.filter(x => x.qty > 0);
-    console.log('Ovde filter:', filter)
+    
     const cartitems = 
     <ul className={classes['cart-items']}>
         {

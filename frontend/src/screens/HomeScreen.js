@@ -69,12 +69,6 @@ function HomeScreen() {
  }
  
   const orderCategories = categories?.slice().sort((a, b) =>{return a.order - b.order})
-  const slike = [
-    
-      "https://policplantpublic.s3.eu-west-2.amazonaws.com/slika1.jpg",
-    
-      "https://policplantpublic.s3.eu-west-2.amazonaws.com/jesenji+izgled.jpg"
-    ]
   
 
   return (

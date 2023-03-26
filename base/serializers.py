@@ -155,6 +155,12 @@ class PlantCategorySerializer(serializers.ModelSerializer):
          return str(productNumber)
 
 class PlantImageSerializer(serializers.ModelSerializer):
+    image_name = serializers.SerializerMethodField(read_only= True)
     class Meta:
         model = PlantImage
         fields = '__all__'
+    
+    def get_image_name(self, obj):
+         
+         
+         return str(obj.image)

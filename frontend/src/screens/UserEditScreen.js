@@ -22,7 +22,7 @@ function UserEditScreen() {
 
   const { id } = useParams()
   const userId = id
-    console.log('ovako:', userId)
+    
     
   const userDetails = useSelector((state) => state.userDetails);
   const { user, error, loading } = userDetails;
@@ -30,8 +30,6 @@ function UserEditScreen() {
   const userUpdate = useSelector((state) => state.userUpdate);
   const { error: errorUpdate, loading: loadingUpdate , success: successUpdate} = userUpdate;
 
-  console.log('ovo je user id:', user._id)
-  console.log('ovo je user name:', user.name)
   useEffect(() => {
 
 
@@ -42,10 +40,10 @@ function UserEditScreen() {
         }else{
 
             if(!user.name || user._id !== Number(userId)){
-                console.log('********************')
+                
                 dispatch(getUserDetails(id))
             }else{
-                console.log('++++++++++++++++++++++')
+                
                 setName(user.name)
                 setEmail(user.email)
                 setIsAdmin(user.isAdmin)

@@ -46,7 +46,7 @@ function PlaceOrderScreen(props) {
             setIznos(order.totalPrice)
             setOrderId(order._id)
             setOrderi(order.orderItems)
-            console.log('ovo je order:',order)
+           
             //navigate(`/order/${order._id}`)
             props.onShowOrder({iznos: order.totalPrice,
                                orderId: order._id,
@@ -88,7 +88,7 @@ function PlaceOrderScreen(props) {
                 <ListGroup variant='flush'>
                     <ListGroup.Item>
 
-                        <h2>Adresa</h2>
+                        <h2 style={{color:'green'}}>Adresa</h2>
                         <div>
 
                             <div>
@@ -118,7 +118,7 @@ function PlaceOrderScreen(props) {
 
                      <ListGroup.Item>
 
-                        <h2>Nacin Placanja</h2>
+                        <h2 style={{color:'green'}}>Nacin Placanja</h2>
                         <p>
                             <strong>Method:</strong> <TitleCase string={placanje} />
                             
@@ -127,14 +127,14 @@ function PlaceOrderScreen(props) {
 
                      <ListGroup.Item>
 
-                        <h2>Narucene biljke</h2>
+                        <h2 style={{color:'green'}}>Narucene biljke</h2>
                         { cart?.cartItems?.length === 0 
                             ? <div>
                                 <Message variant= 'info'> Vasa Korpa je prazna</Message> 
                                 <Button to="/"
 
                                          type='button'
-                                         className='btn-block'
+                                         className='btn-block btn-success'
                                          href="/"
                                          >Povratak na pocetak
                                 </Button>
@@ -151,7 +151,7 @@ function PlaceOrderScreen(props) {
                                                         </Col>
                                                         <Col sm={12} md={6} lg={4} xl={3} xs={3}>
 
-                                                            <Link to={`/products/${item.id}`}>{item.name}</Link>
+                                                            <Link as='div' style={{color:'green'}} to={`/products/${item.id}`}>{item.name}</Link>
                                                         </Col>
                                                         <Col sm={12} md={6} lg={4} xl={6} xs={6}>
                                                             {item.qty} x {item.price.toFixed(2)} rsd = {(item.qty *item.price).toFixed(2)} rsd
@@ -171,10 +171,10 @@ function PlaceOrderScreen(props) {
             </Col>
 
             <Col sm={12} md={6} lg={4} xl={4} xs={12}>
-                    <Card border="info">
+                    <Card border="success">
                         <ListGroup variant='flush'>
                             <ListGroup.Item>
-                                <h2>Narudzba</h2>
+                                <h2 style={{color:'green'}}>Narudzba</h2>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                <Row>
@@ -206,7 +206,7 @@ function PlaceOrderScreen(props) {
                                 <Button
 
                                          type='button'
-                                         className='btn-block'
+                                         className='btn-block btn-success'
                                          disabled={cart?.cartItems?.length === 0 }
                                          onClick={placeOrder}>Posalji porudzbu</Button>
                             </ListGroup.Item>

@@ -2,9 +2,8 @@ import { updateProductActions} from './updateProduct-slice'
 import { productDetails } from './product-actions'
 import axios from 'axios'
 
-export const updateProduct = (product, images) => {
+export const updateProduct = (product, images, items) => {
     return async (dispatch, getState) => {
-
 
         const {
             userLogin:{ userInfo }
@@ -24,28 +23,43 @@ export const updateProduct = (product, images) => {
             return data;
         }
 
-        const uploadData = async (product_id, images) => {
+        const uploadData = async (product_id, images, itms) => {
 
             const files = images //e.target.filesconsole.log('form fils:', files)
+            const items = itms?.map((item, index) => {
+                return {...item, order: index}
+            })
             const formData = new FormData()
-            console.log('Type', images)
-            if(images[0] instanceof File ){
+            
+            // if(images[0] instanceof File ){
                 
+            //     const arr = Array.from(files)
+            //     arr?.forEach(x => 
+            //         formData.append('images', x)
+            //     )
+            //     //formData.append('image', files)
+            //     formData.append('product_id', product_id)
+            // }else{
+                
+            //     const arr = Array.from(files?.map(x => x.id))
+                
+            //     formData.append('images', arr)
+            //     //formData.append('image', files)
+            //     formData.append('product_id', product_id)
+            // }
+            console.log('Items',items)
+            console.log('Images', files)
+            
+            
+            if(files){
                 const arr = Array.from(files)
                 arr?.forEach(x => 
                     formData.append('images', x)
                 )
-                //formData.append('image', files)
-                formData.append('product_id', product_id)
-            }else{
-                
-                const arr = Array.from(files?.map(x => x.id))
-                
-                formData.append('images', arr)
-                //formData.append('image', files)
-                formData.append('product_id', product_id)
             }
             
+            formData.append('product_id', product_id)
+            formData.append('items', JSON.stringify(items))
             try {
                 const config = {
                  headers: {
@@ -64,7 +78,7 @@ export const updateProduct = (product, images) => {
             dispatch(updateProductActions.updateProductRequest())
             const cartData = await fetchData()
             dispatch(updateProductActions.updateProductSuccess(cartData))
-            const imageData = await uploadData(product._id, images)
+            const imageData = await uploadData(product._id, images, items)
             dispatch(productDetails(product._id))
 
         } catch (error) {

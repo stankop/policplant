@@ -27,7 +27,7 @@ export const updateUser = (user) => {
         try {
             dispatch(userUpdateActions.userUpdateRequest())
             const data = await fetchData()
-            console.log('---------------------------------')
+           
             dispatch(userUpdateActions.userUpdateSuccess())
             dispatch(listUsers())
 

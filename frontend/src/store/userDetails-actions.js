@@ -8,7 +8,7 @@ export const getUserDetails = (id) => {
         const {
             userLogin:{ userInfo }
         } = getState()
-        console.log('ovo je u fetc:',id)
+       
         const fetchData = async () => {
 
             const config = {
@@ -25,7 +25,7 @@ export const getUserDetails = (id) => {
         try {
             dispatch(userDetailsActions.userDetailsRequest())
             const data = await fetchData()
-            console.log('---------------------------------')
+           
             dispatch(userDetailsActions.userDetailsSuccess(data))
 
 

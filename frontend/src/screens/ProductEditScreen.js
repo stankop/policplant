@@ -86,13 +86,15 @@ function ProductEditScreen( ) {
         const targetFiles = evnt.target.files;
         const targetFilesObject= [...targetFiles]
         targetFilesObject.map((file)=>{
-           return selectedFIles.push(URL.createObjectURL(file))
+           return selectedFIles.push({file: URL.createObjectURL(file), name: file.name})
         })
+        
         
         setImage(evnt.target.files)
         const photos = selectedFIles?.map(image => {
               return {
-                  src:image,
+                  src:image.file,
+                  name:image.name,
                   width:1,
                   height:1
               }
@@ -100,10 +102,13 @@ function ProductEditScreen( ) {
         const newItems = items?.map(image => {
             return {
                 src:image.src,
+                name: image.name,
                 width:1,
                 height:1
             }
         })
+        console.log('Itemi:', [...newItems, ...photos])
+        console.log('Images:', evnt.target.files)
         setItems([...newItems, ...photos])
     }
 
@@ -120,24 +125,30 @@ function ProductEditScreen( ) {
            
             const targetFilesObject= Array.from([...product?.images])?.sort((x, y) => x.order - y.order).map(image => {
                 return {
+                    name: image.image_name,
                     image: image?.image,
                     id: image?.id
                 }
             })
+
+            
             const targetFilesObjectWithoutLast = targetFilesObject?.filter(x => x?.id !== prvaSlika?.id)
             if(prvaSlika){
-                targetFilesObjectWithoutLast.unshift({image: prvaSlika?.image, id: prvaSlika?.id})
+                targetFilesObjectWithoutLast.unshift({image: prvaSlika?.image, id: prvaSlika?.id, name: prvaSlika?.image_name})
             }
 
-        const photos = [...new Set(targetFilesObjectWithoutLast)]?.map(image => {
-              return {
-                  src:image.image,
-                  id:image.id,
-                  width:1,
-                  height:1
-              }
-        })
-        setItems(photos) 
+            const photos = [...new Set(targetFilesObjectWithoutLast)]?.map(image => {
+                return {
+                    name: image.name,
+                    src:image.image,
+                    id:image.id,
+                    width:1,
+                    height:1
+                }
+            })
+            
+            setImage(null)
+            setItems(photos) 
         }   
     }, [success,product?.name, product?.images])
 
@@ -147,7 +158,7 @@ function ProductEditScreen( ) {
 
         
         if(success){
-            console.log('Flicking')
+            
             //dispatch(updateProductReset())
             //navigate(`/admin/productlist`)
             setName(product.name)
@@ -184,7 +195,7 @@ function ProductEditScreen( ) {
     }
     const submitHandler = (e) => {
         e.preventDefault()
-        ukupno.current = items
+        
         dispatch(updateProduct({
             _id:id,
             name,
@@ -209,7 +220,7 @@ function ProductEditScreen( ) {
             prodajno_mesto,
             novo,
             popust
-        }, images))
+        }, images, items))
         setItems(ukupno.current)
         // setImage(ukupno.current.map((index,item) => {
         //     return {
@@ -297,14 +308,14 @@ function ProductEditScreen( ) {
     const onSortEnd = ({ oldIndex, newIndex},e) => {
 
         setItems(arrayMoveImmutable(items, oldIndex, newIndex));
-        setImage(arrayMoveImmutable(Array.from(items?.map((item, index) => {
-            return {
-                id: item.id,
-                image: item.src,
-                order:index,
-                product: id
-            }
-        })), oldIndex, newIndex));
+        // setImage(arrayMoveImmutable(Array.from(items?.map((item, index) => {
+        //     return {
+        //         id: item.id,
+        //         image: item.src,
+        //         order:index,
+        //         product: id
+        //     }
+        // })), oldIndex, newIndex));
     };
 
     const memoizedImageCard = useMemo(() => {
@@ -427,23 +438,29 @@ function ProductEditScreen( ) {
 
                             <Form.Group controlId='image'
                                 onContextMenu={(e) => {
-                                    console.log('Doublew:', e.detail)
+                                    
                                     e.preventDefault(); // prevent the default behaviour when right clicked
                                     const image = JSON.stringify(e.target.src)
                                     const newItems = items.filter(item => JSON.stringify(item.src) !== image)
+
+                                    console.log('Itemi:', newItems)
+                                    console.log('Imagesi:', images)
                                     setItems(newItems)
                                     
-                                    const newImages= newItems.map((item, index) => {
-                                        return {
-                                            image: item.src,
-                                            order: index,
-                                            product: id,
-                                            id: item.id
-                                        }
-                                    })
-                                    console.log('Hi')
-                                    setImage(newImages)
-                                    setFlick(true)
+                                    // if(images){
+                                    //     const newImages= images.map((item, index) => {
+                                    //         return {
+                                    //             image: item.src,
+                                    //             order: index,
+                                    //             product: id,
+                                    //             id: item.id
+                                    //         }
+                                    //     })
+                                       
+                                    //     //setImage(newImages)
+                                    // }
+                                    
+                                    
                                     // const slanje= []
                                     // newImages.forEach(x => {
                                     //     var file = new File(["hello"], x.image

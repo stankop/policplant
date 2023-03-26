@@ -66,14 +66,14 @@ function MultiCaroseul(props) {
                              zoomOnHover={0}
                              buttonPosition="bottom"
                              alwaysShowButton={true} >
-                    <button onClick={() => { navigate('/categories/36')}} primary  className="btn success" style={{ border: '2px solid black'}} > Cetinari pogledajte  </button>
+                    <button onClick={() => { navigate('/categories/36')}} primary="true"  className="btn success" style={{ border: '2px solid black'}} > Cetinari pogledajte  </button>
                 </ImageButton>
             </div>
             <div style={{padding:'1rem'}}>
                 <ImageButton img={image2}
                              alwaysShowButton={true}
                              buttonPosition="bottom" >
-                    <button onClick={() => { navigate('/categories/29')}} primary className="btn success" style={{ border: '2px solid black'}} > Puzavice pogledajte </button>
+                    <button onClick={() => { navigate('/categories/29')}} primary="true" className="btn success" style={{ border: '2px solid black'}} > Puzavice pogledajte </button>
                 </ImageButton>
             </div> 
         </Carousel>

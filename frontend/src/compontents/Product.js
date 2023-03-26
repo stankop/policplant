@@ -27,7 +27,6 @@ function Product({product, catId}) {
             families: ['Poppins', 'Chilanka']
           }
         });
-        console.log('CatId:', catId)
     }, [])
 
   return (

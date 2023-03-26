@@ -23,7 +23,7 @@ function SearchBox() {
     
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log('Vrednost KEYWORDA: ', keyword)
+       
         
     }
 
