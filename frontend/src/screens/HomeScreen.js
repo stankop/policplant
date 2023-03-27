@@ -1,4 +1,4 @@
-import React, { useEffect , useState, useRef} from 'react'
+import React, { useEffect , useState, useRef, useMemo} from 'react'
 import { Row, Col, Container } from 'react-bootstrap'
 import Product from '../compontents/Product'
 import Kategorija from '../compontents/Kategorija'
@@ -32,14 +32,7 @@ function HomeScreen() {
   const dispatch = useDispatch()
   const [carucel, setCarucel] = useState(true)
   const [ toggle, setToggle ] = useState(true)
-//   const [ val, setVal ] = useState({
-//     color: '',
-//     high: [],
-//     type: [],
-//     category: [],
-//     flow: [],
-//     search: ''
-// })
+
   const screenType = useScreenType();
   const cat = useSelector(state => state.categoryList)
   const { error: { categoryError}, loading:{ categoryLoading}, categories } = cat
@@ -48,6 +41,7 @@ function HomeScreen() {
   const [search, setSearch] = useSearchParams();
   const keyword = search.get("keyword");
   const customerLogo = useRef(null);
+  const isFirst = useRef(true);
 
   useEffect(()=>{
 
@@ -57,16 +51,32 @@ function HomeScreen() {
   }, [dispatch]);
 
 
- const setSearchValue = (value) => {
-    //setVal(value)
-    if(value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== ''){
-     setToggle(false)
-     setCarucel(false)
-   } else{
-     setToggle(true)
-     setCarucel(true)
+  const searchFunc = useMemo(() => {
+    const setSearchValue = (value) => {
+      
+      if(value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== '' || value.keyword !== ''){
+       setToggle(false)
+       setCarucel(false)
+     } else{
+       setToggle(true)
+       setCarucel(true)
+     }
+     console.log('Mozda ovo', value)
    }
- }
+   return setSearchValue
+  }, [])
+
+//  const setSearchValue = (value) => {
+//     //setVal(value)
+//     if(value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== '' || value.keyword !== ''){
+//      setToggle(false)
+//      setCarucel(false)
+//    } else{
+//      setToggle(true)
+//      setCarucel(true)
+//    }
+//    console.log('Mozda ovo', value)
+//  }
  
   const orderCategories = categories?.slice().sort((a, b) =>{return a.order - b.order})
   
@@ -82,7 +92,7 @@ function HomeScreen() {
 
         <h1 style={{color:'#333333'}}> {carucel ? 'Detaljna pretraga:' : 'Filtrirani Proizvodi:'}</h1>
         {/* <Sidebar></Sidebar> */}
-        {screenType.isMobile && <SearchModal onSearch={ setSearchValue}></SearchModal>} 
+        {screenType.isMobile && <SearchModal onSearch={ searchFunc}></SearchModal>} 
         {/* {screenType.isMobile && <MUISearchModal onSearch={ setSearchValue}></MUISearchModal>} */}
         { categoryLoading ? <Loader></Loader>
                  : categoryError ? <Message variant='danger'>{categoryError}</Message> 
@@ -91,7 +101,7 @@ function HomeScreen() {
                   <Container fluid> 
                     <Row>
                     { (screenType.isDesktop || screenType.isLargeDesktop) && <Col>
-                          <Search onSearch={ setSearchValue}></Search> 
+                          <Search onSearch={ searchFunc}></Search> 
                       </Col> }
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
                         { toggle ? (

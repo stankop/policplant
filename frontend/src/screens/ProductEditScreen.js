@@ -107,8 +107,7 @@ function ProductEditScreen( ) {
                 height:1
             }
         })
-        console.log('Itemi:', [...newItems, ...photos])
-        console.log('Images:', evnt.target.files)
+        
         setItems([...newItems, ...photos])
     }
 
@@ -443,8 +442,6 @@ function ProductEditScreen( ) {
                                     const image = JSON.stringify(e.target.src)
                                     const newItems = items.filter(item => JSON.stringify(item.src) !== image)
 
-                                    console.log('Itemi:', newItems)
-                                    console.log('Imagesi:', images)
                                     setItems(newItems)
                                     
                                     // if(images){

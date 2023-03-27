@@ -62,30 +62,19 @@ function Search( { onSearch}) {
             keyword: keyword
         }
         
-        //onSearch(value)
         return value;
         }, [boja, high, tip, kategorija, pozicija, pretraga, keyword]);
-    
+        
     const debouncedSearchTerm = useDebounce(memoizedValue, 500);
-    const initialRender = useRef(true);
     
-
     useEffect(()=>{
-
-        onSearch(memoizedValue)
-
-     }, [memoizedValue, onSearch]);
-
-    useEffect(()=>{
-       if(initialRender.current){
-        initialRender.current = false;
-       }
-       else{
+       
         
         dispatch(listFilterProducts(debouncedSearchTerm))
-        //navigate(`filter`, {state: debouncedSearchTerm, replace:true})
-       }    
-    }, [dispatch, debouncedSearchTerm, keyword]);
+        onSearch(debouncedSearchTerm)
+        
+         
+    }, [dispatch, debouncedSearchTerm]);
 
     const submitHandler = (e) => {
         e.preventDefault()
@@ -138,7 +127,7 @@ function Search( { onSearch}) {
                     <h6><strong style={{color:'#333333'}}>Boja cveta</strong></h6>
                         <Form.Control 
                             type='search'
-                            name='pretraga'
+                            name='boja'
                             inline ='true'
                             placeholder='Unesite boju...'
                             onChange={(e) => setBoja(e.target.value) }>

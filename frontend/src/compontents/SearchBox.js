@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-
+import { listFilterProducts } from '../store/product-actions'
 
 
 function SearchBox() {
@@ -23,13 +23,21 @@ function SearchBox() {
     
     const submitHandler = (e) => {
         e.preventDefault()
-       
+        dispatch(listFilterProducts({
+            color: '',
+            high: '',
+            type: '',
+            category: '',
+            flow: '',
+            search: keyword,
+            keyword: keyword}))
         
     }
 
     useEffect(() => {
         localStorage.setItem('keyword', keyword)
     },[keyword])
+
 
     const btnStyle = {
         background: 'greenyellow',
