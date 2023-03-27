@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Button, Card, Form, Container, ListGroupItem} from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Button, Card, Form, Container, ListGroupItem, InputGroup} from 'react-bootstrap'
 import Rating from '../compontents/Rating'
 import Loader from '../compontents/Loader'
 import Message from '../compontents/Message'
@@ -23,6 +23,7 @@ import '../../node_modules/react-image-gallery/styles/css/image-gallery.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ImageGallery from 'react-image-gallery';
 import Ikonice from '../compontents/UI/Ikonice';
+import {  Plus, Dash } from 'react-bootstrap-icons';
 
 function ProductScreen({match}) {
     
@@ -99,6 +100,18 @@ function ProductScreen({match}) {
 
  const htmlString = {__html: DOMPurify.sanitize(product?.description)}
 
+  const incrementHandle = (e) => {
+    
+        setQty(e => e + 1)
+  }
+
+  const decrementHandle = (e) => {
+        if(qty > 1){
+            
+            setQty(e => e - 1)
+        }
+        
+  }
   return (
     <div style={{height:'100%'}}>
         <Breadcrumb style={{ paddingTop:'2rem', textDecoration: 'none'}}>
@@ -232,7 +245,7 @@ function ProductScreen({match}) {
                                                                 </Row>
                                                             </ListGroup.Item> */}
 
-                                                            {product?.countInStock > 0 && (
+                                                            {/* {product?.countInStock > 0 && (
                                                                 <ListGroup.Item>
                                                                     <Row>
                                                                         <Col>Količina:</Col>
@@ -253,7 +266,42 @@ function ProductScreen({match}) {
                                                                         </Col>
                                                                     </Row>
                                                                 </ListGroup.Item>
-                                                            )}
+                                                            )} */}
+
+                                                            {product?.countInStock > 0 && (
+                                                                <ListGroup.Item>
+                                                                    <Row>
+                                                                        <Col>Količina:</Col>
+                                                                        <Col className="justify-content-md-right">
+                                                                            <Row  className="justify-content-md-right">
+                                                                                <Col sm={4}>
+                                                                                    <Button variant="light" 
+                                                                                            onClick={decrementHandle}> 
+                                                                                        <Dash color="red" size={16} />
+                                                                                    </Button>
+                                                                                </Col>
+                                                                                <Col sm={4}>
+                                                                                <InputGroup  >
+                                                                                    <Form.Control 
+                                                                                        onChange={(e) => setQty(Number(e.target.value))}
+                                                                                        value={qty} 
+                                                                                    >
+                                                                                            
+
+                                                                                    </Form.Control>
+                                                                                </InputGroup>
+                                                                                </Col>
+                                                                                <Col sm={4}>
+                                                                                    <Button variant="light"
+                                                                                            onClick={incrementHandle}> 
+                                                                                        <Plus color="green" size={16} />
+                                                                                    </Button>
+                                                                                </Col>
+                                                                            </Row>
+                                                                        </Col>
+                                                                    </Row>
+                                                                </ListGroup.Item>
+                                                            )} 
 
                                                             <ListGroup.Item>
                                                                 <Button 
