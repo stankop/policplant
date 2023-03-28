@@ -26,6 +26,7 @@ import { sliderClasses } from '@mui/material'
 import { SimpleCarouselSlider } from 'react-simple-carousel-image-slider'
 import Carousel from 'flat-carousel';
 import MultiCaroseul from '../compontents/MultiCaroseul'
+import Spinner from 'react-bootstrap/Spinner';
 
 function HomeScreen() {
 
@@ -35,9 +36,9 @@ function HomeScreen() {
 
   const screenType = useScreenType();
   const cat = useSelector(state => state.categoryList)
-  const { error: { categoryError}, loading:{ categoryLoading}, categories } = cat
+  const { error:  categoryError, loading: categoryLoading, categories } = cat
   const prod = useSelector(state => state.productList)
-  const { error: { productError }, loading:{ productLoading }, products } = prod
+  const { error:  productError , loading: productLoading , products } = prod
   const [search, setSearch] = useSearchParams();
   const keyword = search.get("keyword");
   const customerLogo = useRef(null);

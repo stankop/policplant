@@ -6,6 +6,7 @@ function Loader() {
     <Spinner
      animation='border' 
      role='status'
+     variant="success"
      style={{
          height: '100px',
          width: '100px',
