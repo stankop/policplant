@@ -22,12 +22,12 @@ export default function SearchModal( {onSearch}) {
 
   return (
     <>
-      <MDBBtn onClick={toggleShow}>Pretraga   <i className="fa fa-bars fa-large"></i></MDBBtn>
+      <MDBBtn style={{background:'green', border:'1px solid green'}} onClick={toggleShow}>Pretraga   <i className="fa fa-bars fa-large"></i></MDBBtn>
       <MDBModal show={basicModal} setShow={setBasicModal} tabIndex='-1' animationDirection="left">
         <MDBModalDialog position="top-right"  dialogClassName={classes['modal']} scrollable  >
           <MDBModalContent>
             <MDBModalHeader >
-              <MDBModalTitle>Pretraga Biljaka</MDBModalTitle>
+              <MDBModalTitle style={{color:'green'}}>Pretraga Biljaka</MDBModalTitle>
               <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
             </MDBModalHeader>
             <MDBModalBody>

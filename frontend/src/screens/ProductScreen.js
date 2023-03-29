@@ -134,7 +134,7 @@ function ProductScreen({match}) {
                 :(  
                     <div>
                         <Row >
-                                <Col  sm={12} md={6} lg={4} xl={5} xs={6} >
+                                <Col  sm={12} md={6} lg={4} xl={5} xs={4} >
                                     <Row>
                                     
                                     {/* {image && <ImageZoom src={image} alt={product.name} zoom="150" fluid>
@@ -156,7 +156,7 @@ function ProductScreen({match}) {
                                     ))}
                                     </Row> */}
                                 </Col>
-                                <Col sm={12} md={6} lg={8} xl={7} xs={6}>
+                                <Col sm={12} md={6} lg={8} xl={7} xs={8}>
                                     <ListGroup variant='flush'>
                                         <ListGroup.Item>
                                             <h2><strong style={{ color:'#333333', fontSize:'2.8rem', fontFamily: 'Oswald, sans-serif'}}>{product?.name}</strong> <i style={{fontSize:'1.4rem' , color:'#333333'}}>{product?.botanicki_naziv}</i></h2> 

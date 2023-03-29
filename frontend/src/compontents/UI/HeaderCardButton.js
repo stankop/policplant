@@ -2,10 +2,12 @@ import CartIcon  from './Cart/CartIcon'
 import classes from './HeaderCartButton.module.css'
 import {  useEffect, useState } from 'react';
 import {  useSelector } from 'react-redux'
+import useScreenType from "react-screentype-hook";
 
 const HeaderCartButton = (props) => {
 
     const [btnIsHihg, setBtnIsHigh] = useState(false)
+    const screenType = useScreenType();
 
     const cart = useSelector((state) => state.cart);
     const { cartItems } = cart;
@@ -41,7 +43,7 @@ const HeaderCartButton = (props) => {
 
    
     return(
-        <button className={btnClasses} onClick={props.onClick}>
+        <button  style={ screenType ? { width:'8rem', height:'4rem'} : {}}  className={btnClasses} onClick={props.onClick}>
             <span className={classes.icon}>
                 <CartIcon ></CartIcon>
             </span>

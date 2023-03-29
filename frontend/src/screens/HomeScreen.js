@@ -105,15 +105,30 @@ function HomeScreen() {
                           <Search onSearch={ searchFunc}></Search> 
                       </Col> }
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
-                        { toggle ? (
-                        <Row  className={'gy-2'}>
+                        { toggle  ? ( 
+                          screenType.isMobile ? 
+                          
+                        (<Row  >
+                          {orderCategories?.map(category => (
+                          <Col key={category._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
+                              <Kategorija category={category} />
+                          </Col>
+                            ))}
+                            {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                        </Row>)
+                        : 
+                        (
+                          <Row  className={'gy-2'}>
                           {orderCategories?.map(category => (
                           <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={4} className="d-flex">
                               <Kategorija category={category} />
                           </Col>
                             ))}
                             {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
-                        </Row>) :
+                        </Row>
+                        )
+                        ) 
+                        :
                         (<Row className={'gy-2'}>
                           {products?.map(product => (
                           <Col key={product._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex">

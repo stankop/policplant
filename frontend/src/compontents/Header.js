@@ -24,6 +24,7 @@ import { listCategories } from "../store/category-actions";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Image from 'react-bootstrap/Image'
 import '../compontents/Header.css'
+import useScreenType from "react-screentype-hook";
 
 
 function Header(props) {
@@ -38,6 +39,7 @@ function Header(props) {
   const [cat, setCat] = useState(categories)
 
   const dispatch = useDispatch();
+  const screenType = useScreenType();
 
   useEffect(() => {
  
@@ -110,34 +112,75 @@ function Header(props) {
     <header >
       <Row>
       <Navbar  variant="dark" expand="lg" collapseOnSelect style={{ height:'12rem'}} className={classes["color-navbar"]}>
-        <Container  style={{ overflow:'hidden'}}>
-        
-              <LinkContainer to="/">
-                <Navbar.Brand >
-                  {/* <h1 className={classes["h1"]}>Rasadnik Ema</h1> */}
-                  <Image fluid  src={image} loading="eager" style={{ width:'22rem', height:'22rem',marginTop: '+2rem', overflow:'hidden'}} alt="Rasadnik Ema"/>
-                </Navbar.Brand>
-              </LinkContainer>
-              
-              <Navbar.Text style={{ textAlign: 'center'}}>
-                  {<div>                     
-                    <div style={{fontSize: '1.6rem', color:'black'}}><FontAwesomeIcon icon={faPhone} />     Pozovite nas</div>
-                      
-                    <div style={{color:'black',fontSize: '1.4rem'}}>0652077257</div>
-                  </div>}
+        { screenType.isMobile ? 
+              <Container  style={{ overflow:'hidden'}}>
+                  <Row>
+                    <Col>
+                      <LinkContainer to="/">
+                        <Navbar.Brand >
+                          {/* <h1 className={classes["h1"]}>Rasadnik Ema</h1> */}
+                          <Image fluid  src={image} loading="eager" style={{ width:'16rem', height:'14rem', overflow:'hidden'}} alt="Rasadnik Ema"/>
+                        </Navbar.Brand>
+                      </LinkContainer>
+                    </Col>
+                    {/* <Navbar.Text style={{ textAlign: 'center'}}>
+                        {<div>                     
+                          <div style={{fontSize: '1.6rem', color:'black'}}><FontAwesomeIcon icon={faPhone} />     Pozovite nas</div>
+                            
+                          <div style={{color:'black',fontSize: '1.4rem'}}>0652077257</div>
+                        </div>}
 
-              </Navbar.Text>
-              
-                <SearchBox ></SearchBox>
+                    </Navbar.Text> */}
+                    
+                      {/* <SearchBox ></SearchBox> */}
+                    <Col>
+                      <Navbar.Text style={{ textAlign: 'center'}}>
+                      <LinkContainer to="/cart" >
+                            <Nav.Link style={{ margin:'1rem'}}>
+                              <HeaderCardButton onClick={props.onShowCart}></HeaderCardButton>
+                            </Nav.Link>
+                          </LinkContainer>
+                      </Navbar.Text>
+                      <Navbar.Text style={{ textAlign: 'center'}}>
+                        {<div>                     
+                          <div style={{fontSize: '1.2rem', color:'black'}}><FontAwesomeIcon icon={faPhone} />     Pozovite nas</div>
+                            
+                          <div style={{color:'black',fontSize: '1.2rem'}}>0652077257</div>
+                        </div>}
 
-              <Navbar.Text style={{ textAlign: 'center'}}>
-              <LinkContainer to="/cart" >
-                    <Nav.Link style={{ margin:'1rem'}}>
-                      <HeaderCardButton onClick={props.onShowCart}></HeaderCardButton>
-                    </Nav.Link>
-                  </LinkContainer>
-              </Navbar.Text>
-        </Container>
+                    </Navbar.Text>
+                    </Col>
+                  </Row>
+              </Container> 
+              :
+              <Container  style={{ overflow:'hidden'}}>
+              
+                <LinkContainer to="/">
+                  <Navbar.Brand >
+                    {/* <h1 className={classes["h1"]}>Rasadnik Ema</h1> */}
+                    <Image fluid  src={image} loading="eager" style={{ width:'22rem', height:'22rem',marginTop: '+2rem', overflow:'hidden'}} alt="Rasadnik Ema"/>
+                  </Navbar.Brand>
+                </LinkContainer>
+                
+                <Navbar.Text style={{ textAlign: 'center'}}>
+                    {<div>                     
+                      <div style={{fontSize: '1.6rem', color:'black'}}><FontAwesomeIcon icon={faPhone} />     Pozovite nas</div>
+                        
+                      <div style={{color:'black',fontSize: '1.4rem'}}>0652077257</div>
+                    </div>}
+
+                </Navbar.Text>
+                
+                  <SearchBox ></SearchBox>
+
+                <Navbar.Text style={{ textAlign: 'center'}}>
+                <LinkContainer to="/cart" >
+                      <Nav.Link style={{ margin:'1rem'}}>
+                        <HeaderCardButton onClick={props.onShowCart}></HeaderCardButton>
+                      </Nav.Link>
+                    </LinkContainer>
+                </Navbar.Text>
+              </Container>}
       </Navbar>
       </Row>
       
