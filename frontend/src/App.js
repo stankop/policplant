@@ -62,7 +62,7 @@ function App() {
       {<Header onShowCart={showCartHalnder}/> }
       <main >
         
-        <div className="container-fluid" style={ screenType.isMobile ? { backgroundColor: '#FFF' , width:'100%'} : { backgroundColor: '#FFF' , width:'80%'}}>
+        <div className="container-fluid" style={ screenType.isMobile ? { backgroundColor: '#FFF' , width:'100%', margin:0} : { backgroundColor: '#FFF' , width:'80%'}}>
           <Routes>
             <Route path="/" element={<HomeScreen />} exact></Route>
             <Route path="/products/:id/:catId" element={<ProductScreen />}></Route>

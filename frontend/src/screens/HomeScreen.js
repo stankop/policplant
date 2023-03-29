@@ -83,7 +83,7 @@ function HomeScreen() {
   
 
   return (
-    <div>
+    <div style={ screenType.isMobile ? { backgroundColor: '#FFF' , width:'100vw', margin:0} : { }}>
         {/* { carucel && <MDBCarusel itemRef={customerLogo}></MDBCarusel>}   */}
         {/* { carucel && <ReactCarusel ></ReactCarusel>} */}
         {/* { carucel && <CarouselFadeExample></CarouselFadeExample>}  */}
@@ -98,9 +98,9 @@ function HomeScreen() {
         { categoryLoading ? <Loader></Loader>
                  : categoryError ? <Message variant='danger'>{categoryError}</Message> 
                  :
-                 <div > 
-                  <Container fluid> 
-                    <Row>
+                 <div style={ screenType.isMobile ? { width:'100vw', margin:0} : { }}> 
+                  <Container fluid > 
+                    
                     { (screenType.isDesktop || screenType.isLargeDesktop) && <Col>
                           <Search onSearch={ searchFunc}></Search> 
                       </Col> }
@@ -110,7 +110,7 @@ function HomeScreen() {
                           
                         (<Row  >
                           {orderCategories?.map(category => (
-                          <Col key={category._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
+                          <Col  key={category._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex my-1 p-1 justify-content-center">
                               <Kategorija category={category} />
                           </Col>
                             ))}
@@ -129,19 +129,28 @@ function HomeScreen() {
                         )
                         ) 
                         :
-                        (<Row className={'gy-2'}>
+                        ( screenType.isMobile ? <Row>
                           {products?.map(product => (
-                          <Col key={product._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex">
+                          <Col key={product._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex my-1 p-1">
                               <Product product={product} />
                           </Col>
                             ))} 
                             {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
-                        </Row>)}
+                        </Row> :
+                        <Row className={'gy-2'}>
+                        {products?.map(product => (
+                        <Col key={product._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex my-1 p-1">
+                            <Product product={product} />
+                        </Col>
+                          ))} 
+                          {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                      </Row>) 
+                        }
                       </Col>
                       {/* { (screenType.isDesktop || screenType.isLargeDesktop) && <Col>
                           <Search onSearch={ setSearchValue}></Search> 
                       </Col> } */}
-                    </Row>
+                    
                   </Container>
                   
                 </div>}
