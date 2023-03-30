@@ -104,6 +104,7 @@ function HomeScreen() {
                     { (screenType.isDesktop || screenType.isLargeDesktop) && <Col>
                           <Search onSearch={ searchFunc}></Search> 
                       </Col> }
+
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
                         { toggle  ? ( 
                           screenType.isMobile ? 
@@ -126,16 +127,23 @@ function HomeScreen() {
                             ))}
                             {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
                         </Row>
-                        )
-                        ) 
+                        )) 
                         :
-                        ( <Row>
+                        ( screenType.isMobile ? <Row>
                           {products?.map(product => (
                           <Col key={product._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
                               <Product product={product} />
                           </Col>
                             ))} 
                             {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                        </Row> :
+                        <Row>
+                        {products?.map(product => (
+                        <Col key={product._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
+                            <Product product={product} />
+                        </Col>
+                          ))} 
+                          {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
                         </Row>) 
                         }
                       </Col>

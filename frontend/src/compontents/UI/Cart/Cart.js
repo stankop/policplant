@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import CartItem from './CartItem'
 import { removeItem , addItem, removeFromCart} from '../../../store/cart-actions'
 import { useNavigate} from "react-router-dom";
+import useScreenType from "react-screentype-hook";
 
 const Cart = (props) => {
 
@@ -13,6 +14,7 @@ const Cart = (props) => {
     const { cartItems } = cart;
 
     const dispatch = useDispatch()
+    const screenType = useScreenType();
 
     const totalAmount = cartItems?.reduce((total, item) => 
         {

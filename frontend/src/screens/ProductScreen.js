@@ -24,6 +24,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ImageGallery from 'react-image-gallery';
 import Ikonice from '../compontents/UI/Ikonice';
 import {  Plus, Dash } from 'react-bootstrap-icons';
+import useScreenType from "react-screentype-hook";
 
 function ProductScreen({match}) {
     
@@ -33,6 +34,7 @@ function ProductScreen({match}) {
   const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch()
+  const screenType = useScreenType();
 
   const userLogin = useSelector(state => state.userLogin)
   const {userInfo} = userLogin
@@ -114,9 +116,9 @@ function ProductScreen({match}) {
   }
   return (
     <div style={{height:'100%'}}>
-        <Breadcrumb style={{ paddingTop:'2rem', textDecoration: 'none'}}>
+        <Breadcrumb style={{ paddingTop:'1.8rem', textDecoration: 'none'}}>
           <Breadcrumb.Item href="/#/"><i className="fa fa-home" style={{color:'green'}}></i></Breadcrumb.Item>
-          <Breadcrumb.Item as='li' style={{ textDecoration:'none', textDecorationLine: 'none'}} href={`#/categories/${catId}`}>
+          <Breadcrumb.Item  style={{ textDecoration:'none !important', textDecorationLine: 'none !important'}} href={`#/categories/${catId}`}>
                 
             <font style={{color:'green' , textDecoration: 'none', textDecorationLine: 'none'}}>{product?.category?.find(x => x._id.toString() === catId)?.name}</font> 
           </Breadcrumb.Item>
@@ -134,7 +136,7 @@ function ProductScreen({match}) {
                 :(  
                     <div>
                         <Row >
-                                <Col  sm={12} md={6} lg={4} xl={5} xs={4} >
+                                <Col  sm={12} md={6} lg={4} xl={5} xs={12} >
                                     <Row>
                                     
                                     {/* {image && <ImageZoom src={image} alt={product.name} zoom="150" fluid>
@@ -156,10 +158,10 @@ function ProductScreen({match}) {
                                     ))}
                                     </Row> */}
                                 </Col>
-                                <Col sm={12} md={6} lg={8} xl={7} xs={8}>
+                                <Col sm={12} md={6} lg={8} xl={7} xs={12}>
                                     <ListGroup variant='flush'>
                                         <ListGroup.Item>
-                                            <h2><strong style={{ color:'#333333', fontSize:'2.8rem', fontFamily: 'Oswald, sans-serif'}}>{product?.name}</strong> <i style={{fontSize:'1.4rem' , color:'#333333'}}>{product?.botanicki_naziv}</i></h2> 
+                                            <h2><strong style={{ color:'#333333', fontSize:'2.6rem', fontFamily: 'Oswald, sans-serif'}}>{product?.name}</strong> <i style={{fontSize:'1.4rem' , color:'#333333'}}>{product?.botanicki_naziv}</i></h2> 
                                         </ListGroup.Item>
                                         <ListGroup.Item >
                                             <strong style={{ color:'#228B22', fontSize:30 }}>{product?.price} rsd</strong> 
@@ -270,10 +272,42 @@ function ProductScreen({match}) {
 
                                                             {product?.countInStock > 0 && (
                                                                 <ListGroup.Item>
+                                                                   { screenType.isMobile ? <Row>
+                                                                        <Col xs={4}>Količina:</Col>
+                                                                        <Col xs={8} className="justify-content-md-right">
+                                                                            <Row  xs={12}>
+                                                                                <Col xs={4}>
+                                                                                    <Button variant="light" 
+                                                                                            onClick={decrementHandle}> 
+                                                                                        <Dash color="red" size={16} />
+                                                                                    </Button>
+                                                                                </Col>
+                                                                                <Col xs={4}>
+                                                                                    <InputGroup >
+                                                                                        <Form.Control 
+                                                                                            onChange={(e) => setQty(Number(e.target.value))}
+                                                                                            value={qty} 
+                                                                                            sm={2}
+                                                                                        >
+                                                                                                
+
+                                                                                        </Form.Control>
+                                                                                    </InputGroup>
+                                                                                </Col>
+                                                                                <Col xs={4}>
+                                                                                    <Button variant="light"
+                                                                                            onClick={incrementHandle}> 
+                                                                                        <Plus color="green" size={16} />
+                                                                                    </Button>
+                                                                                </Col>
+                                                                            </Row>
+                                                                        </Col>
+                                                                    </Row> 
+                                                                    :
                                                                     <Row>
                                                                         <Col>Količina:</Col>
                                                                         <Col className="justify-content-md-right">
-                                                                            <Row  className="justify-content-md-right">
+                                                                            <Row  sm={12}>
                                                                                 <Col sm={4}>
                                                                                     <Button variant="light" 
                                                                                             onClick={decrementHandle}> 
@@ -281,15 +315,16 @@ function ProductScreen({match}) {
                                                                                     </Button>
                                                                                 </Col>
                                                                                 <Col sm={4}>
-                                                                                <InputGroup  >
-                                                                                    <Form.Control 
-                                                                                        onChange={(e) => setQty(Number(e.target.value))}
-                                                                                        value={qty} 
-                                                                                    >
-                                                                                            
+                                                                                    <InputGroup >
+                                                                                        <Form.Control 
+                                                                                            onChange={(e) => setQty(Number(e.target.value))}
+                                                                                            value={qty} 
+                                                                                            sm={2}
+                                                                                        >
+                                                                                                
 
-                                                                                    </Form.Control>
-                                                                                </InputGroup>
+                                                                                        </Form.Control>
+                                                                                    </InputGroup>
                                                                                 </Col>
                                                                                 <Col sm={4}>
                                                                                     <Button variant="light"
@@ -299,7 +334,7 @@ function ProductScreen({match}) {
                                                                                 </Col>
                                                                             </Row>
                                                                         </Col>
-                                                                    </Row>
+                                                                    </Row>}  
                                                                 </ListGroup.Item>
                                                             )} 
 
@@ -329,13 +364,13 @@ function ProductScreen({match}) {
                                                 </Col>
                                                
                                         </ListGroup.Item>
-                                        <ListGroupItem style={{paddingTop:'2rem'}}>
+                                        <ListGroupItem xs={12} style={{paddingTop:'2rem'}}>
                                             {product && <Ikonice product={product}></Ikonice>}
                                         </ListGroupItem>
                                     </ListGroup>
                                     <br/>
                                     <br/>
-                                    <div style={{margin:'0.3rem'}}>
+                                    <div style={{margin:'0.5rem'}}>
                                         Share:
                                         <a href='https//:' style={{margin:'0.3rem'}} title="Face">
                                                 <i className="fa-brands fa-facebook" style={{color:'green'}}></i>

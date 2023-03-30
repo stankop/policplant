@@ -4,7 +4,7 @@ function ONamaScreen() {
   return (
     <div>
       <h3>O nama</h3>
-      <div>Neki opis...sta ja znam sta....nakenjati nesto.</div>
+      <div>U izgradnji je stranica sajta.</div>
     </div>
   );
 }

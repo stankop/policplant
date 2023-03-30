@@ -10,7 +10,8 @@ import {
   Button,
   Card,
   ToggleButtonGroup,
-  ToggleButton
+  ToggleButton,
+  InputGroup
 } from "react-bootstrap";
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
@@ -25,6 +26,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { orderActions } from "../store/order-slice";
 import { color } from "@mui/system";
+import useScreenType from "react-screentype-hook";
+import {  Plus, Dash } from 'react-bootstrap-icons';
 
 function CartScreen() {
 
@@ -34,11 +37,15 @@ function CartScreen() {
   const [color, setColor] = useState(true)
   const id = search.get("id");
   const qty = search.get("qty");
+  //const [qty, setQty] = useState(1);
+
 
   const [dostava, setDostava] = useState("licno");
   const [placanje, setPlacanje] = useState("pouzece");
 
   const dispatch = useDispatch();
+  const screenType = useScreenType();
+
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   
@@ -96,11 +103,11 @@ function CartScreen() {
                     ></Image>
                   </Col>
                   <Col sm={12} md={3} lg={4} xl={3} xs={3}>
-                    <Link style={{ textDecoration:'none'}} to={`/products/${item.id}`}><strong><h4 style={{color:'green', textDecoration:'none'}}>{item.name}</h4></strong></Link>
+                    <Link style={{ textDecoration:'none'}} to={`/products/${item.id}`}><strong><h4 style={{color:'green', fontSize:'1.2rem', textDecoration:'none'}}>{item.name}</h4></strong></Link>
                   </Col>
                   <Col sm={12} md={6} lg={4} xl={3} xs={3}><strong>{item.price.toFixed(2)} rsd</strong></Col>
                   <Col sm={12} md={6} lg={4} xl={2} xs={2}>
-                    <Form.Control
+                    {/* <Form.Control
                       as="select"
                       value={item.qty}
                       onChange={(e) =>
@@ -116,7 +123,45 @@ function CartScreen() {
                             ))
                       ) }
                       
+                    </Form.Control> */}
+                    <Form.Control
+                      disabled
+                      value={item.qty}
+                      onChange={(e) =>
+                        dispatch(addToCart(item.id, Number(e.target.value)))
+                      }
+                    >
+                     
+                      
                     </Form.Control>
+                    {/* <Col className="justify-content-md-right">
+                      <Row  sm={12}>
+                          <Col sm={4}>
+                              <Button variant="light" 
+                                      onClick={decrementHandle}> 
+                                  <Dash color="red" size={16} />
+                              </Button>
+                          </Col>
+                          <Col sm={4}>
+                              <InputGroup >
+                                  <Form.Control 
+                                      onChange={(e) => setQty(Number(e.target.value))}
+                                      value={qty} 
+                                      sm={2}
+                                  >
+                                          
+
+                                  </Form.Control>
+                              </InputGroup>
+                          </Col>
+                          <Col sm={4}>
+                              <Button variant="light"
+                                      onClick={incrementHandle}> 
+                                  <Plus color="green" size={16} />
+                              </Button>
+                          </Col>
+                      </Row>
+                    </Col> */}
                   </Col>
                   <Col md={1} xl={2} xs={1}>
                     <Button

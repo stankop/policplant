@@ -110,7 +110,7 @@ function Header(props) {
   return (
     <Fragment >
     <header >
-      <Row>
+      
       <Navbar  variant="dark" expand="lg" collapseOnSelect style={{ height:'12rem'}} className={classes["color-navbar"]}>
         { screenType.isMobile ? 
               <Container  style={{ overflow:'hidden'}}>
@@ -182,7 +182,7 @@ function Header(props) {
                 </Navbar.Text>
               </Container>}
       </Navbar>
-      </Row>
+      
       
       <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>
         <Container >
@@ -290,7 +290,7 @@ function Header(props) {
             
           </Row>
         </Container>
-      </Navbar>
+      </Navbar> 
     </header>
     { false && <div className={classes["main-image"]}>
         <img src={image} alt="Green color background" ></img>

@@ -9,11 +9,13 @@ import {  addToCart,removeFromCart } from '../store/cart-actions'
 import { useParams } from 'react-router';
 import WebFont from 'webfontloader';
 import '../compontents/Product.css'
+import useScreenType from "react-screentype-hook";
 
 function Product({product, catId}) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch()
+    const screenType = useScreenType();
 
     const addToCartHandler = () => {
         
@@ -30,13 +32,13 @@ function Product({product, catId}) {
     }, [])
 
   return (
-    <Card className={`my-1 p-1 rounded ${classes["img-hover-zoomA"]}`} border="success"  style={{ width: '17.5rem', height: 'auto' }}>
+    <Card className={`my-1 p-1 rounded ${classes["img-hover-zoomA"]}`} border="success" style={ screenType.isMobile ? { width: '110% !important', height: '24.8rem' } : { width: '90%', height: '30rem' }}>
         <Link to={`/products/${product._id}/${catId}`}> 
-            <Card.Img src={product.images?.findLast( image => image.order === 0)?.image} loading='lazy' style={{width: '100%', height: '14rem' }}></Card.Img>
-            <Card.ImgOverlay style={{width: '95%', height: '14rem' }}>
-                {product?.countInStock < 1 && <Card.Title><div style={{ backgroundColor:"red", color:"white", display: 'inline-flex', padding: '4px', marginBottom: '1em'}}>Nema na stanju</div></Card.Title>}
+            <Card.Img src={product.images?.findLast( image => image.order === 0)?.image} loading='lazy' style={screenType.isMobile ? { width: '100%', height: '28vh', objectFit: 'cover' } : { width: '100%', height: '32vh', objectFit: 'cover' }}></Card.Img>
+            <Card.ImgOverlay style={{width: '100%', height: '10rem' }}>
+                {product?.countInStock < 1 && <Card.Title><div style={ screenType.isMobile ? { backgroundColor:"red",fontSize:'.8rem', color:"white", width:'50%', display: 'inline-flex', padding: '4px', marginBottom: '1em'} : { backgroundColor:"red", color:"white", display: 'inline-flex', padding: '4px', marginBottom: '1em'}}>Nema na stanju</div></Card.Title>}
             </Card.ImgOverlay>
-            <Card.ImgOverlay className="card-img-overlay d-flex align-items-end flex-column bd-highlight mb-3" style={{width: '100%', height: '14rem' }}>
+            <Card.ImgOverlay className="card-img-overlay d-flex align-items-end flex-column bd-highlight mb-3" style={ screenType.isMobile ? {width: '100%', height: '12rem' } : {width: '100%', height: '14rem' }}>
                 {product?.prodajno_mesto && 
                     <Card.Img src='https://policplantblob.blob.core.windows.net/policplant-banner/samo_na_projadnom_mestu1.png' 
                               loading='lazy'
@@ -66,7 +68,7 @@ function Product({product, catId}) {
             <Button     variant="primary" 
                         disabled={product.countInStock < 1} 
                         type='button'
-                        style={{background:'#83b735', border:'1px solid #83b735'}}
+                        style={screenType.isMobile ? {background:'#83b735', width:'80%', height:'35%', border:'1px solid #83b735'} : {background:'#83b735', width:'70%', height:'35%', border:'1px solid #83b735'}}
                         onClick= {addToCartHandler}>
                                 Dodaj u Korpu
             </Button>

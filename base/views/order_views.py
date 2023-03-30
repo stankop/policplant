@@ -90,7 +90,7 @@ def addOrderItems(request):
     send_template_email(
         template='email.html',
         to=data_email,
-        subj='PolicPlant',
+        subj='RasadnikEma',
         order=order,
         itemi=itemi)
 
