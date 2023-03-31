@@ -28,7 +28,7 @@ function MultiCaroseul(props) {
     const navigate = useNavigate();
     const image1 = <Image
             className='img-fluid shadow-5'
-            src= "https://policplantblob.blob.core.windows.net/policplant-banner/banner-1.jpg"
+            src= "https://policplantblob.blob.core.windows.net/policplant-banner/banner-1_800x600.jpg"
             alt="First slide"
             rounded
            
@@ -37,7 +37,7 @@ function MultiCaroseul(props) {
 
     const image2 = <Image
             className='img-fluid shadow-4'
-            src= "https://policplantblob.blob.core.windows.net/policplant-banner/banner2.jpg"
+            src= "https://policplantblob.blob.core.windows.net/policplant-banner/banner2_800x600.jpg"
             alt="Second slide"
             rounded
             style={{ height:'50%'}}
