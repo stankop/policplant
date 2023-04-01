@@ -66,11 +66,15 @@ function Search( { onSearch}) {
         }, [boja, high, tip, kategorija, pozicija, pretraga, keyword]);
         
     const debouncedSearchTerm = useDebounce(memoizedValue, 500);
-    
+    const initialRender = useRef(true)
+
     useEffect(()=>{
        
-        
-        dispatch(listFilterProducts(debouncedSearchTerm))
+        if(!initialRender.current || (boja.length > 0 || high.length > 0 || tip.length > 0 || kategorija.length > 0 || pozicija.length > 0 || pretraga || keyword)){
+            dispatch(listFilterProducts(debouncedSearchTerm))
+            initialRender.current =false
+        }
+       
         onSearch(debouncedSearchTerm)
         
          
