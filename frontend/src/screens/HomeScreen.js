@@ -54,18 +54,17 @@ function HomeScreen() {
   
   const searchFunc = useMemo(() => {
     const setSearchValue = (value) => {
-      console.log('Carucel prvi', carucel)
+     
       if(value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== '' || !(value.keyword === '' || value.keyword === null)){
        setToggle(false)
        setCarucel(false)
-       console.log('Test1', carucel)
+       
      } else{
        setToggle(true)
        setCarucel(true)
-       console.log('Test2', carucel)
+      
      }
-     console.log('Mozda ovo', value)
-     console.log('Carucel drugi', carucel)
+     
    }
    return setSearchValue
   }, [])

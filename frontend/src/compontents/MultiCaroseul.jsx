@@ -28,7 +28,7 @@ function MultiCaroseul(props) {
     const navigate = useNavigate();
     const image1 = <Image
             className='img-fluid shadow-5'
-            src= "https://policplantblob.blob.core.windows.net/policplant-banner/banner-1_800x600.jpg"
+            src= "https://policplantblob.blob.core.windows.net/policplant-banner/biljke za senku baner_800x600.jpg"
             alt="First slide"
             rounded
            
@@ -37,8 +37,16 @@ function MultiCaroseul(props) {
 
     const image2 = <Image
             className='img-fluid shadow-4'
-            src= "https://policplantblob.blob.core.windows.net/policplant-banner/banner2_800x600.jpg"
+            src= "https://policplantblob.blob.core.windows.net/policplant-banner/trajnice baner_800x600.jpg"
             alt="Second slide"
+            rounded
+            style={{ height:'50%'}}
+            />
+
+    const image3 = <Image
+            className='img-fluid shadow-4'
+            src= "https://policplantblob.blob.core.windows.net/policplant-banner/ukrasno zbunje baner_800x600.jpg"
+            alt="Third slide"
             rounded
             style={{ height:'50%'}}
             />
@@ -63,17 +71,25 @@ function MultiCaroseul(props) {
             >
             <div style={{padding:'1rem'}}>
                 <ImageButton img={image1}
-                             zoomOnHover={0}
+                             //zoomOnHover={0}
                              buttonPosition="bottom"
                              alwaysShowButton={true} >
-                    <button onClick={() => { navigate('/categories/36')}} primary="true"  className="btn success" style={{ border: '2px solid black'}} > Cetinari pogledajte  </button>
+                    <button onClick={() => { navigate('/categories/37')}} primary="true"  className="btn success" style={{ border: '2px solid black'}} > Biljke za senku </button>
                 </ImageButton>
             </div>
             <div style={{padding:'1rem'}}>
                 <ImageButton img={image2}
+                             //zoomOnHover={0}
                              alwaysShowButton={true}
                              buttonPosition="bottom" >
-                    <button onClick={() => { navigate('/categories/29')}} primary="true" className="btn success" style={{ border: '2px solid black'}} > Puzavice pogledajte </button>
+                    <button onClick={() => { navigate('/categories/28')}} primary="true" className="btn success" style={{ border: '2px solid black'}} > Trajnice pogledajte </button>
+                </ImageButton>
+            </div> 
+            <div style={{padding:'1rem'}}>
+                <ImageButton img={image3}
+                             alwaysShowButton={true}
+                             buttonPosition="bottom" >
+                    <button onClick={() => { navigate('/categories/31')}} primary="true" className="btn success" style={{ border: '2px solid black'}} > Ukrasno zbunje pogledajte </button>
                 </ImageButton>
             </div> 
         </Carousel>
