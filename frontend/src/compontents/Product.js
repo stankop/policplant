@@ -32,9 +32,9 @@ function Product({product, catId}) {
     }, [])
 
   return (
-    <Card className={`my-1 p-1 rounded ${classes["img-hover-zoomA"]}`} border="success" style={ screenType.isMobile ? { width: '110% !important', height: '24.8rem' } : { width: '90%', height: '30rem' }}>
+    <Card className={`my-1 p-1 rounded ${classes["img-hover-zoomA"]}`} border="success" style={ screenType.isMobile ? {  height: '23.8rem' } : { width: '90%', height: '30rem' }}>
         <Link to={`/products/${product._id}/${catId}`}> 
-            <Card.Img src={product.images?.findLast( image => image.order === 0)?.image} loading='lazy' style={screenType.isMobile ? { width: '100%', height: '28vh', objectFit: 'cover' } : { width: '100%', height: '32vh', objectFit: 'cover' }}></Card.Img>
+            <Card.Img src={product.images?.findLast( image => image.order === 0)?.image} loading='lazy' style={screenType.isMobile ? { width: '100%', height: '24vh', objectFit: 'cover' } : { width: '100%', height: '32vh', objectFit: 'cover' }}></Card.Img>
             <Card.ImgOverlay style={{width: '100%', height: '10rem' }}>
                 {product?.countInStock < 1 && <Card.Title><div style={ screenType.isMobile ? { backgroundColor:"red",fontSize:'.8rem', color:"white", width:'50%', display: 'inline-flex', padding: '4px', marginBottom: '1em'} : { backgroundColor:"red", color:"white", display: 'inline-flex', padding: '4px', marginBottom: '1em'}}>Nema na stanju</div></Card.Title>}
             </Card.ImgOverlay>
@@ -49,8 +49,8 @@ function Product({product, catId}) {
         <Card.Body style={{ textAlign: "center"}}>
             <Link style={{ textDecoration: 'none' }} to={`/products/${product._id}`}> 
              <Card.Title as="h3" >
-                 <div className='click' style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>{product?.name}</div>
-                 <div className='click' style={{ fontSize: '.8rem', fontStyle: 'italic', color:'#333333', fontFamily: 'Poppins'}}>{product?.botanicki_naziv}</div>
+                 <div className='click' style={{ fontSize: '.8rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>{product?.name}</div>
+                 <div className='click' style={{ fontSize: '.7rem', fontStyle: 'italic', color:'#333333', fontFamily: 'Poppins'}}>{product?.botanicki_naziv}</div>
              </Card.Title>
              </Link> 
             {/* <Card.Text as="div">
@@ -58,7 +58,7 @@ function Product({product, catId}) {
                         <Rating value={product.rating} text={`${product.numReviews} komentara`} color={'#f8e825'}></Rating>
                 </div>
             </Card.Text> */}
-            <Card.Text as="h4" style={{ color:'#83b735', fontSize: '1rem'}}>
+            <Card.Text as="h5" style={{ color:'#83b735', fontSize: '.8rem'}}>
                     {product.price} RSD
             </Card.Text>
             {/* <Card.Text as="h6"> */}

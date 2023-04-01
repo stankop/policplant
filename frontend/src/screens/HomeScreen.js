@@ -55,7 +55,7 @@ function HomeScreen() {
   const searchFunc = useMemo(() => {
     const setSearchValue = (value) => {
       console.log('Carucel prvi', carucel)
-      if(value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== '' || value.keyword !== ''){
+      if(value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== '' || !(value.keyword === '' || value.keyword === null)){
        setToggle(false)
        setCarucel(false)
        console.log('Test1', carucel)
