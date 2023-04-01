@@ -7,6 +7,7 @@ import WebFont from 'webfontloader';
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '../compontents/Footer.css'
+import useScreenType from "react-screentype-hook";
 
 const location = {
   address: 'Prnjavorska 114, Budisava',
@@ -17,6 +18,8 @@ const location = {
 function Footer() {
 
   const image = 'https://policplantblob.blob.core.windows.net/policplant-container/veliki logo verzija 1.0.png'
+
+  const screenType = useScreenType();
 
   useEffect(() => {
     WebFont.load({
@@ -36,7 +39,7 @@ function Footer() {
 
             </Row> */}
             <Row>
-              <Col style={{ }}>
+              <Col    style={{ }}>
                 <Image xs={6} md={4} src={image}
                        
                        fluid
@@ -72,7 +75,7 @@ function Footer() {
                     </a> */}
                 </div>
               </Col>
-              <Col style={{margin:'2rem', paddingTop:'2rem'}}>
+              <Col    style={{margin:'2rem', paddingTop:'2rem' }}>
                 <h4 style={{ fontSize: '1.2rem', color:'#333333', fontFamily: '"Poppins", sans-serif', marginBottom:'1.2rem'}}><strong>Korisni linkovi</strong></h4>
                 <Link to="/porucivanje" style={{ textDecoration: 'none' }}>
                   <h5 className='click' style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Kako poručiti putem sajta</h5>

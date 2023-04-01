@@ -83,7 +83,7 @@ function HomeScreen() {
   
 
   return (
-    <div style={ screenType.isMobile ? { backgroundColor: '#FFF' , width:'100vw', margin:0} : { }}>
+    <div style={ screenType.isMobile ? { backgroundColor: '#FFF' , margin:0} : { }}>
         {/* { carucel && <MDBCarusel itemRef={customerLogo}></MDBCarusel>}   */}
         {/* { carucel && <ReactCarusel ></ReactCarusel>} */}
         {/* { carucel && <CarouselFadeExample></CarouselFadeExample>}  */}

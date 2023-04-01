@@ -82,11 +82,11 @@ function CartScreen() {
   return (
     <div>
     <Row>
-      <Col sm={12} md={6} lg={4} xl={6} xs={12}>
+      <Col sm={12} md={6} lg={4} xl={8} xs={12}>
         <h1 style={{color:'green'}}>Korpa</h1>
         {cartItems?.length === 0 ? (
-          <Message variant="info">
-            Vasa korpa je prazna <Link to="/">Vratite se Nazad</Link>
+          <Message variant="success">
+            <strong>Vasa korpa je prazna</strong> <Link to="/" style={{color:'green'}}>Vratite se Nazad</Link>
           </Message>
         ) : (
           <ListGroup variant="flush" >
@@ -94,7 +94,7 @@ function CartScreen() {
               return (
               <ListGroup.Item key={item.id} hidden={item.qty < 1}>
                 <Row>
-                  <Col sm={12} md={6} lg={3} xl={2} xs={2}>
+                  <Col sm={12} md={6} lg={3} xl={1} xs={2}>
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -102,11 +102,11 @@ function CartScreen() {
                       rounded
                     ></Image>
                   </Col>
-                  <Col sm={12} md={3} lg={4} xl={3} xs={3}>
+                  <Col sm={4} md={3} lg={4} xl={4} xs={3}>
                     <Link style={{ textDecoration:'none'}} to={`/products/${item.id}`}><strong><h4 style={{color:'green', fontSize:'1.2rem', textDecoration:'none'}}>{item.name}</h4></strong></Link>
                   </Col>
-                  <Col sm={12} md={6} lg={4} xl={3} xs={3}><strong>{item.price.toFixed(2)} rsd</strong></Col>
-                  <Col sm={12} md={6} lg={4} xl={2} xs={2}>
+                  <Col sm={12} md={6} lg={4} xl={2} xs={3}><strong style={ screenType.isMobile ? {fontSize:'.8rem'} : {fontSize:'1rem'}}>{item.price.toFixed(2)} rsd</strong></Col>
+                  <Col sm={4} md={6} lg={4} xl={1} xs={2}>
                     {/* <Form.Control
                       as="select"
                       value={item.qty}
@@ -163,7 +163,7 @@ function CartScreen() {
                       </Row>
                     </Col> */}
                   </Col>
-                  <Col md={1} xl={2} xs={1}>
+                  <Col sm={4}  md={1} lg={2} xl={2} xs={1}>
                     <Button
                       type="button"
                       variant="light"
@@ -178,8 +178,8 @@ function CartScreen() {
           </ListGroup>
         )}
       </Col>
-      <Col sm={12} md={6} lg={4} xl={6} xs={12}>
-        <Card border="success">
+      <Col sm={12} md={6} lg={4} xl={4} xs={12}>
+        <Card border="success"style={{margin:'1rem'}}>
            <Card.Header as="h4">Vasa Porudzbina</Card.Header>
           <ListGroup variant="flush">
             <ListGroup.Item >
