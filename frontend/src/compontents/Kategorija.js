@@ -8,10 +8,10 @@ function Kategorija({category}) {
 
   const screenType = useScreenType();
   return (
-    <Card className={`my-1 p-1   ${classes["img/-hover-zoom"]} h-110 `} border="dark"  style={ screenType.isMobile ? { width: '100%', height: '23rem' } : { width: '100%', height: '25rem' }}>
-        <Card.Header as="h6"></Card.Header>
+    <Card className={`my-1 p-1   ${classes["img/-hover-zoom"]} h-110 `} border="dark"  style={ screenType.isMobile ? { width: '100%', height: '19rem' } : { width: '100%', height: '22rem' }}>
+        <Card.Header as="h7"></Card.Header>
         <Link to={`/categories/${category._id}`}>
-            <Card.Img src={category.image} loading='lazy' style={screenType.isMobile ? { width: '100%', height: '30vh', objectFit: 'cover' } : { width: '100%', height: '32vh', objectFit: 'cover' }}></Card.Img>
+            <Card.Img src={category.image} loading='lazy' style={screenType.isMobile ? { width: '100%', height: '24vh', objectFit: 'cover' } : { width: '100%', height: '26vh', objectFit: 'cover' }}></Card.Img>
         </Link>
         <Card.Body style={{ textAlign: "center", textDecoration: 'none'}}>
             <Link to={`/categories/${category._id}`}>

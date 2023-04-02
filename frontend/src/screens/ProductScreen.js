@@ -210,7 +210,7 @@ function ProductScreen({match}) {
                                             <strong> Prezimljava:</strong> {product?.prezimljava}
                                         </ListGroup.Item>}
                                         {product?.sirina_biljke && <ListGroup.Item>
-                                            <strong> Sirina:</strong> {product?.sirina_biljke}
+                                            <strong> Širina:</strong> {product?.sirina_biljke}
                                         </ListGroup.Item>}
                                         {product?.velicina_slanja && <ListGroup.Item>
                                             <strong> Isporuka:</strong> {product?.velicina_slanja}

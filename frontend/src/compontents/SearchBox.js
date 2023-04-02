@@ -40,7 +40,7 @@ function SearchBox() {
 
 
     const btnStyle = {
-        background: 'greenyellow',
+        background: 'rgb(131, 183, 53)',
         // backgroundImage: 'url(' + imgUrl + ')',
     };
 
@@ -51,7 +51,7 @@ function SearchBox() {
             <Row>
                 <Col md={10}>
                     <Form.Control 
-                        
+                        placeholder='Unesi pojam'
                         type='search'
                         name='keyword'
                         inline ='true'

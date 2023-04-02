@@ -7,7 +7,7 @@ function InformacijePorucivanje() {
         });
       return (
         <div>
-          <h3>Poručivanje</h3>
+          <h3 style={{marginTop:'1rem'}}>Poručivanje</h3>
             <div>
                 <p>Minimalna vrednost pošiljke koju šaljemo je 1000rsd.</p>
                 <p>Porudžbinu možete izvršiti na sledeće načine:</p>

@@ -139,7 +139,7 @@ function Search( { onSearch}) {
                    
                 </Row>
                 {/* style={{ display: 'flex', padding:'0.5rem', width: '100%'}} */}
-                <Row md={12} xl={12} style={{ }}> 
+                {/* <Row md={12} xl={12} style={{ }}> 
                         
                         <h6><strong style={{color:'#333333'}}>Pretraga Proizvoda:</strong></h6>
                             <Form.Control 
@@ -149,7 +149,7 @@ function Search( { onSearch}) {
                                 placeholder='Trazeni proizvod...'
                                 onChange={(e) => setPretraga(e.target.value) }>
                             </Form.Control>     
-                </Row>
+                </Row> */}
 
                 {/* <Row md={12}>
                     

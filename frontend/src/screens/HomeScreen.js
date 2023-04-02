@@ -93,7 +93,8 @@ function HomeScreen() {
         {/* {  carucel && <DragCoruseal></DragCoruseal>} */}
         { carucel && <MultiCaroseul></MultiCaroseul>}
 
-        <h1 style={{color:'#333333'}}> {carucel ? 'Detaljna pretraga:' : 'Filtrirani Proizvodi:'}</h1>
+        <div style={{ textAlign:'center', margin:'1rem'}}><h1 style={{color:'red', alignItems:'center', fontSize:'2.5rem'}}> <strong>{ 'Sajt je u Pripremi!'}</strong></h1></div>
+        <h1 style={{color:'#333333', fontSize:'1.2rem'}}> <strong>{carucel ? 'Detaljna pretraga:' : 'Filtrirani Proizvodi:'}</strong></h1>
         {/* <Sidebar></Sidebar> */}
         {screenType.isMobile && <SearchModal onSearch={ searchFunc}></SearchModal>} 
         {/* {screenType.isMobile && <MUISearchModal onSearch={ setSearchValue}></MUISearchModal>} */}
@@ -104,7 +105,9 @@ function HomeScreen() {
                   <Container fluid > 
                     <Row>
                     { (screenType.isDesktop || screenType.isLargeDesktop) && <Col>
-                          <Search onSearch={ searchFunc}></Search> 
+                          <div style={{ border:'.4rem solid #83B735', paddingBottom:'1rem', paddingLeft:'1rem'}}>
+                            <Search onSearch={ searchFunc}></Search> 
+                          </div>
                       </Col> }
 
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>

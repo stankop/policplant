@@ -62,49 +62,34 @@ function Header(props) {
   };
 
   const info = [
-    {
-      id:0,
-      value: 'Informacije',
-      src: 'a'
-    },
+    // {
+    //   id:0,
+    //   value: 'Informacije',
+    //   src: 'a'
+    // },
     { 
       id:1,
       value: 'Poručivanje',
       src: 'porucivanje'},
     {
       id:2,
-      value: 'Kako poručiti putem sajta',
-      src: 'b'
+      value: 'Način plaćanja i isporuke ',
+      src: 'isporuke'
     },
     {
       id:3,
-      value:'Izrada plana sadnje',
-      src: 'c'
+      value:'Najčešća pitanja ',
+      src: 'pitanja'
     },
     {
       id:4,
-      value:'Najčešća pitanja',
-      src: 'd'
+      value:'Reklamacije',
+      src: 'reklamacije'
     },
     {
       id:5,
-      value:'Način plaćanja',
-      src: 'e'
-    },
-    {
-      id:6,
-      value:'Isporuka',
-      src: 'isporuka'
-    },
-    {
-      id:7,
-      value:'Reklamacije',
-      src: 'f'
-    },
-    {
-      id:8,
       value:'Politika privatnosti',
-      src: 'g'
+      src: 'privatnost'
     }]
 
   return (

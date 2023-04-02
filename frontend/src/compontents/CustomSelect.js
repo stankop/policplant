@@ -42,6 +42,7 @@ export default function CustomSelect({values, onAction}) {
         isClearable
         isSearchable
         isMulti
+        placeholder='Izaberi...'
         className="basic-multi-select"
         onMenuOpen={onMenuOpen}
         onMenuClose={onMenuClose}

@@ -49,8 +49,8 @@ function Product({product, catId}) {
         <Card.Body style={{ textAlign: "center"}}>
             <Link style={{ textDecoration: 'none' }} to={`/products/${product._id}`}> 
              <Card.Title as="h3" >
-                 <div className='click' style={{ fontSize: '.8rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>{product?.name}</div>
-                 <div className='click' style={{ fontSize: '.7rem', fontStyle: 'italic', color:'#333333', fontFamily: 'Poppins'}}>{product?.botanicki_naziv}</div>
+                 <div className='click' style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>{product?.name}</div>
+                 <div className='click' style={{ fontSize: '.9rem', fontStyle: 'italic', color:'#333333', fontFamily: 'Poppins'}}>{product?.botanicki_naziv}</div>
              </Card.Title>
              </Link> 
             {/* <Card.Text as="div">
@@ -58,7 +58,7 @@ function Product({product, catId}) {
                         <Rating value={product.rating} text={`${product.numReviews} komentara`} color={'#f8e825'}></Rating>
                 </div>
             </Card.Text> */}
-            <Card.Text as="h5" style={{ color:'#83b735', fontSize: '.8rem'}}>
+            <Card.Text as="h5" style={{ color:'#83b735', fontSize: '1rem'}}>
                     {product.price} RSD
             </Card.Text>
             {/* <Card.Text as="h6"> */}

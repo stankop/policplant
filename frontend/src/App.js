@@ -28,6 +28,9 @@ import Cart from './compontents/UI/Cart/Cart'
 import Order from './compontents/UI/Order/Order'
 import InformacijeIsporuka from './screens/InformacijeIsporuka'
 import InformacijePorucivanje from './screens/InformacijePorucivanje'
+import InformacijePitanja from './screens/InformacijePitanja'
+import InformacijeReklamacije from './screens/InformacijeReklamacije'
+import InformacijePrivatnost from './screens/InformacijePrivatnost'
 import useScreenType from "react-screentype-hook";
 
 function App() {
@@ -89,8 +92,11 @@ function App() {
             <Route path="/admin/user/:id/edit" element={<UserEditScreen />}></Route>
             <Route path="/admin/product/:id/edit" element={<ProductEditScreen />}></Route>
             <Route path="/admin/orderlist" element={<OrderListScreen />}></Route>
-            <Route path="/isporuka" element={<InformacijeIsporuka />}></Route>
+            <Route path="/isporuke" element={<InformacijeIsporuka />}></Route>
             <Route path="/porucivanje" element={<InformacijePorucivanje />}></Route>
+            <Route path="/pitanja" element={<InformacijePitanja />}></Route>
+            <Route path="/reklamacije" element={<InformacijeReklamacije />}></Route>
+            <Route path="/privatnost" element={<InformacijePrivatnost />}></Route>
           </Routes>
         </div>
         
