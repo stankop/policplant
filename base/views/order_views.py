@@ -26,23 +26,31 @@ from django.core.mail import EmailMultiAlternatives
 @api_view(['POST'])
 def addOrderItems(request):
     data = request.data
-    data_email = data['email']
+    data_email = str(data['email'].lower())
+    
     try:
-        user,a = UserAccount.objects.update_or_create(
-            email=data['email'],
-            defaults={
-                'user_name':data['name'],
-                'password':make_password('ok'),
-                'place':data['place'],
-                'address':data['address'],
-                'self_phone':data['self_phone'],
-                'fix_phone':data['fix_phone']
-            }
-            
-        )
-        user.save()
-    except Exception as e:
-        return Response({'detail': f'Duplicate User - email {data_email} alredy in use.Or problem with: {e}'}, status=status.HTTP_400_BAD_REQUEST)
+        user = UserAccount.objects.get(email=data_email)
+    except UserAccount.DoesNotExist:
+        try:
+            user = UserAccount.objects.create(
+                email=data_email,
+                user_name=data['name'],
+                password=make_password('ok'),
+                place=data['place'],
+                address=data['address'],
+                self_phone=data['self_phone'],
+                fix_phone=data['fix_phone'])
+            user.save()
+        except Exception as e:
+            return Response({'detail': f'Problem prilikom kreiranja Accaunt-a sa Email-om: {data_email}. Molim vas pokusajte da kreirate Accaunt ponovo sa ispravnim Emailom.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    user.user_name = data['name']
+    user.place = data['place']
+    user.address = data['address']
+    user.self_phone = data['self_phone']
+    user.fix_phone = data['fix_phone']
+    user.save()
+
     orderItems = data['orderItems']
 
     if orderItems and len(orderItems) == 0:

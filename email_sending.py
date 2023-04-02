@@ -14,9 +14,9 @@ def send_template_email(template, to, subj, **kwargs):
 
 
 def send_email( to, subj, html_content):
-    subject, from_email, to = subj, 'PolicPlant Company', to
+    subject, from_email, to = subj, 'Rasadnik Ema', to
     text_content = 'Hvala vam sto kupujete kod nas.'
     html_content = html_content
-    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to,'s_polic@yahoo.com'])
     msg.attach_alternative(html_content, "text/html")
     msg.send()

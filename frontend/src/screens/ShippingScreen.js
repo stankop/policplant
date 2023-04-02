@@ -108,15 +108,15 @@ function ShippingScreen() {
                         Email
                     </Form.Label>
                     <Form.Control {...register("email",{ 
-                            required: true,  
+                            required: "Potebno je uneti Vas email",  
                             pattern: {
                                 value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                 message: "Nije validan Email" 
                             },
-                            message:"That is a invalid email."
+                            message:"Mail koji ste uneli nije validan."
                         })}
                             aria-invalid={errors.email ? "true" : "false"}
-                            type='email'
+                            
                             placeholder='Unesite Email...'
                             value={email ? email : ''}
                             onChange={(e) => setEmail(e.target.value)}>
@@ -184,8 +184,14 @@ function ShippingScreen() {
                     <Form.Label>
                         Mobilni telefon
                     </Form.Label>
-                    <Form.Control {...register("self_phone")}
-                            required
+                    <Form.Control {...register("self_phone",{
+                                required:"Unesite broj Vaseg mobilnog telefona",
+                                valueAsNumber: {
+                                    value: true,
+                                    message: "Unesite ispravan broj mobilnog telefona"},
+                                message:"Unesite Vas broj mobilnog telefona."
+                            })}
+                            
                             type='number'
                             placeholder='Unesite mobilni telefon..'
                             value={self_phone ? self_phone : ''}
@@ -199,7 +205,7 @@ function ShippingScreen() {
                         Zahtevi oko isporuke
                     </Form.Label>
                     <Form.Control {...register("demands")}
-                            required
+                            
                             type='text'
                             placeholder='Unesite zahteve oko isporuke...'
                             value={demands ? demands : ''}
