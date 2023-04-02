@@ -144,36 +144,36 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 #ovo je DB u localu
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'PolicPlant',
-            'USER': 'postgres',
-            'PASSWORD':'ok',
-            'HOST':'localhost',
-            'PORT':'5435'
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': 'PolicPlant',
+#             'USER': 'postgres',
+#             'PASSWORD':'ok',
+#             'HOST':'localhost',
+#             'PORT':'5435'
 
-        }
-    }
+#         }
+#     }
 # else:
 #ovo je DB na Azuru(policplant-azure)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'PolicPlant',
-#         'USER': 'postgres@policplant-azure',
-#         'PASSWORD':'Prnjavorska114',
-#         'HOST':'policplant-azure.postgres.database.azure.com',
-#         'PORT':'5432',
-#         'OPTIONS': {
-#             'sslmode': 'verify-full',
-#             'sslrootcert': os.path.join(BASE_DIR, 'BaltimoreCyberTrustRoot.crt.pem')
-#             },
-#             #  'SSL': True
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'PolicPlant',
+        'USER': 'postgres@policplant-azure',
+        'PASSWORD':'Prnjavorska114',
+        'HOST':'policplant-azure.postgres.database.azure.com',
+        'PORT':'5432',
+        'OPTIONS': {
+            'sslmode': 'verify-full',
+            'sslrootcert': os.path.join(BASE_DIR, 'BaltimoreCyberTrustRoot.crt.pem')
+            },
+            #  'SSL': True
 
-#     }
-# }
+    }
+}
 
 #ovo je DB na HEROKU
 #DATABASES = {
