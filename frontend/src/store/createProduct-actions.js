@@ -90,6 +90,16 @@ export const productReset = () => {
     }
 }
 
+export const changeStanjeValue = (id, value) => {
+    return async (dispatch) => {
+
+        const formData = new FormData()
+        formData.append('product_id', id)
+        formData.append('value', value)
+        const { data } = await axios.post('/api/products/changestate/', formData)
+    }
+}
+
 
 
        

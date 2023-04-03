@@ -12,8 +12,9 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { listUsers } from '../store/userList-actions' 
 import { listProducts } from '../store/product-actions'
 import { deleteProduct, deleteProductReset } from '../store/deleteProduct-actions'
-import { createProduct, productReset } from '../store/createProduct-actions'
+import { createProduct,changeStanjeValue, productReset } from '../store/createProduct-actions'
 import { Link } from 'react-router-dom';
+import { MDBInput } from 'mdb-react-ui-kit'
 
 function ProductListScreen() {
 
@@ -72,6 +73,10 @@ function ProductListScreen() {
     const createProductHandler = () => {
 
         dispatch(createProduct())
+    }
+
+    const changingValueHandler = async (id, value) => {
+        dispatch(changeStanjeValue(id, value))
     }
     
   return (
@@ -135,7 +140,11 @@ function ProductListScreen() {
                                         <td style={{width:'4rem'}}>{product.novo ?? product.novo ? 'Yes' : 'No'}</td>
                                         <td style={{width:'4rem'}}>{product.popust ?? product.popust ? product.popust : 'No'}</td>
                                         <td style={{width:'20rem'}}>{product.color}</td>
-                                        <td style={{whiteSpace: "nowrap", width:'5rem'}}>{product.countInStock}</td>
+                                        <td style={{ width:'6rem'}}>
+                                            {
+                                                <MDBInput  id='form1' type='text' defaultValue={product.countInStock} onChange={(e ) => changingValueHandler(product._id, e.target.value)} />
+                                                
+                                            }</td>
                                         <td style={{width:'5rem'}}><Link to={`/admin/product/${product._id}/edit`}>
 
                                                 <Button variant = 'light' className='btn-sm'>

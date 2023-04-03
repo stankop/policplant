@@ -78,7 +78,7 @@ function UserListScreen() {
 
                                     <tr key={user._id}>
                                         <td>{user._id}</td>
-                                        <td>{user.name}</td>
+                                        <td>{user.user_name}</td>
                                         <td>{user.email}</td>
                                         <td>{user.isAdmin ? (
                                             <i className='fas fa-check' style={{ color: 'green'}}></i>

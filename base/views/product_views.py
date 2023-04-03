@@ -307,6 +307,25 @@ def getProductsByCategoryId(request, pk):
     serializer = ProductSerializer(products, many= True)
     return Response({'products': serializer.data })
 
+@api_view(['POST'])
+def changeStatusValue(request):
+    data = request.data
+    message = ''
+    try:
+        product_id = int(data['product_id'])
+        value = int(data['value'])
+        product = Product.objects.get(_id = product_id)
+        product.countInStock = value
+        product.save()
+    except Product.DoesNotExist:
+        return Response({message:'Greska u upitu podataka'})
+    except Exception as e:
+        return Response({ message: 'Neka druga greska'})
+    
+
+    
+    return Response({message: 'Uspesno izmena stanja' })
+
 
 @api_view(['POST'])
 def uploadImage(request):
