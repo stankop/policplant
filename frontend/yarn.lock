@@ -6868,6 +6868,19 @@
   "resolved" "https://registry.npmjs.org/ignore/-/ignore-5.2.4.tgz"
   "version" "5.2.4"
 
+"imagekit-javascript@^1.5.4":
+  "integrity" "sha512-WnEq7zIiYx+bN1fUzLEqSD33xOCEhHpDmlo3SxQkXPiLBnnnLGhBZi583wNhBXP3RB/yQQEKOBeOelnZ7WVgPA=="
+  "resolved" "https://registry.npmjs.org/imagekit-javascript/-/imagekit-javascript-1.5.5.tgz"
+  "version" "1.5.5"
+
+"imagekitio-react@^2.0.0":
+  "integrity" "sha512-CBZ8Y43RgzHenqRj3nRA9MZVQbmUATxwFoyfrDXNRomT9i6EabG0582e7zl/cmODAfcSfW0dA8Oyz19HyfP+EA=="
+  "resolved" "https://registry.npmjs.org/imagekitio-react/-/imagekitio-react-2.0.0.tgz"
+  "version" "2.0.0"
+  dependencies:
+    "imagekit-javascript" "^1.5.4"
+    "prop-types" "^15.7.2"
+
 "immer@^9.0.16":
   "integrity" "sha512-eY+Y0qcsB4TZKwgQzLaE/lqYMlKhv5J9dyd2RhhtGhNo2njPXDqU9XPfcNfa3MIDsdtZt5KlkIsirlo4dHsWdQ=="
   "resolved" "https://registry.npmjs.org/immer/-/immer-9.0.19.tgz"

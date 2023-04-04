@@ -40,7 +40,7 @@ function Footer() {
             </Row> */}
             <Row>
               <Col    style={{ }}>
-                <Image xs={6} md={4} src={image}
+                <Image xs={6} src={image}
                        
                        fluid
                        responsive='true'
@@ -75,7 +75,7 @@ function Footer() {
                     </a> */}
                 </div>
               </Col>
-              <Col    style={{margin:'2rem', paddingTop:'2rem' }}>
+              <Col    style={{margin:'3rem', paddingTop:'2rem' }}>
                 <h4 style={{ fontSize: '1.2rem', color:'#333333', fontFamily: '"Poppins", sans-serif', marginBottom:'1.2rem'}}><strong>Korisni linkovi</strong></h4>
                 <Link to="/porucivanje" style={{ textDecoration: 'none' }}>
                   <h5 className='click' style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Kako poručiti putem sajta</h5>

@@ -10,6 +10,7 @@ import { useParams } from 'react-router';
 import WebFont from 'webfontloader';
 import '../compontents/Product.css'
 import useScreenType from "react-screentype-hook";
+import { IKImage, IKVideo, IKContext, IKUpload } from 'imagekitio-react'
 
 function Product({product, catId}) {
 

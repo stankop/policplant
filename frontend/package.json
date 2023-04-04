@@ -32,6 +32,7 @@
     "flat-carousel": "^0.0.1",
     "formik": "^2.2.9",
     "google-map-react": "^2.2.0",
+    "imagekitio-react": "^2.0.0",
     "mdb-react-ui-kit": "^5.0.0",
     "postcss-custom-properties": "^12.1.10",
     "postcss-safe-parser": "^6.0.0",

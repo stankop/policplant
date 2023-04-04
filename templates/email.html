@@ -107,7 +107,7 @@ Hvala vam sto narucujete cvece iz Rasadnika Ema. Nastavicemo da budemo i dalje p
                                         <strong>Order Confirmation #<strong> 
                                     </td>
                                     <td width="25%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;">
-                                        {{ order._id }}
+                                        
                                     </td>
                                 </tr>
                                 <tr>
@@ -129,7 +129,7 @@ Hvala vam sto narucujete cvece iz Rasadnika Ema. Nastavicemo da budemo i dalje p
                                             
                                             <ul>
                                                 {% for item in itemi %}
-                                                    <li>{{ item.qty }} x {{ "%.2f"|format(item.price | float)}} din</li>
+                                                    <li>{{ item.qty }}  din</li>
                                                 {% endfor %}
                                             </ul>
                                         </td>
@@ -137,7 +137,7 @@ Hvala vam sto narucujete cvece iz Rasadnika Ema. Nastavicemo da budemo i dalje p
                                            
                                             <ul>
                                                 {% for item in itemi %}
-                                                    <li>{{ "%.2f"|format(item.price | float * item.qty | float) }} din</li>
+                                                    <li> din</li>
                                                 {% endfor %}
                                             </ul>
                                         </td>
