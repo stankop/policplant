@@ -33,7 +33,7 @@ a[x-apple-data-detectors] {
         text-align: center !important;
     }
 }
-{% load mathfilters %}
+
 div[style*="margin: 16px 0;"] {margin: 0 !important; }
 </style>
 <body style="margin: 0 !important; padding: 0 !important; background-color: #eeeeee;" bgcolor="#eeeeee">
@@ -138,7 +138,7 @@ Hvala vam sto narucujete cvece iz Rasadnika Ema. Nastavicemo da budemo i dalje p
                                            
                                             <ul>
                                                 {% for item in itemi %}
-                                                    <li> {{ item.price|mul:item.qty }} din</li>
+                                                    <li> {{ item.price }} din</li>
                                                 {% endfor %}
                                             </ul>
                                         </td>
