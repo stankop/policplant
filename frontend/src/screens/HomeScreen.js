@@ -51,6 +51,16 @@ function HomeScreen() {
          
   }, [dispatch]);
 
+  useEffect(()=>{
+    console.log('Ulazka:')
+    if(products?.length < 60 ){
+      setToggle(false)
+    }else{
+      setToggle(true)
+    }
+         
+  }, [products]);
+
   
   const searchFunc = useMemo(() => {
     const setSearchValue = (value) => {

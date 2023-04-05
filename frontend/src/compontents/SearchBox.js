@@ -23,6 +23,7 @@ function SearchBox() {
     
     const submitHandler = (e) => {
         e.preventDefault()
+        console.log('Keyword:', keyword)
         dispatch(listFilterProducts({
             color: '',
             high: '',
@@ -30,13 +31,13 @@ function SearchBox() {
             category: '',
             flow: '',
             search: keyword,
-            keyword: keyword}))
+            keyword: ''}))
         
     }
 
-    useEffect(() => {
-        localStorage.setItem('keyword', keyword)
-    },[keyword])
+    // useEffect(() => {
+    //     localStorage.setItem('keyword', keyword)
+    // },[keyword])
 
 
     const btnStyle = {

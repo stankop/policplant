@@ -83,7 +83,7 @@ export const listFilterProducts = (value) => {
                 keyword: value.keyword
             }
             
-        
+        console.log('Ulaz:', val)
         const fetchData = async () => {
             
             const { data } = await axios.post(`/api/products/filter/`,val)
