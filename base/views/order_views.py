@@ -100,6 +100,7 @@ def addOrderItems(request):
         to=data_email,
         subj='RasadnikEma',
         order=order,
+        id=order._id,
         itemi=itemi)
 
     return Response(serializer.data)

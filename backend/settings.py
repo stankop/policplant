@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_swagger',
     'storages',
-    'webpack_boilerplate'
+    'webpack_boilerplate',
+    'mathfilters'
 ]
 
 REST_FRAMEWORK = {

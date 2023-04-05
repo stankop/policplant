@@ -33,6 +33,7 @@ a[x-apple-data-detectors] {
         text-align: center !important;
     }
 }
+{% load mathfilters %}
 div[style*="margin: 16px 0;"] {margin: 0 !important; }
 </style>
 <body style="margin: 0 !important; padding: 0 !important; background-color: #eeeeee;" bgcolor="#eeeeee">
@@ -107,7 +108,7 @@ Hvala vam sto narucujete cvece iz Rasadnika Ema. Nastavicemo da budemo i dalje p
                                         <strong>Order Confirmation #<strong> 
                                     </td>
                                     <td width="25%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;">
-                                        
+                                        {{id}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -129,7 +130,7 @@ Hvala vam sto narucujete cvece iz Rasadnika Ema. Nastavicemo da budemo i dalje p
                                             
                                             <ul>
                                                 {% for item in itemi %}
-                                                    <li>{{ item.qty }}  din</li>
+                                                    <li>{{ item.qty }} x {{ item.price }} din</li>
                                                 {% endfor %}
                                             </ul>
                                         </td>
@@ -137,7 +138,7 @@ Hvala vam sto narucujete cvece iz Rasadnika Ema. Nastavicemo da budemo i dalje p
                                            
                                             <ul>
                                                 {% for item in itemi %}
-                                                    <li> din</li>
+                                                    <li> {{ item.price|mul:item.qty }} din</li>
                                                 {% endfor %}
                                             </ul>
                                         </td>
@@ -178,7 +179,7 @@ Hvala vam sto narucujete cvece iz Rasadnika Ema. Nastavicemo da budemo i dalje p
                                         <td align="left" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px;">
                                             <p style="font-weight: 800;"><strong>Podaci kupca<strong></p>
                                             
-                                            <p>Ime i prezime: {{order.user.user_name}}<br>Adresa:{{order.user.address}}<br>Mesto:{{order.user.place}}<br>Broj mobilnog:{{order.user.self_phone}}<br>Email kupca:{{order.user.email}}</p>
+                                            <p>Ime i prezime: {{order.user.user_name}}<br>Adresa:{{order.user.address}}<br>Mesto:{{order.user.place}}<br>Broj mobilnog:{{order.user.self_phone}}<br>Email:{{order.user.email}}</p>
 
                                         </td>
                                     </tr>
