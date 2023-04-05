@@ -69,7 +69,7 @@ function Product({product, catId}) {
             <Button     variant="primary" 
                         disabled={product.countInStock < 1} 
                         type='button'
-                        style={screenType.isMobile ? {background:'#83b735', width:'80%', height:'35%', border:'1px solid #83b735'} : {background:'#83b735', width:'70%', height:'35%', border:'1px solid #83b735'}}
+                        style={screenType.isMobile ? {background:'#83b735', width:'80%', height:'35%', border:'1px solid #83b735'} : {background:'#83b735', width:'70%', height:'36%', border:'1px solid #83b735'}}
                         onClick= {addToCartHandler}>
                                 Dodaj u Korpu
             </Button>

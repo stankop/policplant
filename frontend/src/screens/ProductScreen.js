@@ -364,9 +364,9 @@ function ProductScreen({match}) {
                                                 </Col>
                                                
                                         </ListGroup.Item>
-                                        <ListGroupItem xs={12} style={{paddingTop:'2rem'}}>
+                                        {/* <ListGroupItem xs={12} style={{paddingTop:'2rem'}}>
                                             {product && <Ikonice product={product}></Ikonice>}
-                                        </ListGroupItem>
+                                        </ListGroupItem> */}
                                     </ListGroup>
                                     <br/>
                                     <br/>

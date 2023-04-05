@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState,useRef,  useEffect} from "react";
 import { LinkContainer } from 'react-router-bootstrap'
 import { Form, Button, Row, Col, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -34,6 +34,9 @@ function ProductListScreen() {
 
     const navigate = useNavigate()
 
+    const [val, setVal] = useState(null)
+    const order_set = useRef(0)
+
     
     useEffect(() => {
 
@@ -59,6 +62,11 @@ function ProductListScreen() {
 
      }, [dispatch, navigate, userInfo, successDelete, successCreate])
      
+    useEffect(() => {
+
+        setVal(products?.slice().sort((a,b) => a._id - b._id))
+
+    }, [products])
 
     const deleteHandler = (id) => {
         
@@ -77,6 +85,61 @@ function ProductListScreen() {
 
     const changingValueHandler = async (id, value) => {
         dispatch(changeStanjeValue(id, value))
+    }
+
+    const values = products?.slice().sort((a,b) => a._id - b._id)
+
+    const filter = (sort) => {
+        
+        switch(sort) {
+            case 'id':
+                
+                if(order_set.current){
+                    setVal(products?.slice().sort((a,b) => a._id - b._id))
+                    order_set.current = !order_set.current
+                }else{
+                    
+                    setVal(products?.slice().reverse((a,b) => a._id - b._id))
+                    order_set.current = !order_set.current
+                }
+              
+              break;
+            case 'name':
+                if(order_set.current){
+                    setVal(products?.slice().sort((a,b) => a.name - b.name))
+                    order_set.current = !order_set.current
+                }else{
+                    
+                    setVal(products?.slice().reverse((a,b) => a.name - b.name))
+                    order_set.current = !order_set.current
+                }
+                
+              break;
+            case 'cena':
+                if(order_set.current){
+                    setVal(products?.slice().sort((a,b) => a.price - b.price))
+                    order_set.current = !order_set.current
+                }else{
+                    
+                    setVal(products?.slice().reverse((a,b) => a.price - b.price))
+                    order_set.current = !order_set.current
+                }
+                break;
+            case 'stanje':
+                if(order_set.current){
+                    setVal(products?.slice().sort((a,b) => a.countInStock - b.countInStock))
+                    order_set.current = !order_set.current
+                }else{
+                    
+                    setVal(products?.slice().reverse((a,b) => a.countInStock - b.countInStock))
+                    order_set.current = !order_set.current
+                }
+                break;
+                
+            default:
+                setVal(products?.slice().sort((a,b) => a._id - b._id))
+          }
+
     }
     
   return (
@@ -116,20 +179,20 @@ function ProductListScreen() {
                             <thead>
                                 <tr>
                                     <th>RB</th>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Cena</th>
+                                    <th onClick={() => filter('id')}>ID</th>
+                                    <th onClick={() => filter('name')}>Name</th>
+                                    <th onClick={() => filter('cena')}>Cena</th>
                                     <th>Kategorija</th>
                                     <th>Novo</th>
                                     <th>Popust</th>
                                     <th>Boja</th>
-                                    <th>Stanje</th>
+                                    <th onClick={() => filter('stanje')}>Stanje</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {products?.slice().sort((a,b) => a._id - b._id).map((product, index) => (
+                                {(val ? val : values)?.map((product, index) => (
 
                                     <tr key={product._id}>
                                         <td style={{width:'4rem'}}>{index + 1}</td>
