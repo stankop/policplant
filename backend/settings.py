@@ -31,6 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '*',
     'djangobackend.azurewebsites.net',
+    'https://rasadnikema.rs',
     'policplant.herokuapp.com',
     'localhost',
     '127.0.0.1',

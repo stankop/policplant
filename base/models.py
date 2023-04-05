@@ -214,7 +214,7 @@ class Product(models.Model):
     #image = models.ImageField(null=True, blank=True, default='/default.jpg')
     description = models.TextField(null=True, blank=True)
     price = models.PositiveIntegerField( null=True, blank=True, default=0)
-    countInStock = models.PositiveIntegerField(null=True, blank=True, default=0)
+    countInStock = models.IntegerField(null=True, blank=True, default=0)
     
     #karakteristike
     color = models.CharField(max_length=250, null=True, blank=True)
