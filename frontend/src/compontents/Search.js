@@ -31,7 +31,7 @@ function useDebounce(value, delay) {
     return debouncedValue;
 }
 
-function Search( { onSearch}) {
+function Search( { onSearch, forToogle}) {
 
     const dispatch = useDispatch()
     const cat = useSelector(state => state.categoryList)
@@ -72,9 +72,10 @@ function Search( { onSearch}) {
        
         if(!initialRender.current || (boja.length > 0 || high.length > 0 || tip.length > 0 || kategorija.length > 0 || pozicija.length > 0 || pretraga || keyword)){
             dispatch(listFilterProducts(debouncedSearchTerm))
-            initialRender.current =false
+            
+            forToogle(memoizedValue)
         }
-       
+        initialRender.current =false
         onSearch(debouncedSearchTerm)
         
          

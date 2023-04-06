@@ -53,15 +53,25 @@ function HomeScreen() {
 
   useEffect(()=>{
     console.log('Ulazka:')
-    if(!customerLogo.current){
-      if(products?.length < 60 ){
+    if(!customerLogo.current || products?.length < 60 ){
+      console.log('Unutra:', products)
+      if(products?.length < 60){
+        console.log('Toggle:', toggle)
         setToggle(false)
+        if(screenType.isMobile){
+          if(products?.length === 0){
+           
+            setToggle(true)
+          }
+        }
       }else{
         setToggle(true)
       }
       
+      
+      customerLogo.current = false 
     }    
-    customerLogo.current = false 
+    
   }, [products]);
   
   const searchFunc = useMemo(() => {
@@ -81,6 +91,13 @@ function HomeScreen() {
    return setSearchValue
   }, [])
 
+  const forToogle = (val) => {
+    console.log('Mozda ovo', val)
+    if(!(val?.color?.length > 0  || val?.high?.length > 0 || val?.type?.length > 0 || val?.category?.length > 0 || val?.flow?.length > 0 || val?.search || val?.keyword)){
+      setToggle(true)
+      console.log('Rerender', val)
+    }
+  }
 //  const setSearchValue = (value) => {
 //     //setVal(value)
 //     if(value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== '' || value.keyword !== ''){
@@ -108,7 +125,7 @@ function HomeScreen() {
         <div style={{ textAlign:'center', margin:'1rem'}}><h1 style={{color:'red', alignItems:'center', fontSize:'2.5rem'}}> <strong>{ 'Sajt je u Pripremi!'}</strong></h1></div>
         <h1 style={{color:'#333333', fontSize:'1.2rem'}}> <strong>{carucel ? 'Detaljna pretraga:' : 'Filtrirani Proizvodi:'}</strong></h1>
         {/* <Sidebar></Sidebar> */}
-        {screenType.isMobile && <SearchModal onSearch={ searchFunc}></SearchModal>} 
+        {screenType.isMobile && <SearchModal onSearch={ searchFunc} forToogle={ forToogle}></SearchModal>} 
         {/* {screenType.isMobile && <MUISearchModal onSearch={ setSearchValue}></MUISearchModal>} */}
         { categoryLoading ? <Loader></Loader>
                  : categoryError ? <Message variant='danger'>{categoryError}</Message> 
@@ -118,7 +135,7 @@ function HomeScreen() {
                     <Row>
                     { (screenType.isDesktop || screenType.isLargeDesktop) && <Col>
                           <div style={{ border:'.4rem solid #83B735', paddingBottom:'1rem', paddingLeft:'1rem'}}>
-                            <Search onSearch={ searchFunc}></Search> 
+                            <Search onSearch={ searchFunc} forToogle={forToogle}></Search> 
                           </div>
                       </Col> }
 

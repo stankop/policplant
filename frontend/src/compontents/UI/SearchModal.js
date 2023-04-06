@@ -15,7 +15,7 @@ import classes from './SearchModal.module.css'
 const setSearchValue = () => {
 
 }
-export default function SearchModal( {onSearch}) {
+export default function SearchModal( {onSearch, forToogle}) {
   const [basicModal, setBasicModal] = useState(false);
 
   const toggleShow = () => setBasicModal(!basicModal);
@@ -31,7 +31,7 @@ export default function SearchModal( {onSearch}) {
               <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
             </MDBModalHeader>
             <MDBModalBody>
-                <Search onSearch={ onSearch}></Search> 
+                <Search onSearch={ onSearch} forToogle={ forToogle }></Search> 
             </MDBModalBody>
 
             <MDBModalFooter>
