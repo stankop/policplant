@@ -62,7 +62,7 @@ function App() {
     <Router>
       { cartIsShown &&  <Cart onClose={hideCartHanlder}></Cart> }
       { orderIsShown &&  <Order onClose={hideOrderHanlder} value={value}></Order> }
-      {<Header onShowCart={showCartHalnder}/> }
+      {<Header onShowCart={showCartHalnder} /> }
       <main >
         
         <div className="container-fluid" style={ screenType.isMobile ? { backgroundColor: '#FFF' , width:'100%', margin:0} : { backgroundColor: '#FFF' , width:'80%'}}>

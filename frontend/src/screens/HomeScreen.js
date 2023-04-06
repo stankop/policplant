@@ -52,27 +52,27 @@ function HomeScreen() {
   }, [dispatch]);
 
   useEffect(()=>{
-    console.log('Ulazka:')
-    if(!customerLogo.current || products?.length < 60 ){
-      console.log('Unutra:', products)
-      if(products?.length < 60){
-        console.log('Toggle:', toggle)
-        setToggle(false)
-        if(screenType.isMobile){
-          if(products?.length === 0){
+    // console.log('Ulazka:')
+    // if(!customerLogo.current || products?.length < 60 ){
+    //   console.log('Unutra:', products)
+    //   if(products?.length < 60){
+    //     console.log('Toggle:', toggle)
+    //     setToggle(false)
+    //     if(screenType.isMobile){
+    //       if(products?.length === 0){
            
-            setToggle(true)
-          }
-        }
-      }else{
-        setToggle(true)
-      }
+    //         setToggle(true)
+    //       }
+    //     }
+    //   }else{
+    //     setToggle(true)
+    //   }
       
       
-      customerLogo.current = false 
-    }    
-    
-  }, [products]);
+    //   customerLogo.current = false 
+    // }    
+    console.log('Prazno')
+  }, []);
   
   const searchFunc = useMemo(() => {
     const setSearchValue = (value) => {
@@ -93,7 +93,7 @@ function HomeScreen() {
 
   const forToogle = (val) => {
     console.log('Mozda ovo', val)
-    if(!(val?.color?.length > 0  || val?.high?.length > 0 || val?.type?.length > 0 || val?.category?.length > 0 || val?.flow?.length > 0 || val?.search || val?.keyword)){
+    if(val?.keyword){
       setToggle(true)
       console.log('Rerender', val)
     }

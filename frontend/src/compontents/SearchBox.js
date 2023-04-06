@@ -32,7 +32,7 @@ function SearchBox() {
             flow: '',
             search: keyword,
             keyword: ''}))
-        
+            localStorage.setItem('keyword', keyword)
     }
 
     // useEffect(() => {
