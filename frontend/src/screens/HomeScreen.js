@@ -41,7 +41,7 @@ function HomeScreen() {
   const { error:  productError , loading: productLoading , products } = prod
   const [search, setSearch] = useSearchParams();
   const keyword = search.get("keyword");
-  const customerLogo = useRef(null);
+  const customerLogo = useRef(true);
   const isFirst = useRef(true);
 
   useEffect(()=>{
@@ -53,14 +53,16 @@ function HomeScreen() {
 
   useEffect(()=>{
     console.log('Ulazka:')
-    if(products?.length < 60 ){
-      setToggle(false)
-    }else{
-      setToggle(true)
-    }
-         
+    if(!customerLogo.current){
+      if(products?.length < 60 ){
+        setToggle(false)
+      }else{
+        setToggle(true)
+      }
+      
+    }    
+    customerLogo.current = false 
   }, [products]);
-
   
   const searchFunc = useMemo(() => {
     const setSearchValue = (value) => {
