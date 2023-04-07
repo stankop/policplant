@@ -357,7 +357,7 @@ def uploadImage(request):
             product_image = None
         if product_image:
             product_image.order = index
-        product_image.save()
+            product_image.save()
 
     # if not request.FILES.getlist('images'):
     #     imagesStay=[]

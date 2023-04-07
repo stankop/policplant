@@ -16,7 +16,8 @@ window.scrollTo({
         službe i iznose od 450,00 dinara, pa naviše, zavisno od težine i vrednosti pošiljke i nije moguće ih izračunati unapred. Maksimalna težina paketa za 
         slanje PostExpress službom je 20 kg, u kutijama čije dimenzije ne prelaze 60x50x50cm.
         U suprotnom se pošiljka šalje kao CC paket, koja ima malo duži rok isporuke. Ukoliko ima više paketa za svaki se plaćaju troškovi isporuke.
-        Nemamo mogućnost slanja paketa u inostranstvo. Vreme isporuke je od 2-5 radnih dana.  
+        Nemamo mogućnost slanja paketa u inostranstvo. Vreme isporuke je od 2-5 radnih dana.  <br></br><br></br>
+        <strong>BESPLATNA DOSTAVA</strong> je moguća na teritoriji grada Novog Sada, za svaku narudžbinu u vrednosti većoj od 2000rsd.
 
 
         <h3 style={{ color:'green'}}>Način plaćanja</h3> 

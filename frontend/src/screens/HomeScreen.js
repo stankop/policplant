@@ -51,28 +51,28 @@ function HomeScreen() {
          
   }, [dispatch]);
 
-  useEffect(()=>{
-    // console.log('Ulazka:')
-    // if(!customerLogo.current || products?.length < 60 ){
-    //   console.log('Unutra:', products)
-    //   if(products?.length < 60){
-    //     console.log('Toggle:', toggle)
-    //     setToggle(false)
-    //     if(screenType.isMobile){
-    //       if(products?.length === 0){
+  // useEffect(()=>{
+  //   // console.log('Ulazka:')
+  //   // if(!customerLogo.current || products?.length < 60 ){
+  //   //   console.log('Unutra:', products)
+  //   //   if(products?.length < 60){
+  //   //     console.log('Toggle:', toggle)
+  //   //     setToggle(false)
+  //   //     if(screenType.isMobile){
+  //   //       if(products?.length === 0){
            
-    //         setToggle(true)
-    //       }
-    //     }
-    //   }else{
-    //     setToggle(true)
-    //   }
+  //   //         setToggle(true)
+  //   //       }
+  //   //     }
+  //   //   }else{
+  //   //     setToggle(true)
+  //   //   }
       
       
-    //   customerLogo.current = false 
-    // }    
-    console.log('Prazno')
-  }, []);
+  //   //   customerLogo.current = false 
+  //   // }    
+  //   console.log('Prazno')
+  // }, []);
   
   const searchFunc = useMemo(() => {
     const setSearchValue = (value) => {
@@ -134,7 +134,7 @@ function HomeScreen() {
                   <Container fluid > 
                     <Row>
                     { (screenType.isDesktop || screenType.isLargeDesktop) && <Col>
-                          <div style={{ border:'.4rem solid #83B735', paddingBottom:'1rem', paddingLeft:'1rem'}}>
+                          <div style={{ border:'.2rem solid #83B735', paddingBottom:'1rem', paddingLeft:'1rem'}}>
                             <Search onSearch={ searchFunc} forToogle={forToogle}></Search> 
                           </div>
                       </Col> }
