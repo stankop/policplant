@@ -34,6 +34,7 @@ function Header(props) {
   const category = useSelector((state) => state.categoryList);
   const { categories } = category;
   const image = 'https://policplantblob.blob.core.windows.net/policplant-container/veliki logo verzija 1.0.png'
+  //const image = 'https://policplantblob.blob.core.windows.net/policplant-banner/veliki logo verzija 1.0-350x350.png'
   const listKagetorija= useRef([])
 
   const [cat, setCat] = useState(categories)
