@@ -54,7 +54,7 @@ function Footer() {
                   Telefon: 0652077257
                 </div>
                 <div>
-                  Email: <a href="mailto:rasadnikema@mail.com">rasadnikema@mail.com</a> 
+                  Email: <a href="mailto:rasadnikema@mail.com">rasadnikema@gmail.com</a> 
                 </div>
                 <div style={{padding:'.5rem'}}>
                     

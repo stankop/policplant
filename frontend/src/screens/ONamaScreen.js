@@ -5,7 +5,7 @@ function ONamaScreen() {
   const bordureImages = ['https://policplantblob.blob.core.windows.net/policplant-banner/Bordura1.png',
                         'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura2.png',
                         'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura3.png',
-                        'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura4.pnd',
+                        'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura4.png',
                         'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura5.png',
                         'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura6.png',
                         'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura7.png']

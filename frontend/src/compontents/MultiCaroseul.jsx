@@ -31,7 +31,7 @@ function MultiCaroseul(props) {
             src= "https://policplantblob.blob.core.windows.net/policplant-banner/biljke za senku baner_800x600.jpg"
             alt="First slide"
             rounded
-           
+            onClick={() => { navigate('/categories/37')}}
             style={{ height:'50%'}}
             />
 
@@ -40,6 +40,7 @@ function MultiCaroseul(props) {
             src= "https://policplantblob.blob.core.windows.net/policplant-banner/trajnice baner_800x600.jpg"
             alt="Second slide"
             rounded
+            onClick={() => { navigate('/categories/28')}}
             style={{ height:'50%'}}
             />
 
@@ -48,6 +49,7 @@ function MultiCaroseul(props) {
             src= "https://policplantblob.blob.core.windows.net/policplant-banner/ukrasno zbunje baner_800x600.jpg"
             alt="Third slide"
             rounded
+            onClick={() => { navigate('/categories/31')}}
             style={{ height:'50%'}}
             />
     return (
@@ -74,7 +76,7 @@ function MultiCaroseul(props) {
                              //zoomOnHover={0}
                              buttonPosition="bottom"
                              alwaysShowButton={true} >
-                    <button onClick={() => { navigate('/categories/37')}} primary="true"  className="btn success" style={{ border: '2px solid black'}} > Biljke za senku </button>
+                    <button onClick={() => { navigate('/categories/37')}} primary="true"  className="btn success" style={{ border: '2px solid black',cursor:'pointer', backgroundColor:'white'}} > Za vaš kutak u senci </button>
                 </ImageButton>
             </div>
             <div style={{padding:'1rem'}}>
@@ -82,14 +84,14 @@ function MultiCaroseul(props) {
                              //zoomOnHover={0}
                              alwaysShowButton={true}
                              buttonPosition="bottom" >
-                    <button onClick={() => { navigate('/categories/28')}} primary="true" className="btn success" style={{ border: '2px solid black'}} > Trajnice pogledajte </button>
+                    <button onClick={() => { navigate('/categories/28')}} primary="true" className="btn success" style={{ border: '2px solid black',cursor:'pointer', backgroundColor:'white'}} > Veliki izbor trajnica </button>
                 </ImageButton>
             </div> 
             <div style={{padding:'1rem'}}>
                 <ImageButton img={image3}
                              alwaysShowButton={true}
                              buttonPosition="bottom" >
-                    <button onClick={() => { navigate('/categories/31')}} primary="true" className="btn success" style={{ border: '2px solid black'}} > Ukrasno zbunje pogledajte </button>
+                    <button onClick={() => { navigate('/categories/31')}} primary="true" className="btn success" style={{ border: '2px solid black',cursor:'pointer', backgroundColor:'white'}} >  Neizostavni deo vrta </button>
                 </ImageButton>
             </div> 
         </Carousel>

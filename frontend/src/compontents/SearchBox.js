@@ -6,6 +6,8 @@ import { useParams, useSearchParams } from "react-router-dom";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { listFilterProducts } from '../store/product-actions'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ArrowRight } from 'react-bootstrap-icons';
 
 
 function SearchBox() {
@@ -42,38 +44,43 @@ function SearchBox() {
 
     const btnStyle = {
         background: 'rgb(131, 183, 53)',
+        border:'2px solid rgb(131, 183, 53)'
         // backgroundImage: 'url(' + imgUrl + ')',
     };
 
   return (
     
     <Form onSubmit={submitHandler} >
-        <Container style={{padding:'4rem'}}>
+        <Container fluid >
             <Row>
-                <Col md={10}>
+                <Col style={{ padding:0}}>
                     <Form.Control 
-                        placeholder='Unesi pojam'
+                        placeholder='Unesi pojam...'
                         type='search'
                         name='keyword'
-                        inline ='true'
-                        className='mr-sm-2 ml-sm-5'
-                        onChange={(e) => setKeyword(e.target.value) }>
+                        
+                       
+                        onChange={(e) => setKeyword(e.target.value) }
+                        style={{ border:'2px solid rgb(131, 183, 53)', width:'20rem'}}>
                     </Form.Control>
                 </Col>
-                <Col md={2}>
-                <OverlayTrigger
-                    placement="right"
-                    delay={{ show: 250, hide: 400 }}
-                    overlay={renderTooltip}
-                    >
-                        <Button 
-                            type='submit'
-                            variant='outline-success'
-                            className='p-2'
-                            style={btnStyle}>
-                            Pretraga
-                        </Button>
-                </OverlayTrigger>
+                <Col style={{ padding:0}}>
+                    <OverlayTrigger
+                        placement="right"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={renderTooltip}
+                        >
+                            <Button 
+                                type='submit'
+                                variant='outline-success'
+                                className='p-1.8'
+                                style={btnStyle}>
+                                {/* <ArrowRight size={16}/> */}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </Button>
+                    </OverlayTrigger>
                 </Col>
             </Row>
         </Container>

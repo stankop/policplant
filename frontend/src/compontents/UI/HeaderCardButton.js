@@ -43,7 +43,7 @@ const HeaderCartButton = (props) => {
 
    
     return(
-        <button  style={ screenType ? { width:'8rem', height:'4rem'} : {}}  className={btnClasses} onClick={props.onClick}>
+        <button  style={ screenType.isDesktop || screenType.isLargeDesktop ? { width:'16rem', height:'4rem'} : {width:'8rem', height:'4rem'}}  className={btnClasses} onClick={props.onClick}>
             <span className={classes.icon}>
                 <CartIcon ></CartIcon>
             </span>
