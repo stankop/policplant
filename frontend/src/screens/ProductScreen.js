@@ -283,7 +283,7 @@ function ProductScreen({match}) {
                                                                                     </Button>
                                                                                 </Col>
                                                                                 <Col xs={4}>
-                                                                                    <InputGroup >
+                                                                                    <InputGroup style={{width:'3rem'}}>
                                                                                         <Form.Control 
                                                                                             onChange={(e) => setQty(Number(e.target.value))}
                                                                                             value={qty} 
@@ -315,7 +315,7 @@ function ProductScreen({match}) {
                                                                                     </Button>
                                                                                 </Col>
                                                                                 <Col sm={4}>
-                                                                                    <InputGroup >
+                                                                                    <InputGroup style={{width:'3.8rem'}}>
                                                                                         <Form.Control 
                                                                                             onChange={(e) => setQty(Number(e.target.value))}
                                                                                             value={qty} 
@@ -349,7 +349,7 @@ function ProductScreen({match}) {
                                                                         Dodaj u Korpu
                                                                 </Button>
                                                             </ListGroup.Item>
-                                                            <ListGroup.Item>
+                                                            {/* <ListGroup.Item>
                                                                 <Button 
                                                                     style={{ background :'#83b735', border:'1px solid #83b735'}}
                                                                     className='btn btn-block' 
@@ -357,7 +357,7 @@ function ProductScreen({match}) {
                                                                     onClick={() => window.open('#/cart',"_self")}>
                                                                         Poruči
                                                                 </Button>
-                                                            </ListGroup.Item>
+                                                            </ListGroup.Item> */}
                                                         </ListGroup>
                                                     </Card>
 

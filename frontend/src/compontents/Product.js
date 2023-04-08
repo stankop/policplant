@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import {useEffect, useState, useRef} from 'react'
 import { Card, Button } from 'react-bootstrap'
 import Rating from './Rating'
 import { Link } from 'react-router-dom'
@@ -11,17 +11,23 @@ import WebFont from 'webfontloader';
 import '../compontents/Product.css'
 import useScreenType from "react-screentype-hook";
 import { IKImage, IKVideo, IKContext, IKUpload } from 'imagekitio-react'
+import Overlay from 'react-bootstrap/Overlay';
 
 function Product({product, catId}) {
 
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const screenType = useScreenType();
+    const [show, setShow] = useState(false);
+    const [isLoading, setLoading] = useState(false);
+    const target = useRef(null);
 
     const addToCartHandler = () => {
         
         dispatch(addToCart(Number(product._id), Number(1)));
-        navigate(`/cart/?id=${product._id}&qty=${1}`)
+        setShow(!show)
+        setLoading(true)
+       // navigate(`/cart/?id=${product._id}&qty=${1}`)
     }
 
     useEffect(() => {
@@ -70,9 +76,34 @@ function Product({product, catId}) {
                         disabled={product.countInStock < 1} 
                         type='button'
                         style={screenType.isMobile ? {background:'#83b735', width:'80%', height:'35%', border:'1px solid #83b735'} : {background:'#83b735', width:'70%', height:'36%', border:'1px solid #83b735'}}
-                        onClick= {addToCartHandler}>
-                                Dodaj u Korpu
+                        onClick= {addToCartHandler}
+                        ref={target}>
+                               { !isLoading ? 'Dodaj u Korpu' : 'Dodato u korpu'}
             </Button>
+            <Overlay target={target.current} show={show} placement="right">
+                {({
+                placement: _placement,
+                arrowProps: _arrowProps,
+                show: _show,
+                popper: _popper,
+                hasDoneInitialMeasure: _hasDoneInitialMeasure,
+                ...props
+                }) => (
+                <div
+                    {...props}
+                    style={{
+                    position: 'absolute',
+                    backgroundColor: 'green',
+                    padding: '2px 10px',
+                    color: 'white',
+                    borderRadius: 3,
+                    ...props.style,
+                    }}
+                >
+                    Biljka dodata u korpu...
+                </div>
+                )}
+            </Overlay>
         </Card.Body>
     </Card>
   )

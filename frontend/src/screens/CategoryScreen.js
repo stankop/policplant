@@ -40,11 +40,18 @@ function CategoryScreen() {
 
  const htmlString = {__html: DOMPurify.sanitize(catProducts?.find( cat => cat._id?.toString() === id)?.description)}
  
+ const bordureImages = ['https://policplantblob.blob.core.windows.net/policplant-banner/Bordura1.png',
+                        'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura2.png',
+                        'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura3.png',
+                        'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura4.pnd',
+                        'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura5.png',
+                        'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura6.png',
+                        'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura7.png']
  
   return (
     <div>
         { false && <ProductCarucel></ProductCarucel>}
-        <Breadcrumb style={{ paddingTop:'2rem'}}>
+        <Breadcrumb style={{ paddingTop:'1.7rem'}}>
           <Breadcrumb.Item href="/"><i className="fa fa-home" style={{color:'green'}}></i></Breadcrumb.Item>
           <Breadcrumb.Item  active>
             { catProducts?.find( cat => cat._id?.toString() === id)?.name}
@@ -57,6 +64,9 @@ function CategoryScreen() {
         
         {/* <p>{ catProducts?.find( cat => cat._id?.toString() === id)?.description}</p> */}
         <p dangerouslySetInnerHTML={htmlString}></p>
+        <div style={{ margin:'.5rem'}}>
+          <img alt='Bordura'  src={bordureImages[(Math.random() * bordureImages.length) | 0]}></img>
+        </div>
         { loading ? <Loader></Loader>
                  : error ? <Message variant='danger'>{error}</Message> 
                  :
