@@ -12,8 +12,8 @@ function ONamaScreen() {
   return (
     <div>
       <h3>O nama</h3>
-      <div style={{ padding:'1rem'}}>
-          <img alt='Bordura'  src={bordureImages[(Math.random() * bordureImages.length) | 0]}></img>
+      <div style={{ padding:'1rem', maxWidth:'100%'}}>
+          <img alt='Bordura' style={{ maxWidth:'100%'}}  src={bordureImages[(Math.random() * bordureImages.length) | 0]}></img>
       </div>
       <div>
       Rasadnik Ema je registrovano poljoprivredno gazdinstvo koje se bavi proizvodnjom i prodajom ukrasnih baštenskih sadnica. U ponudi imamo sadnice perena, 

@@ -19,4 +19,5 @@ urlpatterns = [
     path('allcategories/', views.getAllCategories, name='get_categories'),
     path('categories/', views.getCategories, name='get_categories'),
     path('filter/', views.getFilterProducts, name='get_filter_products'),
+    path('filterGornja/', views.getGornjaPretragaProducts, name='get_filter_gornja_products'),
 ]

@@ -38,7 +38,7 @@ function HomeScreen() {
   const cat = useSelector(state => state.categoryList)
   const { error:  categoryError, loading: categoryLoading, categories } = cat
   const prod = useSelector(state => state.productList)
-  const { error:  productError , loading: productLoading , products } = prod
+  const { error:  productError , loading: productLoading , products, success } = prod
   const [search, setSearch] = useSearchParams();
   const keyword = search.get("keyword");
   const customerLogo = useRef(true);
@@ -140,7 +140,7 @@ function HomeScreen() {
                       </Col> }
 
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
-                        { toggle  ? ( 
+                        { !(products?.length > 0 && products?.length < 60)  ? ( 
                           screenType.isMobile ? 
                           
                         (<Row  >
@@ -163,22 +163,25 @@ function HomeScreen() {
                         </Row>
                         )) 
                         :
-                        ( screenType.isMobile ? <Row>
-                          {products?.map(product => (
-                          <Col key={product._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
-                              <Product product={product} />
-                          </Col>
-                            ))} 
-                            {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
-                        </Row> :
-                        <Row>
-                        {products?.map(product => (
-                        <Col key={product._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
-                            <Product product={product} />
-                        </Col>
-                          ))} 
-                          {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
-                        </Row>) 
+                        ( screenType.isMobile ? 
+                        
+                            <Row>
+                              {products?.map(product => (
+                              <Col key={product._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
+                                  <Product product={product} />
+                              </Col>
+                                ))} 
+                                {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                            </Row> 
+                          :
+                            <Row>
+                            {products?.map(product => (
+                            <Col key={product._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
+                                <Product product={product} />
+                            </Col>
+                              ))} 
+                              {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                            </Row>) 
                         }
                       </Col>
                       {/* { (screenType.isDesktop || screenType.isLargeDesktop) && <Col>

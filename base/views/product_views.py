@@ -296,6 +296,23 @@ def getFilterProducts(request):
     serializer = ProductSerializer(products, many= True)
     return Response({'products': serializer.data} )
 
+@api_view(['POST'])
+def getGornjaPretragaProducts(request):
+    data = request.data
+    search = str(data['search']).lower()
+            
+    print('Search:', search)
+    
+    products = Product.objects.filter((Q(pk__lte=0) if (data['search'] == '' or 
+                                                        data['search'] == [] or 
+                                                        data['search'] == None) 
+                                                    else Q(name__icontains=search) | Q(hesteg__icontains=search))).order_by('name')
+    print("Final:",products)
+
+   
+    serializer = ProductSerializer(products, many= True)
+    return Response({'products': serializer.data} )
+
 @api_view(['GET'])
 def getProductsByCategoryId(request, pk):
     

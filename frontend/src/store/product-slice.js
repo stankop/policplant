@@ -6,18 +6,21 @@ const productListSlice = createSlice({
         products: [],
         loading: false,
         error: '',
+        success:false,
         page:1,
         pages:1
     },
     reducers:{
         productListRequest(state){
             state.loading = true
+            state.success = false
             state.products = []
         },
 
         productListSuccess(state, action) {
                     state.loading = false
                     state.products = action.payload.products
+                    state.success = true
                     state.page = action.payload.page
                     state.pages = action.payload.pages
         },
@@ -25,6 +28,7 @@ const productListSlice = createSlice({
         productListFail(state, action) {
             state.loading = false
             state.error = action.payload
+            state.success = false
         }
 
     }

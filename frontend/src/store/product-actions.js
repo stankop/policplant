@@ -108,6 +108,37 @@ export const listFilterProducts = (value) => {
     }
 }
 
+export const listFilterGornjeProducts = (value) => {
+    return async (dispatch) => {
+
+        
+        const val = {search: value}
+            
+        console.log('Fetch filtra gornje:', val)
+        const fetchData = async () => {
+            
+            const { data } = await axios.post(`/api/products/filterGornja/`, val)
+            return data;
+        }
+
+        try {
+            dispatch(productListActions.productListRequest())
+            const prodData = await fetchData()
+            dispatch(productListActions.productListSuccess(prodData))
+
+        } catch (error) {
+            dispatch(
+                productListActions.productListFail(
+                  error.response && error.response.data.detail
+                  ? error.response.data.detail
+                  : error.message
+                )
+              );
+        }
+
+    }
+}
+
 
 
 

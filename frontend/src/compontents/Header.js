@@ -200,11 +200,12 @@ function Header(props) {
                           </NavDropdown>  
                     </div>
                     
-                    <div style={{fontSize: '1.4rem'}}><FontAwesomeIcon icon={faInfo}></FontAwesomeIcon>   
+                    <div style={{fontSize: '1.4rem',display: 'inline-block', paddingRight:'1rem'}}><FontAwesomeIcon icon={faInfo}></FontAwesomeIcon>   
                           <NavDropdown title="Info" 
                                   id="basic-nav-dropdown" 
                                   
                                   style={{
+                                          
                                           fontSize: '1.4rem', 
                                           display: 'inline-block'}}>
                             {info?.map( (i) => (
@@ -221,7 +222,7 @@ function Header(props) {
                   <LinkContainer to="/onama" >
                   
                     <Nav.Link>
-                    <div style={{fontSize: '1.4rem',display: 'inline-block'}}><FontAwesomeIcon icon={faAnchor}></FontAwesomeIcon>     O nama</div>
+                      <div style={{fontSize: '1.4rem',display: 'inline-block',paddingRight:'1rem'}}><FontAwesomeIcon icon={faAnchor}></FontAwesomeIcon>     O nama</div>
                    
                     </Nav.Link>
                   </LinkContainer>
@@ -235,7 +236,7 @@ function Header(props) {
                   </LinkContainer>
 
                   {userInfo ? (
-                    <NavDropdown title={userInfo.user_name} id="username" style={{fontSize: '1.4rem'}}>
+                    <NavDropdown title={userInfo.user_name} id="username" style={{fontSize: '1.4rem', paddingRight:'1rem'}}>
                       <LinkContainer
                         to="/profile">
                         <NavDropdown.Item>Profile</NavDropdown.Item>
@@ -245,15 +246,14 @@ function Header(props) {
                       </NavDropdown.Item>
                     </NavDropdown>
                   ) : (
-                    <LinkContainer
-                      to="/login"
-                      
-                    >
+                    
+                    <LinkContainer to="/login" style={{fontSize: '1.3rem', paddingRight:'1rem'}}>
                       <Nav.Link>
-                        <FontAwesomeIcon icon={faUser} />
+                        <FontAwesomeIcon icon={faUser} style={{paddingRight:'.5rem'}} />
                         Login/Register
                       </Nav.Link>
                     </LinkContainer>
+                    
                   )}
                   {userInfo && userInfo.isAdmin && (
                     <NavDropdown title="Admin" id="adminmenu" style={{fontSize: '1.4rem'}}>

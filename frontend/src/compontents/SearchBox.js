@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-import { listFilterProducts } from '../store/product-actions'
+import { listFilterProducts, listFilterGornjeProducts } from '../store/product-actions'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ArrowRight } from 'react-bootstrap-icons';
 
@@ -26,15 +26,8 @@ function SearchBox() {
     const submitHandler = (e) => {
         e.preventDefault()
         console.log('Keyword:', keyword)
-        dispatch(listFilterProducts({
-            color: '',
-            high: '',
-            type: '',
-            category: '',
-            flow: '',
-            search: keyword,
-            keyword: ''}))
-            localStorage.setItem('keyword', keyword)
+        dispatch(listFilterGornjeProducts(keyword))
+            //localStorage.setItem('keyword', keyword)
     }
 
     // useEffect(() => {
