@@ -6,14 +6,14 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 class ProductSerializer(serializers.ModelSerializer):
     #colorChoises = serializers.SerializerMethodField(read_only=True)
-    placeChoises = serializers.SerializerMethodField(read_only=True)
-    mesto_sadnjeChoises = serializers.SerializerMethodField(read_only=True)
-    type_of_plantChoises = serializers.SerializerMethodField(read_only=True)
+    #placeChoises = serializers.SerializerMethodField(read_only=True)
+    #mesto_sadnjeChoises = serializers.SerializerMethodField(read_only=True)
+    #type_of_plantChoises = serializers.SerializerMethodField(read_only=True)
     category = serializers.SerializerMethodField(read_only=True)
-    vre_cveChoises = serializers.SerializerMethodField(read_only=True)
-    orezivanjeChoises = serializers.SerializerMethodField(read_only=True)
-    privlaci_insekteChoises = serializers.SerializerMethodField(read_only=True)
-    brzina_rastaChoises = serializers.SerializerMethodField(read_only=True)
+    #vre_cveChoises = serializers.SerializerMethodField(read_only=True)
+    #orezivanjeChoises = serializers.SerializerMethodField(read_only=True)
+    #privlaci_insekteChoises = serializers.SerializerMethodField(read_only=True)
+    #brzina_rastaChoises = serializers.SerializerMethodField(read_only=True)
     images = serializers.SerializerMethodField(read_only=True)
     #categories = serializers.SerializerMethodField(read_only=True)
 
