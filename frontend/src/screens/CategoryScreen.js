@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap'
 import Product from '../compontents/Product'
 import Kategorija from '../compontents/Kategorija'
 import { useDispatch , useSelector } from 'react-redux'
-import { listProducts } from '../store/product-actions'
+import { listProducts, productsReset } from '../store/product-actions'
 import { listCategories } from '../store/category-actions'
 import Loader from '../compontents/Loader'
 import Message from '../compontents/Message'
@@ -49,6 +49,10 @@ function CategoryScreen() {
                         'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura5.png',
                         'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura6.png',
                         'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura7.png']
+                        
+  const resetProducts = () => {
+    dispatch(productsReset())
+  }
  
   return (
     <div>
@@ -61,7 +65,7 @@ function CategoryScreen() {
           </Breadcrumb.Item>
           
         </Breadcrumb>
-        <Link to={-1} className='btn btn-success  my-3'> Nazad</Link>
+        <Link to={-1} className='btn btn-success  my-3' onClick={resetProducts}> Nazad</Link>
         <h1 style={{color:'#333333'}}>{ catProducts?.find( cat => cat._id?.toString() === id)?.name}</h1>
         
         {/* <p>{ catProducts?.find( cat => cat._id?.toString() === id)?.description}</p> */}

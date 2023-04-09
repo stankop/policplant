@@ -139,6 +139,26 @@ export const listFilterGornjeProducts = (value) => {
     }
 }
 
+export const productsReset = () => {
+    return async (dispatch) => {
+
+        try {
+            
+            dispatch(productListActions.productListResetSuccess())
+
+        } catch (error) {
+            dispatch(
+                productDetailsActions.productDetailsFail(
+                  error.response && error.response.data.detail
+                  ? error.response.data.detail
+                  : error.message
+                )
+              );
+        }
+
+    }
+}
+
 
 
 

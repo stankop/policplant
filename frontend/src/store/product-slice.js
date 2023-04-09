@@ -29,6 +29,13 @@ const productListSlice = createSlice({
             state.loading = false
             state.error = action.payload
             state.success = false
+        },
+
+        productListResetSuccess(state, action) {
+            state.loading = false
+            state.error = ''
+            state.success = false
+            state.products = []
         }
 
     }
