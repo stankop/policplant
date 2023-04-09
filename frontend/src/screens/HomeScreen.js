@@ -140,7 +140,7 @@ function HomeScreen() {
                       </Col> }
 
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
-                        { !(products?.length > 0 && products?.length < 60)  ? ( 
+                        { !(products?.length > 0 && products?.length < 131 )  ? ( 
                           screenType.isMobile ? 
                           
                         (<Row  >
