@@ -133,55 +133,70 @@ function HomeScreen() {
                  <div > 
                   <Container fluid > 
                     <Row>
-                    { (screenType.isDesktop || screenType.isLargeDesktop) && <Col>
+                    { (screenType.isDesktop || screenType.isLargeDesktop) 
+                      && 
+                      <Col>
                           <div style={{ border:'.2rem solid #83B735', paddingBottom:'1rem', paddingLeft:'1rem'}}>
                             <Search onSearch={ searchFunc} forToogle={forToogle}></Search> 
                           </div>
-                      </Col> }
+                      </Col> 
+                    }
 
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
-                        { !(products?.length > 0 && products?.length < 64)  ? ( 
-                          screenType.isMobile ? 
-                          
-                        (<Row  >
-                          {orderCategories?.map(category => (
-                          <Col  key={category._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex my-1 p-1">
-                              <Kategorija category={category} />
-                          </Col>
-                            ))}
-                            {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
-                        </Row>)
-                        : 
-                        (
-                          <Row  className={'gy-2'}>
-                          {orderCategories?.map(category => (
-                          <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={4} className="d-flex ">
-                              <Kategorija category={category} />
-                          </Col>
-                            ))}
-                            {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
-                        </Row>
-                        )) 
+                        { !(products?.length > 0 && products?.length < 64)  
+                        ? 
+                          ( 
+                            screenType.isMobile 
+                            
+                            ? 
+                              (
+                                <Row >
+                                    {orderCategories?.map(category => (
+                                    <Col  key={category._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex my-1 p-1">
+                                        <Kategorija category={category} />
+                                    </Col>
+                                      ))}
+                                      {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                                </Row>
+                              )
+                            : 
+                              ( !productLoading 
+                                ?
+                                  (<Row  className={'gy-2'}>
+                                    {orderCategories?.map(category => (
+                                    <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={4} className="d-flex ">
+                                        <Kategorija category={category} />
+                                    </Col>
+                                      ))}
+                                      {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                                  </Row>)
+                                  :
+                                  <Loader></Loader>
+                              )
+                          ) 
                         :
-                        ( screenType.isMobile ? 
-                        
-                            <Row>
-                              {products?.map(product => (
-                              <Col key={product._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
-                                  <Product product={product} />
-                              </Col>
-                                ))} 
-                                {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
-                            </Row> 
-                          :
-                            <Row>
-                            {products?.map(product => (
-                            <Col key={product._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
-                                <Product product={product} />
-                            </Col>
-                              ))} 
-                              {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
-                            </Row>) 
+                          ( screenType.isMobile
+                            
+                            ? 
+                          
+                              <Row>
+                                {products?.map(product => (
+                                <Col key={product._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
+                                    <Product product={product} />
+                                </Col>
+                                  ))} 
+                                  {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                              </Row> 
+                            :
+                              <Row>
+                                {products?.map(product => (
+                                <Col key={product._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
+                                    <Product product={product} />
+                                </Col>
+                                  ))} 
+                                  {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                              </Row>
+                          ) 
                         }
                       </Col>
                       {/* { (screenType.isDesktop || screenType.isLargeDesktop) && <Col>
