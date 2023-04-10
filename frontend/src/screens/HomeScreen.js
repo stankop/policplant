@@ -143,7 +143,7 @@ function HomeScreen() {
                     }
 
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
-                        { !(products?.length > 0 && products?.length < 64)  
+                        { !(products?.length > 0 && products?.length < 131)  
                         ? 
                           ( 
                             screenType.isMobile 
@@ -160,7 +160,7 @@ function HomeScreen() {
                                 </Row>
                               )
                             : 
-                              ( !productLoading 
+                              ( (!productLoading || toggle) 
                                 ?
                                   (<Row  className={'gy-2'}>
                                     {orderCategories?.map(category => (
