@@ -150,7 +150,7 @@ function HomeScreen({clearProducts}) {
                             screenType.isMobile 
                             
                             ? 
-                              ( ( toggle || clearProducts) 
+                              ( ( toggle || clearProducts) && !productLoading
                               ?
                                 (<Row >
                                     {orderCategories?.map(category => (
@@ -164,7 +164,7 @@ function HomeScreen({clearProducts}) {
                                 <Loader></Loader>
                               )
                             : 
-                              ( ( toggle) 
+                              ( ( toggle || clearProducts) && !productLoading
                                 ?
                                   (<Row  className={'gy-2'}>
                                     {orderCategories?.map(category => (
