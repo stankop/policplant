@@ -143,21 +143,24 @@ function HomeScreen() {
                     }
 
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
-                        { !(products?.length > 0 && products?.length < 131)  
+                        { !(products?.length > 0 && products?.length < 64)  
                         ? 
                           ( 
                             screenType.isMobile 
                             
                             ? 
-                              (
-                                <Row >
+                              ( ( toggle) 
+                              ?
+                                (<Row >
                                     {orderCategories?.map(category => (
                                     <Col  key={category._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex my-1 p-1">
                                         <Kategorija category={category} />
                                     </Col>
                                       ))}
                                       {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
-                                </Row>
+                                </Row>)
+                                :
+                                <Loader></Loader>
                               )
                             : 
                               ( ( toggle) 
