@@ -32,6 +32,8 @@ import InformacijePitanja from './screens/InformacijePitanja'
 import InformacijeReklamacije from './screens/InformacijeReklamacije'
 import InformacijePrivatnost from './screens/InformacijePrivatnost'
 import useScreenType from "react-screentype-hook";
+import { productsReset } from './store/product-actions'
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
 
@@ -39,7 +41,9 @@ function App() {
   const [orderIsShown, setOrderIsShown] = useState(false)
 
   const [value, setValue] = useState({})
+  const [clear, setClear] = useState(false)
   const screenType = useScreenType();
+  const dispatch = useDispatch();
 
   const showCartHalnder = () =>{
     setCartIsShown(true)
@@ -58,16 +62,21 @@ function App() {
     setOrderIsShown(false)
   }
 
+  const clearProducts = () => {
+    setClear(true)
+    dispatch(productsReset())
+  }
+
   return (
     <Router>
       { cartIsShown &&  <Cart onClose={hideCartHanlder}></Cart> }
       { orderIsShown &&  <Order onClose={hideOrderHanlder} value={value}></Order> }
-      {<Header onShowCart={showCartHalnder} /> }
+      {<Header onShowCart={showCartHalnder} clearProducts={clearProducts} /> }
       <main >
         
         <div className="container-fluid" style={ screenType.isMobile ? { backgroundColor: '#FFF' , width:'100%', margin:0} : { backgroundColor: '#FFF' , width:'80%'}}>
           <Routes>
-            <Route path="/" element={<HomeScreen />} exact></Route>
+            <Route path="/" element={<HomeScreen clearProducts={clear}/>} exact></Route>
             <Route path="/products/:id/:catId" element={<ProductScreen />}></Route>
             <Route path="/categories/:id" element={<CategoryScreen />}></Route>
             <Route path="/filter" element={<FilterScreen />}></Route>

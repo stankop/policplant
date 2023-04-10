@@ -28,7 +28,7 @@ import Carousel from 'flat-carousel';
 import MultiCaroseul from '../compontents/MultiCaroseul'
 import Spinner from 'react-bootstrap/Spinner';
 
-function HomeScreen() {
+function HomeScreen({clearProducts}) {
 
   const dispatch = useDispatch()
   const [carucel, setCarucel] = useState(true)
@@ -77,7 +77,7 @@ function HomeScreen() {
   const searchFunc = useMemo(() => {
     const setSearchValue = (value) => {
      
-      if(value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== '' || !(value.keyword === '' || value.keyword === null)){
+      if((value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== '' || !(value.keyword === '' || value.keyword === null)) && !clearProducts){
        setToggle(false)
        setCarucel(false)
        
@@ -113,6 +113,7 @@ function HomeScreen() {
   const orderCategories = categories?.slice().sort((a, b) =>{return a.order - b.order})
   
 
+
   return (
     <div style={ screenType.isMobile ? { backgroundColor: '#FFF' , margin:0} : { }}>
         {/* { carucel && <MDBCarusel itemRef={customerLogo}></MDBCarusel>}   */}
@@ -143,13 +144,13 @@ function HomeScreen() {
                     }
 
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
-                        { !(products?.length > 0 && products?.length < 64)  
+                        { !(products?.length > 0 && products?.length < 131)  
                         ? 
                           ( 
                             screenType.isMobile 
                             
                             ? 
-                              ( ( toggle) 
+                              ( ( toggle || clearProducts) 
                               ?
                                 (<Row >
                                     {orderCategories?.map(category => (

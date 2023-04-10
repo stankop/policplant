@@ -25,6 +25,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Image from 'react-bootstrap/Image'
 import '../compontents/Header.css'
 import useScreenType from "react-screentype-hook";
+import { productsReset } from '../store/product-actions'
 
 
 function Header(props) {
@@ -98,14 +99,15 @@ function Header(props) {
     <header >
       
       <Navbar  variant="dark" expand="lg" collapseOnSelect style={{ height:'12rem'}} className={classes["color-navbar"]}>
-        { screenType.isMobile ? 
+        { screenType.isMobile 
+          ? 
               <Container  style={{ overflow:'hidden'}}>
                   <Row>
                     <Col>
-                      <LinkContainer to="/">
-                        <Navbar.Brand >
+                      <LinkContainer to="/" >
+                        <Navbar.Brand>
                           {/* <h1 className={classes["h1"]}>Rasadnik Ema</h1> */}
-                          <Image fluid  src={image} loading="eager" style={{ width:'16rem', height:'14rem', overflow:'hidden'}} alt="Rasadnik Ema"/>
+                          <Image fluid  src={image} loading="eager" style={{ width:'16rem', height:'14rem', overflow:'hidden'}} alt="Rasadnik Ema" onClick={props.clearProducts}/>
                         </Navbar.Brand>
                       </LinkContainer>
                     </Col>
@@ -121,30 +123,30 @@ function Header(props) {
                       {/* <SearchBox ></SearchBox> */}
                     <Col>
                       <Navbar.Text style={{ textAlign: 'center'}}>
-                      <LinkContainer to="/cart" >
+                          <LinkContainer to="/cart" >
                             <Nav.Link style={{ margin:'1rem'}}>
                               <HeaderCardButton onClick={props.onShowCart}></HeaderCardButton>
                             </Nav.Link>
                           </LinkContainer>
-                      </Navbar.Text>
-                      <Navbar.Text style={{ textAlign: 'center'}}>
+                        </Navbar.Text>
+                        <Navbar.Text style={{ textAlign: 'center'}}>
                         {<div>                     
                           <div style={{fontSize: '1.2rem', color:'black'}}><FontAwesomeIcon icon={faPhone} />     Pozovite nas</div>
                             
                           <div style={{color:'black',fontSize: '1.2rem'}}>0652077257</div>
                         </div>}
 
-                    </Navbar.Text>
+                      </Navbar.Text>
                     </Col>
-                  </Row>
-              </Container> 
+                    </Row>
+                </Container> 
               :
               <Container  style={{ overflow:'hidden'}}>
               
                 <LinkContainer to="/">
                   <Navbar.Brand >
                     {/* <h1 className={classes["h1"]}>Rasadnik Ema</h1> */}
-                    <Image fluid  src={image} loading="eager" style={{ width:'22rem', height:'22rem',marginTop: '+2rem', overflow:'hidden'}} alt="Rasadnik Ema"/>
+                    <Image fluid  src={image} loading="eager" style={{ width:'22rem', height:'22rem',marginTop: '+2rem', overflow:'hidden'}} alt="Rasadnik Ema" onClick={props.clearProducts}/>
                   </Navbar.Brand>
                 </LinkContainer>
                 
