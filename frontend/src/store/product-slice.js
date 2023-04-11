@@ -4,6 +4,7 @@ const productListSlice = createSlice({
     name: 'productList',
     initialState: {
         products: [],
+        allProducts:[],
         loading: false,
         error: '',
         success:false,
@@ -36,6 +37,11 @@ const productListSlice = createSlice({
             state.error = ''
             state.success = false
             state.products = []
+        },
+
+        allProducts(state, action) {
+           
+            state.allProducts = action.payload.products
         }
 
     }

@@ -4,7 +4,7 @@ import Product from '../compontents/Product'
 import Kategorija from '../compontents/Kategorija'
 import Search from '../compontents/Search'
 import { useDispatch , useSelector } from 'react-redux'
-import { listFilterProducts } from '../store/product-actions'
+import { listFilterProducts, getAllProducts } from '../store/product-actions'
 import { listCategories } from '../store/category-actions'
 import Loader from '../compontents/Loader'
 import Message from '../compontents/Message'
@@ -38,7 +38,7 @@ function HomeScreen({clearProducts}) {
   const cat = useSelector(state => state.categoryList)
   const { error:  categoryError, loading: categoryLoading, categories } = cat
   const prod = useSelector(state => state.productList)
-  const { error:  productError , loading: productLoading , products, success } = prod
+  const { error:  productError , loading: productLoading , products, success, allProducts } = prod
   const [search, setSearch] = useSearchParams();
   const keyword = search.get("keyword");
   const customerLogo = useRef(true);
@@ -47,6 +47,13 @@ function HomeScreen({clearProducts}) {
   useEffect(()=>{
 
     dispatch(listCategories())
+    //dispatch(listFilterProducts(val))
+         
+  }, [dispatch]);
+
+  useEffect(()=>{
+
+    dispatch(getAllProducts())
     //dispatch(listFilterProducts(val))
          
   }, [dispatch]);
@@ -77,7 +84,7 @@ function HomeScreen({clearProducts}) {
   const searchFunc = useMemo(() => {
     const setSearchValue = (value) => {
      
-      if((value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== '' || !(value.keyword === '' || value.keyword === null)) && !clearProducts){
+      if((value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== '' || !(value.keyword === '' || value.keyword === null)) && clearProducts){
        setToggle(false)
        setCarucel(false)
        
@@ -144,13 +151,13 @@ function HomeScreen({clearProducts}) {
                     }
 
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
-                        { !(products?.length > 0 && products?.length < 131)  
+                        { !(products?.length > 0 && products?.length < 64)  
                         ? 
                           ( 
                             screenType.isMobile 
                             
                             ? 
-                              ( ( toggle || clearProducts) && !productLoading
+                              ( ( toggle || !clearProducts) || !productLoading
                               ?
                                 (<Row >
                                     {orderCategories?.map(category => (
@@ -160,11 +167,20 @@ function HomeScreen({clearProducts}) {
                                       ))}
                                       {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
                                 </Row>)
-                                :
-                                <Loader></Loader>
+                                : clearProducts ? 
+                                  <Loader></Loader>
+                                  :
+                                  (<Row >
+                                    {orderCategories?.map(category => (
+                                    <Col  key={category._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex my-1 p-1">
+                                        <Kategorija category={category} />
+                                    </Col>
+                                      ))}
+                                      {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                                </Row>)
                               )
                             : 
-                              ( ( toggle || clearProducts) && !productLoading
+                              ( ( toggle || !clearProducts) || !productLoading
                                 ?
                                   (<Row  className={'gy-2'}>
                                     {orderCategories?.map(category => (
@@ -174,8 +190,17 @@ function HomeScreen({clearProducts}) {
                                       ))}
                                       {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
                                   </Row>)
-                                  :
+                                  : clearProducts ? 
                                   <Loader></Loader>
+                                  :
+                                  (<Row >
+                                    {orderCategories?.map(category => (
+                                    <Col  key={category._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex my-1 p-1">
+                                        <Kategorija category={category} />
+                                    </Col>
+                                      ))}
+                                      {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                                </Row>)
                               )
                           ) 
                         :

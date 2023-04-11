@@ -159,6 +159,34 @@ export const productsReset = () => {
     }
 }
 
+export const getAllProducts = () => {
+    return async (dispatch) => {
+
+        const fetchData = async () => {
+
+            const { data } = await axios.get(`/api/products/getAllProducts/`)
+            return data;
+           
+        }
+
+        try {
+            
+            const cartData = await fetchData()
+            dispatch(productListActions.allProducts(cartData))
+
+        } catch (error) {
+            dispatch(
+                productListActions.productListFail(
+                  error.response && error.response.data.detail
+                  ? error.response.data.detail
+                  : error.message
+                )
+              );
+        }
+
+    }
+}
+
 
 
 

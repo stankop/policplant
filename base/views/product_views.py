@@ -398,3 +398,14 @@ def uploadImage(request):
     product.save()
     return Response(data={'message':'Image was uploaded'})
 
+
+@api_view(['GET'])
+def getAllProducts(request):
+    
+    
+    products = Product.objects.all().order_by('name')
+    print('Broj biljaka je:', len(products))
+
+    serializer = ProductSerializer(products, many= True)
+    return Response({'products': serializer.data})
+
