@@ -36,7 +36,7 @@ function CategoryScreen() {
       left: 0,
       behavior: 'smooth'
       })
-    dispatch(listProducts(id))
+   //dispatch(listProducts(id))
         
  }, [dispatch, id]);
 
@@ -53,7 +53,7 @@ function CategoryScreen() {
   const resetProducts = () => {
     dispatch(productsReset())
   }
- 
+ const filter = allProducts?.filter(product => product?.category?.map(x => x._id.toString())?.includes(id))
   return (
     <div>
         { false && <ProductCarucel></ProductCarucel>}
@@ -74,12 +74,12 @@ function CategoryScreen() {
           <img alt='Bordura' style={screenType.isMobile ? {maxWidth:'95%', margin:'.5rem'} : { margin:'.5rem'}}  src={bordureImages[(Math.random() * bordureImages.length) | 0]} ></img>
           
         </div>
-        { false ? <Loader></Loader>
+        { !filter?.length ? <Loader></Loader>
                  : error ? <Message variant='danger'>{error}</Message> 
                  :
                  <div >  
                     <Row >
-                     {allProducts?.filter(product => product?.category?.map(x => x._id.toString())?.includes(id))?.length === 0 ? <div>Trenutno nema proizvoda iz ove kategorije na stanju.</div> : products?.filter(product => product?.category?.map(x => x._id.toString())?.includes(id))?.map(product => (
+                     {filter?.length === 0 ? <div>Trenutno nema proizvoda iz ove kategorije na stanju.</div> : filter?.filter(product => product?.category?.map(x => x._id.toString())?.includes(id))?.map(product => (
                      <Col key={product._id} sm={12} md={6} lg={4} xl={3} xs={6} className="d-flex">
                          <Product product={product} catId={id} />
                      </Col>
