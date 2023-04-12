@@ -98,6 +98,9 @@ function Search( { onSearch, forToogle}) {
         // backgroundImage: 'url(' + imgUrl + ')',
     };
 
+    const type_plant = ["zimzelena", "listopadna", "višegodišnja","delimično zimzelena"]
+    const mest_plant = ["sunce", "polusenka","hlad"]
+
   return (
     
     <Form onSubmit={submitHandler} >
@@ -116,7 +119,7 @@ function Search( { onSearch, forToogle}) {
                 <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
 
                     <h6><strong style={{color:'#333333'}}>Tip biljke</strong></h6>
-                        <CustomSelect values={ allcategories?.type_of_plant?.map(col => (
+                        <CustomSelect values={ type_plant.map(col => (
                             { value: col, label: col}
                             ))} onAction={setTip}>
 
@@ -126,7 +129,7 @@ function Search( { onSearch, forToogle}) {
                 <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                 
                     <h6><strong style={{color:'#333333'}}>Pozicija za sadnju</strong></h6>
-                        <CustomSelect values={ allcategories?.mesto_sadnje?.map(col => (
+                        <CustomSelect values={ mest_plant.map(col => (
                             { value: col, label: col}
                             ))} onAction={setPozicija}>
 

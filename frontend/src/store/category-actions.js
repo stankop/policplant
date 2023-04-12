@@ -12,9 +12,9 @@ export const listCategories = (keyword = '', page) => {
             }
            
             const { data: categories } = await axios.get(`/api/products/categories/`)
-            const { data: allcategories } = await axios.get(`/api/products/allcategories/`)
+            //const { data: allcategories } = await axios.get(`/api/products/allcategories/`)
 
-            return { categories, allcategories };
+            return { categories};
         }
 
         try {
