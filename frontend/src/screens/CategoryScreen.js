@@ -17,6 +17,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from "react-router-dom";
 import DOMPurify from 'dompurify';
 import useScreenType from "react-screentype-hook";
+import { catMemory } from '../compontents/UI/categories'
 
 function CategoryScreen() {
 
@@ -40,7 +41,7 @@ function CategoryScreen() {
         
  }, [dispatch, id]);
 
- const htmlString = {__html: DOMPurify.sanitize(catProducts?.find( cat => cat._id?.toString() === id)?.description)}
+ const htmlString = {__html: DOMPurify.sanitize(catMemory?.find( cat => cat._id?.toString() === id)?.description)}
  
  const bordureImages = ['https://policplantblob.blob.core.windows.net/policplant-banner/Bordura1.png',
                         'https://policplantblob.blob.core.windows.net/policplant-banner/Bordura2.png',
@@ -60,13 +61,13 @@ function CategoryScreen() {
         <Breadcrumb style={{ paddingTop:'1.7rem'}}>
           <Breadcrumb.Item href="/"><i className="fa fa-home" style={{color:'green'}}></i></Breadcrumb.Item>
           <Breadcrumb.Item  active style={{fontSize:'.9rem'}}>
-            { catProducts?.find( cat => cat._id?.toString() === id)?.name}
+            { catMemory?.find( cat => cat._id?.toString() === id)?.name}
           
           </Breadcrumb.Item>
           
         </Breadcrumb>
         <Link to={-1} className='btn btn-success  my-3' onClick={resetProducts}> Nazad</Link>
-        <h1 style={{color:'#333333'}}>{ catProducts?.find( cat => cat._id?.toString() === id)?.name}</h1>
+        <h1 style={{color:'#333333'}}>{ catMemory?.find( cat => cat._id?.toString() === id)?.name}</h1>
         
         {/* <p>{ catProducts?.find( cat => cat._id?.toString() === id)?.description}</p> */}
         <p dangerouslySetInnerHTML={htmlString}></p>
