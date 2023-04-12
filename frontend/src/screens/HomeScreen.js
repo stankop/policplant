@@ -29,6 +29,7 @@ import MultiCaroseul from '../compontents/MultiCaroseul'
 import Spinner from 'react-bootstrap/Spinner';
 import _ from 'lodash'
 import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons'
+import { catMemory } from '../compontents/UI/categories'
 
 
 function HomeScreen({clearProducts, clearFilter}) {
@@ -207,8 +208,8 @@ function HomeScreen({clearProducts, clearFilter}) {
 //    }
 //    console.log('Mozda ovo', value)
 //  }
- 
-  const orderCategories = categories?.slice().sort((a, b) =>{return a.order - b.order})
+
+  const orderCategories = catMemory?.slice().sort((a, b) =>{return a.order - b.order})
 
   return (
     <div style={ screenType.isMobile ? { backgroundColor: '#FFF' , margin:0} : { }}>
@@ -224,9 +225,9 @@ function HomeScreen({clearProducts, clearFilter}) {
         {/* <Sidebar></Sidebar> */}
         {screenType.isMobile && <SearchModal onSearch={ searchFunc} forToogle={ forToogle}></SearchModal>} 
         {/* {screenType.isMobile && <MUISearchModal onSearch={ setSearchValue}></MUISearchModal>} */}
-        { categoryLoading ? 
+        { false ?  //categoryLoading
                   <Loader></Loader>
-                 : categoryError
+                 : false //categoryError
                    ? 
                    <Message variant='danger'>{categoryError}</Message> 
                    :
