@@ -31,8 +31,8 @@ def getRoutes(request):
 @api_view(['GET'])
 def getAllCategories(request):
     
-    categoriess = PlantCategory.objects.all()
-    product = Product._meta.get_fields()
+    #categoriess = PlantCategory.objects.all()
+    #product = Product._meta.get_fields()
     my_model_fields = [field for field in Product._meta.get_fields()]
     for f in my_model_fields:
         if f.name == 'mesto_sadnje':

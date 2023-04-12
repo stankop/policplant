@@ -49,17 +49,17 @@ function HomeScreen({clearProducts, clearFilter}) {
   const customerLogo = useRef(true);
   const isFirst = useRef(true);
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
-    dispatch(listCategories())
+  //   dispatch(listCategories())
          
-  }, [dispatch]);
+  // }, [dispatch]);
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
-    dispatch(getAllProducts())
+  //   dispatch(getAllProducts())
          
-  }, [dispatch]);
+  // }, [dispatch]);
 
   // useEffect(()=>{
   //   // console.log('Ulazka:')
@@ -138,9 +138,13 @@ function HomeScreen({clearProducts, clearFilter}) {
     }
 
     if(val?.color){
-      
-      let temp = allProducts?.filter(x => x.color?.toLowerCase() === val?.color)
-      color.push(...temp)
+      console.log('Type', typeof val?.color)
+      let temp = allProducts?.filter(x => x.color?.toLowerCase().includes(val?.color?.toLowerCase()))
+      if(temp?.length){
+        color.push(...temp)
+      }else{
+        color.push('1111')
+      }
       
       console.log('Color:', color)   
     }
@@ -180,7 +184,7 @@ function HomeScreen({clearProducts, clearFilter}) {
 
   useEffect(() => {
     console.log('Pokusaj')
-    
+
     if(localStorage.getItem('filter')){
       const items = JSON.parse(localStorage.getItem('filter'))
       if(items){
@@ -220,9 +224,12 @@ function HomeScreen({clearProducts, clearFilter}) {
         {/* <Sidebar></Sidebar> */}
         {screenType.isMobile && <SearchModal onSearch={ searchFunc} forToogle={ forToogle}></SearchModal>} 
         {/* {screenType.isMobile && <MUISearchModal onSearch={ setSearchValue}></MUISearchModal>} */}
-        { categoryLoading ? <Loader></Loader>
-                 : categoryError ? <Message variant='danger'>{categoryError}</Message> 
-                 :
+        { categoryLoading ? 
+                  <Loader></Loader>
+                 : categoryError
+                   ? 
+                   <Message variant='danger'>{categoryError}</Message> 
+                   :
                  <div > 
                   <Container fluid > 
                     <Row>
@@ -236,7 +243,7 @@ function HomeScreen({clearProducts, clearFilter}) {
                     }
 
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
-                        { filter?.length === 0  
+                        { filter?.length === 0 
 
                           ? 
 

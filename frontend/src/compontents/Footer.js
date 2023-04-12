@@ -8,6 +8,9 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '../compontents/Footer.css'
 import useScreenType from "react-screentype-hook";
+import { listFilterProducts, getAllProducts } from '../store/product-actions'
+import { useDispatch , useSelector } from 'react-redux'
+import { listCategories } from '../store/category-actions'
 
 const location = {
   address: 'Prnjavorska 114, Budisava',
@@ -18,6 +21,20 @@ const location = {
 function Footer() {
 
   const image = 'https://policplantblob.blob.core.windows.net/policplant-container/veliki logo verzija 1.0.png'
+
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+
+    dispatch(listCategories())
+         
+  }, [dispatch]);
+
+  useEffect(()=>{
+    console.log('Foooter')
+    dispatch(getAllProducts())
+         
+  }, [dispatch]);
 
   const screenType = useScreenType();
 

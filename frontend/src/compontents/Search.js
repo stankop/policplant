@@ -51,7 +51,7 @@ function Search( { onSearch, forToogle}) {
 
 
     const [pozicija, setPozicija] = useState([])
-    const [boja, setBoja] = useState([])
+    const [boja, setBoja] = useState('')
     const [tip, setTip] = useState([])
     const [kategorija, setKategorija] = useState([])
 
@@ -77,7 +77,7 @@ function Search( { onSearch, forToogle}) {
 
     useEffect(()=>{
        
-        if(!initialRender.current || (boja.length > 0 || high.length > 0 || tip.length > 0 || kategorija.length > 0 || pozicija.length > 0 || pretraga || keyword)){
+        if(!initialRender.current || (boja || high.length > 0 || tip.length > 0 || kategorija.length > 0 || pozicija.length > 0 || pretraga || keyword)){
             //dispatch(listFilterProducts(debouncedSearchTerm))
             
             forToogle(memoizedValue)

@@ -46,13 +46,6 @@ function Header(props) {
   const screenType = useScreenType();
 
   useEffect(() => {
- 
-    
-    
-
-  }, [dispatch]);
-
-  useEffect(() => {
    
 
     localStorage.setItem('categories', JSON.stringify(categories))
