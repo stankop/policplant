@@ -9,6 +9,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import CustomDropDown from './CustomDropDown';
 import CustomSelect from './CustomSelect';
 import { listProducts, listFilterProducts } from '../store/product-actions'
+import { catMemory } from  '../compontents/UI/categories'
 
 function useDebounce(value, delay) {
     // State and setters for debounced value
@@ -109,7 +110,7 @@ function Search( { onSearch, forToogle}) {
                 
                 <Row md={12} xl={12} style={{ padding:'0.5rem', width: '100%'}}>
                     <h6><strong style={{color:'#333333'}}>Kategorija biljke</strong></h6>
-                        <CustomSelect  values={ categories?.slice().sort((a, b) =>{return a.order - b.order}).map(col => (
+                        <CustomSelect  values={ catMemory?.slice().sort((a, b) =>{return a.order - b.order}).map(col => (
                             { value: col.name, label: col.name}
                             ))} onAction={setKategorija}>
 

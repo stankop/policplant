@@ -27,6 +27,7 @@ import '../compontents/Header.css'
 import useScreenType from "react-screentype-hook";
 import { productsReset } from '../store/product-actions'
 import { useNavigate, useLocation } from "react-router-dom";
+import { catMemory } from  '../compontents/UI/categories'
 
 
 function Header(props) {
@@ -190,7 +191,7 @@ function Header(props) {
                                   style={{
                                           fontSize: '1.4rem', 
                                           display: 'inline-block'}}>
-                            {cat?.slice().sort((a, b) =>{return a.order - b.order}).map( (category) => (
+                            {catMemory?.slice().sort((a, b) =>{return a.order - b.order}).map( (category) => (
                               <LinkContainer to={`/categories/${category._id}`} key={category._id}>
                                   <NavDropdown.Item  key={category._id}>
                                       { category.name }  
