@@ -13,6 +13,9 @@ import { listProducts, listFilterProducts } from '../store/product-actions'
 function useDebounce(value, delay) {
     // State and setters for debounced value
     const [debouncedValue, setDebouncedValue] = useState(value);
+    const prod = useSelector(state => state.productList)
+    const { error:  productError , loading: productLoading , products, success, allProducts } = prod
+
     useEffect(
       () => {
         // Update debounced value after delay
@@ -37,18 +40,22 @@ function Search( { onSearch, forToogle}) {
     const cat = useSelector(state => state.categoryList)
     const { allcategories, categories } = cat
     const prod = useSelector(state => state.productList)
-    const { products } = prod
-
-    const [pretraga, setPretraga] = useState('')
-    const [pozicija, setPozicija] = useState([])
-    const [boja, setBoja] = useState([])
-    const [high, setHigh] = useState([])
-    const [tip, setTip] = useState([])
-    const [kategorija, setKategorija] = useState([])
+    const { products, allProducts } = prod
 
     const navigate = useNavigate()
     const location = useLocation();
     const keyword = localStorage.getItem('keyword')
+
+    const [pretraga, setPretraga] = useState('')
+    const [high, setHigh] = useState([])
+
+
+    const [pozicija, setPozicija] = useState([])
+    const [boja, setBoja] = useState([])
+    const [tip, setTip] = useState([])
+    const [kategorija, setKategorija] = useState([])
+
+   
 
     
     const memoizedValue = useMemo(() => {
@@ -71,7 +78,7 @@ function Search( { onSearch, forToogle}) {
     useEffect(()=>{
        
         if(!initialRender.current || (boja.length > 0 || high.length > 0 || tip.length > 0 || kategorija.length > 0 || pozicija.length > 0 || pretraga || keyword)){
-            dispatch(listFilterProducts(debouncedSearchTerm))
+            //dispatch(listFilterProducts(debouncedSearchTerm))
             
             forToogle(memoizedValue)
         }

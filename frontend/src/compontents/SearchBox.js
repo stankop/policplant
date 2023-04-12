@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ArrowRight } from 'react-bootstrap-icons';
 
 
-function SearchBox() {
+function SearchBox({onClick}) {
 
     const [keyword, setKeyword] = useState('')
     const navigate = useNavigate()
@@ -26,14 +26,9 @@ function SearchBox() {
     const submitHandler = (e) => {
         e.preventDefault()
         console.log('Keyword:', keyword)
-        dispatch(listFilterGornjeProducts(keyword))
-            //localStorage.setItem('keyword', keyword)
+        //dispatch(listFilterGornjeProducts(keyword))
+        onClick(keyword)    //localStorage.setItem('keyword', keyword)
     }
-
-    // useEffect(() => {
-    //     localStorage.setItem('keyword', keyword)
-    // },[keyword])
-
 
     const btnStyle = {
         background: 'rgb(131, 183, 53)',

@@ -27,12 +27,17 @@ import { SimpleCarouselSlider } from 'react-simple-carousel-image-slider'
 import Carousel from 'flat-carousel';
 import MultiCaroseul from '../compontents/MultiCaroseul'
 import Spinner from 'react-bootstrap/Spinner';
+import _ from 'lodash'
+import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons'
 
-function HomeScreen({clearProducts}) {
+
+function HomeScreen({clearProducts, clearFilter}) {
 
   const dispatch = useDispatch()
   const [carucel, setCarucel] = useState(true)
   const [ toggle, setToggle ] = useState(true)
+  const all = useRef([])
+  const [filter, setFilter] = useState([])
 
   const screenType = useScreenType();
   const cat = useSelector(state => state.categoryList)
@@ -47,14 +52,12 @@ function HomeScreen({clearProducts}) {
   useEffect(()=>{
 
     dispatch(listCategories())
-    //dispatch(listFilterProducts(val))
          
   }, [dispatch]);
 
   useEffect(()=>{
 
     dispatch(getAllProducts())
-    //dispatch(listFilterProducts(val))
          
   }, [dispatch]);
 
@@ -97,14 +100,98 @@ function HomeScreen({clearProducts}) {
    }
    return setSearchValue
   }, [])
-
+ 
   const forToogle = (val) => {
-    console.log('Mozda ovo', val)
-    if(val?.keyword){
-      setToggle(true)
-      console.log('Rerender', val)
+    
+    
+    const cati = []
+    const flow = []
+    const type = []
+    const color = []
+
+    if(val?.category?.length){
+      Array.from(val?.category)?.forEach(cat => {
+        let temp = allProducts?.filter(x => Array.from(x.category)?.map(y => y.name).includes(cat.value))
+        cati?.push(...temp)
+      })
+      console.log('Cat:', cati)
+     
     }
+
+    if(val?.type?.length){
+      Array.from(val?.type)?.forEach(cat => {
+        let temp = allProducts?.filter(x => x.type_of_plant?.toLowerCase() === cat.value?.toLowerCase())
+        type?.push(...temp)
+      })
+      console.log('Type:', type)
+      
+      
+    }
+
+    if(val?.flow?.length){
+      Array.from(val?.flow)?.forEach(cat => {
+        let temp = allProducts?.filter(x => typeof x.mesto_sadnje === "string" ?  x.mesto_sadnje.toLowerCase() === cat.value?.toLowerCase() : Array.from(x.mesto_sadnje)?.includes(cat.value.toLowerCase()))
+        flow?.push(...temp)
+      })
+      console.log('Flow:', flow)
+      
+    }
+
+    if(val?.color){
+      
+      let temp = allProducts?.filter(x => x.color?.toLowerCase() === val?.color)
+      color.push(...temp)
+      
+      console.log('Color:', color)   
+    }
+
+    const catiIds = Array.from(cati?.map(x => x._id))
+    const typeIds = Array.from(type?.map(x => x._id))
+    const flowIds = Array.from(flow?.map(x => x._id))
+    const colorIds = Array.from(color?.map(x => x._id))
+
+    var temp = []
+    var ukupno = []
+    temp.push(catiIds)
+    temp.push(typeIds)
+    temp.push(flowIds)
+    temp.push(colorIds)
+    temp.forEach(x => {
+      if(x.length){
+        ukupno.push(x)
+      }
+    })
+
+    
+    if(ukupno.length){
+      var a = _.intersection.apply(_, ukupno);
+      all.current = a
+      let broj = allProducts?.filter(x => all.current?.includes(x._id))
+      setFilter(broj)
+      localStorage.setItem('filter', JSON.stringify(broj))
+      
+    } else {
+      all.current = []
+      setFilter([])
+      localStorage.setItem('filter', [])
+    }
+    console.log('Current outside:', all.current)
   }
+
+  useEffect(() => {
+    console.log('Pokusaj')
+    
+    if(localStorage.getItem('filter')){
+      const items = JSON.parse(localStorage.getItem('filter'))
+      if(items){
+        setFilter(items)
+      }
+    }
+    
+  }, []);
+
+  
+
 //  const setSearchValue = (value) => {
 //     //setVal(value)
 //     if(value.color?.length || value.high?.length || value.type?.length || value.category?.length  || value.flow?.length || value.search !== '' || value.keyword !== ''){
@@ -118,8 +205,6 @@ function HomeScreen({clearProducts}) {
 //  }
  
   const orderCategories = categories?.slice().sort((a, b) =>{return a.order - b.order})
-  
-
 
   return (
     <div style={ screenType.isMobile ? { backgroundColor: '#FFF' , margin:0} : { }}>
@@ -151,14 +236,16 @@ function HomeScreen({clearProducts}) {
                     }
 
                       <Col sm={6} md={6} lg={8} xl={9} xs={12}>
-                        { !(products?.length > 0 && products?.length < 64)  
-                        ? 
+                        { filter?.length === 0  
+
+                          ? 
+
                           ( 
                             screenType.isMobile 
                             
                             ? 
-                              ( ( toggle || !clearProducts) || !productLoading
-                              ?
+                              
+                              
                                 (<Row >
                                     {orderCategories?.map(category => (
                                     <Col  key={category._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex my-1 p-1">
@@ -167,49 +254,29 @@ function HomeScreen({clearProducts}) {
                                       ))}
                                       {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
                                 </Row>)
-                                : clearProducts ? 
-                                  <Loader></Loader>
-                                  :
-                                  (<Row >
-                                    {orderCategories?.map(category => (
-                                    <Col  key={category._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex my-1 p-1">
-                                        <Kategorija category={category} />
-                                    </Col>
-                                      ))}
-                                      {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
-                                </Row>)
-                              )
+                                
+                              
                             : 
-                              ( ( toggle || !clearProducts) || !productLoading
-                                ?
-                                  (<Row  className={'gy-2'}>
-                                    {orderCategories?.map(category => (
-                                    <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={4} className="d-flex ">
-                                        <Kategorija category={category} />
-                                    </Col>
-                                      ))}
-                                      {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
-                                  </Row>)
-                                  : clearProducts ? 
-                                  <Loader></Loader>
-                                  :
-                                  (<Row >
-                                    {orderCategories?.map(category => (
-                                    <Col  key={category._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex my-1 p-1">
-                                        <Kategorija category={category} />
-                                    </Col>
-                                      ))}
-                                      {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
+                              ( 
+                               
+                                (<Row  className={'gy-2'}>
+                                  {orderCategories?.map(category => (
+                                  <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={4} className="d-flex ">
+                                      <Kategorija category={category} />
+                                  </Col>
+                                    ))}
+                                    {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
                                 </Row>)
+                                 
                               )
                           ) 
-                        :
+                          :
                           ( screenType.isMobile
                             
                             ? 
                           
                               <Row>
-                                {products?.map(product => (
+                                {filter?.map(product => (
                                 <Col key={product._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
                                     <Product product={product} />
                                 </Col>
@@ -218,7 +285,7 @@ function HomeScreen({clearProducts}) {
                               </Row> 
                             :
                               <Row>
-                                {products?.map(product => (
+                                {filter?.map(product => (
                                 <Col key={product._id} sm={6} md={6} lg={4} xl={3} xs={6} className="d-flex">
                                     <Product product={product} />
                                 </Col>

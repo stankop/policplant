@@ -26,6 +26,7 @@ import Image from 'react-bootstrap/Image'
 import '../compontents/Header.css'
 import useScreenType from "react-screentype-hook";
 import { productsReset } from '../store/product-actions'
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 function Header(props) {
@@ -41,12 +42,13 @@ function Header(props) {
   const [cat, setCat] = useState(categories)
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const screenType = useScreenType();
 
   useEffect(() => {
  
     
-    //dispatch(listCategories())
+    
 
   }, [dispatch]);
 
@@ -93,7 +95,11 @@ function Header(props) {
       value:'Politika privatnosti',
       src: 'privatnost'
     }]
-
+  
+  const clearFilter = () => {
+    console.log('Jakako ')
+    localStorage.setItem('filter', JSON.stringify([]))
+  }
   return (
     <Fragment >
     <header >
@@ -107,7 +113,7 @@ function Header(props) {
                       <LinkContainer to="/" >
                         <Navbar.Brand>
                           {/* <h1 className={classes["h1"]}>Rasadnik Ema</h1> */}
-                          <Image fluid  src={image} loading="eager" style={{ width:'16rem', height:'14rem', overflow:'hidden'}} alt="Rasadnik Ema" onClick={props.clearProducts}/>
+                          <Image fluid  src={image} loading="eager" style={{ width:'16rem', height:'14rem', overflow:'hidden'}} alt="Rasadnik Ema" onClick={props.clearFilter}/>
                         </Navbar.Brand>
                       </LinkContainer>
                     </Col>
@@ -146,7 +152,7 @@ function Header(props) {
                 <LinkContainer to="/">
                   <Navbar.Brand >
                     {/* <h1 className={classes["h1"]}>Rasadnik Ema</h1> */}
-                    <Image fluid  src={image} loading="eager" style={{ width:'22rem', height:'22rem',marginTop: '+2rem', overflow:'hidden'}} alt="Rasadnik Ema" onClick={props.clearProducts}/>
+                    <Image fluid  src={image} loading="eager" style={{ width:'22rem', height:'22rem',marginTop: '+2rem', overflow:'hidden'}} alt="Rasadnik Ema" onClick={props.clearFilter}/>
                   </Navbar.Brand>
                 </LinkContainer>
                 
@@ -159,7 +165,7 @@ function Header(props) {
 
                 </Navbar.Text>
                 
-                  <SearchBox ></SearchBox>
+                  <SearchBox onClick={props.searchBox}></SearchBox>
 
                 <Navbar.Text style={{ textAlign: 'center'}}>
                 <LinkContainer to="/cart" >

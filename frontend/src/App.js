@@ -22,8 +22,8 @@ import ProductEditScreen from "./screens/ProductEditScreen"
 import ProductCreateScreen from "./screens/ProductCreateScreen"
 import OrderListScreen from "./screens/OrderListScreen"
 import FilterScreen from "./screens/FilterScreen"
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
-import { useState, useRef } from "react";
+import { HashRouter as Router, useNavigate, Route, Routes } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
 import Cart from './compontents/UI/Cart/Cart'
 import Order from './compontents/UI/Order/Order'
 import InformacijeIsporuka from './screens/InformacijeIsporuka'
@@ -37,8 +37,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 function App() {
 
+  const prod = useSelector(state => state.productList)
+  const { error:  productError , loading: productLoading , products, success, allProducts } = prod
+
   const [cartIsShown, setCartIsShown] = useState(false)
   const [orderIsShown, setOrderIsShown] = useState(false)
+  const [clearFil, setClearFil] = useState(false)
+  const [seaBox, setSeaBox] = useState(false)
 
   const [value, setValue] = useState({})
   const [clear, setClear] = useState(false)
@@ -67,16 +72,43 @@ function App() {
     dispatch(productsReset())
   }
 
+  const clearFilter = () => {
+    
+    localStorage.setItem('filter', JSON.stringify([]))
+    setClearFil(true)
+   
+  }
+
+  const searchBox = (keyword) => {
+    console.log('Searchbox mozda', keyword)
+    let filter = allProducts?.filter(x => x.name?.toLowerCase().includes(keyword.toLowerCase()) || x.hesteg?.toLowerCase().includes(keyword.toLowerCase()))
+    console.log('Filter:', filter)
+    if(filter?.length > 0 && filter?.length < 64){
+      localStorage.setItem('filter', JSON.stringify(filter))
+    }else{
+      localStorage.setItem('filter', JSON.stringify([]))
+    }
+   
+    setClearFil(true)
+   
+  }
+
+  useEffect(() => {
+ 
+    console.log('Useefect')
+    setClearFil(false)
+  }, [clearFil]);
+
   return (
     <Router>
       { cartIsShown &&  <Cart onClose={hideCartHanlder}></Cart> }
       { orderIsShown &&  <Order onClose={hideOrderHanlder} value={value}></Order> }
-      {<Header onShowCart={showCartHalnder} clearProducts={clearProducts} /> }
+      {<Header onShowCart={showCartHalnder} clearProducts={clearProducts} clearFilter={clearFilter} searchBox={searchBox}/> }
       <main >
         
         <div className="container-fluid" style={ screenType.isMobile ? { backgroundColor: '#FFF' , width:'100%', margin:0} : { backgroundColor: '#FFF' , width:'80%'}}>
           <Routes>
-            <Route path="/" element={<HomeScreen clearProducts={clear}/>} exact></Route>
+            <Route path="/" element={<HomeScreen clearProducts={clear} key={clearFil} clearFilter={clearFil}/>} exact></Route>
             <Route path="/products/:id/:catId" element={<ProductScreen />}></Route>
             <Route path="/categories/:id" element={<CategoryScreen />}></Route>
             <Route path="/filter" element={<FilterScreen />}></Route>
