@@ -24,11 +24,11 @@ function Footer() {
 
   const dispatch = useDispatch()
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
-    dispatch(listCategories())
+  //   dispatch(listCategories())
          
-  }, [dispatch]);
+  // }, [dispatch]);
 
   useEffect(()=>{
     console.log('Foooter')
