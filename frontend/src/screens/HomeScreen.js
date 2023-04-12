@@ -140,9 +140,60 @@ function HomeScreen({clearProducts, clearFilter}) {
 
     if(val?.color){
       console.log('Type', typeof val?.color)
-      let temp = allProducts?.filter(x => x.color?.toLowerCase().includes(val?.color?.toLowerCase()))
-      if(temp?.length){
-        color.push(...temp)
+      let ukupno = []
+      if (val?.color){
+          ukupno.push(val?.color.toLowerCase())
+          if ( val?.color.toLowerCase().includes('ž') || val?.color.toLowerCase().includes('z')){
+            ukupno.push(val?.color.toLowerCase())
+            ukupno.push(val?.color.toLowerCase().replace('ž','z'))
+            ukupno.push(val?.color.toLowerCase().replace('z','ž'))
+          }
+
+          if (val?.color.toLowerCase().includes('č') || val?.color.toLowerCase().includes('c')){
+            ukupno.push(val?.color.toLowerCase())
+            ukupno.push(val?.color.toLowerCase().replace('č','c'))
+            ukupno.push(val?.color.toLowerCase().replace('c','č'))
+          }
+              
+          if (val?.color.toLowerCase().includes('š') || val?.color.toLowerCase().includes('s')){
+            ukupno.push(val?.color.toLowerCase())
+            ukupno.push(val?.color.toLowerCase().replace('š','s'))
+            ukupno.push(val?.color.toLowerCase().replace('s','š'))
+          }
+          
+      }
+      console.log('Bojice:', ukupno)
+
+      let temp = allProducts?.map(val => {
+        let search = []
+        
+        if (val?.color){
+          search.push(val.color)
+          if ( val?.color.toLowerCase().includes('ž') || val?.color.toLowerCase().includes('z')){
+              search.push(val?.color.toLowerCase())
+              search.push(val?.color.toLowerCase().replace('ž','z'))
+              search.push(val?.color.toLowerCase().replace('z','ž'))
+          }
+
+          if (val?.color.toLowerCase().includes('č') || val?.color.toLowerCase().includes('c')){
+              search.push(val?.color.toLowerCase())
+              search.push(val?.color.toLowerCase().replace('č','c'))
+              search.push(val?.color.toLowerCase().replace('c','č'))
+          }
+              
+          if (val?.color.toLowerCase().includes('š') || val?.color.toLowerCase().includes('s')){
+              search.push(val?.color.toLowerCase())
+              search.push(val?.color.toLowerCase().replace('š','s'))
+              search.push(val?.color.toLowerCase().replace('s','š'))
+          }
+      }
+        console.log('Unutra', search + '>' + val?.color)
+        return {search: search,
+                val: val}
+      }).filter(x => _.intersection(x.search, ukupno)?.length > 0)
+
+      if(temp?.map(x => x.val)?.length){
+        color.push(...temp?.map(x => x.val))
       }else{
         color.push('1111')
       }

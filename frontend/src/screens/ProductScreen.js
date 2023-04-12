@@ -25,6 +25,7 @@ import ImageGallery from 'react-image-gallery';
 import Ikonice from '../compontents/UI/Ikonice';
 import {  Plus, Dash } from 'react-bootstrap-icons';
 import useScreenType from "react-screentype-hook";
+import underlinebez from './Clase.module.css'
 
 function ProductScreen({match}) {
     
@@ -115,14 +116,24 @@ function ProductScreen({match}) {
         
   }
   return (
+    <>
+      <style type="text/css">
+        {`
+            .underlinbez {
+            text-decoration: none;
+            
+            }
+
+        `}
+      </style>
     <div style={{height:'100%'}}>
         <Breadcrumb style={{ paddingTop:'1.8rem', textDecoration: 'none'}}>
           <Breadcrumb.Item href="/#/"><i className="fa fa-home" style={{color:'green'}}></i></Breadcrumb.Item>
-          <Breadcrumb.Item  style={{ textDecoration:'none !important', textDecorationLine: 'none !important'}} href={`#/categories/${catId}`}>
+          <Breadcrumb.Item className="underlinbez" href={`#/categories/${catId}`}>
                 
-            <font style={{color:'green' , textDecoration: 'none', textDecorationLine: 'none'}}>{product?.category?.find(x => x._id.toString() === catId)?.name}</font> 
+            <font style={{color:'green', fontSize:'.9rem' }}>{product?.category?.find(x => x._id.toString() === catId)?.name}</font> 
           </Breadcrumb.Item>
-          <Breadcrumb.Item active>
+          <Breadcrumb.Item active style={{ fontSize:'.9rem' }}>
             {product?.name}
           </Breadcrumb.Item>
         </Breadcrumb>
@@ -545,7 +556,7 @@ function ProductScreen({match}) {
                     )}  
         
     </div>
-  )
+    </>)
 }
 
 export default ProductScreen
