@@ -30,11 +30,11 @@ function Footer() {
          
   // }, [dispatch]);
 
-  useEffect(()=>{
-    console.log('Foooter')
-    dispatch(getAllProducts())
+  // useEffect(()=>{
+  //   console.log('Foooter')
+  //   dispatch(getAllProducts())
          
-  }, [dispatch]);
+  // }, [dispatch]);
 
   const screenType = useScreenType();
 

@@ -34,6 +34,7 @@ import InformacijePrivatnost from './screens/InformacijePrivatnost'
 import useScreenType from "react-screentype-hook";
 import { productsReset } from './store/product-actions'
 import { useDispatch, useSelector } from "react-redux";
+import { listFilterProducts, getAllProducts } from './store/product-actions'
 
 function App() {
 

@@ -28,6 +28,7 @@ import useScreenType from "react-screentype-hook";
 import { productsReset } from '../store/product-actions'
 import { useNavigate, useLocation } from "react-router-dom";
 import { catMemory } from  '../compontents/UI/categories'
+import { listFilterProducts, getAllProducts } from '../store/product-actions'
 
 
 function Header(props) {
@@ -48,7 +49,8 @@ function Header(props) {
 
   useEffect(() => {
    
-
+    console.log('Pokusaj Header')
+    dispatch(getAllProducts())
     localStorage.setItem('categories', JSON.stringify(categories))
     listKagetorija.current = JSON.parse(localStorage.getItem('categories'))
     setCat(listKagetorija.current)
