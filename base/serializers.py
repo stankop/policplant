@@ -18,7 +18,7 @@ class ProductAllSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['_id', 'name', 'description', 'price', 'countInStock', 'botanicki_naziv', 'images', 'category']
+        fields = ['_id', 'name', 'description', 'price', 'countInStock', 'botanicki_naziv', 'images', 'category', 'color', 'type_of_plant', 'mesto_sadnje', 'place_of_planting']
     
     def get_category(self,obj):
         category=PlantCategorySerializer(obj.category,  many=True)

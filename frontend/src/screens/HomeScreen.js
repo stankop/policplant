@@ -30,6 +30,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import _ from 'lodash'
 import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons'
 import { catMemory } from '../compontents/UI/categories'
+import { products as prodMemory } from '../compontents/UI/allProducts'
 
 
 function HomeScreen({clearProducts, clearFilter}) {
