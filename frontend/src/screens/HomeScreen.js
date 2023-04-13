@@ -140,7 +140,7 @@ function HomeScreen({clearProducts, clearFilter}) {
     }
 
     if(val?.color){
-      console.log('Type', typeof val?.color)
+      console.log('Type', typeof val?.color, val.color)
       let ukupno = []
       if (val?.color){
           ukupno.push(val?.color.toLowerCase())
@@ -188,10 +188,12 @@ function HomeScreen({clearProducts, clearFilter}) {
               search.push(val?.color.toLowerCase().replace('s','š'))
           }
       }
-        console.log('Unutra', search + '>' + val?.color)
+        console.log('Unutra', search + ' i ukupno: ' + ukupno)
         return {search: search,
                 val: val}
       }).filter(x => _.intersection(x.search, ukupno)?.length > 0)
+
+      console.log('Temp', temp?.map(x => x.val))
 
       if(temp?.map(x => x.val)?.length){
         color.push(...temp?.map(x => x.val))

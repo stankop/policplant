@@ -82,7 +82,8 @@ function App() {
 
   const searchBox = (keyword) => {
     console.log('Searchbox mozda', keyword)
-    let filter = allProducts?.filter(x => x.name?.toLowerCase().includes(keyword.toLowerCase()) || x.hesteg?.toLowerCase().includes(keyword.toLowerCase()))
+    let filter = allProducts?.filter(x => x.name?.toLowerCase().includes(keyword.toLowerCase()) || x.hesteg?.toLowerCase().includes(keyword.toLowerCase()) 
+    || x.color?.toLowerCase().includes(keyword.toLowerCase()) || x.botanicki_naziv?.toLowerCase().includes(keyword.toLowerCase()))
     
     if(filter?.length > 0 && filter?.length < 131){
       localStorage.setItem('filter', JSON.stringify(filter))
