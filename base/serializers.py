@@ -3,6 +3,30 @@ from rest_framework import serializers
 from .models import PlantCategory, PlantImage, Product, Order, OrderItem, UserAccount
 from rest_framework_simplejwt.tokens import RefreshToken
 
+class ProductAllSerializer(serializers.ModelSerializer):
+    #colorChoises = serializers.SerializerMethodField(read_only=True)
+    #placeChoises = serializers.SerializerMethodField(read_only=True)
+    #mesto_sadnjeChoises = serializers.SerializerMethodField(read_only=True)
+    #type_of_plantChoises = serializers.SerializerMethodField(read_only=True)
+    category = serializers.SerializerMethodField(read_only=True)
+    #vre_cveChoises = serializers.SerializerMethodField(read_only=True)
+    #orezivanjeChoises = serializers.SerializerMethodField(read_only=True)
+    #privlaci_insekteChoises = serializers.SerializerMethodField(read_only=True)
+    #brzina_rastaChoises = serializers.SerializerMethodField(read_only=True)
+    images = serializers.SerializerMethodField(read_only=True)
+    #categories = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Product
+        fields = ['_id', 'name', 'description', 'price', 'countInStock', 'botanicki_naziv', 'images', 'category']
+    
+    def get_category(self,obj):
+        category=PlantCategorySerializer(obj.category,  many=True)
+        return category.data
+
+    def get_images(self, obj):
+        serializer = PlantImageSerializer(obj.images, many=True)
+        return serializer.data
 
 class ProductSerializer(serializers.ModelSerializer):
     #colorChoises = serializers.SerializerMethodField(read_only=True)
@@ -20,6 +44,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+        #fields = ['_id', 'name', 'description', 'price', 'countInStock', 'botanicki_naziv', 'images', 'category']
 
    
     # def get_colorChoises(self, obj):

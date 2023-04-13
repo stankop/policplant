@@ -11,7 +11,7 @@ from base.models import PlantImage
 from base.serializers import PlantCategorySerializer
 from base.models import PlantCategory
 from base.models import Product
-from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken
+from base.serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, ProductAllSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth.models import User
@@ -406,6 +406,6 @@ def getAllProducts(request):
     products = Product.objects.all().order_by('name')
     print('Broj biljaka je:', len(products))
 
-    serializer = ProductSerializer(products, many= True)
+    serializer = ProductAllSerializer(products, many= True)
     return Response({'products': serializer.data})
 
