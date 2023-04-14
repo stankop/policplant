@@ -22,7 +22,7 @@ import ProductEditScreen from "./screens/ProductEditScreen"
 import ProductCreateScreen from "./screens/ProductCreateScreen"
 import OrderListScreen from "./screens/OrderListScreen"
 import FilterScreen from "./screens/FilterScreen"
-import { HashRouter as Router, useNavigate, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, useNavigate, Route, Routes, Navigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import Cart from './compontents/UI/Cart/Cart'
 import Order from './compontents/UI/Order/Order'
@@ -50,6 +50,7 @@ function App() {
   const [clear, setClear] = useState(false)
   const screenType = useScreenType();
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const showCartHalnder = () =>{
     setCartIsShown(true)
@@ -82,6 +83,7 @@ function App() {
 
   const searchBox = (keyword) => {
     console.log('Searchbox mozda', keyword)
+
     let filter = allProducts?.filter(x => x.name?.toLowerCase().includes(keyword.toLowerCase()) || x.hesteg?.toLowerCase().includes(keyword.toLowerCase()) 
     || x.color?.toLowerCase().includes(keyword.toLowerCase()) || x.botanicki_naziv?.toLowerCase().includes(keyword.toLowerCase()))
     
@@ -92,17 +94,17 @@ function App() {
     }
    
     setClearFil(true)
-   
+    navigate('/')
   }
 
   useEffect(() => {
  
-    console.log('Useefect')
     setClearFil(false)
   }, [clearFil]);
 
   return (
-    <Router>
+    //<Router>
+    <div>
       { cartIsShown &&  <Cart onClose={hideCartHanlder}></Cart> }
       { orderIsShown &&  <Order onClose={hideOrderHanlder} value={value}></Order> }
       {<Header onShowCart={showCartHalnder} clearProducts={clearProducts} clearFilter={clearFilter} searchBox={searchBox}/> }
@@ -145,7 +147,8 @@ function App() {
         
       </main>
       <Footer />
-    </Router>
+    </div>
+    //</Router>
   );
 }
 

@@ -242,8 +242,14 @@ function HomeScreen({clearProducts, clearFilter}) {
 
     if(localStorage.getItem('filter')){
       const items = JSON.parse(localStorage.getItem('filter'))
-      if(items){
+      console.log('Items:', items)
+      if(items?.length !== 0){
         setFilter(items)
+        window.scrollTo({
+          top: 500,
+          left: 200,
+          behavior: "smooth"
+        });
       }
     }
     

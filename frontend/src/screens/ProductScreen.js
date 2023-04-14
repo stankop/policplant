@@ -148,17 +148,17 @@ function ProductScreen({match}) {
                     <div>
                         <Row >
                                 <Col  sm={12} md={6} lg={4} xl={5} xs={12} >
-                                    <Row>
+                                    
                                     
                                     {/* {image && <ImageZoom src={image} alt={product.name} zoom="150" fluid>
 
                                     </ImageZoom>} */}
                                      {images && <ImageGallery items={images}
-                                     
+                                     style={{ height: '5rem !important'}}
                                      lazyLoad={true}
                                       />}
                                     
-                                    </Row>
+                                  
                                     {/* <Row className="justify-content-md-left">
                                     {product?.images?.map(img => (
                                         <Col key={img.id} sm={4} md={4} lg={4} xl={3} xs={6} className="d-flex">

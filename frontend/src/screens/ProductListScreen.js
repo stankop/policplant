@@ -15,6 +15,7 @@ import { deleteProduct, deleteProductReset } from '../store/deleteProduct-action
 import { createProduct,changeStanjeValue, productReset } from '../store/createProduct-actions'
 import { Link } from 'react-router-dom';
 import { MDBInput } from 'mdb-react-ui-kit'
+import { MDBCol, MDBFormInline, MDBIcon } from "mdbreact";
 
 function ProductListScreen() {
 
@@ -141,6 +142,12 @@ function ProductListScreen() {
           }
 
     }
+
+    const pretraga = (e) => {
+        console.log('Pretraga:', e.target.value)
+        let temp = products?.filter(x => x.name?.toLowerCase().includes(e.target.value.toLowerCase()))
+        setVal(temp)
+    }
     
   return (
     <div>
@@ -154,6 +161,17 @@ function ProductListScreen() {
                         <i className='fas fa-plus'></i> Kreiraj Proizvod
                     </Button>
                 </LinkContainer>     
+            </Col>
+            <Col className='text-right'>
+                {/* <MDBCol md="8">
+                    <form className="form-inline mt-4 mb-4">
+                        <MDBIcon icon="search" />
+                        <input className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Pretraga biljaka..." aria-label="Search" onChange={pretraga} />
+                    </form>
+                </MDBCol> */}
+                <MDBCol md="6">
+                    <input style={{ border:'1px solid green'}} className="form-control" type="text" placeholder="Pretraga biljaka..." aria-label="Search" onChange={pretraga} />
+                </MDBCol>
             </Col>
 
         </Row>

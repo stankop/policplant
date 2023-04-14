@@ -36,6 +36,7 @@
     "imagekitio-react": "^2.0.0",
     "lodash": "^4.17.21",
     "mdb-react-ui-kit": "^5.0.0",
+    "mdbreact": "^5.2.0",
     "postcss-custom-properties": "^12.1.10",
     "postcss-safe-parser": "^6.0.0",
     "react": "^18.2.0",
