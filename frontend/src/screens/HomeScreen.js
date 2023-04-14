@@ -329,7 +329,7 @@ function HomeScreen({clearProducts, clearFilter}) {
                                
                                 (<Row  className={'gy-2'}>
                                   {orderCategories?.map(category => (
-                                  <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={4} className="d-flex ">
+                                  <Col key={category._id} sm={12} md={6} lg={4} xl={3} xs={4} className="d-flex my-1 p-1">
                                       <Kategorija category={category} />
                                   </Col>
                                     ))}

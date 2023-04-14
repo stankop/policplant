@@ -72,7 +72,7 @@ function CategoryScreen() {
         {/* <p>{ catProducts?.find( cat => cat._id?.toString() === id)?.description}</p> */}
         <p dangerouslySetInnerHTML={htmlString}></p>
         <div >
-          <img alt='Bordura' style={screenType.isMobile ? {maxWidth:'95%', margin:'.5rem'} : { margin:'.5rem'}}  src={bordureImages[(Math.random() * bordureImages.length) | 0]} ></img>
+          <img alt='Bordura' style={screenType.isMobile ? {maxWidth:'95%', margin:'.5rem'} : {maxWidth:'100%', margin:'1rem'}}  src={bordureImages[(Math.random() * bordureImages.length) | 0]} ></img>
           
         </div>
         { !filter?.length ? <Loader></Loader>

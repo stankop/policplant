@@ -149,7 +149,7 @@ function App() {
       {<Header onShowCart={showCartHalnder} clearProducts={clearProducts} clearFilter={clearFilter} searchBox={searchBox}/> }
       <main >
         
-        <div className="container-fluid" style={ screenType.isMobile ? { backgroundColor: '#FFF' , width:'100%', margin:0} : { backgroundColor: '#FFF' , width:'80%'}}>
+        <div className="container-fluid" style={ screenType.isMobile ? { backgroundColor: '#FFF' , width:'100%', margin:0} : { backgroundColor: '#FFF' , width:'85%'}}>
           <Routes>
             <Route path="/" element={<HomeScreen clearProducts={clear} key={clearFil} clearFilter={clearFil}/>} exact></Route>
             <Route path="/products/:id/:catId" element={<ProductScreen />}></Route>

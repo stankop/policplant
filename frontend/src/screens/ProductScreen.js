@@ -91,7 +91,7 @@ function ProductScreen({match}) {
                 original: image.image,
                 thumbnail: image.image,
                 loading:'lazy',
-                originalHeight: screenType.isMobile ? '350rem' : screenType.isLargeDesktop ? '600rem' : '500rem',
+                originalHeight: screenType.isMobile ? '350rem' : '500rem',
                 //originalWidth: screenType.isMobile ? '350rem' : screenType.isLargeDesktop ? '600rem' : '250rem',
                 originalClass:'padding:2rem'
             }

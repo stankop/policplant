@@ -39,9 +39,9 @@ function Product({product, catId}) {
     }, [])
 
   return (
-    <Card className={`my-1 p-1 rounded ${classes["img-hover-zoomA"]}`} border="success" style={ screenType.isMobile ? {  height: '23.8rem' } : { width: '90%', height: '30rem' }}>
+    <Card className={`my-1 p-1 rounded ${classes["img-hover-zoomA"]}`} border="success" style={ screenType.isMobile ? {  height: '23.8rem' } : { width: '100%', height: '30rem' }}>
         <Link to={`/products/${product._id}/${catId}`}> 
-            <Card.Img src={product.images?.findLast( image => image.order === 0)?.image} loading='lazy' style={screenType.isMobile ? { width: '100%', height: '24vh', objectFit: 'cover' } : { width: '100%', height: '32vh', objectFit: 'cover' }}></Card.Img>
+            <Card.Img src={product.images?.findLast( image => image.order === 0)?.image} loading='lazy' style={screenType.isMobile ? { width: '100%', height: '24vh', objectFit: 'cover' } : { width: '100%', height: '18rem', objectFit: 'cover' }}></Card.Img>
             <Card.ImgOverlay style={{width: '100%', height: '10rem' }}>
                 {product?.countInStock < 1 && <Card.Title><div style={ screenType.isMobile ? { backgroundColor:"red",fontSize:'.8rem', color:"white", width:'50%', display: 'inline-flex', padding: '4px', marginBottom: '1em'} : { backgroundColor:"red", color:"white", display: 'inline-flex', padding: '4px', marginBottom: '1em'}}>Nema na stanju</div></Card.Title>}
             </Card.ImgOverlay>
