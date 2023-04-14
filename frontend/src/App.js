@@ -84,8 +84,47 @@ function App() {
   const searchBox = (keyword) => {
     console.log('Searchbox mozda', keyword)
 
-    let filter = allProducts?.filter(x => x.name?.toLowerCase().includes(keyword.toLowerCase()) || x.hesteg?.toLowerCase().includes(keyword.toLowerCase()) 
-    || x.color?.toLowerCase().includes(keyword.toLowerCase()) || x.botanicki_naziv?.toLowerCase().includes(keyword.toLowerCase()))
+    let filter = allProducts?.map(val => {
+      let search = []
+      
+      if (keyword){
+        search.push(keyword)
+        if ( keyword.toLowerCase().includes('ž') || keyword.toLowerCase().includes('z')){
+            search.push(keyword.toLowerCase())
+            search.push(keyword.toLowerCase().replace('ž','z'))
+            search.push(keyword.toLowerCase().replace('z','ž'))
+        }
+
+        if (keyword.toLowerCase().includes('č') || keyword.toLowerCase().includes('c')){
+            search.push(keyword.toLowerCase())
+            search.push(keyword.toLowerCase().replace('č','c'))
+            search.push(keyword.toLowerCase().replace('c','č'))
+        }
+
+        if (keyword.toLowerCase().includes('ć') || keyword.toLowerCase().includes('c')){
+          search.push(keyword.toLowerCase())
+          search.push(keyword.toLowerCase().replace('ć','c'))
+          search.push(keyword.toLowerCase().replace('c','ć'))
+      }
+            
+        if (keyword.toLowerCase().includes('š') || keyword.toLowerCase().includes('s')){
+            search.push(keyword.toLowerCase())
+            search.push(keyword.toLowerCase().replace('š','s'))
+            search.push(keyword.toLowerCase().replace('s','š'))
+        }
+    }
+      console.log('Unutra:', search )
+      return {search: search,
+              val: val}
+    }).filter(x => x.search?.some(y => x.val?.name?.toLowerCase().includes(y.toLowerCase())) || x.search?.some(y => x.val?.hesteg?.toLowerCase().includes(y.toLowerCase()))
+     || x.search?.some(y => x.val?.color?.toLowerCase().includes(y.toLowerCase())) || x.search?.some(y => x.val?.botanicki_naziv?.toLowerCase().includes(y.toLowerCase())))?.map(y =>
+      {return y.val})
+    
+     console.log("Temp:", filter)
+
+    // let filter = allProducts?.filter(x => x.name?.toLowerCase().includes(keyword.toLowerCase()) || x.hesteg?.toLowerCase().includes(keyword.toLowerCase()) 
+    // || x.color?.toLowerCase().includes(keyword.toLowerCase()) || x.botanicki_naziv?.toLowerCase().includes(keyword.toLowerCase()))
+    //.filter(x => ukupno?.some( item => x.search?.some(item2 => item2?.includes(item))))
     
     if(filter?.length > 0 && filter?.length < 131){
       localStorage.setItem('filter', JSON.stringify(filter))

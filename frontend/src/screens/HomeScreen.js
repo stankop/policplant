@@ -191,7 +191,7 @@ function HomeScreen({clearProducts, clearFilter}) {
         console.log('Unutra', search + ' i ukupno: ' + ukupno)
         return {search: search,
                 val: val}
-      }).filter(x => _.intersection(x.search, ukupno)?.length > 0)
+      }).filter(x => ukupno?.some( item => x.search?.some(item2 => item2?.includes(item))))
 
       console.log('Temp', temp?.map(x => x.val))
 
