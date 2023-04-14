@@ -89,7 +89,11 @@ function ProductScreen({match}) {
         const imgs = [...new Set(targetFilesObjectWithoutLast)]?.map(image => {
             return {
                 original: image.image,
-                thumbnail: image.image
+                thumbnail: image.image,
+                loading:'lazy',
+                originalHeight: screenType.isMobile ? '350rem' : screenType.isLargeDesktop ? '600rem' : '500rem',
+                //originalWidth: screenType.isMobile ? '350rem' : screenType.isLargeDesktop ? '600rem' : '250rem',
+                originalClass:'padding:2rem'
             }
         })
         setImages(imgs)
@@ -147,15 +151,15 @@ function ProductScreen({match}) {
                 :(  
                     <div>
                         <Row >
-                                <Col  sm={12} md={6} lg={4} xl={5} xs={12} >
+                                <Col  sm={12} md={6} lg={5} xl={5} xs={12} >
                                     
                                     
                                     {/* {image && <ImageZoom src={image} alt={product.name} zoom="150" fluid>
 
                                     </ImageZoom>} */}
                                      {images && <ImageGallery items={images}
-                                     style={{ height: '5rem !important'}}
-                                     lazyLoad={true}
+                                     alt='slikica'
+                                     loading='lazy'
                                       />}
                                     
                                   
