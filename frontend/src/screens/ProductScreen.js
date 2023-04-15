@@ -304,7 +304,7 @@ function ProductScreen({match}) {
                                                                 <ListGroup.Item>
                                                                    { screenType.isMobile ? <Row>
                                                                         <Col xs={4} md={4} lg={4}>Količina:</Col>
-                                                                        <Col xs={8} className="justify-content-md-right">
+                                                                        <Col xs={8}>
                                                                             <Row  xs={12}>
                                                                                 <Col xs={4} md={4} lg={4}>
                                                                                     <Button variant="light" 
@@ -312,7 +312,7 @@ function ProductScreen({match}) {
                                                                                         <Dash color="red" size={16} />
                                                                                     </Button>
                                                                                 </Col>
-                                                                                <Col xs={4} md={4} lg={4} >
+                                                                                <Col xs={4}  lg={4} md={{ gutterX: 5 }}>
                                                                                     <InputGroup style={{width:'3rem'}}>
                                                                                         <Form.Control 
                                                                                             onChange={(e) => setQty(Number(e.target.value))}
