@@ -59,7 +59,7 @@ function CategoryScreen() {
     <div>
         { false && <ProductCarucel></ProductCarucel>}
         <Breadcrumb style={{ paddingTop:'1.7rem'}}>
-          <Breadcrumb.Item href="/"><i className="fa fa-home" style={{color:'green'}}></i></Breadcrumb.Item>
+          <Breadcrumb.Item href="/"><i className="fa fa-home" style={{color:'green', fontSize:'.9rem'}}></i></Breadcrumb.Item>
           <Breadcrumb.Item  active style={{fontSize:'.9rem'}}>
             { catMemory?.find( cat => cat._id?.toString() === id)?.name}
           

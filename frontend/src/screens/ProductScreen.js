@@ -26,6 +26,8 @@ import Ikonice from '../compontents/UI/Ikonice';
 import {  Plus, Dash } from 'react-bootstrap-icons';
 import useScreenType from "react-screentype-hook";
 import underlinebez from './Clase.module.css'
+import classes from './ProductScreen.module.css'
+import { MDBBreadcrumb, MDBBreadcrumbItem } from 'mdb-react-ui-kit';
 
 function ProductScreen({match}) {
     
@@ -131,16 +133,29 @@ function ProductScreen({match}) {
         `}
       </style>
     <div style={{height:'100%'}}>
-        <Breadcrumb style={{ paddingTop:'1.8rem', textDecoration: 'none'}}>
-          <Breadcrumb.Item href="/#/"><i className="fa fa-home" style={{color:'green'}}></i></Breadcrumb.Item>
-          <Breadcrumb.Item className="underlinbez" href={`#/categories/${catId}`}>
+        {/* <Breadcrumb style={{ paddingTop:'1.8rem', textDecoration: 'none'}}>
+          <Breadcrumb.Item href="/#/"><i className="fa fa-home" style={{color:'green', fontSize:'.9rem'}}></i></Breadcrumb.Item>
+          <Breadcrumb.Item href={`#/categories/${catId}`}>
                 
-            <font style={{color:'green', fontSize:'.9rem' }}>{product?.category?.find(x => x._id.toString() === catId)?.name}</font> 
+            <font style={{color:'green', fontSize:'.9rem'}}>{product?.category?.find(x => x._id.toString() === catId)?.name}</font> 
           </Breadcrumb.Item>
           <Breadcrumb.Item active style={{ fontSize:'.9rem' }}>
             {product?.name}
           </Breadcrumb.Item>
-        </Breadcrumb>
+        </Breadcrumb> */}
+
+       
+
+        <MDBBreadcrumb style={{ paddingTop:'1.8rem'}}>
+            <MDBBreadcrumbItem style={{color:'green', fontSize:'.9rem'}}>
+                <a href='/#/'><i className="fa fa-home" style={{color:'green', fontSize:'.9rem'}}></i></a>
+            </MDBBreadcrumbItem>
+            <MDBBreadcrumbItem href={`#/categories/${catId}`} style={{color:'green', fontSize:'.9rem'}}>
+                <a style={{ textDecoration:'none'}} href={`#/categories/${catId}`}><font style={{color:'green', fontSize:'.9rem'}}>{product?.category?.find(x => x._id.toString() === catId)?.name}</font></a>
+            </MDBBreadcrumbItem>
+            <MDBBreadcrumbItem active style={{color:'green', fontSize:'.9rem'}}>{product?.name}</MDBBreadcrumbItem>
+        </MDBBreadcrumb>
+      
         <Link to={-1} className='btn btn-success my-3'> Nazad</Link>
         {userInfo && <Link to={`/admin/product/${id}/edit`} className='btn btn-success my-3' style={{ marginLeft:'3rem'}}> Edit Biljke</Link>}
 
