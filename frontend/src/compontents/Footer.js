@@ -57,7 +57,7 @@ function Footer() {
             </Row> */}
             <Row>
               <Col    style={{ }}>
-                <Image xs={6} src={image}
+                <Image xs={6} xl={6} lg={6} md={6} src={image}
                        
                        fluid
                        responsive='true'

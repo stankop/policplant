@@ -1,3 +1,19 @@
 .click:hover {
     color: rgb(51 51 51 / 65%) !important;
   }
+
+  .header {
+    position: relative;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+  }
+  
+  .header-show {
+    top: 0px;
+  }
+  
+  .header-hide {
+    top: -6rem;
+  }
+ 

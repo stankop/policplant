@@ -153,7 +153,7 @@ function ProductListScreen() {
     <div>
         <Row className='align-items-center'>
             <Col >
-                <h1 style={{color:'green'}}>Biljke</h1>
+                <h1 style={{color:'green', padding:'2rem'}}>Biljke</h1>
             </Col>
             <Col className='text-right'>
                 <LinkContainer to={`/admin/createproduct`}>
