@@ -151,7 +151,7 @@ function ProductScreen({match}) {
                 <a href='/#/'><i className="fa fa-home" style={{color:'green', fontSize:'.9rem'}}></i></a>
             </MDBBreadcrumbItem>
             <MDBBreadcrumbItem  style={{color:'green', fontSize:'.9rem'}}>
-                <a style={{ textDecoration:'none'}} href={`/categories/${catId}`}><font style={{color:'green', fontSize:'.9rem'}}>{product?.category?.find(x => x._id.toString() === catId)?.name}</font></a>
+                <a style={{ textDecoration:'none'}} href={`/#/categories/${catId}`}><font style={{color:'green', fontSize:'.9rem'}}>{product?.category?.find(x => x._id.toString() === catId)?.name}</font></a>
             </MDBBreadcrumbItem>
             <MDBBreadcrumbItem active style={{color:'green', fontSize:'.9rem'}}>{product?.name}</MDBBreadcrumbItem>
         </MDBBreadcrumb>
@@ -303,16 +303,16 @@ function ProductScreen({match}) {
                                                             {product?.countInStock > 0 && (
                                                                 <ListGroup.Item>
                                                                    { screenType.isMobile ? <Row>
-                                                                        <Col xs={4}>Količina:</Col>
+                                                                        <Col xs={4} md={4} lg={4}>Količina:</Col>
                                                                         <Col xs={8} className="justify-content-md-right">
                                                                             <Row  xs={12}>
-                                                                                <Col xs={4}>
+                                                                                <Col xs={4} md={4} lg={4}>
                                                                                     <Button variant="light" 
                                                                                             onClick={decrementHandle}> 
                                                                                         <Dash color="red" size={16} />
                                                                                     </Button>
                                                                                 </Col>
-                                                                                <Col xs={4}>
+                                                                                <Col xs={4} md={4} lg={4} >
                                                                                     <InputGroup style={{width:'3rem'}}>
                                                                                         <Form.Control 
                                                                                             onChange={(e) => setQty(Number(e.target.value))}
@@ -324,7 +324,7 @@ function ProductScreen({match}) {
                                                                                         </Form.Control>
                                                                                     </InputGroup>
                                                                                 </Col>
-                                                                                <Col xs={4}>
+                                                                                <Col xs={4} md={4} lg={4}>
                                                                                     <Button variant="light"
                                                                                             onClick={incrementHandle}> 
                                                                                         <Plus color="green" size={16} />
