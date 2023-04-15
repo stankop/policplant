@@ -87,6 +87,8 @@ def addOrderItems(request):
                 price=i['price'],
                 image="stanko.jpg"
             )
+            item.total = item.qty * item.price
+            item.save()
             itemi.append(item)
             # 5 update Stock
             product.countInStock -= item.qty
