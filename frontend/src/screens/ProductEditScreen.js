@@ -11,7 +11,7 @@ import { listProducts, productDetails } from '../store/product-actions'
 import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import { updateProduct, updateProductReset, updateProductDetails } from '../store/updateProduct-actions'
-import { listCategories } from '../store/category-actions'
+import { listCategories, listCategoriesForCreate } from '../store/category-actions'
 import Select from 'react-select';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -113,7 +113,7 @@ function ProductEditScreen( ) {
 
     useEffect(() => {
         
-        dispatch(listCategories()) 
+        dispatch(listCategoriesForCreate()) 
         
     }, [dispatch])
 
@@ -781,7 +781,7 @@ function ProductEditScreen( ) {
                             </Form.Group>
 
                             <Button type='submit' variant='success'  className='my-3'>
-                                Edituj Biljku
+                                Sačuvaj Biljku
                         </Button>
 
                         </Form>

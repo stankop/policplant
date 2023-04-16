@@ -11,7 +11,7 @@ import { listProducts, productDetails } from '../store/product-actions'
 import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import { updateProduct, updateProductReset } from '../store/updateProduct-actions'
-import { listCategories } from '../store/category-actions'
+import { listCategories, listCategoriesForCreate } from '../store/category-actions'
 import { createProduct, productReset } from '../store/createProduct-actions'
 import Select from 'react-select';
 import {toast} from 'react-toastify';
@@ -107,7 +107,7 @@ function ProductCreateScreen( ) {
 
     useEffect(() => {
         
-        dispatch(listCategories()) 
+        dispatch(listCategoriesForCreate()) 
         
     }, [dispatch])
 
