@@ -113,20 +113,20 @@ function App() {
             search.push(keyword.toLowerCase().replace('s','š'))
         }
     }
-      console.log('Unutra:', search )
+      
       return {search: search,
               val: val}
     }).filter(x => x.search?.some(y => x.val?.name?.toLowerCase().includes(y.toLowerCase())) || x.search?.some(y => x.val?.hesteg?.toLowerCase().includes(y.toLowerCase()))
-     || x.search?.some(y => x.val?.color?.toLowerCase().includes(y.toLowerCase())) || x.search?.some(y => x.val?.botanicki_naziv?.toLowerCase().includes(y.toLowerCase())))?.map(y =>
+     || x.search?.some(y => x.val?.color?.toLowerCase().includes(y.toLowerCase())) || x.search?.some(y => x.val?.botanicki_naziv?.toLowerCase().includes(y.toLowerCase()))
+     ||  x.search?.some(y => x.val?.description?.toLowerCase().includes(y.toLowerCase())))?.map(y =>
       {return y.val})
     
-     console.log("Temp:", filter)
 
     // let filter = allProducts?.filter(x => x.name?.toLowerCase().includes(keyword.toLowerCase()) || x.hesteg?.toLowerCase().includes(keyword.toLowerCase()) 
     // || x.color?.toLowerCase().includes(keyword.toLowerCase()) || x.botanicki_naziv?.toLowerCase().includes(keyword.toLowerCase()))
     //.filter(x => ukupno?.some( item => x.search?.some(item2 => item2?.includes(item))))
     
-    if(filter?.length > 0 && filter?.length < 131){
+    if(filter?.length > 0 && filter?.length < 144){
       localStorage.setItem('filter', JSON.stringify(filter))
     }else{
       localStorage.setItem('filter', JSON.stringify([]))

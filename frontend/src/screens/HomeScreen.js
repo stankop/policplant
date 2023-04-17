@@ -155,6 +155,12 @@ function HomeScreen({clearProducts, clearFilter}) {
             ukupno.push(val?.color.toLowerCase().replace('č','c'))
             ukupno.push(val?.color.toLowerCase().replace('c','č'))
           }
+
+          if (val?.color.toLowerCase().includes('ć') || val?.color.toLowerCase().includes('c')){
+            ukupno.push(val?.color.toLowerCase())
+            ukupno.push(val?.color.toLowerCase().replace('ć','c'))
+            ukupno.push(val?.color.toLowerCase().replace('c','ć'))
+          }
               
           if (val?.color.toLowerCase().includes('š') || val?.color.toLowerCase().includes('s')){
             ukupno.push(val?.color.toLowerCase())
@@ -176,11 +182,17 @@ function HomeScreen({clearProducts, clearFilter}) {
               search.push(val?.color.toLowerCase().replace('z','ž'))
           }
 
-          if (val?.color.toLowerCase().includes('č') || val?.color.toLowerCase().includes('c')){
+          if (val?.color.toLowerCase().includes('ć') || val?.color.toLowerCase().includes('c')){
               search.push(val?.color.toLowerCase())
-              search.push(val?.color.toLowerCase().replace('č','c'))
-              search.push(val?.color.toLowerCase().replace('c','č'))
+              search.push(val?.color.toLowerCase().replace('ć','c'))
+              search.push(val?.color.toLowerCase().replace('c','ć'))
           }
+
+          if (val?.color.toLowerCase().includes('č') || val?.color.toLowerCase().includes('c')){
+            search.push(val?.color.toLowerCase())
+            search.push(val?.color.toLowerCase().replace('č','c'))
+            search.push(val?.color.toLowerCase().replace('c','č'))
+        }
               
           if (val?.color.toLowerCase().includes('š') || val?.color.toLowerCase().includes('s')){
               search.push(val?.color.toLowerCase())

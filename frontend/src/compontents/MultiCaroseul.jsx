@@ -5,11 +5,18 @@ import Image from "react-bootstrap/Image";
 import ImageButton from 'react-image-button';
 import { useNavigate } from 'react-router-dom';
 import useScreenType from "react-screentype-hook";
+import 'react-multi-carousel/lib/styles.css';
 
 const responsive = {
+    superLargeDesktop: {
+    // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 3,
+      slidesToSlide: 1 // optional, default to 1.
+    },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 2,
+      items: 3,
       slidesToSlide: 1 // optional, default to 1.
     },
     tablet: {
@@ -35,7 +42,8 @@ function MultiCaroseul(props) {
             alt="First slide"
             rounded
             onClick={() => { navigate('/categories/37')}}
-            style={{ height:'50%'}}
+            width='100%'
+            
             />
     const image1_mobile = <Image
             className='img-fluid shadow-5'
@@ -43,7 +51,7 @@ function MultiCaroseul(props) {
             alt="First slide"
             rounded
             onClick={() => { navigate('/categories/37')}}
-            style={{ height:'50%'}}
+            
             />
 
     const image2 = <Image
@@ -52,7 +60,7 @@ function MultiCaroseul(props) {
             alt="Second slide"
             rounded
             onClick={() => { navigate('/categories/28')}}
-            style={{ height:'50%'}}
+            width='100%'
             />
 
     const image2_mobile = <Image
@@ -70,7 +78,7 @@ function MultiCaroseul(props) {
             alt="Third slide"
             rounded
             onClick={() => { navigate('/categories/31')}}
-            style={{ height:'50%'}}
+            width='100%'
             />
     
     const image3_mobile = <Image
@@ -104,6 +112,7 @@ function MultiCaroseul(props) {
             <div style={{padding:'1rem'}}>
                 <ImageButton img={!screenType.isMobile ? image1 : image1_mobile}
                              //zoomOnHover={0}
+                            
                              buttonPosition="bottom"
                              alwaysShowButton={true} >
                     <button onClick={() => { navigate('/categories/37')}} primary="true"  className="btn success" style={{ border: '2px solid black',cursor:'pointer', backgroundColor:'white'}} > Za vaš kutak u senci </button>
