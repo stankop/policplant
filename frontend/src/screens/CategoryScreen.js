@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import DOMPurify from 'dompurify';
 import useScreenType from "react-screentype-hook";
 import { catMemory } from '../compontents/UI/categories'
+import $ from 'jquery';
 
 function CategoryScreen() {
 
@@ -32,11 +33,16 @@ function CategoryScreen() {
   const screenType = useScreenType();
 
   useEffect(()=>{
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-      })
+    // window.scrollTo({
+    //   top: 0,
+    //   left: 0,
+    //   behavior: 'smooth',
+    //   duration: 2000
+    //   })
+
+    $('html, body').animate({
+      scrollTop: 0,
+      } , 400);
    //dispatch(listProducts(id))
         
  }, [dispatch, id]);
