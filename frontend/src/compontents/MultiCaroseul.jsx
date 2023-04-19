@@ -91,6 +91,7 @@ function MultiCaroseul(props) {
             />
 
     return (
+      <div style={{ border: '1px solid green', marginTop:'2rem', borderRadius: '1rem'}}>
         <Carousel
             swipeable={false}
             draggable={false}
@@ -134,6 +135,7 @@ function MultiCaroseul(props) {
                 </ImageButton>
             </div> 
         </Carousel>
+      </div>
     )
 }
 

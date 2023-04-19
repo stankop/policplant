@@ -309,7 +309,7 @@ function HomeScreen({clearProducts, clearFilter}) {
                     { (screenType.isDesktop || screenType.isLargeDesktop) 
                       && 
                       <Col>
-                          <div style={{ border:'.2rem solid #83B735', paddingBottom:'1rem', paddingLeft:'1rem'}}>
+                          <div style={{ border:'.2rem solid #83B735', borderRadius: '1rem', paddingBottom:'1rem', paddingLeft:'1rem'}}>
                             <Search onSearch={ searchFunc} forToogle={forToogle}></Search> 
                           </div>
                       </Col> 
