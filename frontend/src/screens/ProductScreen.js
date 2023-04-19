@@ -151,7 +151,7 @@ function ProductScreen({match}) {
                 <a href='/#/'><i className="fa fa-home" style={{color:'green', fontSize:'.9rem'}}></i></a>
             </MDBBreadcrumbItem>
             <MDBBreadcrumbItem  style={{color:'green', fontSize:'.9rem'}}>
-                <a style={{ textDecoration:'none'}} href={`/#/categories/${catId}`}><font style={{color:'green', fontSize:'.9rem'}}>{product?.category?.find(x => x._id.toString() === catId)?.name}</font></a>
+                <a style={{ textDecoration:'none'}} href={`/#/categories/${catId}`}><font style={{color:'green', fontSize:'.9rem'}}>{product?.category?.find(x => x._id.toString() === catId ? catId : product?.category[0])?.name}</font></a>
             </MDBBreadcrumbItem>
             <MDBBreadcrumbItem active style={{color:'green', fontSize:'.9rem'}}>{product?.name}</MDBBreadcrumbItem>
         </MDBBreadcrumb>
