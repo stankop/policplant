@@ -3,9 +3,10 @@ import "react-multi-carousel/lib/styles.css";
 import "bootstrap/dist/css/bootstrap.css";
 import Image from "react-bootstrap/Image";
 import ImageButton from 'react-image-button';
-import { useNavigate } from 'react-router-dom';
-import useScreenType from "react-screentype-hook";
+import { useRouter } from 'next/router';
+//import useScreenType from "react-screentype-hook";
 import 'react-multi-carousel/lib/styles.css';
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 const responsive = {
     superLargeDesktop: {
@@ -33,15 +34,15 @@ const responsive = {
 
 function MultiCaroseul(props) {
 
-    const navigate = useNavigate();
-    const screenType = useScreenType();
+    const navigate = useRouter();
+    //const screenType = useScreenType();
 
     const image1 = <Image
             className='img-fluid shadow-5'
             src= "https://policplantblob.blob.core.windows.net/policplant-banner/biljke za senku baner_800x600.jpg"
             alt="First slide"
             rounded
-            onClick={() => { navigate('/categories/37')}}
+            onClick={() => { navigate.replace('/categories/37')}}
             width='100%'
             
             />
@@ -50,7 +51,7 @@ function MultiCaroseul(props) {
             src= "https://policplantblob.blob.core.windows.net/policplant-banner/biljke za senku baner_350x250.jpg"
             alt="First slide"
             rounded
-            onClick={() => { navigate('/categories/37')}}
+            onClick={() => { navigate.replace('/categories/37')}}
             
             />
 
@@ -59,7 +60,7 @@ function MultiCaroseul(props) {
             src= "https://policplantblob.blob.core.windows.net/policplant-banner/trajnice baner_800x600.jpg"
             alt="Second slide"
             rounded
-            onClick={() => { navigate('/categories/28')}}
+            onClick={() => { navigate.replace('/categories/28')}}
             width='100%'
             />
 
@@ -68,7 +69,7 @@ function MultiCaroseul(props) {
             src= "https://policplantblob.blob.core.windows.net/policplant-banner/trajnice baner_350x250.jpg"
             alt="Second slide"
             rounded
-            onClick={() => { navigate('/categories/28')}}
+            onClick={() => { navigate.replace('/categories/28')}}
             style={{ height:'50%'}}
             />
 
@@ -77,7 +78,7 @@ function MultiCaroseul(props) {
             src= "https://policplantblob.blob.core.windows.net/policplant-banner/ukrasno zbunje baner_800x600.jpg"
             alt="Third slide"
             rounded
-            onClick={() => { navigate('/categories/31')}}
+            onClick={() => { navigate.replace('/categories/31')}}
             width='100%'
             />
     
@@ -86,7 +87,7 @@ function MultiCaroseul(props) {
             src= "https://policplantblob.blob.core.windows.net/policplant-banner/ukrasno zbunje baner_350x250.jpg"
             alt="Third slide"
             rounded
-            onClick={() => { navigate('/categories/31')}}
+            onClick={() => { navigate.replace('/categories/31')}}
             style={{ height:'50%'}}
             />
 
@@ -111,27 +112,27 @@ function MultiCaroseul(props) {
             itemClass="carousel-item-padding-40-px"
             >
             <div style={{padding:'1rem'}}>
-                <ImageButton img={!screenType.isMobile ? image1 : image1_mobile}
+                <ImageButton img={!isMobile ? image1 : image1_mobile}
                              //zoomOnHover={0}
                             
                              buttonPosition="bottom"
                              alwaysShowButton={true} >
-                    <button onClick={() => { navigate('/categories/37')}} primary="true"  className="btn success" style={{ border: '2px solid black',cursor:'pointer', backgroundColor:'white'}} > Za vaš kutak u senci </button>
+                    <button onClick={() => { navigate.replace('/categories/37')}} primary="true"  className="btn success" style={{ border: '2px solid black',cursor:'pointer', backgroundColor:'white'}} > Za vaš kutak u senci </button>
                 </ImageButton>
             </div>
             <div style={{padding:'1rem'}}>
-                <ImageButton img={!screenType.isMobile ? image2 : image2_mobile}
+                <ImageButton img={!isMobile ? image2 : image2_mobile}
                              //zoomOnHover={0}
                              alwaysShowButton={true}
                              buttonPosition="bottom" >
-                    <button onClick={() => { navigate('/categories/28')}} primary="true" className="btn success" style={{ border: '2px solid black',cursor:'pointer', backgroundColor:'white'}} > Veliki izbor trajnica </button>
+                    <button onClick={() => { navigate.replace('/categories/28')}} primary="true" className="btn success" style={{ border: '2px solid black',cursor:'pointer', backgroundColor:'white'}} > Veliki izbor trajnica </button>
                 </ImageButton>
             </div> 
             <div style={{padding:'1rem'}}>
-                <ImageButton img={!screenType.isMobile ? image3 : image3_mobile}
+                <ImageButton img={!isMobile ? image3 : image3_mobile}
                              alwaysShowButton={true}
                              buttonPosition="bottom" >
-                    <button onClick={() => { navigate('/categories/31')}} primary="true" className="btn success" style={{ border: '2px solid black',cursor:'pointer', backgroundColor:'white'}} >  Neizostavni deo vrta </button>
+                    <button onClick={() => { navigate.replace('/categories/31')}} primary="true" className="btn success" style={{ border: '2px solid black',cursor:'pointer', backgroundColor:'white'}} >  Neizostavni deo vrta </button>
                 </ImageButton>
             </div> 
         </Carousel>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'next/link'
 import { Form, Button, Row, Col, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../compontents/Loader'
@@ -83,12 +83,12 @@ function UserListScreen() {
                                         <td>{user.isAdmin ? (
                                             <i className='fas fa-check' style={{ color: 'green'}}></i>
                                         ) : <i className='fas fa-check' style={{ color: 'red'}}></i>}</td>
-                                        <td><LinkContainer to={`/admin/user/${user._id}/edit`}>
+                                        <td><Link href={`/admin/user/${user._id}/edit`}>
 
                                                 <Button variant = 'light' className='btn'>
                                                      <i className='fas fa-edit'></i>
                                                 </Button>
-                                            </LinkContainer>
+                                            </Link>
                                         </td>
                                         <td>
                                             <Button  className='btn' onClick={(e) => deleteHandler(user._id)}>

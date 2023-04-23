@@ -1,20 +1,21 @@
 
 import { Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import  Link  from 'next/link'
 import classes from './Product.module.css'
-import useScreenType from "react-screentype-hook";
+//import useScreenType from "react-screentype-hook";
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 function Kategorija({category}) {
 
-  const screenType = useScreenType();
+  //const screenType = useScreenType();
   return (
-    <Card className={`my-1 p-1   ${classes["img/-hover-zoom"]} h-100 `} border="success"  style={ screenType.isMobile ? { width: '100%', height: '19rem' } : { width: '100%', height: '22rem' }}>
+    <Card className={`my-1 p-1   ${classes["img/-hover-zoom"]} h-100 `} border="success"  style={ isMobile ? { width: '100%', height: '19rem' } : { width: '100%', height: '22rem' }}>
         <Card.Header as="h6"></Card.Header>
-        <Link to={`/categories/${category._id}`}>
-            <Card.Img src={category.image} loading='lazy' style={screenType.isMobile ? { width: '100%', height: '24vh', objectFit: 'cover' } : { width: '100%', height: '26vh', objectFit: 'cover' }}></Card.Img>
+        <Link href={`/categories/${category._id}`}>
+            <Card.Img src={category.image} loading='lazy' style={isMobile ? { width: '100%', height: '24vh', objectFit: 'cover' } : { width: '100%', height: '26vh', objectFit: 'cover' }}></Card.Img>
         </Link>
         <Card.Body style={{ textAlign: "center", textDecoration: 'none'}}>
-            <Link to={`/categories/${category._id}`}>
+            <Link href={`/categories/${category._id}`}>
              <Card.Title as="div" >
                  <strong style={{ display: 'inline-block', textAlign: "center", fontSize: '1.2rem', color:'#333333'}}>{category.name}</strong>
              </Card.Title>

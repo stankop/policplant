@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'next/link'
 import { Form, Button, Row, Col, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../compontents/Loader'
@@ -90,12 +90,12 @@ function OrderListScreen() {
                                             }
                                         </td>
 
-                                        <td><LinkContainer to={`/order/${order._id}/`}>
+                                        <td><Link href={`/order/${order._id}/`}>
 
                                                 <Button variant = 'light' className='btn'>
                                                      Details
                                                 </Button>
-                                            </LinkContainer>
+                                            </Link>
                                         </td>
                                         
                                     </tr>

@@ -1,4 +1,4 @@
-import {configureStore} from '@reduxjs/toolkit'
+import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit'
 import { productListReducer } from './product-slice'
 import { categoryListReducer } from './category-slice'
 import { productDetailsReducer } from './productDetails-slice'
@@ -22,7 +22,7 @@ import { createProductReducer} from './createProduct-slice'
 import { userUpdateReducer } from './userUpdate-slice'
 import { updateProductReducer } from './updateProduct-slice'
 import { orderListReducer } from './orderList-slice'
-
+import { createWrapper } from "next-redux-wrapper";
 
 const store = configureStore({
     reducer:{
@@ -50,7 +50,9 @@ const store = configureStore({
         orderList: orderListReducer,
         categoryList: categoryListReducer,
         
-    }
+    },
+    devTools: true,
 })
 
 export default store
+//export const wrapper = createWrapper(makeStore);

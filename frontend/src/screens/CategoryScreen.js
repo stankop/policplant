@@ -13,8 +13,8 @@ import Paginate from '../compontents/Paginate'
 import ProductCarucel from '../compontents/ProductCarusel'
 import { CSSTransition } from 'react-transition-group'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
-import { LinkContainer } from 'react-router-bootstrap'
-import { Link } from "react-router-dom";
+//import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from "next/link";
 import DOMPurify from 'dompurify';
 import useScreenType from "react-screentype-hook";
 import { catMemory } from '../compontents/UI/categories'
@@ -72,7 +72,7 @@ function CategoryScreen() {
           </Breadcrumb.Item>
           
         </Breadcrumb>
-        <Link to={-1} className='btn btn-success  my-3' onClick={resetProducts}> Nazad</Link>
+        <Link href={-1} className='btn btn-success  my-3' onClick={resetProducts}> Nazad</Link>
         <h1 style={{color:'#333333'}}>{ catMemory?.find( cat => cat._id?.toString() === id)?.name}</h1>
         
         {/* <p>{ catProducts?.find( cat => cat._id?.toString() === id)?.description}</p> */}
@@ -94,9 +94,7 @@ function CategoryScreen() {
 
                       {/* <Paginate page={page} pages={pages} keyword={keyword}></Paginate> */}
                     </Row>
-                </div>}
-                
-        
+                 </div>}   
     </div>
   )
 }

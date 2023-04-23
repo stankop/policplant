@@ -1,13 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useEffect } from "react";
 
-const userInfoFromStorage = localStorage.getItem('userInfo')
-                             ? JSON.parse(localStorage.getItem('userInfo'))
-                             : null
+
+
+  if (typeof window !== 'undefined') {
+    const userInfoFromStorage = localStorage.getItem('userInfo')
+        ? JSON.parse(localStorage.getItem('userInfo'))
+        : null
+  }else{
+    
+  }
 
 const userSlice = createSlice({
         name: "user",
         initialState: {
-            userInfo: userInfoFromStorage,
+            userInfo: [], //userInfoFromStorage,
             loading: false,
             error: ''
         },

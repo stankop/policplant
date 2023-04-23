@@ -1,6 +1,6 @@
 import React, { useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link } from 'next/link'
 import { Carousel, Image} from 'react-bootstrap'
 import Loader from './Loader'
 import Message from './Message'

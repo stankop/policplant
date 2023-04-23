@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const userInfoFromStorage = localStorage.getItem("userInfo")
-  ? JSON.parse(localStorage.getItem("userInfo"))
-  : null;
+// const userInfoFromStorage = localStorage.getItem("userInfo")
+//   ? JSON.parse(localStorage.getItem("userInfo"))
+//   : null;
 
 const userRegisterSlice = createSlice({
   name: "userRegister",
   initialState: {
-    userInfo: userInfoFromStorage,
+    userInfo: '', //userInfoFromStorage,
     loading: false,
     error: "",
   },

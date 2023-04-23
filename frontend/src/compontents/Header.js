@@ -13,22 +13,27 @@ import {
   faStore
 } from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useEffect, useRef, useState } from 'react'
-import { LinkContainer, Link } from "react-router-bootstrap";
+
+import Link from 'next/link'
+//import { LinkContainer  } from "react-router-bootstrap";
+
 import { useDispatch, useSelector } from "react-redux";
 import SearchBox from "./SearchBox";
 import { logout } from "../store/user-actions";
-import HeaderCardButton from './/UI/HeaderCardButton'
+import HeaderCardButton from './UI/HeaderCardButton'
 import classes from './Header.module.css'
 import { listCategories } from "../store/category-actions";
 //import { plantCategories } from '../store/plantCategory-actions'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Image from 'react-bootstrap/Image'
-import '../compontents/Header.css'
-import useScreenType from "react-screentype-hook";
+// import '../compontents/Header.module.css'
+//import useScreenType from "react-screentype-hook";
 import { productsReset } from '../store/product-actions'
 import { useNavigate, useLocation } from "react-router-dom";
 import { catMemory } from  '../compontents/UI/categories'
 import { listFilterProducts, getAllProducts } from '../store/product-actions'
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
+import { useRouter } from 'next/router';
 
 
 function Header(props) {
@@ -44,18 +49,18 @@ function Header(props) {
   const [cat, setCat] = useState(categories)
 
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const screenType = useScreenType();
+  const navigate = useRouter()
+  //const screenType = useScreenType();
 
   useEffect(() => {
    
-    console.log('Pokusaj Header')
+    
     dispatch(getAllProducts())
     localStorage.setItem('categories', JSON.stringify(categories))
     listKagetorija.current = JSON.parse(localStorage.getItem('categories'))
     setCat(listKagetorija.current)
     
-  }, [categories]);
+  }, [dispatch, categories]);
   
   const logoutHandler = (event) => {
     dispatch(logout());
@@ -93,7 +98,7 @@ function Header(props) {
     }]
   
   const clearFilter = () => {
-    console.log('Jakako ')
+    
     localStorage.setItem('filter', JSON.stringify([]))
   }
   //smooth toggled header
@@ -132,25 +137,26 @@ function Header(props) {
   
     return isHidden;
   }
-  
+
   const isHidden = useScrollDirection()
+  const forScroll = isHidden ? classes['header-hide']: classes['header-show']
   //
   return (
     <Fragment >
-    <header className={`header ${isHidden ? "header-hide" : "header-show"}`}>
+    <header className={`${classes['headers']} ${forScroll}`}>
       
       <Navbar  variant="dark" expand="lg" collapseOnSelect style={{ height:'12rem'}} className={classes["color-navbar"]}>
-        { screenType.isMobile 
+        { isMobile 
           ? 
               <Container  style={{ overflow:'hidden'}}>
                   <Row>
                     <Col>
-                      <LinkContainer to="/" >
+                      <Link href="/" >
                         <Navbar.Brand>
                           {/* <h1 className={classes["h1"]}>Rasadnik Ema</h1> */}
                           <Image fluid  src={image} loading="eager" style={{ width:'16rem', height:'14rem', overflow:'hidden'}} alt="Rasadnik Ema" onClick={props.clearFilter}/>
                         </Navbar.Brand>
-                      </LinkContainer>
+                      </Link>
                     </Col>
                     {/* <Navbar.Text style={{ textAlign: 'center'}}>
                         {<div>                     
@@ -164,11 +170,11 @@ function Header(props) {
                       {/* <SearchBox ></SearchBox> */}
                     <Col>
                       <Navbar.Text style={{ textAlign: 'center'}}>
-                          <LinkContainer to="/cart" >
+                          <Link href="/cart" >
                             <Nav.Link style={{ margin:'1rem'}}>
                               <HeaderCardButton onClick={props.onShowCart}></HeaderCardButton>
                             </Nav.Link>
-                          </LinkContainer>
+                          </Link>
                         </Navbar.Text>
                         <Navbar.Text style={{ textAlign: 'center'}}>
                         {<div>                     
@@ -184,12 +190,12 @@ function Header(props) {
               :
               <Container  style={{ overflow:'hidden'}}>
               
-                <LinkContainer to="/">
+                <Link href="/">
                   <Navbar.Brand >
                     {/* <h1 className={classes["h1"]}>Rasadnik Ema</h1> */}
                     <Image fluid  src={image} loading="eager" style={{ width:'22rem', height:'22rem',marginTop: '+2rem', overflow:'hidden'}} alt="Rasadnik Ema" onClick={props.clearFilter}/>
                   </Navbar.Brand>
-                </LinkContainer>
+                </Link>
                 
                 <Navbar.Text style={{ textAlign: 'center'}}>
                     {<div>                     
@@ -203,11 +209,11 @@ function Header(props) {
                   <SearchBox onClick={props.searchBox}></SearchBox>
 
                 <Navbar.Text style={{ textAlign: 'center'}}>
-                <LinkContainer to="/cart" >
+                  <Link href="/cart" >
                       <Nav.Link style={{ margin:'1rem'}}>
                         <HeaderCardButton onClick={props.onShowCart}></HeaderCardButton>
                       </Nav.Link>
-                    </LinkContainer>
+                  </Link>
                 </Navbar.Text>
               </Container>}
       </Navbar>
@@ -233,11 +239,11 @@ function Header(props) {
                                           fontSize: '1.4rem', 
                                           display: 'inline-block'}}>
                             {catMemory?.slice().sort((a, b) =>{return a.order - b.order}).map( (category) => (
-                              <LinkContainer to={`/categories/${category._id}`} key={category._id}>
+                              <Link href={`/categories/${category._id}`} key={category._id}>
                                   <NavDropdown.Item  key={category._id}>
                                       { category.name }  
                                   </NavDropdown.Item>
-                                </LinkContainer>
+                              </Link>
                             ))}
                         
                           </NavDropdown>  
@@ -252,65 +258,65 @@ function Header(props) {
                                           fontSize: '1.4rem', 
                                           display: 'inline-block'}}>
                             {info?.map( (i) => (
-                              <LinkContainer to={`/${i.src}/`} key={i.id}>
+                              <Link href={`/${i.src}/`} key={i.id}>
                                   <NavDropdown.Item className='click'  key={i.id}>
                                       { i.value }  
                                   </NavDropdown.Item>
-                                </LinkContainer>
+                              </Link>
                             ))}
                         
                           </NavDropdown>  
                     </div>
                    
-                  <LinkContainer to="/onama" >
+                  <Link href="/onama" >
                   
                     <Nav.Link>
                       <div style={{fontSize: '1.4rem',display: 'inline-block',paddingRight:'1rem'}}><FontAwesomeIcon icon={faAnchor}></FontAwesomeIcon>     O nama</div>
                    
                     </Nav.Link>
-                  </LinkContainer>
+                  </Link>
 
-                  <LinkContainer
-                    to="/kontakt">
+                  <Link
+                    href="/kontakt">
                     <Nav.Link>
                     <div style={{fontSize: '1.4rem'}}><FontAwesomeIcon icon={faContactBook} />   Kontakt</div>
                       
                     </Nav.Link>
-                  </LinkContainer>
+                  </Link>
 
                   {userInfo ? (
                     <NavDropdown title={userInfo.user_name} id="username" style={{fontSize: '1.4rem', paddingRight:'1rem'}}>
-                      <LinkContainer
-                        to="/profile">
+                      <Link
+                        href="/profile">
                         <NavDropdown.Item>Profile</NavDropdown.Item>
-                      </LinkContainer>
+                      </Link>
                       <NavDropdown.Item onClick={logoutHandler} >
                         LogOut
                       </NavDropdown.Item>
                     </NavDropdown>
                   ) : (
                     
-                    <LinkContainer to="/login" style={{fontSize: '1.3rem', paddingRight:'1rem'}}>
+                    <Link href="/login" style={{fontSize: '1.3rem', paddingRight:'1rem'}}>
                       <Nav.Link>
                         <FontAwesomeIcon icon={faUser} style={{paddingRight:'.5rem'}} />
                         Login/Register
                       </Nav.Link>
-                    </LinkContainer>
+                    </Link>
                     
                   )}
                   {userInfo && userInfo.isAdmin && (
                     <NavDropdown title="Admin" id="adminmenu" style={{fontSize: '1.4rem'}}>
-                      <LinkContainer to="/admin/userlist">
+                      <Link href="/admin/userlist">
                         <NavDropdown.Item>Users</NavDropdown.Item>
-                      </LinkContainer>
+                      </Link>
 
-                      <LinkContainer to="/admin/productlist">
+                      <Link href="/admin/productlist">
                         <NavDropdown.Item>Products</NavDropdown.Item>
-                      </LinkContainer>
+                      </Link>
 
-                      <LinkContainer to="/admin/orderlist">
+                      <Link href="/admin/orderlist">
                         <NavDropdown.Item>Orders</NavDropdown.Item>
-                      </LinkContainer>
+                      </Link>
                     </NavDropdown>
                   )}
                 </Nav>

@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import classes from './OrderModal.module.css'
 import ReactDom from 'react-dom'
+import React, { useEffect , useState, useRef, useMemo} from 'react'
 
 const Backdrop = props  => {
 
@@ -12,9 +13,14 @@ const ModalOverlay = props => {
     </div>
 }
 
-const portalelement= document.getElementById("overlays")
 
 const Modal = (props) => {
+
+    const [portalelement, setPortal] =  useState('')
+    useEffect(() => {
+        setPortal(document.getElementById("overlays"))
+        
+      }, []);
 
     return <Fragment>
         {ReactDom.createPortal(<Backdrop onClose={props.onClose}></Backdrop>,portalelement )}

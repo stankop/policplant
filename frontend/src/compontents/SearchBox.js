@@ -1,21 +1,22 @@
 import React, { useEffect, useState,useMemo, useRef } from 'react'
 import { Button, Container, Form, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useLocation } from "react-router-dom";
+//import { useNavigate, useLocation } from "react-router-dom";
 import { useParams, useSearchParams } from "react-router-dom";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { listFilterProducts, listFilterGornjeProducts } from '../store/product-actions'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ArrowRight } from 'react-bootstrap-icons';
+import { useRouter } from 'next/router';
 
 
 function SearchBox({onClick}) {
 
     const [keyword, setKeyword] = useState('')
-    const navigate = useNavigate()
+    const navigate = useRouter()
     const dispatch = useDispatch()
-    const location = useLocation();
+    //const location = useLocation();
 
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip" {...props}>

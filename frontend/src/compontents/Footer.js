@@ -1,16 +1,18 @@
+'use client'
 import React from 'react'
 import  {useEffect} from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import GoogleMap from './UI/GoogelMap'
 import Image from 'react-bootstrap/Image'
-import WebFont from 'webfontloader';
-import { Link } from 'react-router-dom'
+//import WebFont from 'webfontloader';
+import  Link  from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import '../compontents/Footer.css'
-import useScreenType from "react-screentype-hook";
+//import '../compontents/Footer.css'
+//import useScreenType from "react-screentype-hook";
 import { listFilterProducts, getAllProducts } from '../store/product-actions'
 import { useDispatch , useSelector } from 'react-redux'
 import { listCategories } from '../store/category-actions'
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 const location = {
   address: 'Prnjavorska 114, Budisava',
@@ -36,15 +38,18 @@ function Footer() {
          
   // }, [dispatch]);
 
-  const screenType = useScreenType();
+  //const screenType = useScreenType();
 
-  useEffect(() => {
-    WebFont.load({
-      google: {
-        families: ['Poppins', 'Chilanka']
-      }
-    });
-  }, [])
+  // if(isBrowser){
+  //   const WebFontLoader = require('webfontloader');
+  //   useEffect(() => {
+  //     WebFontLoader.load({
+  //       google: {
+  //         families: ['Poppins', 'Chilanka']
+  //       }
+  //     });
+  //   }, [])
+  // }  ---------------------------------------------ovo treba!
 
   return (
     <footer style={{backgroundColor:'white'}}>
@@ -94,13 +99,13 @@ function Footer() {
               </Col>
               <Col    style={{margin:'3rem', paddingTop:'2rem' }}>
                 <h4 style={{ fontSize: '1.2rem', color:'#333333', fontFamily: '"Poppins", sans-serif', marginBottom:'1.2rem'}}><strong>Korisni linkovi</strong></h4>
-                <Link to="/porucivanje" style={{ textDecoration: 'none' }}>
+                <Link href="/porucivanje" style={{ textDecoration: 'none' }}>
                   <h5 className='click' style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Kako poručiti putem sajta</h5>
                 </Link>
                 <h5 style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Izrada plana sadnje</h5>
                 <h5 style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Najčešća pitanja</h5>
                 <h5 style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Način plaćanja</h5>
-                <Link to="/isporuka" style={{ textDecoration: 'none' }}>
+                <Link href="/isporuka" style={{ textDecoration: 'none' }}>
                   <h5 className='click' style={{ fontSize: '1rem', color:'#333333', fontFamily: '"Poppins", sans-serif'}}>Isporuka</h5>
                 </Link>
               </Col>

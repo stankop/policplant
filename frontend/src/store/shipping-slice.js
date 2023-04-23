@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
-                             ? JSON.parse(localStorage.getItem('shippingAddress'))
-                             : {}
+// const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
+//                              ? JSON.parse(localStorage.getItem('shippingAddress'))
+//                              : {}
 
 const shippingSlice = createSlice({
     name: 'shipping',
     initialState: {
-       shippingAddress: shippingAddressFromStorage
+       shippingAddress: [] //shippingAddressFromStorage
     },
     reducers:{
 

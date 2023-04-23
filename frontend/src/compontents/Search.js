@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useMemo, useRef, useCallback } from 'react'
 import { Button, Container, Form, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useLocation } from "react-router-dom";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useRouter } from "next/router";
+//import { useParams, useSearchParams } from "react-router-dom";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -43,9 +43,15 @@ function Search( { onSearch, forToogle}) {
     const prod = useSelector(state => state.productList)
     const { products, allProducts } = prod
 
-    const navigate = useNavigate()
-    const location = useLocation();
-    const keyword = localStorage.getItem('keyword')
+    const navigate = useRouter()
+    const [keyword, setKeyword] = useState('')
+    //const location = useLocation();
+
+    useEffect(() => {
+        setKeyword((localStorage.getItem('keyword')))
+        
+    }, []);
+    //const keyword = localStorage.getItem('keyword')
 
     const [pretraga, setPretraga] = useState('')
     const [high, setHigh] = useState([])
@@ -91,7 +97,7 @@ function Search( { onSearch, forToogle}) {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        navigate(`filter`, {state: debouncedSearchTerm})    
+        navigate.replace(`filter`, {state: debouncedSearchTerm})    
     }
 
     const btnStyle = {

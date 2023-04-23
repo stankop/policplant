@@ -2,12 +2,13 @@ import CartIcon  from './Cart/CartIcon'
 import classes from './HeaderCartButton.module.css'
 import {  useEffect, useState } from 'react';
 import {  useSelector } from 'react-redux'
-import useScreenType from "react-screentype-hook";
+//import useScreenType from "react-screentype-hook";
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 const HeaderCartButton = (props) => {
 
     const [btnIsHihg, setBtnIsHigh] = useState(false)
-    const screenType = useScreenType();
+    //const screenType = useScreenType();
 
     const cart = useSelector((state) => state.cart);
     const { cartItems } = cart;
@@ -43,7 +44,7 @@ const HeaderCartButton = (props) => {
 
    
     return(
-        <button  style={ screenType.isDesktop || screenType.isLargeDesktop ? { width:'16rem', height:'4rem'} : {width:'8rem', height:'4rem'}}  className={btnClasses} onClick={props.onClick}>
+        <button  style={ !isMobile ? { width:'16rem', height:'4rem'} : {width:'8rem', height:'4rem'}}  className={btnClasses} onClick={props.onClick}>
             <span className={classes.icon}>
                 <CartIcon ></CartIcon>
             </span>

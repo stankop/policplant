@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
-import { Link } from 'react-router-dom'
-import { LinkContainer} from 'react-router-bootstrap'
+
+import { Link} from 'next/link'
 import { Form, Button, Row, Col, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../compontents/Loader'
@@ -188,11 +188,11 @@ function ProfileScreen() {
                                 )}</td>
                                 <td>{order._id}</td>
                                 <td>
-                                    <LinkContainer to={`/order/${order._id}`}>
+                                    <Link href={`/order/${order._id}`}>
                                         <Button className='btn-sm'>
                                             Detalji
                                         </Button>
-                                    </LinkContainer>
+                                    </Link>
                                 </td>
                             </tr>
                         ))}

@@ -1,5 +1,5 @@
 import React, { useState,useRef,  useEffect} from "react";
-import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'next/link'
 import { Form, Button, Row, Col, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../compontents/Loader'
@@ -13,7 +13,7 @@ import { listUsers } from '../store/userList-actions'
 import { listProducts } from '../store/product-actions'
 import { deleteProduct, deleteProductReset } from '../store/deleteProduct-actions'
 import { createProduct,changeStanjeValue, productReset } from '../store/createProduct-actions'
-import { Link } from 'react-router-dom';
+
 import { MDBInput } from 'mdb-react-ui-kit'
 import { MDBCol, MDBFormInline, MDBIcon } from "mdbreact";
 
@@ -156,11 +156,11 @@ function ProductListScreen() {
                 <h1 style={{color:'green', padding:'2rem'}}>Biljke</h1>
             </Col>
             <Col className='text-right'>
-                <LinkContainer to={`/admin/createproduct`}>
+                <Link href={`/admin/createproduct`}>
                     <Button className='btn-success my-3'>
                         <i className='fas fa-plus'></i> Kreiraj Proizvod
                     </Button>
-                </LinkContainer>     
+                </Link>     
             </Col>
             <Col className='text-right'>
                 {/* <MDBCol md="8">
@@ -226,7 +226,7 @@ function ProductListScreen() {
                                                 <MDBInput  id='form1' type='text' defaultValue={product.countInStock} onChange={(e ) => changingValueHandler(product._id, e.target.value)} />
                                                 
                                             }</td>
-                                        <td style={{width:'5rem'}}><Link to={`/admin/product/${product._id}/edit`}>
+                                        <td style={{width:'5rem'}}><Link href={`/admin/product/${product._id}/edit`}>
 
                                                 <Button variant = 'light' className='btn-sm'>
                                                      <i className='fas fa-edit'></i>

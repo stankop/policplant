@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect , useState, useRef, useMemo} from 'react'
 import { Row, Col, Container } from 'react-bootstrap'
 import Product from '../compontents/Product'
@@ -8,27 +9,27 @@ import { listFilterProducts, getAllProducts } from '../store/product-actions'
 import { listCategories } from '../store/category-actions'
 import Loader from '../compontents/Loader'
 import Message from '../compontents/Message'
-import { useNavigate, useLocation } from "react-router-dom";
-import { useParams, useSearchParams } from "react-router-dom";
+//import { useNavigate, useLocation } from "react-router-dom";
+//import { useParams, useSearchParams } from "react-router-dom";
 import Paginate from '../compontents/Paginate'
 import ProductCarucel from '../compontents/ProductCarusel'
 import { CSSTransition } from 'react-transition-group'
 //import Sidebar from "../compontents/UI/SideBar"
 import SearchModal from '../compontents/UI/SearchModal'
 //import useScreenType from "react-screentype-hook";
-import MUISearchModal from '../compontents/UI/MUISearchModal'
-import MDBCarusel from '../compontents/MDBCarusel'
-import ReactCarusel from '../compontents/ReactCarusel'
-import ProductCarusel from '../compontents/ProductCarusel'
-import CarouselFadeExample from '../compontents/StaticCarusel'
+//import MUISearchModal from '../compontents/UI/MUISearchModal'
+//import MDBCarusel from '../compontents/MDBCarusel'
+//import ReactCarusel from '../compontents/ReactCarusel'
+//import ProductCarusel from '../compontents/ProductCarusel'
+//import CarouselFadeExample from '../compontents/StaticCarusel'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { sliderClasses } from '@mui/material'
-import { SimpleCarouselSlider } from 'react-simple-carousel-image-slider'
-import Carousel from 'flat-carousel';
+//import { sliderClasses } from '@mui/material'
+//import { SimpleCarouselSlider } from 'react-simple-carousel-image-slider'
+//import Carousel from 'flat-carousel';
 import MultiCaroseul from '../compontents/MultiCaroseul'
-import Spinner from 'react-bootstrap/Spinner';
+//import Spinner from 'react-bootstrap/Spinner';
 import _ from 'lodash'
-import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons'
+//import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons'
 import { catMemory } from '../compontents/UI/categories'
 import { products as prodMemory } from '../compontents/UI/allProducts'
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
@@ -36,13 +37,15 @@ import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detec
 
 function HomeScreen({clearProducts, clearFilter}) {
 
-  const dispatch = useDispatch()
+  //const dispatch = useDispatch()
   const [carucel, setCarucel] = useState(true)
   const [ toggle, setToggle ] = useState(true)
   const all = useRef([])
   const [filter, setFilter] = useState([])
-
   //const screenType = useScreenType();
+  const dispatch = useDispatch();
+  
+
   const cat = useSelector(state => state.categoryList)
   const { error:  categoryError, loading: categoryLoading, categories } = cat
   const prod = useSelector(state => state.productList)
@@ -86,6 +89,14 @@ function HomeScreen({clearProducts, clearFilter}) {
   //   // }    
   //   console.log('Prazno')
   // }, []);
+
+  useEffect(() => {
+   
+    
+    dispatch(getAllProducts())
+    
+    
+  }, [dispatch]);
   
   const searchFunc = useMemo(() => {
     const setSearchValue = (value) => {
@@ -117,8 +128,7 @@ function HomeScreen({clearProducts, clearFilter}) {
         let temp = allProducts?.filter(x => Array.from(x.category)?.map(y => y.name).includes(cat.value))
         cati?.push(...temp)
       })
-      console.log('Cat:', cati)
-     
+
     }
 
     if(val?.type?.length){
@@ -126,9 +136,7 @@ function HomeScreen({clearProducts, clearFilter}) {
         let temp = allProducts?.filter(x => x.type_of_plant?.toLowerCase() === cat.value?.toLowerCase())
         type?.push(...temp)
       })
-      console.log('Type:', type)
-      
-      
+ 
     }
 
     if(val?.flow?.length){
@@ -136,12 +144,12 @@ function HomeScreen({clearProducts, clearFilter}) {
         let temp = allProducts?.filter(x => typeof x.mesto_sadnje === "string" ?  x.mesto_sadnje.toLowerCase() === cat.value?.toLowerCase() : Array.from(x.mesto_sadnje)?.includes(cat.value.toLowerCase()))
         flow?.push(...temp)
       })
-      console.log('Flow:', flow)
+      
       
     }
 
     if(val?.color){
-      console.log('Type', typeof val?.color, val.color)
+      
       let ukupno = []
       if (val?.color){
           ukupno.push(val?.color.toLowerCase())
@@ -170,7 +178,6 @@ function HomeScreen({clearProducts, clearFilter}) {
           }
           
       }
-      console.log('Bojice:', ukupno)
 
       let temp = allProducts?.map(val => {
         let search = []
@@ -201,20 +208,18 @@ function HomeScreen({clearProducts, clearFilter}) {
               search.push(val?.color.toLowerCase().replace('s','š'))
           }
       }
-        console.log('Unutra', search + ' i ukupno: ' + ukupno)
+        
         return {search: search,
                 val: val}
       }).filter(x => ukupno?.some( item => x.search?.some(item2 => item2?.includes(item))))
 
-      console.log('Temp', temp?.map(x => x.val))
+      
 
       if(temp?.map(x => x.val)?.length){
         color.push(...temp?.map(x => x.val))
       }else{
         color.push('1111')
       }
-      
-      console.log('Color:', color)   
     }
 
     const catiIds = Array.from(cati?.map(x => x._id))
@@ -252,6 +257,7 @@ function HomeScreen({clearProducts, clearFilter}) {
 
   useEffect(() => {
     
+
     if(localStorage.getItem('filter')){
       const items = JSON.parse(localStorage.getItem('filter'))
       console.log('Items:', items)
@@ -284,7 +290,7 @@ function HomeScreen({clearProducts, clearFilter}) {
   const orderCategories = catMemory?.slice().sort((a, b) =>{return a.order - b.order})
 
   return (
-    <div style={ isMobile ? { backgroundColor: '#FFF' , margin:0} : { }}>
+    <div style={isMobile ? { backgroundColor: '#FFF' , margin:0} : { }}>
         {/* { carucel && <MDBCarusel itemRef={customerLogo}></MDBCarusel>}   */}
         {/* { carucel && <ReactCarusel ></ReactCarusel>} */}
         {/* { carucel && <CarouselFadeExample></CarouselFadeExample>}  */}

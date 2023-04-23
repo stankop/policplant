@@ -3,18 +3,18 @@ import CartModal from '../CartModal'
 import { useDispatch, useSelector } from 'react-redux'
 import CartItem from './CartItem'
 import { removeItem , addItem, removeFromCart} from '../../../store/cart-actions'
-import { useNavigate} from "react-router-dom";
-import useScreenType from "react-screentype-hook";
+import { useRoute} from "next/router";
+//import useScreenType from "react-screentype-hook";
 
 const Cart = (props) => {
 
     const cart = useSelector((state) => state.cart);
-    const navigate = useNavigate();
+    const navigate = useRoute();
 
     const { cartItems } = cart;
 
     const dispatch = useDispatch()
-    const screenType = useScreenType();
+    //const screenType = useScreenType();
 
     const totalAmount = cartItems?.reduce((total, item) => 
         {
@@ -38,7 +38,7 @@ const Cart = (props) => {
     }
 
     const toPorudzba = () => {
-        navigate(`/cart`)
+        navigate.replace(`/cart`)
         props.onClose();
     }
     const cartitems = 

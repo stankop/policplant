@@ -9,7 +9,6 @@ import { useParams } from 'react-router';
 import {useDispatch, useSelector } from 'react-redux'
 import {  productDetails } from '../store/product-actions'
 import {  addToCart,removeFromCart } from '../store/cart-actions'
-import { LinkContainer } from 'react-router-bootstrap'
 import WebFont from 'webfontloader';
 import XMLToReact from 'xml-to-react';
 import DOMPurify from 'dompurify';

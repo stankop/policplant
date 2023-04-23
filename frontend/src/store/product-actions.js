@@ -114,7 +114,6 @@ export const listFilterGornjeProducts = (value) => {
         
         const val = {search: value}
             
-        console.log('Fetch filtra gornje:', val)
         const fetchData = async () => {
             
             const { data } = await axios.post(`/api/products/filterGornja/`, val)
@@ -166,7 +165,7 @@ export const getAllProducts = () => {
 
             const { data } = await axios.get(`/api/products/getAllProducts/`)
             return data;
-           
+            
         }
 
         try {
