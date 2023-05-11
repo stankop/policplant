@@ -409,3 +409,12 @@ def getAllProducts(request):
     serializer = ProductAllSerializer(products, many= True)
     return Response({'products': serializer.data})
 
+@api_view(['GET'])
+def getCategoryProducts(request, pk):
+    
+    
+    products = Product.objects.filter(category___id=pk).order_by('name')
+    print('Broj biljaka je:', len(products))
+
+    serializer = ProductAllSerializer(products, many= True)
+    return Response({'products': serializer.data})
