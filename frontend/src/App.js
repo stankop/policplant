@@ -126,7 +126,7 @@ function App() {
     // || x.color?.toLowerCase().includes(keyword.toLowerCase()) || x.botanicki_naziv?.toLowerCase().includes(keyword.toLowerCase()))
     //.filter(x => ukupno?.some( item => x.search?.some(item2 => item2?.includes(item))))
     
-    if(filter?.length > 0 && filter?.length < 144){
+    if(filter?.length > 0 && filter?.length < 174){
       localStorage.setItem('filter', JSON.stringify(filter))
     }else{
       localStorage.setItem('filter', JSON.stringify([]))
