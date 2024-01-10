@@ -31,6 +31,10 @@ import _ from 'lodash'
 import { faCommentsDollar } from '@fortawesome/free-solid-svg-icons'
 import { catMemory } from '../compontents/UI/categories'
 import { products as prodMemory } from '../compontents/UI/allProducts'
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
 
 
 function HomeScreen({clearProducts, clearFilter}) {
@@ -50,6 +54,18 @@ function HomeScreen({clearProducts, clearFilter}) {
   const keyword = search.get("keyword");
   const customerLogo = useRef(true);
   const isFirst = useRef(true);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '90%',
+    bgcolor: 'background.paper',
+    border: '1px solid white',
+    boxShadow: 24,
+    p: 6,
+  };
 
   // useEffect(()=>{
 
@@ -297,8 +313,15 @@ function HomeScreen({clearProducts, clearFilter}) {
         {/* <Sidebar></Sidebar> */}
         {screenType.isMobile && <SearchModal onSearch={ searchFunc} forToogle={ forToogle}></SearchModal>} 
         {/* {screenType.isMobile && <MUISearchModal onSearch={ setSearchValue}></MUISearchModal>} */}
-        { false ?  //categoryLoading
-                  <Loader></Loader>
+        { allProducts.length === 0 ?  //categoryLoading
+                  //<Loader></Loader>
+                  <Modal
+                  open={true}>
+                  <Box sx={style}>
+                    <LinearProgress color="success" />
+                  </Box>
+                </Modal>
+                  
                  : false //categoryError
                    ? 
                    <Message variant='danger'>{categoryError}</Message> 
